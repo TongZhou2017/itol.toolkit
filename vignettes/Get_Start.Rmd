@@ -1,0 +1,171 @@
+---
+title: "Get_Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get_Start}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r message=FALSE}
+library(itol.toolkit)
+library(dplyr)
+library(data.table)
+library(ape)
+library(stringr)
+```
+
+```{r message=FALSE, warning=FALSE}
+tree <- system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")
+data("template_groups")
+data("template_parameters_count")
+hub <- create_hub(tree = tree)
+
+## 1,7 data
+df_group <- data.frame(id = unique(template_groups$group), 
+                       data = unique(template_groups$group))
+
+## 2 data
+df_count <- cbind(template_groups,as.data.frame(rowSums(template_parameters_count)))
+
+## 3 data
+df_rename <- data.frame(id = template_groups$template, 
+                        new_label = str_to_title(str_replace_all(template_groups$template,"_"," ")))
+
+## 5 data
+tab_tmp_01 <- as.data.frame(t(template_parameters_count))
+tab_tmp_connect <- convert_01_to_connect(tab_tmp_01)
+tab_tmp_connect <- full_join(tab_tmp_connect, template_groups, by=c("row" = "template"))
+tab_tmp_connect <- tab_tmp_connect %>% filter(val > 10) %>% filter(row != col)
+
+## 6 data
+tab_tmp <- fread(system.file("extdata","parameter_groups.txt",package = "itol.toolkit"))
+tab_id_group <- tab_tmp[,c(1,2)]
+tab_tmp <- tab_tmp[,-c(1,2)]
+tab_tmp_01 <- convert_01(object = tab_tmp)
+tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
+
+order <- c("type","separator","profile","field","common themes","specific themes","data")
+
+tab_tmp_01_long <- tab_tmp_01 %>% melt(id.vars=c("parameter","group"))
+
+template_start_group <- tab_tmp_01_long %>% group_by(group,variable) %>% summarise(sublen = sum(value)) %>% tidyr::spread(key=variable,value=sublen)
+template_start_group$group <- factor(template_start_group$group,levels = order)
+template_start_group <- template_start_group %>% arrange(group)
+start_group <- data.frame(Var1 = template_start_group$group, Freq = apply(template_start_group[,-1], 1, max))
+start_group$start <- 0
+for (i in 2:nrow(start_group)) {
+  start_group$start[i] <- sum(start_group$Freq[1:(i-1)])
+}
+template_start_group[template_start_group == 0] <- NA
+template_end_group <- template_start_group + start_group$start
+template_end_group$group <- order
+template_end_group_long <- template_end_group %>% melt(id.vars=c("group"))
+names(template_end_group_long)[3] <- "end"
+template_end_group_long$start <- rep(start_group$start,length(unique(template_end_group_long$variable)))
+template_end_group_long <- template_end_group_long %>% na.omit()
+template_end_group_long$length <- sum(start_group$Freq)
+template_end_group_long <- template_end_group_long[,c(2,5,4,3,1)]
+template_end_group_long$group <- factor(template_end_group_long$group,levels = order)
+
+## 8 data
+df_values <- fread(system.file("extdata","templates_frequence.txt",package = "itol.toolkit"))
+names(df_values) <- c("id","Li,S. et al. (2022) J. Hazard. Mater.","Zheng,L. et al. (2022) Environ. Pollut.","Welter,D.K. et al. (2021) mSystems","Zhang,L et al. (2022) Nat. Commun.","Rubbens,P. et al. (2019) mSystems","Laidoudi,Y. et al. (2022) Pathogens","Wang,Y. et al. (2022) Nat. Commun.","Ceres,K.M. et al. (2022) Microb. Genomics","Youngblut,N.D. et al. (2019) Nat. Commun.","Balvín,O. et al. (2018) Sci. Rep.","Prostak,S.M. et al. (2021) Curr. Biol.","Dijkhuizen,L.W. et al. (2021) Front. Plant Sci.","Zhang,X. et al. (2022) Microbiol. Spectr.","Peris,D. et al. (2022) PLOS Genet.","Denamur,E. et al. (2022) PLOS Genet.","Dezordi,F.Z. et al. (2022) bioRxiv","Lin,Y. et al. (2021) Microbiome","Wang,Y. et al. (2022) bioRxiv","Qi,Z. et al. (2022) Food Control","Zhou,X. et al. (2022) Food Res. Int.","Zhou,X. et al. (2022) Nat. Commun.")
+names(df_values) <- str_remove_all(names(df_values),"[()]")
+names(df_values) <- str_replace_all(names(df_values),",","-")
+
+## 9 data
+df_value <- fread(system.file("extdata","templates_frequence.txt",package = "itol.toolkit"))
+df_value <- df_value %>% melt(id.vars=c("templates")) %>% na.omit() %>% select(templates,value)
+df_value$value <- log(df_value$value)
+```
+
+```{r tree colors clade in node, message=FALSE}
+unit_1 <- create_unit(data = df_group, 
+                      key = "E1_template_types", 
+                      type = "TREE_COLORS", 
+                      subtype = "clade", 
+                      line_type = c(rep("normal",4),"dashed"),
+                      size_factor = 5, 
+                      tree = tree)
+
+unit_2 <- create_unit(data = df_count, 
+                      key = "E2_parameter_number", 
+                      type = "DATASET_SYMBOL",
+                      position = 1, 
+                      tree = tree)
+
+unit_3 <- create_unit(data = df_rename, 
+                      key = "E3_template_rename", 
+                      type = "LABELS",
+                      tree = tree)
+
+unit_4 <- create_unit(data = template_groups, 
+                      key = "E4_template_name_color", 
+                      type = "DATASET_STYLE", 
+                      subtype = "label",
+                      position = "node",
+                      size_factor = 1.5,
+                      tree = tree)
+
+unit_5 <- create_unit(data = tab_tmp_connect[,1:4], 
+                      key = "E5_template_similarity", 
+                      type = "DATASET_CONNECTION", 
+                      tree = tree)
+
+unit_6 <- create_unit(data = template_end_group_long, 
+                      key = "E6_template_parameters_structure", 
+                      type = "DATASET_DOMAINS", 
+                      tree = tree)
+
+unit_7 <- create_unit(data = df_group, 
+                      key = "E7_template_types", 
+                      type = "DATASET_COLORSTRIP", 
+                      tree = tree)
+
+unit_8 <- create_unit(data = df_values, 
+                      key = "E8_usage_count_among_publications", 
+                      type = "DATASET_HEATMAP", 
+                      tree = tree)
+
+unit_9 <- create_unit(data = df_value, 
+                      key = "E9_log_transformed_usage_count", 
+                      type = "DATASET_BOXPLOT", 
+                      tree = tree)
+```
+
+```{r message=FALSE}
+unit_2@specific_themes$basic_plot$size_max <- 40
+
+unit_5@specific_themes$basic_plot$size_max <- 100
+
+unit_8@specific_themes$heatmap$color$min <- "#ffd966"
+unit_8@specific_themes$heatmap$color$max <- "#cc0000"
+unit_8@specific_themes$heatmap$use_mid <- 0
+
+unit_9@specific_themes$basic_plot$size_max <- 100
+```
+
+```{r}
+hub <- hub + 
+  unit_1 + 
+  unit_2 + 
+  unit_3 + 
+  unit_4 + 
+  unit_5 + 
+  unit_6 + 
+  unit_7 + 
+  unit_8 + 
+  unit_9
+
+write_hub(hub,"~/Downloads/itol.annotation-package.output/tree_of_itol_templates_outputs/")
+```
+
+![](images/itol%20toolkit%20v1%20functions.png){width="640"}

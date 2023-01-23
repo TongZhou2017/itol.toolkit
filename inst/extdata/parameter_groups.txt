@@ -1,0 +1,221 @@
+parameter	group	COLLAPSE	PRUNE	SPACING	TREE_COLORS	DATASET_STYLE	LABELS	DATASET_TEXT	DATASET_COLORSTRIP	DATASET_BINARY	DATASET_GRADIENT	DATASET_HEATMAP	DATASET_SYMBOL	DATASET_EXTERNALSHAPE	DATASET_DOMAINS	DATASET_SIMPLEBAR	DATASET_MULTIBAR	DATASET_BOXPLOT	DATASET_LINECHART	DATASET_PIECHART	DATASET_ALIGNMENT	DATASET_CONNECTIONS	DATASET_IMAGE	POPUP_INFO
+head	type	COLLAPSE	PRUNE	SPACING	TREE_COLORS	DATASET_STYLE	LABELS	DATASET_TEXT	DATASET_COLORSTRIP	DATASET_BINARY	DATASET_GRADIENT	DATASET_HEATMAP	DATASET_SYMBOL	DATASET_EXTERNALSHAPE	DATASET_DOMAINS	DATASET_SIMPLEBAR	DATASET_MULTIBAR	DATASET_BOXPLOT	DATASET_LINECHART	DATASET_PIECHART	DATASET_ALIGNMENT	DATASET_CONNECTIONS	DATASET_IMAGE	POPUP_INFO
+separator	separator			SEPARATOR TAB	"#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR COMMA
+SEPARATOR SPACE"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA"	"#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"	"#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA"
+dataset name	profile					"DATASET_LABEL,<text>"		"DATASET_LABEL,<text>"	DATASET_LABEL <text>	"DATASET_LABEL,<text>"	DATASET_LABEL <text>	DATASET_LABEL <text>	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	DATASET_LABEL <text>	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	"DATASET_LABEL,<text>"	
+dataset color	profile					"COLOR,<hex color>"		"COLOR,<hex color>"	COLOR <hex color>	"COLOR,<hex color>"	COLOR <hex color>	COLOR <hex color>	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	COLOR <hex color>	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	"COLOR,<hex color>"	
+filed labels	field									"FIELD_LABELS,<text>,<text>,<text>,É"		FIELD_LABELS <text> <text> <text> É		"FIELD_LABELS,<text>,<text>,<text>,É"			"FIELD_LABELS,<text>,<text>,<text>,É"			"FIELD_LABELS,<text>,<text>,<text>,É"				
+filed colors	field									"FIELD_COLORS,<hex color>,<hex color>,<hex color>,É"				"FIELD_COLORS,<color>,<color>,<color>,É"			"FIELD_COLORS,<color>,<color>,<color>,É"			"FIELD_COLORS,<color>,<color>,<color>,É"				
+filed shapes	field									"FIELD_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,É"														
+alignment coloring schemes	specific themes																				"CUSTOM_COLOR_SCHEME,<scheme name>,A=#d2d0c9,M=#d2d0c9,I=#d2d0c9,L=#d2d0c9,V=#d2d0c9,P=#746f69,G=#746f69,C=#746f69,F=#d0ad16,Y=#d0ad16,W=#d0ad16,S=#34acfb,T=#34acfb,N=#34acfb,Q=#34acfb,R=#34fb54,K=#34fb54,H=#34fb54,D=#fb4034,E=#fb4034"			
+highligh references	specific themes																				"HIGHLIGHT_REFERENCES,<text>,<text>,<text>,É"			
+branches color	specific themes								COLOR_BRANCHES <0/1>															
+field tree	specific themes											FIELD_TREE <Newick tree>												
+line colors	specific themes																		LINE_COLORS <num>|<hex color> <num>|<hex color> <num>|<hex color> É					
+axis x	specific themes																		AXIS_X <num>(|<num>|<hex color>) <num>(|<num>|<hex color>) <num>(|<num>|<hex color>) ...					
+axis y	specific themes																		AXIS_Y <num>(|<num>|<hex color>) <num>(|<num>|<hex color>) <num>(|<num>|<hex color>) É					
+data scale	common themes														"DATASET_SCALE,<num>(-<text>-<hex color>-<num>-<0/1>-<double[0,inf)>),É"	"DATASET_SCALE,<num>(-<text>-<hex color>-<num>-<0/1>-<double[0,inf)>),É"	"DATASET_SCALE,<num>(-<text>-<hex color>-<num>-<0/1>-<double[0,inf)>),É"	"DATASET_SCALE,<num>(-<text>-<hex color>-<num>-<0/1>-<double[0,inf)>),É"						
+legend title	common themes					"LEGEND_TITLE,<text>"			LEGEND_TITLE <text>	"LEGEND_TITLE,<text>"	LEGEND_TITLE <text>	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"	"LEGEND_TITLE,<text>"		"LEGEND_TITLE,<text>"		"LEGEND_TITLE,<text>"		
+legend position x	common themes					"LEGEND_POSITION_X,<num>"			LEGEND_POSITION_X <num>	"LEGEND_POSITION_X,<num>"	LEGEND_POSITION_X <num>	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"	"LEGEND_POSITION_X,<num>"		"LEGEND_POSITION_X,<num>"		"LEGEND_POSITION_X,<num>"		
+legend position y	common themes					"LEGEND_POSITION_Y,<num>"			LEGEND_POSITION_Y <num>	"LEGEND_POSITION_Y,<num>"	LEGEND_POSITION_Y <num>	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"	"LEGEND_POSITION_Y,<num>"		"LEGEND_POSITION_Y,<num>"		"LEGEND_POSITION_Y,<num>"		
+legend horizontal	common themes					"LEGEND_HORIZONTAL,<0/1>"			LEGEND_HORIZONTAL <0/1>	"LEGEND_HORIZONTAL,<0/1>"	LEGEND_HORIZONTAL <0/1>	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"	"LEGEND_HORIZONTAL,<0/1>"		"LEGEND_HORIZONTAL,<0/1>"		"LEGEND_HORIZONTAL,<0/1>"		
+legend shapes	common themes					"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."			"LEGEND_SHAPES <int[1,6]> <int[1,6]> <int[1,6]> ..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES <int[1,6]> <int[1,6]> <int[1,6]> ..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."	"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."		"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."		"LEGEND_SHAPES,<int[1,6]>,<int[1,6]>,<int[1,6]>,..."		
+legend colors	common themes					"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"			LEGEND_COLORS <hex rgba color> <hex color> <hex color> É	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	LEGEND_COLORS <hex rgba color> <hex color> <hex color> É	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"	"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"		"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"		"LEGEND_COLORS,<hex color>,<hex color>,<hex color>,É"		
+legend labels	common themes					"LEGEND_LABELS,<text>,<text>,<text>,É"			LEGEND_LABELS <text> <text> <text> É	"LEGEND_LABELS,<text>,<text>,<text>,É"	LEGEND_LABELS <text> <text> <text> É	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"	"LEGEND_LABELS,<text>,<text>,<text>,É"		"LEGEND_LABELS,<text>,<text>,<text>,É"		"LEGEND_LABELS,<text>,<text>,<text>,É"		
+legend shape scales	common themes					"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."			"LEGEND_SHAPE_SCALES <double[0,1]> <double[0,1]> <double[0,1]> ..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES <double[0,1]> <double[0,1]> <double[0,1]> ..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."	"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."		"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."		"LEGEND_SHAPE_SCALES,<double[0,1]>,<double[0,1]>,<double[0,1]>,..."		
+strip width	common themes								STRIP_WIDTH <num>		STRIP_WIDTH <num>	STRIP_WIDTH <num>												
+internal value display	common themes							"SHOW_INTERNAL,<0/1>"	SHOW_INTERNAL <0/1>	"SHOW_INTERNAL,<0/1>"	SHOW_INTERNAL <0/1>	SHOW_INTERNAL <0/1>		"SHOW_INTERNAL,<0/1>"	"SHOW_INTERNAL,<0/1>"	"SHOW_INTERNAL,<0/1>"	"SHOW_INTERNAL,<0/1>"	"SHOW_INTERNAL,<0/1>"	SHOW_INTERNAL <0/1>	"SHOW_INTERNAL,<0/1>"			"SHOW_INTERNAL,<0/1>"	
+dashed line display	specific themes									"DASHED_LINES,<0/1>"		DASHED_LINES <0/1>		"DASHED_LINES,<0/1>"	"DASHED_LINES,<0/1>"	"DASHED_LINES,<0/1>"	"DASHED_LINES,<0/1>"	"DASHED_LINES,<0/1>"						
+width max	specific themes														"WIDTH,<num>"	"WIDTH,<num>"	"WIDTH,<num>"	"WIDTH,<num>"	WIDTH <num>					
+margin	specific themes							"MARGIN,<num>"	MARGIN <num>	"MARGIN,<num>"	MARGIN <num>	MARGIN <num>		"MARGIN,<num>"	"MARGIN,<num>"	"MARGIN,<num>"	"MARGIN,<num>"	"MARGIN,<num>"	MARGIN <num>	"MARGIN,<num>"	"MARGIN,<num>"		"MARGIN,<num>"	
+align to labels	specific themes									"ALIGN_TO_LABELS,<0/1>"												"ALIGN_TO_LABELS,<0/1>"		
+align fields	specific themes																"ALIGN_FIELDS,<0/1>"							
+align to tree	specific themes							"ALIGN_TO_TREE,<0/1>"																
+height factor	common themes									"HEIGHT_FACTOR,<double[0,inf)>"				"HEIGHT_FACTOR,<double[0,inf)>"	"HEIGHT_FACTOR,<double[0,inf)>"	"HEIGHT_FACTOR,<double[0,inf)>"	"HEIGHT_FACTOR,<double[0,inf)>"	"HEIGHT_FACTOR,<double[0,inf)>"	"HEIGHT_FACTOR <double[0,inf)>"	"HEIGHT_FACTOR,<double[0,inf)>"				
+maxiimum chart size	common themes												"MAXIMUM_SIZE,<num>"							"MAXIMUM_SIZE,<num>"				
+symbol spacing	common themes									"SYMBOL_SPACING,<num>"														
+horizontal grid	specific themes													"HORIZONTAL_GRID,<0/1>"										
+vertical grid	specific themes													"VERTICAL_GRID,<0/1>"										
+shape spacing	specific themes													"SHAPE_SPACING,<num>"										
+shape type	specific themes													"SHAPE_TYPE,<int[1,5]>"										
+shape color fill	specific themes													"COLOR_FILL,<0/1>"										
+value display	specific themes													"SHOW_VALUES,<0/1>"		"SHOW_VALUES,<0/1>"								
+strip labels display	specific themes								SHOW_STRIP_LABELS <0/1>															
+strip label position	specific themes								"STRIP_LABEL_POSITION <text(center, top, bottom)>"															
+strip label size	specific themes								"STRIP_LABEL_SIZE_FACTOR <double[0,inf)>"															
+strip label rotation	specific themes								STRIP_LABEL_ROTATION <num>															
+strip label shift	specific themes								STRIP_LABEL_SHIFT <num>															
+strip label color	specific themes								STRIP_LABEL_COLOR <hex color>															
+strip label outline width	specific themes								STRIP_LABEL_OUTLINE <num>															
+label display	specific themes							SHOW_LABELS <0/1>	SHOW_LABELS <0/1>	"SHOW_LABELS,<0/1>"	SHOW_LABELS <0/1>	SHOW_LABELS <0/1>		"SHOW_LABELS,<0/1>"										
+font/image size factor	common themes							"SIZE_FACTOR,<double[0,inf)>"	"SIZE_FACTOR <double[0,inf)>"	"SIZE_FACTOR,<double[0,inf)>"	"SIZE_FACTOR <double[0,inf)>"	"SIZE_FACTOR <double[0,inf)>"		"SIZE_FACTOR,<double[0,inf)>"							"SIZE_FACTOR,<double[0,inf)>"		"SIZE_FACTOR,<double[0,inf)>"	
+label size factor	common themes							LABEL_SIZE_FACTOR <0/1>							"LABEL_SIZE_FACTOR,<0/1>"									
+labels on top	common themes														"LABELS_ON_TOP,<0/1>"									
+label rotation	common themes							"LABEL_ROTATION,<num>"	LABEL_ROTATION <num>	"LABEL_ROTATION,<num>"	LABEL_ROTATION <num>	LABEL_ROTATION <num>		"LABEL_ROTATION,<num>"										
+straight labels	common themes							"STRAIGHT_LABELS,<0/1>"																
+labels below	common themes							"LABELS_BELOW,<0/1>"																
+label shift	common themes							LABEL_SHIFT <num>	LABEL_SHIFT <num>	"LABEL_SHIFT,<num>"	LABEL_SHIFT <num>	LABEL_SHIFT <num>		"LABEL_SHIFT,<num>"										
+vertical shift	common themes							"VERTICAL_SHIFT,<num>"																
+external label shiift	common themes							"EXTERNAL_LABEL_SHIFT,<0/1>"																
+bar shift	specific themes														"BAR_SHIFT,<num>"	"BAR_SHIFT,<num>"	"BAR_SHIFT,<num>"	"BAR_SHIFT,<num>"						
+bar zero	specific themes															"BAR_ZERO,<num>"								
+tree display	specific themes											SHOW_TREE <0/1>												
+color na	specific themes											COLOR_NAN <hex color>												
+auto legend	specific themes										AUTO_LEGEND <0/1>	AUTO_LEGEND <0/1>												
+color min	specific themes										COLOR_MIN <hex color>	COLOR_MIN <hex color>												
+color max	specific themes										COLOR_MAX <hex color>	COLOR_MAX <hex color>												
+use midpoint color	specific themes										USE_MID_COLOR <0/1>	USE_MID_COLOR <0/1>												
+color mid	specific themes										COLOR_MID <hex color>	COLOR_MID <hex color>												
+user min value	specific themes											USER_MIN_VALUE <num>												
+user mid value	specific themes											USER_MID_VALUE <num>												
+user max value	specific themes											USER_MAX_VALUE <num>												
+border width	common themes								BORDER_WIDTH <num>		BORDER_WIDTH <num>	BORDER_WIDTH <num>			"BORDER_WIDTH,<num>"	"BORDER_WIDTH,<num>"	"BORDER_WIDTH,<num>"			"BORDER_WIDTH,<num>"				
+border color	common themes								BORDER_COLOR <hex color>		BORDER_COLOR <hex color>	BORDER_COLOR <hex color>			"BORDER_COLOR,<hex color>"	"BORDER_COLOR,<hex color>"	"BORDER_COLOR,<hex color>"			"BORDER_COLOR,<hex color>"				
+border complete	common themes								COMPLETE_BORDER <0/1>															
+gradient fill	specific themes												"GRADIENT_FILL,<0/1>"		"GRADIENT_FILL,<0/1>"									
+domain labels display	specific themes														"SHOW_DOMAIN_LABELS,<0/1>"									
+backbone color	specific themes														"BACKBONE_COLOR,<hex color>"									
+backbone height	specific themes														"BACKBONE_HEIGHT,<num>"									
+vertical chart	specific themes																		VERTICAL_CHART <0/1>					
+chart shift	specific themes																		CHART_SHIFT <num>					
+line display	specific themes																		SHOW_LINE <0/1>					
+line width	specific themes																		LINE_WIDTH <num>					
+line color default	specific themes																		DEFAULT_LINE_COLOR <hex color>					
+points display	specific themes																		SHOW_DOTS <0/1>					
+points size	specific themes																		DOT_SIZE <num>					
+title display	specific themes																		SHOW_TITLE <0/1>					
+title size	specific themes																		TITLE_SIZE <num>					
+title color	specific themes																		TITLE_COLOR <hex color>					
+title shift x	specific themes																		TITLE_SHIFT_X <num>					
+title shift y	specific themes																		TITLE_SHIFT_Y <num>					
+polar area diagram	specific themes																			"POLAR_AREA_DIAGRAM,<0/1>"				
+color scheme	specific themes																				"COLOR_SCHEME,<text>"			
+start position	specific themes																				"START_POSITION,<int[1,4000]>"			
+end position	specific themes																				"END_POSITION,<int[1,4000]>"			
+highligh type	specific themes																				"HIGHLIGHT_TYPE,<text>"			
+highligh missmatch	specific themes																				"HIGHLIGHT_DISAGREEMENTS,<0/1>"			
+highligh match background	specific themes																				"COLORED_DOTS,<0/1>"			
+reference box mark	specific themes																				"MARK_REFERENCES,<0/1>"			
+box style	specific themes																				"REFERENCE_BOX_BORDER_WIDTH,<num>"			
+box border color	specific themes																				"REFERENCE_BOX_BORDER_COLOR,<hex color>"			
+box fill color	specific themes																				"REFERENCE_BOX_FILL_COLOR,<hex color>"			
+gap color inverse	specific themes																				"INVERSE_GAPS,<0/1>"			
+consensus display	specific themes																				"DISPLAY_CONSENSUS,<0/1>"			
+consensus threshold	specific themes																				"CONSENSUS_THRESHOLD,<num[0,100]>"			
+consensus ignore gaps	specific themes																				"IGNORE_GAPS,<0/1>"			
+conservation display	specific themes																				"DISPLAY_CONSERVATION,<0/1>"			
+conservation in color	specific themes																				"COLOR_GRAPH,<0/1>"			
+arrows	specific themes																					"DRAW_ARROWS,<0/1>"		
+arrows size	specific themes																					"ARROW_SIZE,<num>"		
+loop size	specific themes																					"LOOP_SIZE,<num>"		
+line width max	specific themes																					"MAXIMUM_LINE_WIDTH,<num>"		
+curve angle	specific themes																					"CURVE_ANGLE,<num[-80,80]>"		
+center curves	specific themes																					"CENTER_CURVES,<0/1>"		
+image rotation	specific themes																						"IMAGE_ROTATION,<num>"	
+image shift vertically	specific themes																					"IMAGE_SHIFT_V,<num>"		
+image shift horizontally	specific themes																					"IMAGE_SHIFT_H,<num>"		
+data column 1-node id	data	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+data column 2/5-type	data				"range
+clade
+branch
+label
+label_background"	"branch
+label"																1		
+data column 3/2/4/6-color	data				1 hex rgba	1		1	1 hex rgba				1		1							1		
+data column 4/3/6/7/2-label	data				"range 1
+clade
+branch
+label
+label_background"		1	1	1				(1)		1							1		
+data column 4/6-line type	data				"range
+clade 1
+branch 1
+label
+label_background"	"branch 1
+label"																		
+data column 4/6/5-font style	data				"range
+clade
+branch
+label (1) bold italic bold-italic
+label_background"	"branch
+label 1"		1																
+data column 5/3-line width	data				"range
+clade 1
+branch 1
+label
+label_background"	"branch 1
+label"																1		
+data column 5/3/6-font/image/symbol size	data				"range
+clade
+branch
+label (1)
+label_background"	"branch
+label 1"		1					1										1	
+data column 2-sequence	data																				1			
+data column 2-symbol	data									"filled-1
+outline-0
+nothing--1"			1											
+data column 2-minimum	data																	1						
+data column 3-q1	data																	1						
+data column 4-median	data																	1						
+data column 5-q3	data																	1						
+data column 6-maximum	data																	1						
+data column 7-extreme value	data																	(1)						
+data column 2-node id	data																					1		
+data column 2/4-value	data										1	1		1		1	1			1				
+data column 2/3-position	data							1					1							1			1	
+data column 4-rotation	data							1															1	
+data column 5-horizontal shift	data																						1	
+data column 6-vertical shift	data																						1	
+data column 7-url	data																						1	
+data column 2-x|y	data																		1					
+data column 3-radius	data																			1				
+data column 2-length	data														1									
+data column 3-shape	data														1									
+data column 4-start	data														1									
+data column 5-end	data														1									
+data column 3-node type	data					1																		
+data column 7-background color	data					1																		
+data column 5-fill or outline	data												1											
+data column 2-popup title	data																							1
+data column 3-popup content	data																							1
+data column 2-spacing factor	data			1																				
