@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 0.99.0
+Version: 1.0.0
 Authors@R: 
     person(
     given = "Tong",
@@ -37,4 +37,3 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
-biocViews: Software, Visualization
