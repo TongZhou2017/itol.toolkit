@@ -17,6 +17,9 @@ fa_write(object, file, id = "seq_name", seq = "sequence", append = FALSE)
 
 \item{append}{append at the end of an already existing file}
 }
+\value{
+No return value, only output a fasta file
+}
 \description{
 Write the fasta format sequences file from data.frame. (Version 0.0.0.9000)
 }

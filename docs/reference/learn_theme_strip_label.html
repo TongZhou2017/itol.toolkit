@@ -60,14 +60,116 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>lines</dt>
-<dd><p>file lines</p></dd>
+<dd><p>a vector of character strings from template file.</p></dd>
 
 
 <dt>sep</dt>
-<dd><p>separator</p></dd>
+<dd><p>a charactor specifying the separator.</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>a list of strip label parameters containing</p>
+<dl><dt>display</dt>
+<dd><p>0/1 specifying display or hide the individual label
+inside each colored strip (when defined in the data below)</p></dd>
+
+
+<dt>width</dt>
+<dd><p>a number specifying width of the colored strip</p></dd>
+
+
+<dt>size</dt>
+<dd><p>a number specifying strip label size factor (relative to
+the tree leaf labels)</p></dd>
+
+
+<dt>color</dt>
+<dd><p>define colors for each strip label element (use
+hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used
+as SEPARATOR)</p></dd>
+
+
+<dt>color_branches</dt>
+<dd><p>1/0 specifying branches of the tree will or not
+be colored according to the colors of the strips above the leaves. When all
+children of a node have the same color, it will be colored the same, ie. the
+color will propagate inwards towards the root.</p></dd>
+
+
+<dt>position</dt>
+<dd><p>a character specifying position of the strip label
+within the box; 'top', 'center' or 'bottom'</p></dd>
+
+
+<dt>shift</dt>
+<dd><p>a number specifying strip label shift in pixels
+(positive or negative)</p></dd>
+
+
+<dt>rotation</dt>
+<dd><p>a number specifying rotation of the strip labels;
+used only in rectangular tree display mode</p></dd>
+
+
+<dt>outline_width</dt>
+<dd><p>a number specifying draw a black outline around
+the text (width in pixels)</p></dd>
 
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                    <span class="st">"tree_of_itol_templates.tree"</span>,</span></span>
+<span class="r-in"><span>                    package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"template_groups"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">template_groups</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                       data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">template_groups</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## create unit</span></span></span>
+<span class="r-in"><span><span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_group</span>,</span></span>
+<span class="r-in"><span>                    key <span class="op">=</span> <span class="st">"Quickstart"</span>,</span></span>
+<span class="r-in"><span>                    type <span class="op">=</span> <span class="st">"DATASET_COLORSTRIP"</span>,</span></span>
+<span class="r-in"><span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using default color pattern: table2itol</span>
+<span class="r-in"><span><span class="co">## write unit</span></span></span>
+<span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit</span>,<span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Learn parameter</span></span></span>
+<span class="r-in"><span><span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="line_clean.html">line_clean</a></span><span class="op">(</span>file<span class="op">=</span><span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sep</span> <span class="op">=</span> <span class="fu"><a href="learn_separator.html">learn_separator</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">learn_theme_strip_label</span><span class="op">(</span>lines <span class="op">=</span> <span class="va">lines</span>, sep <span class="op">=</span> <span class="va">sep</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $display</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "25"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $size</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $color</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $color_branches</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $position</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shift</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $rotation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $outline_width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

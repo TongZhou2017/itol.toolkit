@@ -9,6 +9,9 @@ correct_get_color(str)
 \arguments{
 \item{str}{taxa string}
 }
+\value{
+a vector of colors
+}
 \description{
 correct_get_color. (Version 0.0.0.9000)
 }

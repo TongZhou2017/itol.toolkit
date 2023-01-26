@@ -9,6 +9,9 @@ convert_01(object)
 \arguments{
 \item{object}{data frame or list}
 }
+\value{
+a data frame with 0/1 values
+}
 \description{
 In data frame and list, convert character and numberic data to 0/1.
 }

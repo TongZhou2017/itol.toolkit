@@ -1,4 +1,4 @@
-<img src="man/figures/itol.toolkit_logo.png" width="480"/>
+<img src="man/figures/itol.toolkit_logo.jpg" width="480"/>
 
 # itol.toolkit
 
@@ -64,4 +64,4 @@ Please [open an issue](https://github.com/TongZhou2017/itol.toolkit/issues) to r
 
 ## License
 
-[MIT License](https://github.com/TongZhou2017/itol.toolkit/blob/master/LICENSE)
+[MIT License](https://github.com/TongZhou2017/itol.toolkit/blob/master/LICENSE.md)

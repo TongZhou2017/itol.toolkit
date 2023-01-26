@@ -9,6 +9,9 @@ fa_read(file)
 \arguments{
 \item{file}{input file in fasta format}
 }
+\value{
+a data frame with sequence id and sequence
+}
 \description{
 Read the fasta format sequences file into data.frame
 }

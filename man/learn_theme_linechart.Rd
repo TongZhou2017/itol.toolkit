@@ -7,9 +7,12 @@
 learn_theme_linechart(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of line chart parameters containing
 }
 \description{
 learn linechart paramters as list

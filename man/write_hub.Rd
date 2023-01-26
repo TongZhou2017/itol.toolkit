@@ -27,6 +27,9 @@ name to be output consistent with the data name prefix.}
 or relative path. The template files will output by the key information from
 theme name in the hub object.}
 }
+\value{
+No return value, only output template files
+}
 \description{
 Write itol.hub object into template files.
 }

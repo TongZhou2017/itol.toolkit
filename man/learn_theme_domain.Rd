@@ -7,9 +7,12 @@
 learn_theme_domain(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of domain parameters containing
 }
 \description{
 learn domain paramters as list

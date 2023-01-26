@@ -9,6 +9,9 @@ unite_rows(df)
 \arguments{
 \item{df}{input data frame}
 }
+\value{
+a data frame with pasted row by same id
+}
 \description{
 Paste rows group by key column
 }

@@ -7,9 +7,12 @@
 line_split(lines, param = "data")
 }
 \arguments{
-\item{lines}{string vector}
+\item{lines}{a vector of character strings from template file.}
 
 \item{param}{"theme" or "data" for the theme paramters or the data lines}
+}
+\value{
+a vector of character strings containing data or theme information
 }
 \description{
 Split lines based on the data block marker

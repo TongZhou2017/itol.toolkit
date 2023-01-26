@@ -7,9 +7,12 @@
 learn_theme_basic_theme(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of basic theme parameters containing
 }
 \description{
 learn basic theme paramters as list

@@ -11,6 +11,9 @@ learn_data_from_unit_list(object, units)
 
 \item{units}{itol.unit object list}
 }
+\value{
+a itol.hub object with new data from a list of itol.unit objects
+}
 \description{
 Learn itol.hub object data from list of unit object.
 }

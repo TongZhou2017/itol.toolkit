@@ -2,8 +2,8 @@
 #' @description Read the fasta format sequences file into data.frame
 #' @importFrom Biostrings readBStringSet
 #' @param file input file in fasta format
+#' @return a data frame with sequence id and sequence
 #' @export
-
 fa_read <- function(file) {
   #  fastaFile <- Biostrings::readDNAStringSet(file)
   fasta_file <- Biostrings::readBStringSet(file)
@@ -22,6 +22,7 @@ fa_read <- function(file) {
 #' @param id id col
 #' @param seq seq col
 #' @param append append at the end of an already existing file
+#' @return No return value, only output a fasta file
 #' @export
 fa_write <- function(object, file, id = "seq_name", seq = "sequence", append = FALSE) {
   if (append) {
@@ -35,6 +36,7 @@ fa_write <- function(object, file, id = "seq_name", seq = "sequence", append = F
 #'
 #' @description Head line for templates
 #' @param function_name parent function name
+#' @return a character specifying the template type
 #' @importFrom dplyr case_when
 #' @export
 head_line <- function(function_name) {
@@ -52,6 +54,7 @@ head_line <- function(function_name) {
 #' correct_get_color
 #' @description correct_get_color. (Version 0.0.0.9000)
 #' @param str taxa string
+#' @return a vector of colors
 #' @import dplyr
 #' @export
 correct_get_color <- function(str) {
@@ -63,6 +66,7 @@ correct_get_color <- function(str) {
 #' get_color
 #' @description get color, support max length 40
 #' @param n level length of a vector
+#' @return a vector of colors
 #' @export
 get_color <- function(n) {
   # Colour vectors collected by Jan P. Meier-Kolthoff.
@@ -327,6 +331,7 @@ get_color <- function(n) {
 #'
 #' @description Paste rows group by key column
 #' @param df input data frame
+#' @return a data frame with pasted row by same id
 #' @import dplyr
 #' @export
 unite_rows <- function(df) {
@@ -344,6 +349,7 @@ unite_rows <- function(df) {
 #' @param str str
 #' @param with_ext with ext or not
 #' @param keep_dir keep file dir or not
+#' @return a character specifying the file name
 #' @import stringr
 #' @export
 
@@ -365,6 +371,7 @@ file_get_name <- function(str, with_ext = TRUE, keep_dir = FALSE) {
 #' @description Get file dir from string
 #' @param str str
 #' @param up up dir
+#' @return a character specifying the dir path
 #' @import stringr
 #' @export
 

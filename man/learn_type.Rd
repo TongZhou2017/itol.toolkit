@@ -7,8 +7,37 @@
 learn_type(file)
 }
 \arguments{
-\item{file}{template file}
+\item{file}{template file. All the template files should follow the format
+rules as same with iTOL offical template files. The files should start with
+the following headers: "COLLAPSE", "PRUNE", "SPACING", "TREE_COLORS",
+"DATASET_STYLE", "LABELS", "DATASET_TEXT", "DATASET_COLORSTRIP",
+"DATASET_BINARY", "DATASET_GRADIENT", "DATASET_HEATMAP", "DATASET_SYMBOL",
+"DATASET_EXTERNALSHAPE", "DATASET_DOMAINS", "DATASET_SIMPLEBAR",
+"DATASET_MULTIBAR", "DATASET_BOXPLOT", "DATASET_LINECHART",
+"DATASET_PIECHART", "DATASET_ALIGNMENT", "DATASET_CONNECTION",
+"DATASET_IMAGE", "POPUP_INFO".}
+}
+\value{
+a character specifying header information
 }
 \description{
 Extract first line of template to learn type information.
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_group <- data.frame(id = unique(template_groups$group),
+                       data = unique(template_groups$group))
+## create unit
+unit <- create_unit(data = df_group,
+                    key = "Quickstart",
+                    type = "DATASET_COLORSTRIP",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn template type
+learn_type(file)
 }

@@ -7,10 +7,62 @@
 learn_theme_strip_label(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a charactor specifying the separator.}
+}
+\value{
+a list of strip label parameters containing
+
+\item{display}{0/1 specifying display or hide the individual label
+inside each colored strip (when defined in the data below)}
+
+\item{width}{a number specifying width of the colored strip}
+
+\item{size}{a number specifying strip label size factor (relative to
+the tree leaf labels)}
+
+\item{color}{define colors for each strip label element (use
+hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used
+as SEPARATOR)}
+
+\item{color_branches}{1/0 specifying branches of the tree will or not
+be colored according to the colors of the strips above the leaves. When all
+children of a node have the same color, it will be colored the same, ie. the
+color will propagate inwards towards the root.}
+
+\item{position}{a character specifying position of the strip label
+within the box; 'top', 'center' or 'bottom'}
+
+\item{shift}{a number specifying strip label shift in pixels
+(positive or negative)}
+
+\item{rotation}{a number specifying rotation of the strip labels;
+used only in rectangular tree display mode}
+
+\item{outline_width}{a number specifying draw a black outline around
+the text (width in pixels)}
 }
 \description{
 learn strip label paramters as list
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_group <- data.frame(id = unique(template_groups$group),
+                       data = unique(template_groups$group))
+## create unit
+unit <- create_unit(data = df_group,
+                    key = "Quickstart",
+                    type = "DATASET_COLORSTRIP",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn parameter
+lines <- line_clean(file=file)
+sep = learn_separator(file = file)
+learn_theme_strip_label(lines = lines, sep = sep)
 }

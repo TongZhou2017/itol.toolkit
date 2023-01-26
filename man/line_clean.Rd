@@ -7,10 +7,20 @@
 line_clean(lines = NULL, file = NULL)
 }
 \arguments{
-\item{lines}{string vector}
+\item{lines}{a vector of character strings. The strings are containing the
+lines of template file. If the file parameter is NULL, this parameter should
+be set.}
 
-\item{file}{template file}
+\item{file}{a character specifying the template file path. If this parameter
+is setted, the lines parameter will be replaced.}
+}
+\value{
+a vector of character strings
 }
 \description{
 Remove the lines start with # or without any information.
+}
+\examples{
+strs <- c("#comment","DATA")
+line_clean(lines=strs)
 }

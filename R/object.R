@@ -71,6 +71,7 @@ create_hub <- function(tree,field_tree=NULL,seq=NULL,abundance=NULL,taxonomy=NUL
 # S4 method
 #' show method for S4 class itol.hub
 #' @param object An object of class itol.hub
+#' @return a stdout screen information about itol.hub object
 #' @importMethodsFrom methods show
 #' @export
 setMethod(
@@ -121,18 +122,6 @@ itol.unit <- setClass(
   )
 )
 
-# S4 method
-#' + method for S4 class itol.hub and itol.unit
-#' @param e1 An object of class itol.hub
-#' @param e2 An object of class itol.unit
-#' @export
-setMethod(
-  "+",
-  c("itol.hub", "itol.unit"),
-  function(e1, e2) {
-    learn_data_from_unit(e1, e2)
-  }
-)
 
 #' Create itol.unit Object from file
 #' @description create a new object for itol.unit

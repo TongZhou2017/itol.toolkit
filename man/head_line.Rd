@@ -9,6 +9,9 @@ head_line(function_name)
 \arguments{
 \item{function_name}{parent function name}
 }
+\value{
+a character specifying the template type
+}
 \description{
 Head line for templates
 }

@@ -22,6 +22,9 @@ unit objects are generated from the itol.hub object and then processed.}
 \item{file}{output file path. Define the output file location and file name
 using absolute or relative path.}
 }
+\value{
+No return value, only output a template file
+}
 \description{
 Write itol.unit object into template file. This function will
 using the type information in unit object to decide different output methods

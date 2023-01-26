@@ -15,6 +15,9 @@ learn_data(df1 = NULL, file, tree = NULL, ...)
 
 \item{...}{Further arguments to be passed to subsequent functions.}
 }
+\value{
+a list with two data frame of node and tip annotation data
+}
 \description{
 Learn data from template file into data frame
 }

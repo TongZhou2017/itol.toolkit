@@ -7,15 +7,18 @@
 learn_subdf(lines, type, sep, dataset_name = NULL, field_labels = NULL)
 }
 \arguments{
-\item{lines}{line vector}
+\item{lines}{a vector of character strings from template file.}
 
 \item{type}{template type}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
 
 \item{dataset_name}{label in template file}
 
 \item{field_labels}{sample ids for binary, heatmap, and other multi-column value templates}
+}
+\value{
+a data frame containing the data learned from template file
 }
 \description{
 Learn sub data frame from template file

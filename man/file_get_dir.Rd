@@ -11,6 +11,9 @@ file_get_dir(str, up = FALSE)
 
 \item{up}{up dir}
 }
+\value{
+a character specifying the dir path
+}
 \description{
 Get file dir from string
 }

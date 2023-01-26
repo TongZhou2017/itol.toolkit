@@ -9,6 +9,9 @@ get_color(n)
 \arguments{
 \item{n}{level length of a vector}
 }
+\value{
+a vector of colors
+}
 \description{
 get color, support max length 40
 }

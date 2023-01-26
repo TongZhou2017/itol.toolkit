@@ -7,9 +7,12 @@
 learn_theme_piechart(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of pie chart parameters containing
 }
 \description{
 learn piechart paramters as list

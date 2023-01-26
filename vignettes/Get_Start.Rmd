@@ -3,7 +3,7 @@ title: "Get_Start"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get_Start}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -20,6 +20,7 @@ library(dplyr)
 library(data.table)
 library(ape)
 library(stringr)
+library(tidyr)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -54,7 +55,7 @@ tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
 
 order <- c("type","separator","profile","field","common themes","specific themes","data")
 
-tab_tmp_01_long <- tab_tmp_01 %>% melt(id.vars=c("parameter","group"))
+tab_tmp_01_long <- tab_tmp_01 %>% tidyr::gather(key = "variable",value = "value",c(-parameter,-group))
 
 template_start_group <- tab_tmp_01_long %>% group_by(group,variable) %>% summarise(sublen = sum(value)) %>% tidyr::spread(key=variable,value=sublen)
 template_start_group$group <- factor(template_start_group$group,levels = order)
@@ -65,9 +66,9 @@ for (i in 2:nrow(start_group)) {
   start_group$start[i] <- sum(start_group$Freq[1:(i-1)])
 }
 template_start_group[template_start_group == 0] <- NA
-template_end_group <- template_start_group + start_group$start
-template_end_group$group <- order
-template_end_group_long <- template_end_group %>% melt(id.vars=c("group"))
+template_end_group <- template_start_group[,2:(ncol(template_start_group)-1)] + start_group$start
+template_end_group <- data.frame(group = order,template_end_group)
+template_end_group_long <- template_end_group %>% tidyr::gather(key = "variable",value = "value",-group)
 names(template_end_group_long)[3] <- "end"
 template_end_group_long$start <- rep(start_group$start,length(unique(template_end_group_long$variable)))
 template_end_group_long <- template_end_group_long %>% na.omit()
@@ -83,7 +84,7 @@ names(df_values) <- str_replace_all(names(df_values),",","-")
 
 ## 9 data
 df_value <- fread(system.file("extdata","templates_frequence.txt",package = "itol.toolkit"))
-df_value <- df_value %>% melt(id.vars=c("templates")) %>% na.omit() %>% select(templates,value)
+df_value <- df_value %>% tidyr::pivot_longer(-templates) %>% na.omit() %>% select(templates,value) %>% as.data.frame()
 df_value$value <- log(df_value$value)
 ```
 
@@ -165,7 +166,7 @@ hub <- hub +
   unit_8 + 
   unit_9
 
-write_hub(hub,"~/Downloads/itol.annotation-package.output/tree_of_itol_templates_outputs/")
+write_hub(hub,tempdir())
 ```
 
-![](images/itol%20toolkit%20v1%20functions.png){width="640"}
+![](images/itol_toolkit_v1_functions.jpg){width="640"}

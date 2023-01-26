@@ -910,6 +910,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data[is.na(data)] <- 0
     method = case_when(method == "sum" ~ "rowSums",
       method == "mean" ~ "rowMeans")
+    data <- mutate_all(data, function(x) as.numeric(as.character(x)))
     eval(parse(text = paste0('result <- ',method,'(data)')))
     data <- data.frame(id = id, data = result)
     names(data) <- c("id",paste0(key,"$",stringr::str_replace_all(field_name," ","_")))
@@ -1273,6 +1274,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data[is.na(data)] <- 0
     method = case_when(method == "sum" ~ "rowSums",
       method == "mean" ~ "rowMeans")
+    data <- mutate_all(data, function(x) as.numeric(as.character(x)))
     eval(parse(text = paste0('result <- ',method,'(data)')))
     data <- data.frame(id = id, data = result)
     names(data) <- c("id",paste0(key,"$",stringr::str_replace_all(field_name," ","_")))

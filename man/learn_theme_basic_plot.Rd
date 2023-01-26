@@ -7,9 +7,12 @@
 learn_theme_basic_plot(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of basic plot parameters containing
 }
 \description{
 learn basic plot paramters as list

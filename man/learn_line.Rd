@@ -7,13 +7,37 @@
 learn_line(lines, param, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{param}{a charactor string of paramter key name}
+\item{param}{a charactor string of paramter key name. The key name should be
+uppercase letters or '_' without spacing.}
 
-\item{sep}{separator}
+\item{sep}{a charactor specifying the separator.}
+}
+\value{
+a charactor string containing parameter value.
 }
 \description{
 learn paramter name and values based on the key name in the
 front of line.
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_group <- data.frame(id = unique(template_groups$group),
+                       data = unique(template_groups$group))
+## create unit
+unit <- create_unit(data = df_group,
+                    key = "Quickstart",
+                    type = "DATASET_COLORSTRIP",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn parameter
+lines <- line_clean(file=file)
+sep = learn_separator(file = file)
+learn_line(lines = lines, param = "STRIP_WIDTH", sep = sep)
 }

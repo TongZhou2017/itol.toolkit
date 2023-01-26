@@ -7,10 +7,44 @@
 learn_field(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of field parameters containing
+
+\item{labels}{a vector of characters specifying the filed name. In
+DATASET_HEATMAP, the labels are shown as heatamp column names.}
+
+\item{colors}{define colors for each individual field column (use
+hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as
+SEPARATOR)}
+
+\item{shapes}{Shape should be a number between 1 and 6, or any
+protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+triangle, 5-left pointing triangle, 6-checkmark}
 }
 \description{
 learn field paramters as list
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+df_frequence <- data.table::fread(system.file("extdata",
+                                              "templates_frequence.txt",
+                                              package = "itol.toolkit"))
+## create unit
+unit <- create_unit(data = df_frequence,
+                    key = "Quickstart",
+                    type = "DATASET_HEATMAP",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn legend parameters
+lines <- line_clean(file=file)
+sep = learn_separator(file = file)
+learn_field(lines = lines, sep = sep)
 }

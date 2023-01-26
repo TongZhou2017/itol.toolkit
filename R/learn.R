@@ -3,8 +3,34 @@
 #' Learn template type
 #'
 #' @description Extract first line of template to learn type information.
-#' @param file template file
+#' @param file template file. All the template files should follow the format
+#' rules as same with iTOL offical template files. The files should start with
+#' the following headers: "COLLAPSE", "PRUNE", "SPACING", "TREE_COLORS",
+#' "DATASET_STYLE", "LABELS", "DATASET_TEXT", "DATASET_COLORSTRIP",
+#' "DATASET_BINARY", "DATASET_GRADIENT", "DATASET_HEATMAP", "DATASET_SYMBOL",
+#' "DATASET_EXTERNALSHAPE", "DATASET_DOMAINS", "DATASET_SIMPLEBAR",
+#' "DATASET_MULTIBAR", "DATASET_BOXPLOT", "DATASET_LINECHART",
+#' "DATASET_PIECHART", "DATASET_ALIGNMENT", "DATASET_CONNECTION",
+#' "DATASET_IMAGE", "POPUP_INFO".
+#' @return a character specifying header information
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' data("template_groups")
+#' df_group <- data.frame(id = unique(template_groups$group),
+#'                        data = unique(template_groups$group))
+#' ## create unit
+#' unit <- create_unit(data = df_group,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_COLORSTRIP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn template type
+#' learn_type(file)
 learn_type <- function(file) {
   lines <- readLines(file)
   type <- lines[1]
@@ -14,11 +40,25 @@ learn_type <- function(file) {
 #' Learn from tree
 #'
 #' @description Learn initial data frame from Newick format tree leaves.
-#' @param tree Newick tree file
-#' @param node output node label
-#' @param tip output tip label
+#' @param tree Newick tree file or phylo object.
+#' @param node a logical to control output with node label or not. The default
+#' value is FALSE.
+#' @param tip a logical to control output tip label or not.The default value is
+#' TRUE.
+#' @return a list containing
+#' @return \item{node}{a data frame with id column. The id information is from
+#' the node label in Newick format tree file or phylo object. If the node
+#' parameter set as FALSE, the node information will be NULL.}
+#' @return \item{tip}{a data frame with id column. The id information is from
+#' the tip label in Newick format tree file or phylo object. If the tip
+#' parameter set as FALSE, the tip information will be NULL.}
 #' @importFrom ape read.tree
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' sub_df <- learn_df(tree,node=TRUE,tip=TRUE)
 learn_df <- function(tree, node = FALSE, tip = TRUE) {
   if (is.character(tree)) {
     tree <- read.tree(tree)
@@ -33,30 +73,28 @@ learn_df <- function(tree, node = FALSE, tip = TRUE) {
       df <- list(node = data.frame(id = node_label))
     }
   } else {
-    (
       if (tip) {
         df <- list(tip = data.frame(id = tip_label))
       } else {
         df <- NULL
-      })
+      }
   }
   return(df)
-}
-
-`%+%` <- function(df1, df2) {
-
-}
-
-merge_df <- function(df1, df2) {
-
 }
 
 #' Filter out comments and empty lines
 #'
 #' @description Remove the lines start with # or without any information.
-#' @param lines string vector
-#' @param file template file
+#' @param lines a vector of character strings. The strings are containing the
+#' lines of template file. If the file parameter is NULL, this parameter should
+#' be set.
+#' @param file a character specifying the template file path. If this parameter
+#' is setted, the lines parameter will be replaced.
+#' @return a vector of character strings
 #' @export
+#' @examples
+#' strs <- c("#comment","DATA")
+#' line_clean(lines=strs)
 line_clean <- function(lines = NULL, file = NULL) {
   if (!is.null(file)) {
     lines <- readLines(file)
@@ -75,11 +113,31 @@ line_clean <- function(lines = NULL, file = NULL) {
 #' Learn separator
 #'
 #' @description Learn 3 types of separators: tab, space, and comma.
-#' @param lines string vector
-#' @param file template file
+#' @param lines a vector of character strings from template file. If the file
+#' parameter is NULL, this parameter should be set.
+#' @param file a character specifying the template file path. If this parameter
+#' is setted, the lines parameter will be replaced.
+#' @return a character specifying the separator
 #' @importFrom stringr str_remove
 #' @importFrom dplyr case_when
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' data("template_groups")
+#' df_group <- data.frame(id = unique(template_groups$group),
+#'                        data = unique(template_groups$group))
+#' ## create unit
+#' unit <- create_unit(data = df_group,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_COLORSTRIP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn template type
+#' learn_separator(file = file)
 learn_separator <- function(lines = NULL, file = NULL) {
   if (!is.null(file)) {
     lines <- line_clean(file = file)
@@ -98,11 +156,32 @@ learn_separator <- function(lines = NULL, file = NULL) {
 #'
 #' @description learn paramter name and values based on the key name in the
 #' front of line.
-#' @param lines file lines
-#' @param param a charactor string of paramter key name
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param param a charactor string of paramter key name. The key name should be
+#' uppercase letters or '_' without spacing.
+#' @param sep a charactor specifying the separator.
+#' @return a charactor string containing parameter value.
 #' @importFrom stringr str_remove
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' data("template_groups")
+#' df_group <- data.frame(id = unique(template_groups$group),
+#'                        data = unique(template_groups$group))
+#' ## create unit
+#' unit <- create_unit(data = df_group,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_COLORSTRIP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn parameter
+#' lines <- line_clean(file=file)
+#' sep = learn_separator(file = file)
+#' learn_line(lines = lines, param = "STRIP_WIDTH", sep = sep)
 learn_line <- function(lines, param, sep) {
   string <- lines[grepl(paste0("^", param, sep), lines)]
   string <- stringr::str_remove(string, paste0("^", param, sep))
@@ -113,9 +192,47 @@ learn_line <- function(lines, param, sep) {
 #' Learn legend
 #'
 #' @description learn legend paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of legned parameters containing
+#' @return \item{title}{a character specifying the title of legend. There should
+#' not be the character same with separater within.}
+#' @return \item{position_x}{a number specifying the x axis px value of the
+#' legend.}
+#' @return \item{position_y}{a number specifying the y axis px value of the
+#' legend.}
+#' @return \item{horizontal}{To order legend entries horizontally instead of
+#' vertically, set this parameter to 1}
+#' @return \item{shapes}{Shape should be a number between 1 and 6, or any
+#' protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+#' triangle, 5-left pointing triangle, 6-checkmark}
+#' @return \item{colors}{define colors for each legend element (use hexadecimal,
+#' RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)}
+#' @return \item{labels}{The legend element label.There should not be the
+#' character same with separater within.}
+#' @return \item{shape_scales}{For each shape, you can define a scaling factor
+#' between 0 and 1.}
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' df_frequence <- data.table::fread(system.file("extdata",
+#'                                               "templates_frequence.txt",
+#'                                               package = "itol.toolkit"))
+#' ## create unit
+#' unit <- create_unit(data = df_frequence,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_SIMPLEBAR",
+#'                     method = "mean",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn legend parameters
+#' lines <- line_clean(file=file)
+#' sep = learn_separator(file = file)
+#' learn_legend(lines = lines, sep = sep)
 learn_legend <- function(lines, sep) {
   legend_title <- learn_line(lines, "LEGEND_TITLE", sep)
   legend_position_x <- learn_line(lines, "LEGEND_POSITION_X", sep)
@@ -144,9 +261,49 @@ learn_legend <- function(lines, sep) {
 #' Learn strip label
 #'
 #' @description learn strip label paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a charactor specifying the separator.
+#' @return a list of strip label parameters containing
+#' @return \item{display}{0/1 specifying display or hide the individual label
+#' inside each colored strip (when defined in the data below)}
+#' @return \item{width}{a number specifying width of the colored strip}
+#' @return \item{size}{a number specifying strip label size factor (relative to
+#' the tree leaf labels)}
+#' @return \item{color}{define colors for each strip label element (use
+#' hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used
+#' as SEPARATOR)}
+#' @return \item{color_branches}{1/0 specifying branches of the tree will or not
+#' be colored according to the colors of the strips above the leaves. When all
+#' children of a node have the same color, it will be colored the same, ie. the
+#' color will propagate inwards towards the root.}
+#' @return \item{position}{a character specifying position of the strip label
+#' within the box; 'top', 'center' or 'bottom'}
+#' @return \item{shift}{a number specifying strip label shift in pixels
+#' (positive or negative)}
+#' @return \item{rotation}{a number specifying rotation of the strip labels;
+#' used only in rectangular tree display mode}
+#' @return \item{outline_width}{a number specifying draw a black outline around
+#' the text (width in pixels)}
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' data("template_groups")
+#' df_group <- data.frame(id = unique(template_groups$group),
+#'                        data = unique(template_groups$group))
+#' ## create unit
+#' unit <- create_unit(data = df_group,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_COLORSTRIP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn parameter
+#' lines <- line_clean(file=file)
+#' sep = learn_separator(file = file)
+#' learn_theme_strip_label(lines = lines, sep = sep)
 learn_theme_strip_label <- function(lines, sep) {
   strip_labels_display <- learn_line(lines, "SHOW_STRIP_LABELS", sep)
   strip_label_width <- learn_line(lines, "STRIP_WIDTH", sep)
@@ -177,9 +334,37 @@ learn_theme_strip_label <- function(lines, sep) {
 #' Learn field
 #'
 #' @description learn field paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of field parameters containing
+#' @return \item{labels}{a vector of characters specifying the filed name. In
+#' DATASET_HEATMAP, the labels are shown as heatamp column names.}
+#' @return \item{colors}{define colors for each individual field column (use
+#' hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as
+#' SEPARATOR)}
+#' @return \item{shapes}{Shape should be a number between 1 and 6, or any
+#' protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+#' triangle, 5-left pointing triangle, 6-checkmark}
 #' @export
+#' @examples
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' df_frequence <- data.table::fread(system.file("extdata",
+#'                                               "templates_frequence.txt",
+#'                                               package = "itol.toolkit"))
+#' ## create unit
+#' unit <- create_unit(data = df_frequence,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_HEATMAP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn legend parameters
+#' lines <- line_clean(file=file)
+#' sep = learn_separator(file = file)
+#' learn_field(lines = lines, sep = sep)
 learn_field <- function(lines, sep) {
   field_shapes <- learn_line(lines, "FIELD_SHAPES", sep)
   field_labels <- learn_line(lines, "FIELD_LABELS", sep)
@@ -198,9 +383,33 @@ learn_field <- function(lines, sep) {
 #' Learn profile
 #'
 #' @description learn profile paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of profile parameters containing
+#' @return \item{name}{a character specifying label, which is used in the legend
+#' table}
+#' @return \item{color}{dataset color in the legend (use hexadecimal, RGB or 
+#' RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)}
 #' @export
+#' @examples 
+#' tree <- system.file("extdata",
+#'                     "tree_of_itol_templates.tree",
+#'                     package = "itol.toolkit")
+#' df_frequence <- data.table::fread(system.file("extdata",
+#'                                               "templates_frequence.txt",
+#'                                               package = "itol.toolkit"))
+#' ## create unit
+#' unit <- create_unit(data = df_frequence,
+#'                     key = "Quickstart",
+#'                     type = "DATASET_HEATMAP",
+#'                     tree = tree)
+#' ## write unit
+#' file <- tempfile()
+#' write_unit(unit,file)
+#' ## Learn legend parameters
+#' lines <- line_clean(file=file)
+#' sep = learn_separator(file = file)
+#' learn_profile(lines = lines, sep = sep)
 learn_profile <- function(lines, sep) {
   dataset_name <- learn_line(lines, "DATASET_LABEL", sep)
   dataset_name <- sub(" ", "_", dataset_name)
@@ -218,9 +427,83 @@ learn_profile <- function(lines, sep) {
 #' Learn label
 #'
 #' @description learn label paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of label parameters containing
+#' @return \item{display}{1/0 specifying display or hide the text labels above 
+#' each field column}
+#' @return \item{size}{a number specifying the size factor for the text labels}
+#' @return \item{top}{1/0 specifying the labels position. If 0, label text which
+#' does not fit into the shape will be hidden}
+#' @return \item{below}{1/0 specifying the labels position. By default, internal
+#' labels will be placed above the branches. If 1, labels will be below the 
+#' branches}
+#' @return \item{rotation}{a number specifying text label rotation angle}
+#' @return \item{straight}{1/0 specifying tree rotation. If set to 1, tree 
+#' rotation will not influence the individual label rotation}
+#' @return \item{vertical}{a number specifying the label vertical shift. Shift 
+#' internal labels vertically by this amount of pixels (positive or negative)}
+#' @return \item{shift}{a number specifying the label shift. text label shift in
+#' pixels (positive or negative)}
+#' @return \item{external_shift}{1/0 specifying label external shift that add 
+#' extra horizontal shift to the external labels. Useful in unrooted display 
+#' mode to shift text labels further away from the node labels.}
 #' @export
+#' @examples 
+#' library(dplyr)
+#'   tree <- system.file("extdata",
+#'                       "tree_of_itol_templates.tree",
+#'                       package = "itol.toolkit")
+#'   tab_tmp <- data.table::fread(system.file("extdata",
+#'                                            "parameter_groups.txt",
+#'                                            package = "itol.toolkit"))
+#'   tab_id_group <- tab_tmp[,c(1,2)]
+#'   tab_tmp <- tab_tmp[,-c(1,2)]
+#'   tab_tmp_01 <- convert_01(object = tab_tmp)
+#'   tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
+#'   order <- c("type","separator","profile","field","common themes",
+#'     "specific themes","data")
+#'   tab_tmp_01_long <- tab_tmp_01 %>% 
+#'                        tidyr::gather(key = "variable",
+#'                                      value = "value",
+#'                                      c(-parameter,-group))
+#'   template_start_group <- tab_tmp_01_long %>% 
+#'                             group_by(group,variable) %>% 
+#'                             summarise(sublen = sum(value)) %>% 
+#'                             tidyr::spread(key=variable,
+#'                                           value=sublen)
+#'   template_start_group$group <- factor(template_start_group$group,
+#'                                        levels = order)
+#'   template_start_group <- template_start_group %>% arrange(group)
+#'   start_group <- data.frame(Var1 = template_start_group$group, 
+#'                             Freq = apply(template_start_group[,-1], 1, max))
+#'   start_group$start <- 0
+#'   for (i in 2:nrow(start_group)) {
+#'     start_group$start[i] <- sum(start_group$Freq[1:(i-1)])
+#'   }
+#'   template_start_group[template_start_group == 0] <- NA
+#'   template_end_group <- template_start_group[,2:(ncol(template_start_group)-1)] + start_group$start
+#'   template_end_group <- data.frame(group = order,template_end_group)
+#'   template_end_group_long <- template_end_group %>% 
+#'                                tidyr::gather(key = "variable",
+#'                                              value = "value",
+#'                                              -group)
+#'   names(template_end_group_long)[3] <- "end"
+#'   template_end_group_long$start <- rep(start_group$start,
+#'                                        length(unique(template_end_group_long$variable)))
+#'   template_end_group_long <- template_end_group_long %>% na.omit()
+#'   template_end_group_long$length <- sum(start_group$Freq)
+#'   template_end_group_long <- template_end_group_long[,c(2,5,4,3,1)]
+#'   template_end_group_long$group <- factor(template_end_group_long$group,levels = order)
+#'   unit <- create_unit(data = template_end_group_long,
+#'                       key = "Quickstart",
+#'                       type = "DATASET_DOMAINS",
+#'                       tree = tree)
+#'   file <- tempfile()
+#'   write_unit(unit,file)
+#'   lines <- line_clean(file=file)
+#'   sep = learn_separator(file = file)
+#'   learn_theme_label(lines,sep)
 learn_theme_label <- function(lines, sep) {
   label_display <- learn_line(lines, "SHOW_LABELS", sep)
   label_size_factor <- learn_line(lines, "LABEL_SIZE_FACTOR", sep)
@@ -252,7 +535,8 @@ learn_theme_label <- function(lines, sep) {
 #'
 #' @description learn bar paramters as list
 #' @param lines file lines
-#' @param sep separator
+#' @param sep a character specifying the separator.
+#' @return a list of bar parameters containing
 #' @export
 learn_theme_bar <- function(lines, sep) {
   bar_shift <- learn_line(lines, "BAR_SHIFT", sep)
@@ -270,8 +554,9 @@ learn_theme_bar <- function(lines, sep) {
 #' Learn heatmap
 #'
 #' @description learn heatmap paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of heatmap parameters containing
 #' @export
 learn_theme_heatmap <- function(lines, sep) {
   heatmap_color_nan <- learn_line(lines, "COLOR_NAN", sep)
@@ -313,8 +598,9 @@ learn_theme_heatmap <- function(lines, sep) {
 #' Learn border
 #'
 #' @description learn border paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of border parameters containing
 #' @export
 learn_theme_border <- function(lines, sep) {
   border_width <- learn_line(lines, "BORDER_WIDTH", sep)
@@ -334,8 +620,9 @@ learn_theme_border <- function(lines, sep) {
 #' Learn domain
 #'
 #' @description learn domain paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of domain parameters containing
 #' @export
 learn_theme_domain <- function(lines, sep) {
   domain_labels_display <- learn_line(lines, "SHOW_DOMAIN_LABELS", sep)
@@ -359,8 +646,9 @@ learn_theme_domain <- function(lines, sep) {
 #' Learn linechart
 #'
 #' @description learn linechart paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of line chart parameters containing
 #' @export
 learn_theme_linechart <- function(lines, sep) {
   linechart_colors <- learn_line(lines, "LINE_COLORS", sep)
@@ -414,8 +702,9 @@ learn_theme_linechart <- function(lines, sep) {
 #' Learn alignment
 #'
 #' @description learn alignment paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of alignment parameters containing
 #' @export
 learn_theme_alignment <- function(lines, sep) {
   alignment_custom_color_scheme <- learn_line(lines, "CUSTOM_COLOR_SCHEME", sep)
@@ -477,8 +766,9 @@ learn_theme_alignment <- function(lines, sep) {
 #' Learn connection
 #'
 #' @description learn connection paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of connection parameters containing
 #' @export
 learn_theme_connection <- function(lines, sep) {
   draw_arrows <- learn_line(lines, "DRAW_ARROWS", sep)
@@ -508,8 +798,9 @@ learn_theme_connection <- function(lines, sep) {
 #' Learn image
 #'
 #' @description learn connection paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of image parameters containing
 #' @export
 learn_theme_image <- function(lines, sep) {
   image_rotation <- learn_line(lines, "IMAGE_ROTATION", sep)
@@ -529,8 +820,9 @@ learn_theme_image <- function(lines, sep) {
 #' Learn externalshape
 #'
 #' @description learn connection paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of external shape parameters containing
 #' @export
 learn_theme_externalshape <- function(lines, sep) {
   externalshape_horizontal_grid <- learn_line(lines, "HORIZONTAL_GRID", sep)
@@ -554,8 +846,9 @@ learn_theme_externalshape <- function(lines, sep) {
 #' Learn align
 #'
 #' @description learn connection paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of align parameters containing
 #' @export
 learn_theme_align <- function(lines, sep) {
   align_label <- learn_line(lines, "ALIGN_TO_LABELS", sep)
@@ -575,8 +868,9 @@ learn_theme_align <- function(lines, sep) {
 #' Learn binary
 #'
 #' @description learn binary paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of binary chart parameters containing
 #' @export
 learn_theme_binary <- function(lines, sep) {
   binary_symbol_spacing <- learn_line(lines, "SYMBOL_SPACING", sep)
@@ -590,8 +884,9 @@ learn_theme_binary <- function(lines, sep) {
 #' Learn piechart
 #'
 #' @description learn piechart paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of pie chart parameters containing
 #' @export
 learn_theme_piechart <- function(lines, sep) {
   piechart_polar_area_diagram <- learn_line(lines, "POLAR_AREA_DIAGRAM", sep)
@@ -605,8 +900,9 @@ learn_theme_piechart <- function(lines, sep) {
 #' Learn basic plot
 #'
 #' @description learn basic plot paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of basic plot parameters containing
 #' @export
 learn_theme_basic_plot <- function(lines, sep) {
   basic_plot_dataset_scale <- learn_line(lines, "DATASET_SCALE", sep)
@@ -632,8 +928,9 @@ learn_theme_basic_plot <- function(lines, sep) {
 #' Learn basic theme
 #'
 #' @description learn basic theme paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of basic theme parameters containing
 #' @export
 learn_theme_basic_theme <- function(lines, sep) {
   basic_theme_internal_display <- learn_line(lines, "SHOW_INTERNAL", sep)
@@ -653,9 +950,10 @@ learn_theme_basic_theme <- function(lines, sep) {
 #' Learn specific themes
 #'
 #' @description learn specific theme paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
 #' @param type template type
+#' @return a list of specific theme parameters containing
 #' @export
 learn_theme_specific_themes <- function(lines, sep, type) {
   if (type == "DATASET_BINARY") {
@@ -714,8 +1012,9 @@ learn_theme_specific_themes <- function(lines, sep, type) {
 #' Learn common themes
 #'
 #' @description learn common theme paramters as list
-#' @param lines file lines
-#' @param sep separator
+#' @param lines a vector of character strings from template file.
+#' @param sep a character specifying the separator.
+#' @return a list of common theme parameters containing
 #' @export
 learn_theme_common_themes <- function(lines, sep) {
   common_themes <- list(
@@ -738,8 +1037,9 @@ learn_theme_common_themes <- function(lines, sep) {
 #' Split lines into two parts
 #'
 #' @description Split lines based on the data block marker
-#' @param lines string vector
+#' @param lines a vector of character strings from template file.
 #' @param param "theme" or "data" for the theme paramters or the data lines
+#' @return a vector of character strings containing data or theme information
 #' @export
 line_split <- function(lines, param = "data") {
   if (param == "data") {
@@ -753,11 +1053,12 @@ line_split <- function(lines, param = "data") {
 #' Learn sub data frame
 #'
 #' @description Learn sub data frame from template file
-#' @param lines line vector
+#' @param lines a vector of character strings from template file.
 #' @param type template type
-#' @param sep separator
+#' @param sep a character specifying the separator.
 #' @param dataset_name label in template file
 #' @param field_labels sample ids for binary, heatmap, and other multi-column value templates
+#' @return a data frame containing the data learned from template file
 #' @importFrom data.table fread
 #' @importFrom data.table melt
 #' @importFrom tidyr separate
@@ -860,6 +1161,7 @@ learn_subdf <- function(lines, type, sep, dataset_name = NULL, field_labels = NU
 #' @param df1 initial data frame
 #' @param df2 sub data frame
 #' @param by key column
+#' @return a data frame containing merged information
 #' @importFrom dplyr left_join
 #' @export
 df_merge <- function(df1, df2, by = "id") {
@@ -872,6 +1174,7 @@ df_merge <- function(df1, df2, by = "id") {
 #' @description Convert the data frame with range id to node id by mrca method.
 #' @param df data frame with any type of id
 #' @param tree tree file path
+#' @return a data frame with converted id from range id
 #' @importFrom data.table fread
 #' @importFrom ape mrca
 #' @importFrom ape drop.tip
@@ -928,6 +1231,7 @@ convert_range_to_node <- function(df, tree) {
 #' @param file template file
 #' @param tree tree file
 #' @param ... Further arguments to be passed to subsequent functions.
+#' @return a list with two data frame of node and tip annotation data
 #' @export
 learn_data <- function(df1 = NULL, file, tree = NULL, ...) {
   file_name <- file_get_name(str = file, with_ext = FALSE, keep_dir = FALSE)
@@ -983,6 +1287,7 @@ learn_data <- function(df1 = NULL, file, tree = NULL, ...) {
 #' @description Learn itol.hub object data from unit object.
 #' @param object itol.hub object
 #' @param unit itol.unit object
+#' @return a itol.hub object containing new data from itol.unit object
 #' @import dplyr
 #' @importFrom stringr str_extract
 #' @importFrom stringr str_remove
@@ -1097,6 +1402,7 @@ learn_data_from_unit <- function(object, unit) {
 #' @description Learn itol.hub object data from list of unit object.
 #' @param object itol.hub object
 #' @param units itol.unit object list
+#' @return a itol.hub object with new data from a list of itol.unit objects
 #' @export
 learn_data_from_unit_list <- function(object, units) {
   for (i in 1:length(units)) {
@@ -1110,6 +1416,7 @@ learn_data_from_unit_list <- function(object, units) {
 #' @description Learn itol.hub object data from template file.
 #' @param object itol.hub object
 #' @param file template file
+#' @return a itol.hub object with new data from template file
 #' @export
 learn_data_from_file <- function(object, file) {
   unit <- file_to_unit(file = file, tree = object@tree$main)
@@ -1125,6 +1432,7 @@ learn_data_from_file <- function(object, file) {
 #' @param dir files path
 #' @param pattern file name pattern in regex
 #' @param ... Further arguments to be passed to subsequent functions.
+#' @return a itol.hub object with new data from template files
 #' @export
 learn_data_from_files <- function(object, files = NULL, dir = NULL, pattern = ".", ...) {
   if (!is.null(dir)) {
@@ -1143,6 +1451,7 @@ learn_data_from_files <- function(object, files = NULL, dir = NULL, pattern = ".
 #'
 #' @description In data frame and list, convert character and numberic data to 0/1.
 #' @param object data frame or list
+#' @return a data frame with 0/1 values
 #' @importFrom dplyr mutate_all
 #' @export
 convert_01 <- function(object) {
@@ -1160,6 +1469,7 @@ convert_01 <- function(object) {
 #' @description If two column has more than 1 shared element then they have connection. Convert
 #' 0/1 data to connection pairs in long shape table. The 0-connection pairs are removed.
 #' @param object data frame with 0/1 data
+#' @return a data frame with source and target connection information
 #' @export
 convert_01_to_connect <- function(object) {
   elements_number <- length(object)

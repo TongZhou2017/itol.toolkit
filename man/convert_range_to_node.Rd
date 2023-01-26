@@ -11,6 +11,9 @@ convert_range_to_node(df, tree)
 
 \item{tree}{tree file path}
 }
+\value{
+a data frame with converted id from range id
+}
 \description{
 Convert the data frame with range id to node id by mrca method.
 }

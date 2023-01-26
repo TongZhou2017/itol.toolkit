@@ -9,7 +9,10 @@ learn_theme_bar(lines, sep)
 \arguments{
 \item{lines}{file lines}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of bar parameters containing
 }
 \description{
 learn bar paramters as list

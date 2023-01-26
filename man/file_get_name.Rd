@@ -13,6 +13,9 @@ file_get_name(str, with_ext = TRUE, keep_dir = FALSE)
 
 \item{keep_dir}{keep file dir or not}
 }
+\value{
+a character specifying the file name
+}
 \description{
 Get file name from string
 }

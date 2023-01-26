@@ -7,12 +7,31 @@
 learn_df(tree, node = FALSE, tip = TRUE)
 }
 \arguments{
-\item{tree}{Newick tree file}
+\item{tree}{Newick tree file or phylo object.}
 
-\item{node}{output node label}
+\item{node}{a logical to control output with node label or not. The default
+value is FALSE.}
 
-\item{tip}{output tip label}
+\item{tip}{a logical to control output tip label or not.The default value is
+TRUE.}
+}
+\value{
+a list containing
+
+\item{node}{a data frame with id column. The id information is from
+the node label in Newick format tree file or phylo object. If the node
+parameter set as FALSE, the node information will be NULL.}
+
+\item{tip}{a data frame with id column. The id information is from
+the tip label in Newick format tree file or phylo object. If the tip
+parameter set as FALSE, the tip information will be NULL.}
 }
 \description{
 Learn initial data frame from Newick format tree leaves.
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+sub_df <- learn_df(tree,node=TRUE,tip=TRUE)
 }

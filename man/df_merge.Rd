@@ -13,6 +13,9 @@ df_merge(df1, df2, by = "id")
 
 \item{by}{key column}
 }
+\value{
+a data frame containing merged information
+}
 \description{
 merge sub data frame into initial data frame
 }

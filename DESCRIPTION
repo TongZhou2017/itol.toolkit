@@ -10,12 +10,12 @@ Authors@R:
   )
 Description: 
     The 'Interactive Tree Of Life' <https://itol.embl.de/> online server can 
-    edit and annotate phylogenetic trees interactively. The 'itol.toolkit' 
-    package can support all types of annotation templates.
+    edit and annotate trees interactively. The 'itol.toolkit' package can 
+    support all types of annotation templates.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.2
 Imports:
     dplyr,
     stringr,
@@ -37,3 +37,11 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
+Collate: 
+    'data.R'
+    'learn.R'
+    'object.R'
+    'utils.R'
+    'output.R'
+    'user.R'
+    'ops.R'

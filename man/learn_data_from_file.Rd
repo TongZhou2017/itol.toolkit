@@ -11,6 +11,9 @@ learn_data_from_file(object, file)
 
 \item{file}{template file}
 }
+\value{
+a itol.hub object with new data from template file
+}
 \description{
 Learn itol.hub object data from template file.
 }

@@ -7,11 +7,14 @@
 learn_theme_specific_themes(lines, sep, type)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
 
 \item{type}{template type}
+}
+\value{
+a list of specific theme parameters containing
 }
 \description{
 learn specific theme paramters as list

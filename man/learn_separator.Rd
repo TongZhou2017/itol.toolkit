@@ -7,10 +7,33 @@
 learn_separator(lines = NULL, file = NULL)
 }
 \arguments{
-\item{lines}{string vector}
+\item{lines}{a vector of character strings from template file. If the file
+parameter is NULL, this parameter should be set.}
 
-\item{file}{template file}
+\item{file}{a character specifying the template file path. If this parameter
+is setted, the lines parameter will be replaced.}
+}
+\value{
+a character specifying the separator
 }
 \description{
 Learn 3 types of separators: tab, space, and comma.
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_group <- data.frame(id = unique(template_groups$group),
+                       data = unique(template_groups$group))
+## create unit
+unit <- create_unit(data = df_group,
+                    key = "Quickstart",
+                    type = "DATASET_COLORSTRIP",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn template type
+learn_separator(file = file)
 }

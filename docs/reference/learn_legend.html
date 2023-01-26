@@ -60,14 +60,110 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>lines</dt>
-<dd><p>file lines</p></dd>
+<dd><p>a vector of character strings from template file.</p></dd>
 
 
 <dt>sep</dt>
-<dd><p>separator</p></dd>
+<dd><p>a character specifying the separator.</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>a list of legned parameters containing</p>
+<dl><dt>title</dt>
+<dd><p>a character specifying the title of legend. There should
+not be the character same with separater within.</p></dd>
+
+
+<dt>position_x</dt>
+<dd><p>a number specifying the x axis px value of the
+legend.</p></dd>
+
+
+<dt>position_y</dt>
+<dd><p>a number specifying the y axis px value of the
+legend.</p></dd>
+
+
+<dt>horizontal</dt>
+<dd><p>To order legend entries horizontally instead of
+vertically, set this parameter to 1</p></dd>
+
+
+<dt>shapes</dt>
+<dd><p>Shape should be a number between 1 and 6, or any
+protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+triangle, 5-left pointing triangle, 6-checkmark</p></dd>
+
+
+<dt>colors</dt>
+<dd><p>define colors for each legend element (use hexadecimal,
+RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)</p></dd>
+
+
+<dt>labels</dt>
+<dd><p>The legend element label.There should not be the
+character same with separater within.</p></dd>
+
+
+<dt>shape_scales</dt>
+<dd><p>For each shape, you can define a scaling factor
+between 0 and 1.</p></dd>
 
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                    <span class="st">"tree_of_itol_templates.tree"</span>,</span></span>
+<span class="r-in"><span>                    package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df_frequence</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                              <span class="st">"templates_frequence.txt"</span>,</span></span>
+<span class="r-in"><span>                                              package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## create unit</span></span></span>
+<span class="r-in"><span><span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span></span>
+<span class="r-in"><span>                    key <span class="op">=</span> <span class="st">"Quickstart"</span>,</span></span>
+<span class="r-in"><span>                    type <span class="op">=</span> <span class="st">"DATASET_SIMPLEBAR"</span>,</span></span>
+<span class="r-in"><span>                    method <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using the first column as id: templates</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The input data are mutate as one column by method: mean</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument is not numeric or logical: returning NA</span>
+<span class="r-in"><span><span class="co">## write unit</span></span></span>
+<span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit</span>,<span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Learn legend parameters</span></span></span>
+<span class="r-in"><span><span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="line_clean.html">line_clean</a></span><span class="op">(</span>file<span class="op">=</span><span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sep</span> <span class="op">=</span> <span class="fu"><a href="learn_separator.html">learn_separator</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">learn_legend</span><span class="op">(</span>lines <span class="op">=</span> <span class="va">lines</span>, sep <span class="op">=</span> <span class="va">sep</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Example legend title"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $position_x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $position_y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $horizontal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shapes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "1" "2" "2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $colors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#ff0000" "#00ff00" "#00ffff" "#0000ff"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $labels</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "value1" "value2" "value3" "value4"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape_scales</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

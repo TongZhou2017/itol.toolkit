@@ -20,7 +20,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom utils write.table
 #' @import dplyr
-#' @return NULL
+#' @return No return value, only output a template file
 #' @export
 #' @examples
 #' tree <- system.file("extdata",
@@ -537,7 +537,7 @@ write_unit <- function(unit, file) {
 #' @param dir output dir path. Define the output files location using absolute
 #' or relative path. The template files will output by the key information from
 #' theme name in the hub object.
-#' @return NULL
+#' @return No return value, only output template files
 #' @export
 #' @examples
 #' tree <- system.file("extdata",
@@ -596,7 +596,7 @@ write_hub <- function(object, dir) {
 #' raw data files.
 #' @importFrom ape write.tree
 #' @importFrom data.table fwrite
-#' @return NULL
+#' @return No return value, only output raw data files
 #' @export
 #' @examples
 #' tree <- system.file("extdata",

@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{An object of class itol.hub}
 }
+\value{
+a stdout screen information about itol.hub object
+}
 \description{
 show method for S4 class itol.hub
 }

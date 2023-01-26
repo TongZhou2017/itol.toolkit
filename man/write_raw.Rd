@@ -31,6 +31,9 @@ count table, taxonomy table, metadata on nodes and tips.}
 \item{title}{files name title string. This character specified the prefix of
 raw data files.}
 }
+\value{
+No return value, only output raw data files
+}
 \description{
 Write raw data in itol.hub object into files
 }

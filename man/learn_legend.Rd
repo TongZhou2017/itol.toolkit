@@ -7,10 +7,59 @@
 learn_legend(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of legned parameters containing
+
+\item{title}{a character specifying the title of legend. There should
+not be the character same with separater within.}
+
+\item{position_x}{a number specifying the x axis px value of the
+legend.}
+
+\item{position_y}{a number specifying the y axis px value of the
+legend.}
+
+\item{horizontal}{To order legend entries horizontally instead of
+vertically, set this parameter to 1}
+
+\item{shapes}{Shape should be a number between 1 and 6, or any
+protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+triangle, 5-left pointing triangle, 6-checkmark}
+
+\item{colors}{define colors for each legend element (use hexadecimal,
+RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)}
+
+\item{labels}{The legend element label.There should not be the
+character same with separater within.}
+
+\item{shape_scales}{For each shape, you can define a scaling factor
+between 0 and 1.}
 }
 \description{
 learn legend paramters as list
+}
+\examples{
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+df_frequence <- data.table::fread(system.file("extdata",
+                                              "templates_frequence.txt",
+                                              package = "itol.toolkit"))
+## create unit
+unit <- create_unit(data = df_frequence,
+                    key = "Quickstart",
+                    type = "DATASET_SIMPLEBAR",
+                    method = "mean",
+                    tree = tree)
+## write unit
+file <- tempfile()
+write_unit(unit,file)
+## Learn legend parameters
+lines <- line_clean(file=file)
+sep = learn_separator(file = file)
+learn_legend(lines = lines, sep = sep)
 }

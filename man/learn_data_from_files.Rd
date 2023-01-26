@@ -17,6 +17,9 @@ learn_data_from_files(object, files = NULL, dir = NULL, pattern = ".", ...)
 
 \item{...}{Further arguments to be passed to subsequent functions.}
 }
+\value{
+a itol.hub object with new data from template files
+}
 \description{
 Learn itol.hub object data from template file.
 }

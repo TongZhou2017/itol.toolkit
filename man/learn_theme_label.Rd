@@ -7,10 +7,96 @@
 learn_theme_label(lines, sep)
 }
 \arguments{
-\item{lines}{file lines}
+\item{lines}{a vector of character strings from template file.}
 
-\item{sep}{separator}
+\item{sep}{a character specifying the separator.}
+}
+\value{
+a list of label parameters containing
+
+\item{display}{1/0 specifying display or hide the text labels above
+each field column}
+
+\item{size}{a number specifying the size factor for the text labels}
+
+\item{top}{1/0 specifying the labels position. If 0, label text which
+does not fit into the shape will be hidden}
+
+\item{below}{1/0 specifying the labels position. By default, internal
+labels will be placed above the branches. If 1, labels will be below the
+branches}
+
+\item{rotation}{a number specifying text label rotation angle}
+
+\item{straight}{1/0 specifying tree rotation. If set to 1, tree
+rotation will not influence the individual label rotation}
+
+\item{vertical}{a number specifying the label vertical shift. Shift
+internal labels vertically by this amount of pixels (positive or negative)}
+
+\item{shift}{a number specifying the label shift. text label shift in
+pixels (positive or negative)}
+
+\item{external_shift}{1/0 specifying label external shift that add
+extra horizontal shift to the external labels. Useful in unrooted display
+mode to shift text labels further away from the node labels.}
 }
 \description{
 learn label paramters as list
+}
+\examples{
+library(dplyr)
+  tree <- system.file("extdata",
+                      "tree_of_itol_templates.tree",
+                      package = "itol.toolkit")
+  tab_tmp <- data.table::fread(system.file("extdata",
+                                           "parameter_groups.txt",
+                                           package = "itol.toolkit"))
+  tab_id_group <- tab_tmp[,c(1,2)]
+  tab_tmp <- tab_tmp[,-c(1,2)]
+  tab_tmp_01 <- convert_01(object = tab_tmp)
+  tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
+  order <- c("type","separator","profile","field","common themes",
+    "specific themes","data")
+  tab_tmp_01_long <- tab_tmp_01 \%>\% 
+                       tidyr::gather(key = "variable",
+                                     value = "value",
+                                     c(-parameter,-group))
+  template_start_group <- tab_tmp_01_long \%>\% 
+                            group_by(group,variable) \%>\% 
+                            summarise(sublen = sum(value)) \%>\% 
+                            tidyr::spread(key=variable,
+                                          value=sublen)
+  template_start_group$group <- factor(template_start_group$group,
+                                       levels = order)
+  template_start_group <- template_start_group \%>\% arrange(group)
+  start_group <- data.frame(Var1 = template_start_group$group, 
+                            Freq = apply(template_start_group[,-1], 1, max))
+  start_group$start <- 0
+  for (i in 2:nrow(start_group)) {
+    start_group$start[i] <- sum(start_group$Freq[1:(i-1)])
+  }
+  template_start_group[template_start_group == 0] <- NA
+  template_end_group <- template_start_group[,2:(ncol(template_start_group)-1)] + start_group$start
+  template_end_group <- data.frame(group = order,template_end_group)
+  template_end_group_long <- template_end_group \%>\% 
+                               tidyr::gather(key = "variable",
+                                             value = "value",
+                                             -group)
+  names(template_end_group_long)[3] <- "end"
+  template_end_group_long$start <- rep(start_group$start,
+                                       length(unique(template_end_group_long$variable)))
+  template_end_group_long <- template_end_group_long \%>\% na.omit()
+  template_end_group_long$length <- sum(start_group$Freq)
+  template_end_group_long <- template_end_group_long[,c(2,5,4,3,1)]
+  template_end_group_long$group <- factor(template_end_group_long$group,levels = order)
+  unit <- create_unit(data = template_end_group_long,
+                      key = "Quickstart",
+                      type = "DATASET_DOMAINS",
+                      tree = tree)
+  file <- tempfile()
+  write_unit(unit,file)
+  lines <- line_clean(file=file)
+  sep = learn_separator(file = file)
+  learn_theme_label(lines,sep)
 }

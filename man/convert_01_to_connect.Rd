@@ -9,6 +9,9 @@ convert_01_to_connect(object)
 \arguments{
 \item{object}{data frame with 0/1 data}
 }
+\value{
+a data frame with source and target connection information
+}
 \description{
 If two column has more than 1 shared element then they have connection. Convert
 0/1 data to connection pairs in long shape table. The 0-connection pairs are removed.

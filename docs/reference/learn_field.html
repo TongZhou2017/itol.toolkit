@@ -60,14 +60,78 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>lines</dt>
-<dd><p>file lines</p></dd>
+<dd><p>a vector of character strings from template file.</p></dd>
 
 
 <dt>sep</dt>
-<dd><p>separator</p></dd>
+<dd><p>a character specifying the separator.</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>a list of field parameters containing</p>
+<dl><dt>labels</dt>
+<dd><p>a vector of characters specifying the filed name. In
+DATASET_HEATMAP, the labels are shown as heatamp column names.</p></dd>
+
+
+<dt>colors</dt>
+<dd><p>define colors for each individual field column (use
+hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as
+SEPARATOR)</p></dd>
+
+
+<dt>shapes</dt>
+<dd><p>Shape should be a number between 1 and 6, or any
+protein domain shape definition. 1-square, 2-circle, 3-star, 4-right pointing
+triangle, 5-left pointing triangle, 6-checkmark</p></dd>
 
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                    <span class="st">"tree_of_itol_templates.tree"</span>,</span></span>
+<span class="r-in"><span>                    package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df_frequence</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                              <span class="st">"templates_frequence.txt"</span>,</span></span>
+<span class="r-in"><span>                                              package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## create unit</span></span></span>
+<span class="r-in"><span><span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span></span>
+<span class="r-in"><span>                    key <span class="op">=</span> <span class="st">"Quickstart"</span>,</span></span>
+<span class="r-in"><span>                    type <span class="op">=</span> <span class="st">"DATASET_HEATMAP"</span>,</span></span>
+<span class="r-in"><span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using the first column as id: templates</span>
+<span class="r-in"><span><span class="co">## write unit</span></span></span>
+<span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit</span>,<span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Learn legend parameters</span></span></span>
+<span class="r-in"><span><span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="line_clean.html">line_clean</a></span><span class="op">(</span>file<span class="op">=</span><span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sep</span> <span class="op">=</span> <span class="fu"><a href="learn_separator.html">learn_separator</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">learn_field</span><span class="op">(</span>lines <span class="op">=</span> <span class="va">lines</span>, sep <span class="op">=</span> <span class="va">sep</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $labels</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "10.1016/j.jhazmat.2022.129230"  "10.1016j.envpol.2022.120243"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "10.1128/mSystems.00258-21"      "10.1038/s41467-022-31113-w"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "10.1128/mSystems.00093-19"      "10.3390/pathogens11091022"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "10.1038/s41467-022-33238-4"     "10.1099/mgen.0.000839"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "10.1038/s41467-019-10191"       "10.1038/s41598-018-25545-y"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "10.1016/j.cub.2021.01.001"      "10.3389/fpls.2021.693039"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "10.1128/spectrum.02211-22"      "10.1371/journal.pgen.1010097"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] "10.1371/journal.pgen.1010112"   "10.1101/2022.06.22.497255"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "10.1186/s40168-021-01016-x"     "10.1101/2022.12.08.519582"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "10.1016/j.foodcont.2021.108572" "10.1016/j.foodres.2022.111998" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "10.1038/s41467-022-35452-6"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $colors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shapes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
