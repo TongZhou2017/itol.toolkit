@@ -19,7 +19,7 @@ Helper Functions for Interactive Tree Of Life (iTOL)
 ``` r
 # from CRAN
 
-#install.packages("itol.toolkit")
+install.packages("itol.toolkit")
 
 # from GitHub
 
