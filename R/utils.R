@@ -66,9 +66,13 @@ correct_get_color <- function(str) {
 #' get_color
 #' @description get color, support max length 40
 #' @param n level length of a vector
+#' @param set a character specifying the palette set name. In dedault,
+#' table2itol is setted. The following choices are possible: wsanderson.
 #' @return a vector of colors
+#' @importFrom wesanderson wes_palettes
+#' @importFrom stats runif
 #' @export
-get_color <- function(n) {
+get_color <- function(n,set="table2itol") {
   # Colour vectors collected by Jan P. Meier-Kolthoff.
   #
   COLOURS <- list(
@@ -324,6 +328,26 @@ get_color <- function(n) {
       "#ceb8d4", "#635b2d", "#c79783", "#733426", "#476682", "#98762e"
     )
   )
+  if(set == "wesanderson"){
+    COLOURS <- list()
+    colors_vector <- unique(unlist(wesanderson::wes_palettes))
+    colors_vector <- colors_vector[which(!colors_vector%in%c("#1E1E1E",
+                                                             "#4E2A1E",
+                                                             "#0C1707",
+                                                             "#000000",
+                                                             "#1C1718",
+                                                             "#39312F",
+                                                             "#0F0D0E",
+                                                             "#29211F",
+                                                             "#24281A",
+                                                             "#273046",
+                                                             "#35274A",
+                                                             "#550307"))]
+    for (i in 1:length(colors_vector)) {
+      indexs <- round(runif(n,1,length(colors_vector)))
+      COLOURS[[i]] <- colors_vector[indexs]
+    }
+  }
   return(COLOURS[[n]])
 }
 

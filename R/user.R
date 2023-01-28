@@ -344,8 +344,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(color %in% c("table2itol","RColorBrewer", "ggsci", "wesanderson")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {

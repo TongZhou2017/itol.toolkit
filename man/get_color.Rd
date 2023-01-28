@@ -4,10 +4,13 @@
 \alias{get_color}
 \title{get_color}
 \usage{
-get_color(n)
+get_color(n, set = "table2itol")
 }
 \arguments{
 \item{n}{level length of a vector}
+
+\item{set}{a character specifying the palette set name. In dedault,
+table2itol is setted. The following choices are possible: wsanderson.}
 }
 \value{
 a vector of colors
