@@ -752,6 +752,11 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       }
     }
     colname_data <- names(data)[!names(data)%in%c("id","new_label", colname_position, colname_rotation, colname_font_type, colname_font_size)]
+    if(length(color) == 1){
+      if(stringr::str_detect(color,"^#")||stringr::str_detect(color,"^rgb")){
+        color = rep(color,nrow(data))
+      }
+    }
     if(length(color) != nrow(data)){
       message("Identifying data column to auto setup color parameter")
       if(length(colname_data)!=1){

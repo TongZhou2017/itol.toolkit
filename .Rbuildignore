@@ -4,3 +4,5 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^docs$
+^CODE_OF_CONDUCT.md$
+^.github$
