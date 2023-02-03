@@ -1,0 +1,4 @@
+Name: Complex HTML Text
+Description: Mutate new column with html style characters
+Binding: complex_html_text
+Interactive: true

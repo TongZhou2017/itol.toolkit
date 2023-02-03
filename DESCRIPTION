@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     person(
     given = "Tong",
@@ -28,7 +28,11 @@ Imports:
     ape,
     data.table,
     purrr,
-    wesanderson
+    wesanderson,
+    miniUI,
+    shiny,
+    rstudioapi,
+    colourpicker
 Suggests: 
     knitr,
     rmarkdown,
@@ -39,6 +43,7 @@ Depends:
     R (>= 2.10)
 LazyData: true
 Collate: 
+    'addins.R'
     'data.R'
     'learn.R'
     'object.R'
