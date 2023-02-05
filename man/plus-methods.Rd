@@ -3,20 +3,28 @@
 \docType{methods}
 \name{+,itol.hub,itol.unit-method}
 \alias{+,itol.hub,itol.unit-method}
+\alias{+,itol.unit,itol.unit-method}
 \title{plus method
 add method for S4 class itol.hub and itol.unit}
 \usage{
 \S4method{+}{itol.hub,itol.unit}(e1, e2)
+
+\S4method{+}{itol.unit,itol.unit}(e1, e2)
 }
 \arguments{
-\item{e1}{An object of class itol.hub}
+\item{e1}{An object of class itol.unit}
 
 \item{e2}{An object of class itol.unit}
 }
 \value{
 a itol.hub object with new data from itol.unit object
+
+a itol.unit object with merged data
 }
 \description{
 plus method
 add method for S4 class itol.hub and itol.unit
+
+plus method
+add method for S4 class itol.unit and itol.unit
 }
