@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.0.5
+Version: 1.1.0
 Authors@R: 
     person(
     given = "Tong",
@@ -32,7 +32,9 @@ Imports:
     miniUI,
     shiny,
     rstudioapi,
-    colourpicker
+    colourpicker,
+    ggsci,
+    RColorBrewer
 Suggests: 
     knitr,
     rmarkdown,

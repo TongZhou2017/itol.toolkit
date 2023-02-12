@@ -4,7 +4,7 @@
 \alias{get_color}
 \title{get_color}
 \usage{
-get_color(n, set = "table2itol")
+get_color(n = 0, set = "table2itol")
 }
 \arguments{
 \item{n}{level length of a vector}

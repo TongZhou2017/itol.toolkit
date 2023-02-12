@@ -50,7 +50,10 @@ itol.hub <- setClass(
 #' create_hub(tree = TREE)
 #'
 create_hub <- function(tree,field_tree=NULL,seq=NULL,abundance=NULL,taxonomy=NULL,node_data=NULL,tip_data=NULL) {
-  tree <- list(main = read.tree(tree), field = list())
+  if (is.character(tree)) {
+    tree <- read.tree(tree)
+  }
+  tree <- list(main = tree, field = list())
   if (any(duplicated(tree$main$node.label)) || is.null(tree$main$node.label)) {
     tree$main <- ape::makeNodeLabel(phy = tree$main, method = "number", prefix = "I")
   }

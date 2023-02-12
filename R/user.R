@@ -344,7 +344,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci", "wesanderson")){
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
         color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
@@ -627,8 +627,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {
@@ -668,6 +668,9 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       profile$name <- key
       unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
     }
+  }
+  if (type == "DATASET_RANGE"){
+
   }
   if(type == "LABELS"){
     if(!is.data.frame(data)){
@@ -768,8 +771,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {
@@ -842,7 +845,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci", "wesanderson")){
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
         color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
@@ -883,7 +886,15 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field_length <- length(field_names)
     field$labels <- field_names
-    field$colors <- get_color(field_length)
+    if(is.null(color)){
+      message("Using default color pattern: table2itol")
+      color = "table2itol"
+    }
+    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+      field$colors <- get_color(field_length,set = color)
+    }else{
+      field$colors <- get_color(field_length)
+    }
     field$shapes <- rep(2,field_length)
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
@@ -1052,8 +1063,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {
@@ -1111,7 +1122,15 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["node"]] <- df_merge(data_left[["node"]], data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field$labels <- field_names
-    field$colors <- get_color(length(field_names))
+    if(is.null(color)){
+      message("Using default color pattern: table2itol")
+      color = "table2itol"
+    }
+    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+      field$colors <- get_color(field_length,set = color)
+    }else{
+      field$colors <- get_color(field_length)
+    }
     profile$name <- key
     sep = "\t"
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
@@ -1214,8 +1233,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {
@@ -1291,6 +1310,36 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     specific_themes$basic_plot$dataset_scale <- c(min,mean,max)
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
+  if(type == "DATASET_MULTIBAR"){
+    if(!is.data.frame(data)){
+      stop("The input data class should be a data frame")
+    }
+    if(names(data)[1] != "id"){
+        message(paste0("Using the first column as id: ",names(data)[1]))
+        names(data)[1] <- "id"
+    }
+    if(length(names(data)) < 2){
+      stop("The input data should has at least 2 columns")
+    }
+    field_names <- names(data)[-1]
+    names(data) <- c("id",paste0(key,"$",field_names))
+    data <- convert_range_to_node(data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+    field_length <- length(field_names)
+    field$labels <- field_names
+    if(is.null(color)){
+      message("Using default color pattern: table2itol")
+      color = "table2itol"
+    }
+    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+      field$colors <- get_color(field_length,set = color)
+    }else{
+      field$colors <- get_color(field_length)
+    }
+    profile$name <- key
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
+  }
   if(type=="DATASET_BOXPLOT"){
     if(!is.data.frame(data)){
       stop("The input data class should be a data frame")
@@ -1325,6 +1374,104 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     profile$name <- key
     sep = "\t"
     specific_themes$basic_plot$dataset_scale <- c(min,mean,max)
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
+  }
+  if(type == "DATASET_LINECHART"){
+    if(!is.data.frame(data)){
+      stop("The input data class should be a data frame")
+    }
+    if(names(data)[1] != "id"){
+        message(paste0("Using the 1st column as id: ",names(data)[1]))
+        names(data)[1] <- "id"
+    }
+    if(names(data)[2] != "X"){
+        message(paste0("Using the 2nd column as X: ",names(data)[2]))
+        names(data)[2] <- "X"
+    }
+    if(names(data)[3] != "Y"){
+        message(paste0("Using the 3rd column as Y: ",names(data)[3]))
+        names(data)[3] <- "Y"
+    }
+    if(length(names(data)) != 3){
+      stop("The input data should has 3 columns: id, x, y")
+    }
+    names(data) <- c("id",paste0(key,c("$X", "$Y")))
+    data <- convert_range_to_node(data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+    profile$name <- key
+    specific_themes$linechart$basic$x <- ""
+    specific_themes$linechart$basic$y <- ""
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
+  }
+  if(type == "DATASET_PIECHART"){
+    if(!is.data.frame(data)){
+      stop("The input data class should be a data frame")
+    }
+    if(names(data)[1] != "id"){
+        message(paste0("Using the 1st column as id: ",names(data)[1]))
+        names(data)[1] <- "id"
+    }
+    if(is.null(position)){
+      message(paste0("Using the 2nd column as position: ",names(data)[2]))
+      names(data)[2] <- "POSITION"
+    }else{
+      data <- data.frame(data[,1],POSITION=position,data[,2:ncol(data)])
+    }
+    if(is.null(size_factor)){
+      message(paste0("Using the 3rd column as radius: ",names(data)[3]))
+      names(data)[3] <- "RADIUS"
+    }else {
+       data <- data.frame(data[,1:2],RADIUS=size_factor,data[,3:ncol(data)])
+    }
+    field_names <- names(data)[-c(1:3)]
+    names(data) <- c("id",paste0(key,"$",c("POSITION", "RADIUS",field_names)))
+    data <- convert_range_to_node(data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+    field_length <- length(field_names)
+    field$labels <- field_names
+    if(is.null(color)){
+      message("Using default color pattern: table2itol")
+      color = "table2itol"
+    }
+    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+      field$colors <- get_color(field_length,set = color)
+    }else{
+      field$colors <- get_color(field_length)
+    }
+    profile$name <- key
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
+  }
+  if(type == "DATASET_ALIGNMENT"){
+    if(!is.data.frame(data)){
+      if(file.exists(data)){
+        fasta_file <- Biostrings::readBStringSet(data)
+        NODE_ID <- names(fasta_file)
+        SEQUENCE <- paste(fasta_file)
+        df_data <- data.frame(NODE_ID, SEQUENCE)
+        df_data$NODE_ID <- as.character(df_data$NODE_ID)
+        names(df_data) <- c("id",paste0(key,c("$SEQUENCE")))
+      }
+      stop("The input data class should be a data frame or a alignment file")
+    }else {
+      if(length(names(data)) > 2){
+        message("The input data should be 2 column: id, seq")
+      }
+      df_data <- data[,1:2]
+      df_data[,1] <- as.character(df_data[,1])
+      names(df_data) <- c("id",paste0(key,c("$SEQUENCE")))
+    }
+    df_data <- convert_range_to_node(df_data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
+    profile$name <- key
+    specific_themes$alignment$reference$ids <- 0
+    specific_themes$alignment$reference$use <- 0
+    specific_themes$alignment$reference$box_border_width <- 0
+    specific_themes$alignment$reference$box_border_color <- ""
+    specific_themes$alignment$reference$box_fill_color <- ""
+    specific_themes$alignment$highlight$type <- ""
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type=="DATASET_CONNECTION"){
@@ -1394,8 +1541,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       color = "table2itol"
     }
     if(length(color) == 1){
-      if(color %in% c("table2itol","RColorBrewer", "ggsci")){
-        color_levels = get_color(length(unique(data[[colname_data]])))
+      if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
         levels(color) <- color_levels
       }else {
@@ -1423,8 +1570,137 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     sep = "\t"
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
-  if(type =="DATASET_IMAGE"){
-
+  if(type =="DATASET_IMAGE"){#ID,position,size_factor,rotation,horizontal_shift,vertical_shift,image_url
+    horizontal_shift = NULL
+    vertical_shift = NULL
+    if(!is.data.frame(data)){
+      stop("The input data class should be a data frame")
+    }
+    if(names(data)[1] != "id"){
+      message(paste0("Using the first column as id: ",names(data)[1]))
+      names(data)[1] <- "id"
+    }
+    if(length(names(data)) > 7 ){
+      stop("The input data should has 2-7 columns: id, position(optional), size factor(optional), rotation(optional), horizontal shift(optional), vertical shift(optional), image url")
+    }
+    colname_position = ""
+    if(is.null(position)){
+      potential_positions <- names(data)[-1]
+      for (potential_position in potential_positions) {
+        if(stringr::str_remove_all(paste0(data[[potential_position]],collapse = ""),"[\\d\\.-]") == "" && stringr::str_count(paste0(data[[potential_position]],collapse = ""),"\\.") <= 1){
+          potential_values <- as.numeric(data[[potential_position]])
+          if(all((potential_values >= -1) & (potential_values <= 1))){
+            message(paste0("Using following column as position parameter: ", potential_position))
+            position = data[[potential_position]]
+            colname_position = potential_position
+            break
+          }
+        }
+      }
+    }
+    colname_image_size = ""
+    if(is.null(size_factor)){
+      potential_image_sizes <- names(data)[!names(data)%in%c("id", colname_position)]
+      for (potential_image_size in potential_image_sizes) {
+        if(stringr::str_remove_all(paste0(data[[potential_image_size]],collapse = ""),"[\\d\\.-]") == "" && stringr::str_count(paste0(data[[potential_image_size]],collapse = ""),"\\.") <= 1){
+          message(paste0("Using following column as image size parameter: ", potential_image_size))
+          size_factor = data[[potential_image_size]]
+          colname_image_size = potential_image_size
+          break
+        }
+      }
+    }
+    colname_rotation = ""
+    if(is.null(rotation)){
+      potential_rotations <- names(data)[!names(data)%in%c("id", colname_position, colname_image_size)]
+      for (potential_rotation in potential_rotations) {
+        if(stringr::str_remove_all(paste0(data[[potential_rotation]],collapse = ""),"[\\d\\.-]") == "" && stringr::str_count(paste0(data[[potential_rotation]],collapse = ""),"\\.") <= 1){
+          message(paste0("Using following column as rotation parameter: ", potential_rotation))
+          rotation = data[[potential_rotation]]
+          colname_rotation = potential_rotation
+          break
+        }
+      }
+    }
+    colname_horizontal_shift = ""
+    if(is.null(horizontal_shift)){
+      potential_horizontal_shifts <- names(data)[!names(data)%in%c("id", colname_position, colname_image_size, colname_rotation)]
+      for (potential_horizontal_shift in potential_horizontal_shifts) {
+        if(stringr::str_remove_all(paste0(data[[potential_horizontal_shift]],collapse = ""),"[\\d\\.-]") == "" && stringr::str_count(paste0(data[[potential_horizontal_shift]],collapse = ""),"\\.") <= 1){
+          message(paste0("Using following column as horizontal_shift parameter: ", potential_horizontal_shift))
+          horizontal_shift = data[[potential_horizontal_shift]]
+          colname_horizontal_shift = potential_horizontal_shift
+          break
+        }
+      }
+    }
+    colname_vertical_shift = ""
+    if(is.null(vertical_shift)){
+      potential_vertical_shifts <- names(data)[!names(data)%in%c("id", colname_position, colname_image_size, colname_rotation, colname_horizontal_shift)]
+      for (potential_vertical_shift in potential_vertical_shifts) {
+        if(stringr::str_remove_all(paste0(data[[potential_vertical_shift]],collapse = ""),"[\\d\\.-]") == "" && stringr::str_count(paste0(data[[potential_vertical_shift]],collapse = ""),"\\.") <= 1){
+          message(paste0("Using following column as vertical_shift parameter: ", potential_vertical_shift))
+          vertical_shift = data[[potential_vertical_shift]]
+          colname_vertical_shift = potential_vertical_shift
+          break
+        }
+      }
+    }
+    colname_image_url <- names(data)[!names(data)%in%c("id", colname_position, colname_image_size, colname_rotation, colname_horizontal_shift, colname_vertical_shift)]
+    if(is.null(position)){
+      message("The position parameter is empty. Using 0 as position.")
+      position = 0
+    }
+    if (is.null(size_factor)) {
+      message("The image size parameter is empty. Using 1 as image size.")
+      size_factor = 1
+    }
+    if(is.null(rotation)){
+      message("The rotation parameter is empty. Using 0 as rotation.")
+      rotation = 0
+    }
+    if (is.null(horizontal_shift)) {
+      message("The horizontal_shift parameter is empty. Using 0.")
+      horizontal_shift = "0"
+    }
+    if (is.null(vertical_shift)) {
+      message("The vertical_shift parameter is empty. Using 0.")
+      vertical_shift = "0"
+    }
+    df_data <- data.frame(id = data[["id"]], position = position, size_factor = size_factor, rotation = rotation, horizontal_shift = horizontal_shift, vertical_shift = vertical_shift, image_url = data[[colname_image_url]])
+    names(df_data) <- c("id",paste0(key,"$",c("POSITION", "SIZE_FACTOR", "ROTATION", "HORIZONTAL_SHIFT", "VERTICAL_SHIFT", "IMAGE_URL")))
+    df_data <- convert_range_to_node(df_data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
+    profile$name <- key
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
+  }
+  if(type=="POPUP_INFO"){#NODE_ID,POPUP_TITLE,POPUP_CONTENT
+    if(!is.data.frame(data)){
+      stop("The input data class should be a data frame")
+    }
+    if(names(data)[1] != "id"){
+      message(paste0("Using the 1st column as id: ",names(data)[1]))
+      names(data)[1] <- "id"
+    }
+    if(length(names(data)) != 3 ){
+      stop("The input data should has 3 columns: id, title, content")
+    }
+    if(names(data)[2] != "title"){
+        message(paste0("Using the 2nd column as title: ",names(data)[2]))
+        names(data)[2] <- "title"
+    }
+    if(names(data)[3] != "content"){
+        message(paste0("Using the 3rd column as content: ",names(data)[3]))
+        names(data)[3] <- "content"
+    }
+    df_data <- data.frame(id = data[["id"]], title = data[["title"]], content = data[["content"]])
+    names(df_data) <- c("id",paste0(key,"$",c("POPUP_TITLE", "POPUP_CONTENT")))
+    df_data <- convert_range_to_node(df_data, tree)
+    data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
+    data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
+    profile$name <- key
+    unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   return(unit)
 }
