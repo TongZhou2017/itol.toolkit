@@ -1,3 +1,5 @@
+[![CRAN status](https://www.r-pkg.org/badges/version/itol.toolkit)](https://CRAN.R-project.org/package=itol.toolkit)
+
 <img src="man/figures/itol.toolkit_logo.jpg" width="480"/>
 
 # itol.toolkit
