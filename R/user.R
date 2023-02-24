@@ -62,8 +62,7 @@ use.theme <- function(type,style="default"){
 #' @description Create itol.unit from simple input in R environment.
 #' @param data if type == "COLLAPSE", a vector of characters specifying the tips
 #' or node used for collapsing used for extracting.
-#' @param key a character specifying the theme name and prefix of data name as
-#' key information for the following reproducible workflow.
+#' @param key a character specifying the output file name for hub object.
 #' @param type a character specifying the template type used for extracting.
 #' Following choices are possible: "COLLAPSE","PRUNE","SPACING","TREE_COLORS",
 #' "DATASET_STYLE","LABELS","DATASET_TEXT","DATASET_COLORSTRIP",
@@ -1103,6 +1102,11 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
+    common_themes$legend$title <- colname_data
+    common_themes$legend$shapes <- levels(as.factor(shape))
+    common_themes$legend$colors <- levels(as.factor(color))
+    common_themes$legend$labels <- levels(as.factor(data[[colname_data]]))
+    common_themes$legend$shape_scales <- rep(1,length(levels(as.factor(shape))))
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type == "DATASET_EXTERNALSHAPE"){
@@ -1122,6 +1126,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["node"]] <- df_merge(data_left[["node"]], data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field$labels <- field_names
+    field_length <- length(field_names)
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"

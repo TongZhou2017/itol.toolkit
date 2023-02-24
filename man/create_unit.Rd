@@ -27,8 +27,7 @@ create_unit(
 \item{data}{if type == "COLLAPSE", a vector of characters specifying the tips
 or node used for collapsing used for extracting.}
 
-\item{key}{a character specifying the theme name and prefix of data name as
-key information for the following reproducible workflow.}
+\item{key}{a character specifying the output file name for hub object.}
 
 \item{type}{a character specifying the template type used for extracting.
 Following choices are possible: "COLLAPSE","PRUNE","SPACING","TREE_COLORS",
