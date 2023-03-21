@@ -150,6 +150,7 @@ use.theme <- function(type,style="default"){
 #' @import dplyr
 #' @importFrom stringr str_replace
 #' @importFrom stringr str_remove_all
+#' @importFrom stringr str_length
 #' @importFrom grDevices boxplot.stats
 #' @export
 #' @examples
@@ -251,7 +252,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(data[[potential_color]]))>3){
+        if(min(stringr::str_length(data[[potential_color]]))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){
@@ -493,7 +494,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(data[[potential_color]]))>3){
+        if(min(stringr::str_length(data[[potential_color]]))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){
@@ -565,7 +566,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       if(subtype == "label"){
         potential_background_colors <- names(data)[-1]
         for(potential_background_color in potential_background_colors){
-          if(min(nchar(data[[potential_background_color]]))>3){
+          if(min(stringr::str_length(data[[potential_background_color]]))>3){
             str_1 <- unique(stringr::str_extract(data[[potential_background_color]],"^."))
             str_2 <- unique(stringr::str_extract(data[[potential_background_color]],"^..."))
             if(length(str_1)==1){
@@ -815,7 +816,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(data[[potential_color]]))>3){
+        if(min(stringr::str_length(data[[potential_color]]))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){
@@ -1003,7 +1004,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(data[[potential_color]]))>3){
+        if(min(stringr::str_length(data[[potential_color]]))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){
@@ -1206,7 +1207,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(as.character(data[[potential_color]])))>3){
+        if(min(stringr::str_length(as.character(data[[potential_color]])))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){
@@ -1506,7 +1507,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(is.null(color)){
       potential_colors <- names(data)[-1]
       for(potential_color in potential_colors){
-        if(min(nchar(data[[potential_color]]))>3){
+        if(min(stringr::str_length(data[[potential_color]]))>3){
           str_1 <- unique(stringr::str_extract(data[[potential_color]],"^."))
           str_2 <- unique(stringr::str_extract(data[[potential_color]],"^..."))
           if(length(str_1)==1){

@@ -193,7 +193,7 @@ hub <- hub +
   unit_8 + 
   unit_9
 
-write_hub(hub,tempdir())
+write_hub(hub,getwd())
 ```
 
 ![](images/itol_toolkit_v1_functions.jpg){width="640"}
