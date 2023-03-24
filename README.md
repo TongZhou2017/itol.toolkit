@@ -30,9 +30,7 @@ pak::pak('itol.toolkit')
 pak::pak('TongZhou2017/itol.toolkit')
 ```
 
-If you do not want to install `pak` package, you can use the most traditional installation method. However, pay attention to the installation of dependency packages. For a complete list of dependency packages and how to install them, see [supplementary materials](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages).
-
-Stable versions can be installed from CRAN official or development versions can be installed from GitHub, but dependency packages from BioConductor need to be installed using BiocManager.
+If you prefer not to use the `pak` method, you can still use the traditional installation method.<details><summary>[Click to view] Traditional method</summary> To install the stable versions, you can use the CRAN official repository. For development versions, you can use the GitHub repository. However, if you need to install packages from Bioconductor, you'll need to use the BiocManager package. 
 
 ``` r
 # install Biostrings
@@ -47,7 +45,11 @@ install.packages("itol.toolkit")
 devtools::install_github("TongZhou2017/itol.toolkit")
 ```
 
-If you have installation problems caused by other systems, R versions, or dependency packages, go to [supplementary materials](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html) for a solution.
+Please note that in order to use this software, you will need to manually install the required dependencies from Bioconductor. A complete list of the necessary packages and installation instructions can be found in the [supplementary materials](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages).</details>
+
+ 
+
+If you encounter any issues during the installation process, such as problems caused by other systems, R versions, or dependency packages, please refer to the [supplementary materials](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html) for a solution.
 
 ## Quickstart
 

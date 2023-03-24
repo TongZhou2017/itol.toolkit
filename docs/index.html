@@ -101,8 +101,10 @@
 <span></span>
 <span><span class="co"># from GitHub</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">'TongZhou2017/itol.toolkit'</span><span class="op">)</span></span></code></pre>
-<p>If you do not want to install <code>pak</code> package, you can use the most traditional installation method. However, pay attention to the installation of dependency packages. For a complete list of dependency packages and how to install them, see <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages" class="external-link">supplementary materials</a>.</p>
-<p>Stable versions can be installed from CRAN official or development versions can be installed from GitHub, but dependency packages from BioConductor need to be installed using BiocManager.</p>
+If you prefer not to use the <code>pak</code> method, you can still use the traditional installation method.
+<details><summary>
+[Click to view] Traditional method
+</summary><p>To install the stable versions, you can use the CRAN official repository. For development versions, you can use the GitHub repository. However, if you need to install packages from Bioconductor, you’ll need to use the BiocManager package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install Biostrings</span></span>
 <span><span class="co"># install.packages("BiocManager")</span></span>
@@ -114,7 +116,8 @@
 <span><span class="co"># from GitHub</span></span>
 <span><span class="co"># install.packages("devtools") # if you have not installed "devtools" package</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"TongZhou2017/itol.toolkit"</span><span class="op">)</span></span></code></pre></div>
-<p>If you have installation problems caused by other systems, R versions, or dependency packages, go to <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html" class="external-link">supplementary materials</a> for a solution.</p>
+Please note that in order to use this software, you will need to manually install the required dependencies from Bioconductor. A complete list of the necessary packages and installation instructions can be found in the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages" class="external-link">supplementary materials</a>.
+</details><p>If you encounter any issues during the installation process, such as problems caused by other systems, R versions, or dependency packages, please refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html" class="external-link">supplementary materials</a> for a solution.</p>
 </div>
 <div class="section level2">
 <h2 id="quickstart">Quickstart<a class="anchor" aria-label="anchor" href="#quickstart"></a>
