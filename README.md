@@ -18,17 +18,38 @@ Helper Functions for Interactive Tree Of Life (iTOL)
 
 ## Installation
 
-``` r
-# from CRAN
+Based on the dependence packages from CRAN and BioConductor source. We recommend to use `pak` to install `itol.package` automatically to avoid problems.
 
+```{r}
+install.packages("pak")
+
+# from CRAN
+pak::pak('itol.toolkit')
+
+# from GitHub
+pak::pak('TongZhou2017/itol.toolkit')
+```
+
+If you do not want to install `pak` package, you can use the most traditional installation method. However, pay attention to the installation of dependency packages. For a complete list of dependency packages and how to install them, see supplementary materials.
+
+There are two options available:
+
+Stable versions can be installed from CRAN official or development versions can be installed from GitHub, but dependency packages from BioConductor need to be installed using BiocManager.
+
+```{r installation process 1}
+# install Biostrings
+# install.packages("BiocManager")
+BiocManager::install("Biostrings")
+
+# from CRAN
 install.packages("itol.toolkit")
 
 # from GitHub
-
 # install.packages("devtools") # if you have not installed "devtools" package
-
 devtools::install_github("TongZhou2017/itol.toolkit")
 ```
+
+If you have installation problems caused by other systems, R versions, or dependency packages, go to supplementary materials for a solution.
 
 ## Quickstart
 
