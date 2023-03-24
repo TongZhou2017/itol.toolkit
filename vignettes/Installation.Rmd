@@ -1,0 +1,128 @@
+---
+title: "Installation"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+author: Longzhao Li^[IOCAS, 2575760336@qq.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{COLLAPSE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  echo = TRUE
+)
+```
+
+
+Here is the detailed version of the installation tutorial, the installation process encountered errors, you can find detailed solutions in this article.
+
+If the following solutions do not help you, please leave a comment on the [website](https://github.com/TongZhou2017/itol.toolkit/issues). We will solve the problem as soon as possible and add the solution to this document for more users to read.
+
+## Problems caused by the system
+
+In the Ubuntu system, when installing the ape dependency package, there may be the following problems:
+
+> error "/usr/bin/ld: cannot find -llapack"
+> 
+> error "/usr/bin/ld: cannot find -lgfortran"
+
+This is due to a lack of basic tools from the system. Install these tools using shell commands:
+
+```{bash message=FALSE, warning=FALSE}
+sudo apt install liblapack-dev libopenblas-dev gfortran
+```
+
+## Problems caused by R version
+
+The development environment of `itol.toolkit` package is R4.2.0. Since R version 4.0.0, some important language habit updates have been released, among which the updates of Rcpp, rlang and other underlying packages have a great impact on users below R version 4.0.0. `itol.toolkit` running in versions earlier than R4.0.0 may cause some errors caused by underlying dependency packages. Run `itol.toolkit` at R 4.0.0 or later possibly.
+### nchar error in quickstart
+The following error occurs when running the quickstart tutorial:
+
+```{r message=FALSE, warning=FALSE}
+unit <- create_unit(data = df_group,  
+                    key = "Quickstart",  
+                    type = "DATASET_COLORSTRIP",  
+                    tree = tree)
+```
+
+> Error in char (data[[potential_color]]) :
+> 
+> 'nchar()' requires a character vector
+
+The best way is to install `itol.toolkit` v1.1.2 and later, where we removed the nchar dependency in favor of stringr::str_length, which is more stable across R versions.
+
+The temporary solution is to explicitly define the color parameter in the create_unit function.
+```{r message=FALSE, warning=FALSE}
+unit <- create_unit(data = df_group,  
+                    key = "Quickstart",  
+                    type = "DATASET_COLORSTRIP",  
+                    color = "Set1",
+                    tree = tree)
+```
+
+
+## Problems caused by dependency packages
+
+R packages from the BioConductor platform cannot be automatically installed by install.packages or devtools::install_github. This will result in an error similar to the following:
+
+> error "package ‘Biostrings’ is not available (for R version 3.6.3)"
+
+The best way is to use pak package to install `itol.toolkit` package. See the main document for the method.
+
+Another way is to install dependency packages using ``BiocManager`:
+```{r message=FALSE, warning=FALSE}
+# install.packages("BiocManager")
+BiocManager::install("Biostrings")
+```
+
+The complete dependency package information is as follows. If you have network problems, download the dependency package manually and install it locally. See the next section for details.
+
+| package | platform | function in itol.toolkit |
+| --- | --- | --- |
+| [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) | CRAN | Data processing |
+| [stringr](https://cran.r-project.org/web/packages/stringr/index.html) | CRAN | String processing; `nchar` repalce |
+| [data tble](https://cran.r-project.org/web/packages/data.table/index.html) | CRAN | Data processing |
+| [methods](https://www.rdocumentation.org/packages/methods/versions/3.6.2) | CRAN | Object base function |
+| [stats](https://www.rdocumentation.org/packages/stats/versions/3.6.2l) | CRAN | Data processing |
+| [tidyr](https://www.rdocumentation.org/packages/tidyr/versions/1.3.0) | CRAN | Data frame processing |
+| [purr](https://www.rdocumentation.org/packages/purrr/versions/1.0.1) | CRAN | Data screening |
+| [seqinr](https://www.rdocumentation.org/packages/seqinr/versions/4.2-23) | CRAN | Tree file processing |
+| [ape](https://cran.r-project.org/web/packages/ape/) | CRAN | Tree file processing |
+| [Biostrings](https://www.rdocumentation.org/packages/Biostrings/versions/2.40.2) | Bioconductor | fasta format sequence read |
+| [wesanderson](https://www.rdocumentation.org/packages/wesanderson/versions/0.3.6) | CRAN | Color scheme |
+| [ggsci](https://cran.r-project.org/web/packages/ggsci/index.html) | CRAN | Color scheme |
+| [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html) | CRAN | Color scheme |
+| [rstudioapi](https://cran.r-project.org/web/packages/rstudioapi/index.html) | CRAN | RStudio Plug-in base |
+| [shiny](https://cran.r-project.org/web/packages/shiny/) | CRAN | RStudio Plug-in base |
+| [miniUI](https://cran.r-project.org/web/packages/miniUI/index.html) | CRAN | RStudio Plug-in base |
+| [colourpicker](https://cran.r-project.org/web/packages/colourpicker/index.html) | CRAN | RStudio Plug-in base |
+
+## Problems caused by the network
+
+If you encounter similar errors caused by network problems:
+
+> Warning in install.packages :
+  unable to access index for repository https://cran.rstudio.com/src/contrib:  
+  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
+  Installing package into ‘C:/Users/25757/Documents/R/win-library/4.0’
+  (as ‘lib’ is unspecified)
+>
+> Warning in install.packages :
+  unable to access index for repository https://cran.rstudio.com/src/contrib:  
+  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
+>
+> Warning in install.packages :
+  package ‘ape’ is not available (for R version 4.0.0)  
+>
+> Warning in install.packages :
+  unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/4.0:  
+  cannot open URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/PACKAGES'
+
+Please download the R packages manually from the CARN in the previous section, and then install them locally using the following command:
+```{r message=FALSE, warning=FALSE}
+install.packages(PathToPkgFile,repos=NULL,type="source")
+```
+
