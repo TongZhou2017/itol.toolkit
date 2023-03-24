@@ -96,8 +96,8 @@ this document for more users to read.</p>
 <div class="section level2">
 <h2 id="problems-caused-by-the-system">Problems caused by the system<a class="anchor" aria-label="anchor" href="#problems-caused-by-the-system"></a>
 </h2>
-<p>In the Ubuntu system, when installing the ape dependency package,
-there may be the following problems:</p>
+<p>In the Ubuntu system, when installing the <code>ape</code> dependency
+package, there may be the following problems:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#  error "/usr/bin/ld: cannot find -llapack"</span></span>
 <span><span class="co">#  error "/usr/bin/ld: cannot find -lgfortran"</span></span></code></pre></div>
@@ -110,13 +110,16 @@ tools using shell commands:</p>
 </h2>
 <p>The development environment of <code>itol.toolkit</code> package is
 R4.2.0. Since R version 4.0.0, some important language habit updates
-have been released, among which the updates of Rcpp, rlang and other
-underlying packages have a great impact on users below R version 4.0.0.
-<code>itol.toolkit</code> running in versions earlier than R4.0.0 may
-cause some errors caused by underlying dependency packages. Run
-<code>itol.toolkit</code> at R 4.0.0 or later possibly. ### nchar error
-in quickstart The following error occurs when running the quickstart
-tutorial:</p>
+have been released, among which the updates of <code>Rcpp</code>, rlang
+and other underlying packages have a great impact on users below R
+version 4.0.0. <code>itol.toolkit</code> running in versions earlier
+than R4.0.0 may cause some errors caused by underlying dependency
+packages. Run <code>itol.toolkit</code> at R 4.0.0 or later
+possibly.</p>
+<div class="section level3">
+<h3 id="nchar-error-in-quickstart">nchar error in quickstart<a class="anchor" aria-label="anchor" href="#nchar-error-in-quickstart"></a>
+</h3>
+<p>The following error occurs when running the quickstart tutorial:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_group</span>,  </span>
 <span>                    key <span class="op">=</span> <span class="st">"Quickstart"</span>,  </span>
@@ -126,10 +129,12 @@ tutorial:</p>
 <span><span class="co">#  Error in char (data[[potential_color]]) :</span></span>
 <span><span class="co">#  'nchar()' requires a character vector</span></span></code></pre></div>
 <p>The best way is to install <code>itol.toolkit</code> v1.1.2 and
-later, where we removed the nchar dependency in favor of
-stringr::str_length, which is more stable across R versions.</p>
+later, where we removed the <code>nchar</code> dependency in favor of
+<code><a href="https://stringr.tidyverse.org/reference/str_length.html" class="external-link">stringr::str_length</a></code>, which is more stable across R
+versions.</p>
 <p>The temporary solution is to explicitly define the color parameter in
-the create_unit function.</p>
+the <a href="https://tongzhou2017.github.io/itol.toolkit/reference/create_unit.html" class="external-link"><code>create_unit</code></a>
+function.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_group</span>,  </span>
 <span>                    key <span class="op">=</span> <span class="st">"Quickstart"</span>,  </span>
@@ -137,25 +142,28 @@ the create_unit function.</p>
 <span>                    color <span class="op">=</span> <span class="st">"Set1"</span>,</span>
 <span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
 </div>
+</div>
 <div class="section level2">
 <h2 id="problems-caused-by-dependency-packages">Problems caused by dependency packages<a class="anchor" aria-label="anchor" href="#problems-caused-by-dependency-packages"></a>
 </h2>
-<p>R packages from the BioConductor platform cannot be automatically
-installed by install.packages or devtools::install_github. This will
-result in an error similar to the following:</p>
+<p>R packages from the <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> platform cannot be
+automatically installed by <code>install.packages</code> or
+<code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">devtools::install_github</a></code>. This will result in an error
+similar to the following:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#  error "package ‘Biostrings’ is not available (for R version 3.6.3)"</span></span></code></pre></div>
-<p>The best way is to use pak package to install
-<code>itol.toolkit</code> package. See the main document for the
-method.</p>
+<p>The best way is to use <a href="https://github.com/r-lib/pak" class="external-link"><code>pak</code></a> package to
+install <code>itol.toolkit</code> package. See the <a href="https://tongzhou2017.github.io/itol.toolkit/index.html#installation" class="external-link">main
+document</a> for the method.</p>
 <p>Another way is to install dependency packages using
-`<code>BiocManager</code>:</p>
+<code>BiocManager</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("BiocManager")</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span></span></code></pre></div>
 <p>The complete dependency package information is as follows. If you
 have network problems, download the dependency package manually and
-install it locally. See the next section for details.</p>
+install it locally. See the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-the-network" class="external-link">next
+section</a> for details.</p>
 <table class="table">
 <colgroup>
 <col width="33%">
@@ -179,8 +187,7 @@ install it locally. See the next section for details.</p>
 <td>String processing; <code>nchar</code> repalce</td>
 </tr>
 <tr class="odd">
-<td><a href="https://cran.r-project.org/web/packages/data.table/index.html" class="external-link">data
-tble</a></td>
+<td><a href="https://cran.r-project.org/web/packages/data.table/index.html" class="external-link">data.table</a></td>
 <td>CRAN</td>
 <td>Data processing</td>
 </tr>
@@ -200,7 +207,7 @@ tble</a></td>
 <td>Data frame processing</td>
 </tr>
 <tr class="odd">
-<td><a href="https://www.rdocumentation.org/packages/purrr/versions/1.0.1" class="external-link">purr</a></td>
+<td><a href="https://www.rdocumentation.org/packages/purrr/versions/1.0.1" class="external-link">purrr</a></td>
 <td>CRAN</td>
 <td>Data screening</td>
 </tr>
@@ -278,8 +285,10 @@ tble</a></td>
 <span><span class="co">#  Warning in install.packages :</span></span>
 <span><span class="co">#  unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/4.0:  </span></span>
 <span><span class="co">#  cannot open URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/PACKAGES'</span></span></code></pre></div>
-<p>Please download the R packages manually from the CARN in the previous
-section, and then install them locally using the following command:</p>
+<p>Please download the R packages manually from the package homepages in
+the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages" class="external-link">previous
+section</a>, and then install them locally using the following
+command:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">PathToPkgFile</span>,repos<span class="op">=</span><span class="cn">NULL</span>,type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
 </div>
