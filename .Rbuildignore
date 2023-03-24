@@ -6,3 +6,4 @@
 ^docs$
 ^CODE_OF_CONDUCT.md$
 ^.github$
+^inst/extdata/dataset*$
