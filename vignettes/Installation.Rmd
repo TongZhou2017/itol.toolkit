@@ -4,7 +4,7 @@ date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 author: Longzhao Li^[IOCAS, 2575760336@qq.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{COLLAPSE}
+  %\VignetteIndexEntry{Installation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,10 +24,10 @@ If the following solutions do not help you, please leave a comment on the [websi
 ## Problems caused by the system
 
 In the Ubuntu system, when installing the ape dependency package, there may be the following problems:
-
-> error "/usr/bin/ld: cannot find -llapack"
-> 
-> error "/usr/bin/ld: cannot find -lgfortran"
+```{r}
+#  error "/usr/bin/ld: cannot find -llapack"
+#  error "/usr/bin/ld: cannot find -lgfortran"
+```
 
 This is due to a lack of basic tools from the system. Install these tools using shell commands:
 
@@ -46,11 +46,12 @@ unit <- create_unit(data = df_group,
                     key = "Quickstart",  
                     type = "DATASET_COLORSTRIP",  
                     tree = tree)
+
+#  Error in char (data[[potential_color]]) :
+#  'nchar()' requires a character vector
 ```
 
-> Error in char (data[[potential_color]]) :
-> 
-> 'nchar()' requires a character vector
+
 
 The best way is to install `itol.toolkit` v1.1.2 and later, where we removed the nchar dependency in favor of stringr::str_length, which is more stable across R versions.
 
@@ -68,7 +69,10 @@ unit <- create_unit(data = df_group,
 
 R packages from the BioConductor platform cannot be automatically installed by install.packages or devtools::install_github. This will result in an error similar to the following:
 
-> error "package ‘Biostrings’ is not available (for R version 3.6.3)"
+ 
+```{r message=FALSE, warning=FALSE}
+#  error "package ‘Biostrings’ is not available (for R version 3.6.3)"
+```
 
 The best way is to use pak package to install `itol.toolkit` package. See the main document for the method.
 
@@ -104,25 +108,28 @@ The complete dependency package information is as follows. If you have network p
 
 If you encounter similar errors caused by network problems:
 
-> Warning in install.packages :
-  unable to access index for repository https://cran.rstudio.com/src/contrib:  
-  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
-  Installing package into ‘C:/Users/25757/Documents/R/win-library/4.0’
-  (as ‘lib’ is unspecified)
->
-> Warning in install.packages :
-  unable to access index for repository https://cran.rstudio.com/src/contrib:  
-  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
->
-> Warning in install.packages :
-  package ‘ape’ is not available (for R version 4.0.0)  
->
-> Warning in install.packages :
-  unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/4.0:  
-  cannot open URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/PACKAGES'
+```{r message=FALSE, warning=FALSE}
+#  Warning in install.packages :
+#  unable to access index for repository https://cran.rstudio.com/src/contrib:  
+#  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
+#  Installing package into ‘C:/Users/25757/Documents/R/win-library/4.0’
+#  (as ‘lib’ is unspecified)
+#
+#  Warning in install.packages :
+#  unable to access index for repository https://cran.rstudio.com/src/contrib:  
+#  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  
+#
+#  Warning in install.packages :
+#  package ‘ape’ is not available (for R version 4.0.0)  
+#
+#  Warning in install.packages :
+#  unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/4.0:  
+#  cannot open URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/PACKAGES'
+```
+
+
 
 Please download the R packages manually from the CARN in the previous section, and then install them locally using the following command:
 ```{r message=FALSE, warning=FALSE}
 install.packages(PathToPkgFile,repos=NULL,type="source")
 ```
-

@@ -36,7 +36,7 @@ There are two options available:
 
 Stable versions can be installed from CRAN official or development versions can be installed from GitHub, but dependency packages from BioConductor need to be installed using BiocManager.
 
-```{r installation process 1}
+``` r
 # install Biostrings
 # install.packages("BiocManager")
 BiocManager::install("Biostrings")
@@ -49,7 +49,7 @@ install.packages("itol.toolkit")
 devtools::install_github("TongZhou2017/itol.toolkit")
 ```
 
-If you have installation problems caused by other systems, R versions, or dependency packages, go to supplementary materials for a solution.
+If you have installation problems caused by other systems, R versions, or dependency packages, go to [supplementary materials](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html) for a solution.
 
 ## Quickstart
 
