@@ -18,7 +18,7 @@ Helper Functions for Interactive Tree Of Life (iTOL)
 
 ## Installation
 
-Based on the dependence packages from CRAN and Bioconductor source. We recommend to use `pak` to install `itol.package` automatically to avoid problems.
+Based on the dependence packages from CRAN and Bioconductor source. We recommend to use `pak` to install `itol.toolkit` package automatically to avoid problems.
 
 ```{r}
 install.packages("pak")
