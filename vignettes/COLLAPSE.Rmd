@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 `COLLAPSE` template are used to collapse branches.
 
 Typically, The user merges branches A and B by folding them at their most recent common ancestor (MRCA). However, it is normally hard for users to declare the MRCA node directly. The node name is usually generated automatically by software rather than specified by the user when building the phylogenetic tree. Some programs do not even generate the node name.
+
 This section has taken these complicated cases into account, and provide the corresponding solution, so that users can easily prepare the input data.
 
 ## Range ID
@@ -31,6 +32,7 @@ This basic grammar for range id is written as: `branch_A|branch_B`.
 This section provides an example of how to collapse branches using [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) (refer to the [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information) document for detailed information). Users can download the data locally from the provided link above. The files are read using a relative path in this document, so please adjust the path based on actual situation.
 
 The first step is to load the `newick` format tree file `tree_of_itol_templates.tree` and its corresponding metadata `template_groups`.
+
 ```{r load data, message=FALSE, warning=FALSE}
 library(itol.toolkit)
 tree <- system.file("extdata",
@@ -38,6 +40,7 @@ tree <- system.file("extdata",
                     package = "itol.toolkit")
 data("template_groups")
 ```
+
 Suppose that the user wants to collapse `DATASET_SIMPLEBAR` and `DATASET_MULTIBAR` into one branch; `DATASET_TEXT` and `LABELS` into another branch;`DATASET_ALIGNMENT`, `DATASET_CONNECTIONS`, `DATASET_IMAGE` and `POPUP_INFO` which belong to advanced visualization into one branch:
 
 ```{r E001, message=FALSE, warning=FALSE}
@@ -51,12 +54,15 @@ unit_1 <- create_unit(data = range_ids,
 write_unit(unit_1,
            paste0(getwd(),"/E001_collapse_1.txt"))
 ```
+
 While the first two sets of folded branches are relatively simple to define because no other branches exist between them, the third set of folded branches is slightly complex, requiring the user to select the two branches with the longest spacing among the four to accurately describe the extent to be folded. Writing the code as `DATASET_ALIGNMENT | POPUP_INFO` may result in the omission of the `DATASET_CONNECTIONS` branch, because the branch does not belong to MCRA of `DATASET_ALIGNMENT` and `POPUP_INFO`.
 
 Because the process of defining branches is very cumbersome and requires manual judgment, this function is not used frequently in the 23 templates in iTOL v6.
 
 ## Node ID
+
 Although we used a tip label in the above example, using node names directly is more convenient if it is available. Thus, the `itol.toolkit` also enable you to define the collapsed branch using the node name directly .
+
 The tree provided by `itol.toolkit` dataset(Dataset的链接) including the node labels:
 ```{r E0021, message=FALSE, warning=FALSE}
 ape::read.tree(tree)
@@ -69,7 +75,9 @@ ape::read.tree(tree)
 # 
 # Rooted; includes branch lengths.
 ```
+
 Therefore, you could specify the group you want to merge directly.
+
 ```{r E0022, message=FALSE, warning=FALSE}
 group_names <- unique("tree_sturcture", "theme_style", "text", "basic_plot")
 unit_2 <- create_unit(data = group_names, 

@@ -2,9 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  COLLAPSE: COLLAPSE.html
   Datasets: Datasets.html
   Get_Start: Get_Start.html
   Installation: Installation.html
   Operation: Operation.html
-last_built: 2023-03-28T08:40Z
+last_built: 2023-03-28T11:32Z
 

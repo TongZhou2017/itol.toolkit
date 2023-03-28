@@ -81,6 +81,18 @@ hub <- hub + unit
 write_hub(hub,getwd())
 ```
 
+## Documents
+
+We have documents for every single function and some important tips for users:
+
+### Single functions (Updating 20+)
+
+- [COLLAPSE](https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html): collapse branches by range id or node id.
+
+### Tips (Updating 5+)
+
+- [Datasets](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html): overview of 5 example datasets for demo.
+
 ## Support
 
 Please [open an issue](https://github.com/TongZhou2017/itol.toolkit/issues) to report bugs, propose new functions, or ask for help.
