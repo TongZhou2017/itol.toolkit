@@ -1,0 +1,26 @@
+LABELS
+SEPARATOR TAB
+DATA
+SPACING	Spacing
+COLLAPSE	Collapse
+PRUNE	Prune
+TREE_COLORS	Tree Colors
+DATASET_STYLE	Dataset Style
+DATASET_CONNECTIONS	Dataset Connections
+DATASET_ALIGNMENT	Dataset Alignment
+DATASET_IMAGE	Dataset Image
+POPUP_INFO	Popup Info
+DATASET_COLORSTRIP	Dataset Colorstrip
+LABELS	Labels
+DATASET_TEXT	Dataset Text
+DATASET_LINECHART	Dataset Linechart
+DATASET_GRADIENT	Dataset Gradient
+DATASET_HEATMAP	Dataset Heatmap
+DATASET_BINARY	Dataset Binary
+DATASET_EXTERNALSHAPE	Dataset Externalshape
+DATASET_SYMBOL	Dataset Symbol
+DATASET_PIECHART	Dataset Piechart
+DATASET_DOMAINS	Dataset Domains
+DATASET_BOXPLOT	Dataset Boxplot
+DATASET_SIMPLEBAR	Dataset Simplebar
+DATASET_MULTIBAR	Dataset Multibar

@@ -1,0 +1,16 @@
+DATASET_COLORSTRIP
+SEPARATOR TAB
+DATASET_LABEL	E7_template_types
+COLOR	#ff0000
+SHOW_INTERNAL	0
+MARGIN	0
+BORDER_WIDTH	1
+BORDER_COLOR	#000
+STRIP_WIDTH	25
+COLOR_BRANCHES	1
+DATA
+tree_sturcture	#fb9a99	tree_sturcture
+theme_style	#33a02c	theme_style
+advanced_plot	#a6cee3	advanced_plot
+text	#b2df8a	text
+basic_plot	#1f78b4	basic_plot

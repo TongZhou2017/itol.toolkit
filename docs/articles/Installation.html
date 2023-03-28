@@ -50,10 +50,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/Datasets.html">Datasets</a>
+    </li>
+    <li>
       <a href="../articles/Get_Start.html">Get_Start</a>
     </li>
     <li>
       <a href="../articles/Installation.html">Installation</a>
+    </li>
+    <li>
+      <a href="../articles/Operation.html">Operation</a>
     </li>
   </ul>
 </li>
@@ -76,7 +82,7 @@
 Zhou<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 24 March,
+            <h4 data-toc-skip class="date">Last compiled on 28 March,
 2023</h4>
       
       
@@ -96,6 +102,9 @@ this document for more users to read.</p>
 <div class="section level2">
 <h2 id="problems-caused-by-the-system">Problems caused by the system<a class="anchor" aria-label="anchor" href="#problems-caused-by-the-system"></a>
 </h2>
+<div class="section level3">
+<h3 id="ubuntu">Ubuntu<a class="anchor" aria-label="anchor" href="#ubuntu"></a>
+</h3>
 <p>In the Ubuntu system, when installing the <code>ape</code> dependency
 package, there may be the following problems:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -104,6 +113,7 @@ package, there may be the following problems:</p>
 <p>This is due to a lack of basic tools from the system. Install these
 tools using shell commands:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install liblapack-dev libopenblas-dev gfortran</span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="problems-caused-by-r-version">Problems caused by R version<a class="anchor" aria-label="anchor" href="#problems-caused-by-r-version"></a>
@@ -146,6 +156,9 @@ function.</p>
 <div class="section level2">
 <h2 id="problems-caused-by-dependency-packages">Problems caused by dependency packages<a class="anchor" aria-label="anchor" href="#problems-caused-by-dependency-packages"></a>
 </h2>
+<div class="section level3">
+<h3 id="biostrings">Biostrings<a class="anchor" aria-label="anchor" href="#biostrings"></a>
+</h3>
 <p>R packages from the <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> platform cannot be
 automatically installed by <code>install.packages</code> or
 <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">devtools::install_github</a></code>. This will result in an error
@@ -160,6 +173,36 @@ document</a> for the method.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("BiocManager")</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="fansi">fansi<a class="anchor" aria-label="anchor" href="#fansi"></a>
+</h3>
+<p>This is a typical indirectly dependcy package.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#  Error: package or namespace load failed for 'itol.toolkit' in library.dynam(lib, package, package.lib):</span></span>
+<span><span class="co">#  DLL ‘fansi’ not found: maybe not installed for this architecture?</span></span>
+<span><span class="co">#  Error: loading failed</span></span>
+<span><span class="co">#  Stop</span></span>
+<span><span class="co">#  *** arch - x64</span></span>
+<span><span class="co">#  ERROR: loading failed for 'i386'</span></span>
+<span><span class="co">#  * removing 'C:/Users/86139/Documents/R/win-library/4.1/itol.toolkit'</span></span>
+<span><span class="co">#  Warning message:</span></span>
+<span><span class="co">#  In i.p(...) :</span></span>
+<span><span class="co">#    installation of package ‘C:/Users/86139/AppData/Local/Temp/Rtmpycftoi/file45b02cc43b42/itol.toolkit_1.1.2.tar.gz’ had non-zero exit status</span></span></code></pre></div>
+<p>The best solution is using <code>pak</code> to install:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># from CRAN</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'itol.toolkit'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># from GitHub</span></span>
+<span><span class="co"># not work for this status https://github.com/r-lib/pak/issues/473</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'TongZhou2017/itol.toolkit'</span><span class="op">)</span> </span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="others">Others<a class="anchor" aria-label="anchor" href="#others"></a>
+</h3>
 <p>The complete dependency package information is as follows. If you
 have network problems, download the dependency package manually and
 install it locally. See the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-the-network" class="external-link">next
@@ -264,11 +307,12 @@ section</a> for details.</p>
 </tbody>
 </table>
 </div>
+</div>
 <div class="section level2">
 <h2 id="problems-caused-by-the-network">Problems caused by the network<a class="anchor" aria-label="anchor" href="#problems-caused-by-the-network"></a>
 </h2>
 <p>If you encounter similar errors caused by network problems:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#  Warning in install.packages :</span></span>
 <span><span class="co">#  unable to access index for repository https://cran.rstudio.com/src/contrib:  </span></span>
 <span><span class="co">#  cannot open URL 'https://cran.rstudio.com/src/contrib/PACKAGES'  </span></span>
@@ -289,7 +333,7 @@ section</a> for details.</p>
 the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages" class="external-link">previous
 section</a>, and then install them locally using the following
 command:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">PathToPkgFile</span>,repos<span class="op">=</span><span class="cn">NULL</span>,type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">

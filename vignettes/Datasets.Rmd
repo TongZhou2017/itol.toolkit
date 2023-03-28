@@ -1,7 +1,7 @@
 ---
 title: "Datasets"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
-author: Zhongyi Hua^[IOCAS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+author: Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Datasets}
@@ -33,7 +33,7 @@ has its own special metadata format (e.g. `DATASET_ALIGNMENT`)
 ### Input
 
 1. **Metadata**: It is recommended to use `data.table::fread` to read metadata
-```{r}
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 metadata_path <-system.file("extdata","parameter_groups.txt",package = "itol.toolkit")
 meta_data <- data.table::fread(metadata_path)
 ``` 
@@ -41,7 +41,7 @@ meta_data <- data.table::fread(metadata_path)
 2. **Tree**: It is recommended to use `ape::read.tree` to read the tree file. 
 If it is a non-phylo object tree calculated in the R environment, it is 
 recommended to use `ape::as.phylo` to convert it to a phylo object.
-```{r}
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 tree_path <- system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")
 tree <- read.tree(tree_path)
 ```
@@ -54,7 +54,7 @@ content will be the template file corresponding to the object's type attribute.
 Also, you can add multiple units to the `hub` object, and then use 
 `write_hub` to output the template file in bulk.
 
-##Dataset
+## Dataset
 
 To fully demonstrate `itol.toolkit` functions, we presented five datasets:
 
@@ -81,7 +81,7 @@ It is mainly used for palette display, browser overload testing, and demonstrate
 ### Dataset 2
 |Name|GitHub url|Note|
 | --- | --- | --- |
-|Tree file|[tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/tree.nwk)Newick format，branches are 104 OTU IDs|
+|Tree file|[tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/tree.nwk)|Newick format，branches are 104 OTU IDs|
 |Metadata|[metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/metadata.txt)|Tab seperated file, the first column is sequence id，the second column is unused data，the third column is gene name，the fourth column is substrate，the fifth column is species name|
 
 ### Dataset 3
@@ -91,8 +91,8 @@ It is mainly used for palette display, browser overload testing, and demonstrate
 |Metadata1 Species and their abundance|[abunt-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/abunt-metadata.txt)|Tab seperated file, the first column is OTU ID, the second column is NS group abundance, the third column is OS group abundance, the fourth column is phylum, the fifth column is class, the sixth column is species, the sixth column is indicators with differences|
 |Tree file2 Whole tree|[rare-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-tree.nwk)|Newick format，branches are 1338 OTU IDs|
 |Metadata2  Species and their abundance|[rare-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-metadata.txt)|Tab seperated file, the first column is OTU ID, the second column is NS group abundance, the third column is OS group abundance, the fourth column is phylum, the fifth column is class, the sixth column is species, the sixth column is indicators with differences|
-|Tree file3 iCAMP bin tree|[assembly-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-tree.nwk)||
-|Metadata3 iCAMP result|[assembly-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-metadata.txt)||
+|Tree file3 iCAMP bin tree|[assembly-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-tree.nwk)|Newick format，branches are bins|
+|Metadata3 iCAMP result|[assembly-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-metadata.txt)|Tab seperated file, the first column is bin ID, others are iCAMP output results|
 
 ### Dataset 4
 

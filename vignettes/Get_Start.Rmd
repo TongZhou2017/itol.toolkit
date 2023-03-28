@@ -18,7 +18,7 @@ In this tutorial, we use the iTOL template structure and usage data to show itol
 
 The following packages are used.
 
-```{r message=FALSE}
+```{r  message=FALSE, warning=FALSE}
 library(itol.toolkit) # main package
 library(dplyr) # data manipulation
 library(data.table) # file read
@@ -107,7 +107,7 @@ Using default themes to create the unit object by the `create_unit` function. Fo
 
 The data is for annotation datasets in data frame format. The key is for the output file name if all units are merged into the hub and written out by the hub object. The type is for the template name. The tree is for the main tree path or phylo object. The other parameters are used relating to the different template types.
 
-```{r tree colors clade in node, message=FALSE}
+```{r tree colors clade in node, message=FALSE, warning=FALSE}
 unit_1 <- create_unit(data = df_group, 
                       key = "E1_template_types", 
                       type = "TREE_COLORS", 

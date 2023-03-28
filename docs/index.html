@@ -53,10 +53,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Datasets.html">Datasets</a>
+    </li>
+    <li>
       <a href="articles/Get_Start.html">Get_Start</a>
     </li>
     <li>
       <a href="articles/Installation.html">Installation</a>
+    </li>
+    <li>
+      <a href="articles/Operation.html">Operation</a>
     </li>
   </ul>
 </li>
@@ -94,13 +100,14 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Based on the dependence packages from CRAN and Bioconductor source. We recommend to use <code>pak</code> to install <code>itol.toolkit</code> package automatically to avoid problems.</p>
-<pre class="{r}"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># from CRAN</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">'itol.toolkit'</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'itol.toolkit'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># from GitHub</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">'TongZhou2017/itol.toolkit'</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'TongZhou2017/itol.toolkit'</span><span class="op">)</span></span></code></pre></div>
 If you prefer not to use the <code>pak</code> method, you can still use the traditional installation method.
 <details><summary>
 [Click to view] Traditional method

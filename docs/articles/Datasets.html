@@ -58,6 +58,9 @@
     <li>
       <a href="../articles/Installation.html">Installation</a>
     </li>
+    <li>
+      <a href="../articles/Operation.html">Operation</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -75,7 +78,12 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Datasets</h1>
+                        <h4 data-toc-skip class="author">Zhongyi Hua<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Tong
+Zhou<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+</h4>
             
+            <h4 data-toc-skip class="date">Last compiled on 28 March,
+2023</h4>
       
       
       <div class="hidden name"><code>Datasets.Rmd</code></div>
@@ -84,63 +92,235 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">itol.toolkit</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="数据集结构">数据集结构<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BB%93%E6%9E%84"></a>
+<h2 id="dataset-structure">Dataset structure<a class="anchor" aria-label="anchor" href="#dataset-structure"></a>
 </h2>
-<p>一个完整的数据集应该至少包括：</p>
+<p>A complete dataset should include at least the following:</p>
 <ol style="list-style-type: decimal">
-<li><p>Newick格式的树文件。</p></li>
-<li><p>元数据。</p></li>
+<li><p>Tree file in Newick format.</p></li>
+<li><p>Metadata.</p></li>
 </ol>
-<p>大多数元数据是制表符或逗号分隔的表格文件，可以使用data.table包灵活读取。少数功能的元数据格式特殊，如DATASET_ALIGNMENT的元数据为fasta格式的序列比对文件。</p>
+<p>Metadata files for most functions should be comma seperated files or
+table seperated files that could be imported into R by
+<code>data.table</code>. Only a few function has its own special
+metadata format (e.g. <code>DATASET_ALIGNMENT</code>)</p>
 </div>
 <div class="section level2">
-<h2 id="数据读写">数据读写<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99"></a>
+<h2 id="data-input-and-output">Data input and output<a class="anchor" aria-label="anchor" href="#data-input-and-output"></a>
 </h2>
-<p>树文件推荐使用ape::read.tree读取，如果是在R环境内计算的非phylo对象树，推荐使用<code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo</a></code>转换为phylo对象。</p>
-<p>经过itol.toolkit完成注释后，会获得unit对象或hub对象，可以使用write_unit输出单个unit对象，输出内容为该对象type属性对应的模版文件。也可以将多个unit加入hub对象中，再使用write_hub批量输出模版文件。</p>
+<div class="section level3">
+<h3 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Metadata</strong>: It is recommended to use
+<code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread</a></code> to read metadata</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">metadata_path</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"parameter_groups.txt"</span>,package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span>
+<span><span class="va">meta_data</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">metadata_path</span><span class="op">)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>
+<strong>Tree</strong>: It is recommended to use
+<code><a href="https://rdrr.io/pkg/ape/man/read.tree.html" class="external-link">ape::read.tree</a></code> to read the tree file. If it is a non-phylo
+object tree calculated in the R environment, it is recommended to use
+<code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo</a></code> to convert it to a phylo object.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tree_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"tree_of_itol_templates.tree"</span>,package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span>
+<span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu">read.tree</span><span class="op">(</span><span class="va">tree_path</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
+</h3>
+<p>Users will get <code>unit</code> or <code>hub</code> object after
+itol.toolkit annotation. You can use <code>write_unit</code> to output a
+single <code>unit</code> object, and the output content will be the
+template file corresponding to the object’s type attribute. Also, you
+can add multiple units to the <code>hub</code> object, and then use
+<code>write_hub</code> to output the template file in bulk.</p>
+</div>
 </div>
 <div class="section level2">
-<h2 id="数据集">数据集<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"></a>
+<h2 id="dataset">Dataset<a class="anchor" aria-label="anchor" href="#dataset"></a>
 </h2>
-<p>为了全面展示itol.toolkit功能，我们使用了5个数据集： 1.
-iTOL参数结构及使用情况。这是一个非常小的数据集，主要用于最基础的功能展示。
-2.
-Li_2022_JHazardMater。这是一个注重文本展示的多组别数据集，主要用于TEXT功能、配色系统展示。
-3.
-Zheng。这包括一个小系统发育树、一个大系统发育树、一个多维度数据比较的综合数据集，主要用于配色系统展示、浏览器超载测试、多功能综合使用全流程演示。
-4.
-Microbiome。这是一个来自table2itol软件的标准数据集，主要用于不同软件使用操作对比。
-5. Tree of
-life。这是一个来自iTOL官方的标准数据集，主要用于从模版中学习元数据的工作流演示。</p>
+<p>To fully demonstrate <code>itol.toolkit</code> functions, we
+presented five datasets:</p>
+<ol style="list-style-type: decimal">
+<li><p>iTOL parameter structure and usage. This is a very small dataset,
+mainly used for the most basic function demonstration.</p></li>
+<li><p>Li_2022_JHazardMater. This is a multi group dataset that focuses
+on text display, mainly used for displaying TEXT functions and palette
+systems.</p></li>
+<li><p>Zheng_2022_EnvironPollut. This includes a small phylogenetic
+tree, a large phylogenetic tree, and a comprehensive dataset for
+multi-dimensional data comparison. It is mainly used for palette
+display, browser overload testing, and demonstrate the comprehensive use
+of multiple functions.</p></li>
+<li><p>Microbiome. This is a standard dataset from table2itol software,
+mainly used for comparing different operations between different
+softwares.</p></li>
+<li><p>Tree of life. This is an official standard dataset from iTOL,
+mainly used for demonstrating how to extract and combine metadata from
+existing templates.</p></li>
+</ol>
 <div class="section level3">
 <h3 id="dataset-1">Dataset 1<a class="anchor" aria-label="anchor" href="#dataset-1"></a>
 </h3>
-<p>树文件 system.file(“extdata”,“tree_of_itol_templates.tree”,package =
-“itol.toolkit”) 元数据1 原始参数
-system.file(“extdata”,“parameter_groups.txt”,package = “itol.toolkit”)
-元数据2 参数表 data(“template_parameters_count”) 元数据3 使用表
-system.file(“extdata”,“templates_frequence.txt”,package =
-“itol.toolkit”) 元数据4 分类表 data(“template_groups”)</p>
+<table class="table">
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Import inside R</th>
+<th>GitHub url</th>
+<th>Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Tree file</td>
+<td><code>system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")</code></td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/itol_templates.tree" class="external-link">itol_templates.tree</a></td>
+<td>Newick format，branches are 23 template names，nodes are 5 template
+types</td>
+</tr>
+<tr class="even">
+<td>Metadata1 raw parameter table</td>
+<td><code>system.file("extdata","parameter_groups.txt",package = "itol.toolkit")</code></td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/parameter_usage_raw.txt" class="external-link">parameter_usage_raw.txt</a></td>
+<td>Tab seperated file，parameters are on row，template names are on
+column</td>
+</tr>
+<tr class="odd">
+<td>Metadata2 parameter table</td>
+<td><code>data("template_parameters_count")</code></td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/parameter_usage_count.txt" class="external-link">parameter_usage_count.txt</a></td>
+<td>Tab seperated file，parameters are on row，template names are on
+column，converted from parameter_usage_raw.txt</td>
+</tr>
+<tr class="even">
+<td>Metadata3 frequency table</td>
+<td><code>system.file("extdata","templates_frequence.txt",package = "itol.toolkit")</code></td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/templates_frequence.txt" class="external-link">templates_frequence.txt</a></td>
+<td>Tab seperated file，template names are on row，DOIs are on
+column</td>
+</tr>
+<tr class="odd">
+<td>Metadata4 classification</td>
+<td><code>data("template_groups")</code></td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/template_groups.txt" class="external-link">template_groups.txt</a></td>
+<td>Tab seperated file，the first column is template name，the second
+column is template type</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="dataset-2">Dataset 2<a class="anchor" aria-label="anchor" href="#dataset-2"></a>
 </h3>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>GitHub url</th>
+<th>Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Tree file</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/tree.nwk" class="external-link">tree.nwk</a></td>
+<td>Newick format，branches are 104 OTU IDs</td>
+</tr>
+<tr class="even">
+<td>Metadata</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/metadata.txt" class="external-link">metadata.txt</a></td>
+<td>Tab seperated file, the first column is sequence id，the second
+column is unused data，the third column is gene name，the fourth column
+is substrate，the fifth column is species name</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="dataset-3">Dataset 3<a class="anchor" aria-label="anchor" href="#dataset-3"></a>
 </h3>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>GitHub url</th>
+<th>Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Tree file1 Subtree</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/abunt-tree.nwk" class="external-link">abunt-tree.nwk</a></td>
+<td>Newick format，branches are 39 OTU IDs</td>
+</tr>
+<tr class="even">
+<td>Metadata1 Species and their abundance</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/abunt-metadata.txt" class="external-link">abunt-metadata.txt</a></td>
+<td>Tab seperated file, the first column is OTU ID, the second column is
+NS group abundance, the third column is OS group abundance, the fourth
+column is phylum, the fifth column is class, the sixth column is
+species, the sixth column is indicators with differences</td>
+</tr>
+<tr class="odd">
+<td>Tree file2 Whole tree</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-tree.nwk" class="external-link">rare-tree.nwk</a></td>
+<td>Newick format，branches are 1338 OTU IDs</td>
+</tr>
+<tr class="even">
+<td>Metadata2 Species and their abundance</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-metadata.txt" class="external-link">rare-metadata.txt</a></td>
+<td>Tab seperated file, the first column is OTU ID, the second column is
+NS group abundance, the third column is OS group abundance, the fourth
+column is phylum, the fifth column is class, the sixth column is
+species, the sixth column is indicators with differences</td>
+</tr>
+<tr class="odd">
+<td>Tree file3 iCAMP bin tree</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-tree.nwk" class="external-link">assembly-tree.nwk</a></td>
+<td>Newick format，branches are bins</td>
+</tr>
+<tr class="even">
+<td>Metadata3 iCAMP result</td>
+<td><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-metadata.txt" class="external-link">assembly-metadata.txt</a></td>
+<td>Tab seperated file, the first column is bin ID, others are iCAMP
+output results</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="dataset-4">Dataset 4<a class="anchor" aria-label="anchor" href="#dataset-4"></a>
 </h3>
+<p>Coming Soon</p>
 </div>
 <div class="section level3">
 <h3 id="dataset-5">Dataset 5<a class="anchor" aria-label="anchor" href="#dataset-5"></a>
 </h3>
+<p>Coming Soon</p>
 </div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr>
+<ol>
+<li id="fn1"><p>CACMS, <a href="mailto:njbxhzy@hotmail.com" class="email">njbxhzy@hotmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>IOCAS, <a href="mailto:tongzhou2017@gmail.com" class="email">tongzhou2017@gmail.com</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
   </div>
 

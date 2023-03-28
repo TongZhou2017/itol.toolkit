@@ -1,0 +1,38 @@
+DATASET_HEATMAP
+SEPARATOR TAB
+DATASET_LABEL	E8_usage_count_among_publications
+COLOR	#ff0000
+FIELD_LABELS	Li-S._et_al._2022_J._Hazard._Mater.	Zheng-L._et_al._2022_Environ._Pollut.	Welter-D.K._et_al._2021_mSystems	Zhang-L_et_al._2022_Nat._Commun.	Rubbens-P._et_al._2019_mSystems	Laidoudi-Y._et_al._2022_Pathogens	Wang-Y._et_al._2022_Nat._Commun.	Ceres-K.M._et_al._2022_Microb._Genomics	Youngblut-N.D._et_al._2019_Nat._Commun.	Balvín-O._et_al._2018_Sci._Rep.	Prostak-S.M._et_al._2021_Curr._Biol.	Dijkhuizen-L.W._et_al._2021_Front._Plant_Sci.	Zhang-X._et_al._2022_Microbiol._Spectr.	Peris-D._et_al._2022_PLOS_Genet.	Denamur-E._et_al._2022_PLOS_Genet.	Dezordi-F.Z._et_al._2022_bioRxiv	Lin-Y._et_al._2021_Microbiome	Wang-Y._et_al._2022_bioRxiv	Qi-Z._et_al._2022_Food_Control	Zhou-X._et_al._2022_Food_Res._Int.	Zhou-X._et_al._2022_Nat._Commun.
+SHOW_INTERNAL	0
+MARGIN	0
+STRIP_WIDTH	25
+COLOR_MIN	#ffd966
+COLOR_MID	#ffff00
+COLOR_MAX	#cc0000
+FIELD_TREE	((Ceres-K.M._et_al._2022_Microb._Genomics:3.240370349,Youngblut-N.D._et_al._2019_Nat._Commun.:3.240370349):3.669767131,((Laidoudi-Y._et_al._2022_Pathogens:2.397915762,(Welter-D.K._et_al._2021_mSystems:1.118033989,Wang-Y._et_al._2022_Nat._Commun.:1.118033989):1.279881773):1.029911539,((Prostak-S.M._et_al._2021_Curr._Biol.:2.397915762,(Rubbens-P._et_al._2019_mSystems:2,((Lin-Y._et_al._2021_Microbiome:0.8660254038,Wang-Y._et_al._2022_bioRxiv:0.8660254038):0.5481881586,((Zhang-L_et_al._2022_Nat._Commun.:0.5,(Qi-Z._et_al._2022_Food_Control:0,Zhou-X._et_al._2022_Nat._Commun.:0):0.5):0.9142135624,(Zhang-X._et_al._2022_Microbiol._Spectr.:1.224744871,(Balvín-O._et_al._2018_Sci._Rep.:0.8660254038,(Peris-D._et_al._2022_PLOS_Genet.:0.7071067812,Denamur-E._et_al._2022_PLOS_Genet.:0.7071067812):0.1589186226):0.3587194676):0.189468691):0):0.5857864376):0.3979157617):0.4305113631,(Zheng-L._et_al._2022_Environ._Pollut.:2.598076211,(Dijkhuizen-L.W._et_al._2021_Front._Plant_Sci.:2.291287847,(Dezordi-F.Z._et_al._2022_bioRxiv:1.802775638,(Li-S._et_al._2022_J._Hazard._Mater.:1.118033989,Zhou-X._et_al._2022_Food_Res._Int.:1.118033989):0.684741649):0.4885122097):0.3067883639):0.2303509134):0.5994001755):3.48231018);
+SHOW_TREE	1
+USE_MID_COLOR	0
+DATA
+SPACING	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+COLLAPSE	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0
+PRUNE	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+TREE_COLORS	1	2	0	1	1	0	0	0	0	0	1	4	0	0	0	2	1	1	1	1	1
+DATASET_STYLE	0	0	0	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+DATASET_CONNECTIONS	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_ALIGNMENT	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0
+DATASET_IMAGE	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+POPUP_INFO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_COLORSTRIP	0	2	3	0	3	0	1	1	0	1	4	1	1	2	1	3	1	1	0	0	0
+LABELS	1	2	0	1	0	2	0	0	0	1	2	0	0	1	0	0	0	0	1	1	1
+DATASET_TEXT	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0
+DATASET_LINECHART	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_GRADIENT	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_HEATMAP	0	2	4	1	2	2	5	13	9	0	0	0	0	0	0	0	0	0	1	0	1
+DATASET_BINARY	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0
+DATASET_EXTERNALSHAPE	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+DATASET_SYMBOL	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+DATASET_PIECHART	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_DOMAINS	2	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	1	1
+DATASET_BOXPLOT	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0
+DATASET_SIMPLEBAR	1	4	0	0	0	0	0	0	0	0	0	1	1	0	0	2	1	0	0	3	0
+DATASET_MULTIBAR	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0

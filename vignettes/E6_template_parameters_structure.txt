@@ -1,0 +1,35 @@
+DATASET_DOMAINS
+SEPARATOR COMMA
+DATASET_LABEL,E6_template_parameters_structure
+COLOR,#ff00aa
+LEGEND_TITLE,Example domains legend
+LEGEND_SHAPES,RE,HH,HV,EL,DI,TR,TL
+LEGEND_COLORS,#a6cee3,#1f78b4,#b2df8a,#33a02c,#fb9a99,#e31a1c,#fdbf6f
+LEGEND_LABELS,type,separator,profile,field,common themes,specific themes,data
+LABELS_ON_TOP,0
+DATASET_SCALE,0,1,2,4,7,23,42
+SHOW_DOMAIN_LABELS,1
+BACKBONE_COLOR,#ffaaaa
+DATA
+COLLAPSE,51,RE|0|1|#a6cee3|type,TL|42|43|#fdbf6f|data
+DATASET_ALIGNMENT,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|8|#fb9a99|common themes,TR|23|42|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_BINARY,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,EL|4|7|#33a02c|field,DI|7|21|#fb9a99|common themes,TR|23|27|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_BOXPLOT,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|18|#fb9a99|common themes,TR|23|27|#e31a1c|specific themes,TL|42|49|#fdbf6f|data
+DATASET_COLORSTRIP,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|23|#fb9a99|common themes,TR|23|33|#e31a1c|specific themes,TL|42|45|#fdbf6f|data
+DATASET_CONNECTIONS,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|15|#fb9a99|common themes,TR|23|32|#e31a1c|specific themes,TL|42|48|#fdbf6f|data
+DATASET_DOMAINS,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|22|#fb9a99|common themes,TR|23|31|#e31a1c|specific themes,TL|42|49|#fdbf6f|data
+DATASET_EXTERNALSHAPE,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,EL|4|6|#33a02c|field,DI|7|20|#fb9a99|common themes,TR|23|32|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_GRADIENT,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|22|#fb9a99|common themes,TR|23|30|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_HEATMAP,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,EL|4|5|#33a02c|field,DI|7|22|#fb9a99|common themes,TR|23|37|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_IMAGE,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|9|#fb9a99|common themes,TR|23|25|#e31a1c|specific themes,TL|42|49|#fdbf6f|data
+DATASET_LINECHART,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|9|#fb9a99|common themes,TR|23|40|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_MULTIBAR,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,EL|4|6|#33a02c|field,DI|7|20|#fb9a99|common themes,TR|23|28|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_PIECHART,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,EL|4|6|#33a02c|field,DI|7|20|#fb9a99|common themes,TR|23|25|#e31a1c|specific themes,TL|42|46|#fdbf6f|data
+DATASET_SIMPLEBAR,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|20|#fb9a99|common themes,TR|23|29|#e31a1c|specific themes,TL|42|44|#fdbf6f|data
+DATASET_STYLE,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|15|#fb9a99|common themes,TL|42|51|#fdbf6f|data
+DATASET_SYMBOL,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|16|#fb9a99|common themes,TR|23|24|#e31a1c|specific themes,TL|42|49|#fdbf6f|data
+DATASET_TEXT,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,HV|2|4|#b2df8a|profile,DI|7|16|#fb9a99|common themes,TR|23|26|#e31a1c|specific themes,TL|42|49|#fdbf6f|data
+LABELS,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,TL|42|44|#fdbf6f|data
+POPUP_INFO,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,TL|42|45|#fdbf6f|data
+PRUNE,51,RE|0|1|#a6cee3|type,TL|42|43|#fdbf6f|data
+SPACING,51,RE|0|1|#a6cee3|type,HH|1|2|#1f78b4|separator,TL|42|44|#fdbf6f|data

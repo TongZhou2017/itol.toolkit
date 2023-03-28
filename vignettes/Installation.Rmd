@@ -23,6 +23,8 @@ If the following solutions do not help you, please leave a comment on the [websi
 
 ## Problems caused by the system
 
+### Ubuntu
+
 In the Ubuntu system, when installing the `ape` dependency package, there may be the following problems:
 
 ```{r message=FALSE, warning=FALSE}
@@ -70,6 +72,8 @@ unit <- create_unit(data = df_group,
 
 ## Problems caused by dependency packages
 
+### Biostrings
+
 R packages from the [Bioconductor](https://www.bioconductor.org/) platform cannot be automatically installed by `install.packages` or `devtools::install_github`. This will result in an error similar to the following:
 
 ```{r message=FALSE, warning=FALSE}
@@ -84,6 +88,38 @@ Another way is to install dependency packages using `BiocManager`:
 # install.packages("BiocManager")
 BiocManager::install("Biostrings")
 ```
+
+### fansi
+
+This is a typical indirectly dependcy package.
+
+```{r message=FALSE, warning=FALSE}
+#  Error: package or namespace load failed for 'itol.toolkit' in library.dynam(lib, package, package.lib):
+#  DLL ‘fansi’ not found: maybe not installed for this architecture?
+#  Error: loading failed
+#  Stop
+#  *** arch - x64
+#  ERROR: loading failed for 'i386'
+#  * removing 'C:/Users/86139/Documents/R/win-library/4.1/itol.toolkit'
+#  Warning message:
+#  In i.p(...) :
+#    installation of package ‘C:/Users/86139/AppData/Local/Temp/Rtmpycftoi/file45b02cc43b42/itol.toolkit_1.1.2.tar.gz’ had non-zero exit status
+```
+
+The best solution is using `pak` to install:
+
+```{r message=FALSE, warning=FALSE}
+install.packages("pak")
+
+# from CRAN
+pak::pak('itol.toolkit')
+
+# from GitHub
+# not work for this status https://github.com/r-lib/pak/issues/473
+pak::pak('TongZhou2017/itol.toolkit') 
+```
+
+### Others
 
 The complete dependency package information is as follows. If you have network problems, download the dependency package manually and install it locally. See the [next section](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-the-network) for details.
 
@@ -129,8 +165,6 @@ If you encounter similar errors caused by network problems:
 #  unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/4.0:  
 #  cannot open URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/PACKAGES'
 ```
-
-
 
 Please download the R packages manually from the package homepages in the [previous section](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages), and then install them locally using the following command:
 ```{r message=FALSE, warning=FALSE}
