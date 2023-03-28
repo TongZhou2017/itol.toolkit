@@ -1,0 +1,105 @@
+---
+title: "Datasets"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+author: Zhongyi Hua^[IOCAS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Dataset structure
+
+A complete dataset should include at least the following:
+
+1. Tree file in Newick format.
+
+2. Metadata.
+
+Metadata files for most functions should be comma seperated files or table seperated 
+files that could be imported into R by `data.table`. Only a few function 
+has its own special metadata format (e.g. `DATASET_ALIGNMENT`)
+
+## Data input and output
+
+### Input
+
+1. **Metadata**: It is recommended to use `data.table::fread` to read metadata
+```{r}
+metadata_path <-system.file("extdata","parameter_groups.txt",package = "itol.toolkit")
+meta_data <- data.table::fread(metadata_path)
+``` 
+
+2. **Tree**: It is recommended to use `ape::read.tree` to read the tree file. 
+If it is a non-phylo object tree calculated in the R environment, it is 
+recommended to use `ape::as.phylo` to convert it to a phylo object.
+```{r}
+tree_path <- system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")
+tree <- read.tree(tree_path)
+```
+
+### Output
+
+Users will get `unit` or `hub` object after itol.toolkit annotation. 
+You can use `write_unit` to output a single `unit` object, and the output 
+content will be the template file corresponding to the object's type attribute.
+Also, you can add multiple units to the `hub` object, and then use 
+`write_hub` to output the template file in bulk.
+
+##Dataset
+
+To fully demonstrate `itol.toolkit` functions, we presented five datasets:
+
+1. iTOL parameter structure and usage. This is a very small dataset, mainly used for the most basic function demonstration.
+
+2. Li_2022_JHazardMater. This is a multi group dataset that focuses on text display, mainly used for displaying TEXT functions and palette systems.
+
+3. Zheng_2022_EnvironPollut. This includes a small phylogenetic tree, a large phylogenetic tree, and a comprehensive dataset for multi-dimensional data comparison. 
+It is mainly used for palette display, browser overload testing, and demonstrate the comprehensive use of multiple functions.
+
+4. Microbiome. This is a standard dataset from table2itol software, mainly used for comparing different operations between different softwares.
+
+5. Tree of life. This is an official standard dataset from iTOL, mainly used for demonstrating how to extract and combine metadata from existing templates.
+
+### Dataset 1
+|Name|Import inside R|GitHub url|Note|
+| --- | --- | --- | --- |
+|Tree file|`system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")`| [itol_templates.tree](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/itol_templates.tree)|Newick format，branches are 23 template names，nodes are 5 template types|
+|Metadata1 raw parameter table| `system.file("extdata","parameter_groups.txt",package = "itol.toolkit")`|[parameter_usage_raw.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/parameter_usage_raw.txt)|Tab seperated file，parameters are on row，template names are on column|
+|Metadata2 parameter table | `data("template_parameters_count")`|[parameter_usage_count.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/parameter_usage_count.txt)|Tab seperated file，parameters are on row，template names are on column，converted from parameter_usage_raw.txt|
+|Metadata3 frequency table | `system.file("extdata","templates_frequence.txt",package = "itol.toolkit")`|[templates_frequence.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/templates_frequence.txt)|Tab seperated file，template names are on row，DOIs are on column |
+|Metadata4 classification | `data("template_groups")`|[template_groups.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/template_groups.txt)|Tab seperated file，the first column is  template name，the second column is  template type|
+
+### Dataset 2
+|Name|GitHub url|Note|
+| --- | --- | --- |
+|Tree file|[tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/tree.nwk)Newick format，branches are 104 OTU IDs|
+|Metadata|[metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset2/metadata.txt)|Tab seperated file, the first column is sequence id，the second column is unused data，the third column is gene name，the fourth column is substrate，the fifth column is species name|
+
+### Dataset 3
+|Name|GitHub url|Note|
+| --- | --- | --- |
+|Tree file1 Subtree|[abunt-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/abunt-tree.nwk)|Newick format，branches are 39 OTU IDs|
+|Metadata1 Species and their abundance|[abunt-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/abunt-metadata.txt)|Tab seperated file, the first column is OTU ID, the second column is NS group abundance, the third column is OS group abundance, the fourth column is phylum, the fifth column is class, the sixth column is species, the sixth column is indicators with differences|
+|Tree file2 Whole tree|[rare-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-tree.nwk)|Newick format，branches are 1338 OTU IDs|
+|Metadata2  Species and their abundance|[rare-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/rare-metadata.txt)|Tab seperated file, the first column is OTU ID, the second column is NS group abundance, the third column is OS group abundance, the fourth column is phylum, the fifth column is class, the sixth column is species, the sixth column is indicators with differences|
+|Tree file3 iCAMP bin tree|[assembly-tree.nwk](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-tree.nwk)||
+|Metadata3 iCAMP result|[assembly-metadata.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset3/assembly-metadata.txt)||
+
+### Dataset 4
+
+Coming Soon
+
+### Dataset 5
+
+Coming Soon
+
+
