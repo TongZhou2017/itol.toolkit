@@ -63,7 +63,8 @@ Because the process of defining branches is very cumbersome and requires manual 
 
 Although we used a tip label in the above example, using node names directly is more convenient if it is available. Thus, the `itol.toolkit` also enable you to define the collapsed branch using the node name directly .
 
-The tree provided by `itol.toolkit` dataset(Dataset的链接) including the node labels:
+The tree provided by `itol.toolkit` [dataset 1](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset1/itol_templates.tree) including the node labels:
+
 ```{r E0021, message=FALSE, warning=FALSE}
 ape::read.tree(tree)
 # Phylogenetic tree with 23 tips and 22 internal nodes.
