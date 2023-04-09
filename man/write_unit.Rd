@@ -4,7 +4,7 @@
 \alias{write_unit}
 \title{Write unit object into file}
 \usage{
-write_unit(unit, file)
+write_unit(unit, file = getwd())
 }
 \arguments{
 \item{unit}{unit object. The unit object holds the data and theme of a single

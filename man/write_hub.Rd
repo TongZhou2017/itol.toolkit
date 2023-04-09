@@ -4,7 +4,7 @@
 \alias{write_hub}
 \title{Write all data object into files}
 \usage{
-write_hub(object, dir)
+write_hub(object, dir = getwd())
 }
 \arguments{
 \item{object}{itol.hub object holds the complete data and theme information.

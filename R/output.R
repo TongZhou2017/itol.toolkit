@@ -19,6 +19,7 @@
 #' @importFrom stats na.omit
 #' @importFrom stringr str_replace_all
 #' @importFrom utils write.table
+#' @importFrom utils file_test
 #' @import dplyr
 #' @return No return value, only output a template file
 #' @export
@@ -36,7 +37,10 @@
 #'                     tree = tree)
 #' ## write unit
 #' write_unit(unit,tempfile())
-write_unit <- function(unit, file) {
+write_unit <- function(unit, file = getwd()) {
+  if(file_test("-d",file)){
+    file = paste0(file,"/",unit@profile$name,".txt")
+  }
   lines <- paste0(unit@type)
   if (!is.null(unit@sep)) {
     sep <- case_when(
@@ -562,11 +566,11 @@ write_unit <- function(unit, file) {
 #' ## write hub
 #' hub <- hub + unit_1 + unit_2
 #' write_hub(hub,tempdir())
-write_hub <- function(object, dir) {
+write_hub <- function(object, dir = getwd()) {
   keys <- names(object@theme)
   for (key in keys) {
     unit <- hub_to_unit(object, object@theme[[key]], key)
-    write_unit(unit, paste0(dir, "/", key, ".txt"))
+    write_unit(unit, dir)
   }
 }
 

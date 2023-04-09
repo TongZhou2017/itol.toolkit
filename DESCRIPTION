@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: 
     person(
     given = "Tong",
