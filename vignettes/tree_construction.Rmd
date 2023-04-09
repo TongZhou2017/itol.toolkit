@@ -1,0 +1,97 @@
+---
+title: "tree_construction"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{tree_construction}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+Users need a tree in newick format before using iTOL and itol.toolkit. Phylogenetic trees and clustering trees are the most common types of trees. Phylogenetic trees are usually constructed based on  nucleic acid sequences or amino acid sequences using character-based methods, such as maximum likelihood (ML) method. However, users can cluster the samples from a numeric matrix using hierarchical clustering method as well.
+
+itol.toolkit provides basic clustering tree construction methods, allowing users to build trees based on the numeric matrix using both weighted and unweighted methods.
+
+## Tree construction
+This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) to demonstrate the method of constructing a clustering tree in newick format by hierarchical clustering (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information). We will demonstrate how to construct the tree using both unweighted and weighted methods using of parameters and class of each template.
+
+### Data preparation
+In practice users need to prepare a numeric matrix for tree construction, and if you want using weighted method, then the grouping information is needed.
+```{r data prepare}
+library(itol.toolkit)
+library(data.table)
+library(dplyr)
+file = system.file("extdata",
+                   "iTOL_template_parameters_matrix.txt",
+                   package = "itol.toolkit")
+template_parameters_count <- fread(file)
+order <- names(template_parameters_count)[-1]
+template_parameters_count <- template_parameters_count[,-1]
+template_parameters_count <- convert_01(object = template_parameters_count) %>%
+                             t() %>%
+                             as.data.frame()
+```
+
+### Unweighted Clustering
+For unweighted clustering, users only need to import the numeric matrix.
+```{r unweighted clustering}
+cluster_tree <- count_to_tree(count = template_parameters_count)
+plot(cluster_tree)
+```
+
+### Weighted Clustering
+For weighted clustering, users need to specify the grouping information and weight through the "group" and "weight" parameters.
+```{r weighted clustering}
+data("template_groups")
+template_groups <- template_groups %>%
+                   mutate(template =  factor(template, levels = order)) %>%
+                   arrange(template)
+cluster_tree <- count_to_tree(count = template_parameters_count,
+                              group = template_groups$group,
+                              weight = 1)
+plot(cluster_tree)
+```
+
+### Save Tree
+Once the tree is built, the user needs to export the tree to a newick file for importing to iTOL, etc.
+```{r save tree}
+write.tree(cluster_tree, paste0(getwd(), "/tree_of_itol_templates.tree"))
+```
+
+## Other Methods
+Users can also perform hierarchical clustering with the cluster package.
+```{r load package}
+library(cluster)
+```
+When using the cluster package's `agnes()` function for clustering, users need to specify the method used to calculate dissimilarity between clusters. Here we calculate the agglomerative coefficient of each method by writing a short function and finally choose the method with the value closest to 1.
+```{r select method}
+#define linkage methods
+m <- c( "average", "single", "complete", "ward")
+names(m) <- c( "average", "single", "complete", "ward")
+
+#function to compute agglomerative coefficient
+ac <- function(x) {
+  agnes(template_parameters_count, method = x)$ac
+}
+
+#calculate agglomerative coefficient for each clustering linkage method
+sapply(m, ac)
+```
+After selecting the best method, the user can construct the clustering tree by the `agnes()` function.
+```{r clustering}
+cluster_tree <- agnes(template_parameters_count, method = "ward")
+plot(cluster_tree)
+```

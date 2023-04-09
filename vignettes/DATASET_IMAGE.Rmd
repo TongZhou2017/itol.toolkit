@@ -1,0 +1,69 @@
+---
+title: "DATASET_IMAGE"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{DATASET_IMAGE}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+The function of the `DATASET_IMAGE` template is to add external images onto the tree. Each node in the tree can be associated with a bitmap (any format supported by your browser) or a vector image (SVG). The `DATASET_IMAGE` template belongs to the "Advanced Graphics" class (refer to the [Class]() for detail information).
+
+Users typically add an image to the tree by entering the branch name or node, position, size factor, rotation, horizontal shift, vertical shift, and the URL of the image. This section shows how to use `itol.toolkit` to generate template files for adding images to the tree.
+
+## Add Image
+This section provides an example of how to add an image onto the tree using [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) (refer to the [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information) document for detailed information) and the [logo](https://tongzhou2017.github.io/itol.toolkit/reference/figures/itol.toolkit_logo.jpg) of `itol.toolkit`. Users can download the data locally from the provided link above. The files are read using a relative path in this document, so please adjust the path based on actual situation.
+
+The first step is to load the `newick` format tree file `tree_of_itol_templates.tree`.
+```{r load data}
+library(itol.toolkit)
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+```
+Users need to manually import branch names or nodes and corresponding image URLs in the format of data.frame, and it is recommended to use the `fread()` function of the `data.table` package to import them. Of course, you can also manually enter your branch or node name and image URL directly in the R environment via the `data.frame()` function, as follows:
+```{r data process}
+df_data <- data.frame(ids = "I1",
+                      text = "https://tongzhou2017.github.io/itol.toolkit/reference/figures/itol.toolkit_logo.jpg")
+```
+In addition to the four basic parameters of `create_unit`(i.e., `data`, `key`, `type` and `tree`), we need to set some other parameters to determine the position and size of the image.
+
+- `position`: defines the position of the image on the tree:  
+\-1 = external label  
+a number between 0 and 1 = internal image positioned at the specified value along the node branch (for example, position 0 is exactly at the start of node branch, position 0.5 is in the middle, and position 1 is at the end)
+
+- `size_factor`: defines the size of the image
+
+- `rotation`: defines the rotation angle of the image (0 ~ 360)
+
+```{r creat unit}
+unit_19 <- create_unit(data = df_data,
+                       key = "E019_text_2",
+                       type = "DATASET_IMAGE",
+                       position = 0,
+                       size_factor = 0.2,
+                       rotation=0,
+                       tree = tree)
+```
+
+## Style modification
+`unit@specific_themes$image$shift_h` is a pixel value; can be used to shift the image position left or right. By default, image's top left corner is aligned to the node position.  
+`unit@specific_themes$image$shift_v` is a pixel value; can be used to shift the image position below or above the node
+```{r style modify}
+unit_19@specific_themes$image$shift_v <- 0
+unit_19@specific_themes$image$shift_h <- -850
+```

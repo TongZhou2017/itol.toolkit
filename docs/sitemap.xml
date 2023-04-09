@@ -19,19 +19,103 @@
     <loc>/articles/COLLAPSE.html</loc>
   </url>
   <url>
+    <loc>/articles/Color_Palette.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_ALIGNMENT.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_BINARY.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_BOXPLOT.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_COLORSTRIP.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_CONNECTIONS.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_DOMAIN.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_EXTERNALSHAPE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_GRADIENT.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_HEATMAP.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_IMAGE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_LINECHART.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_MULTIBAR.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_PIECHART.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_SIMPLEBAR.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_STYLE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_SYMBOL.html</loc>
+  </url>
+  <url>
+    <loc>/articles/DATASET_TEXT.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Data_Reproduction.html</loc>
+  </url>
+  <url>
     <loc>/articles/Datasets.html</loc>
   </url>
   <url>
     <loc>/articles/Get_Start.html</loc>
   </url>
   <url>
+    <loc>/articles/Image_Gallery.html</loc>
+  </url>
+  <url>
     <loc>/articles/Installation.html</loc>
+  </url>
+  <url>
+    <loc>/articles/LABELS.html</loc>
+  </url>
+  <url>
+    <loc>/articles/OVERVIEW_STYLE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/OVERVIEW_TREE_STRUCTURE.html</loc>
   </url>
   <url>
     <loc>/articles/Operation.html</loc>
   </url>
   <url>
+    <loc>/articles/POPUP_INFO.html</loc>
+  </url>
+  <url>
+    <loc>/articles/PRUNE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/SPACING.html</loc>
+  </url>
+  <url>
+    <loc>/articles/TREE_COLORS.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/tree_construction.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>

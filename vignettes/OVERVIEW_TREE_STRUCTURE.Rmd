@@ -1,0 +1,110 @@
+---
+title: "TREE_STRUCTURE"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{TREE_STRUCTURE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+## Overview 5 class
+Based on the similarity of the parameters used in the template and the similarity of the template functions, we divided the 23 templates of iTOL v6 into 5 classes.
+
+- Tree structure：COLLAPSE, PRUNE, SPACING
+
+- type：TREE_COLORS, DATASET_STYLE
+
+- text：LABELS, DATASET_TEXT, DATASET_COLORSTRIP
+
+- Basic graphics：DATASET_BINARY, DATASET_GRADIENT, DATASET_HEATMAP, DATASET_SYMBOL, DATASET_EXTERNALSHAPE, DATASET_DOMAINS, DATASET_SIMPLEBAR, DATASET_MULTIBAR, DATASET_BOXPLOT, DATASET_LINECHART, DATASET_PIECHART
+
+- Advanced graphics：DATASET_ALIGNMENT, DATASET_CONNECTION, DATASET_IMAGE, POPUP_INFO
+
+This section outlines templates belong to "tree structures". Five indicators were used to evaluate each template function from different dimensions. These five indicators are:
+
+|indicator|Points of view|
+|---|---|
+|Usage frequency|objective|
+|Style complexity|objective|
+|Input threshold|objective|
+|Core score|subjective|
+|Diversity score|subjective|
+
+- Usage frequency: The average number of times the template type used in published papers is calculated and logarithmic converted.
+```{r}
+library(itol.toolkit)
+df_frequence <- data.table::fread(system.file("extdata",
+                                              "templates_frequence.txt",
+                                              package = "itol.toolkit"))
+df_frequence <- data.frame(template = df_frequence$templates, 
+                           value = rowSums(df_frequence[,-1],na.rm = T))
+df_frequence$value <- round(log(df_frequence$value+1),2)
+```
+
+- Style complexity: The number of style class parameters and converted by square root conversion.
+```{r}
+data("template_parameters_count")
+round(sqrt(rowSums(template_parameters_count[,1:113])+1),2)
+```
+
+-Input threshold: The number of data class parameters + the number of terms of multiple choice parameters + the number of sub-parameters of aggregation parameters + the number of indirect data parameters. If there are infinite items, the single item value is denoted as 5 capping.
+```{r}
+data("template_parameters_count")
+rowSums(template_parameters_count[,114:148])
+```
+
+-Core score: According to the non-replaceability, the degree of overlap with other functions, and the application potential(used as weight), a core score is given. The lowest score is 0 points and the highest score is 5 points.
+
+-Diversity score: According to the frequency of collaboration with other templates, the scalability of its own functions, and the diversity of functional application scenarios, a diversity score is given. The lowest score for each item is 0 points and the highest score is 5 points. 0 points indicate that the function is monotonous, and 5 points indicate that the function is diverse
+
+## COLLAPSE Folded branch
+Usage frequency：1.10
+Style complexity：1
+Input threshold：1
+Core score：(1+1)*(1.10/2)=1.1
+Diversity score：(1+0+0)/3 = 0.33
+
+COLLAPSE directly controls branch aggregation and is irreplaceable. However, this function only works within the software, so it cannot change the raw tree file. This feature is relatively simple and is not intergrated into other features. It is less used and thus is not a core feature of iTOL. As a basic function not displayed in the control panel, this function rarely cooperates with other functions. Moreover, does not support any extended functions. The application scenario of this function is also fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+
+## PRUNE Choose a branch
+Usage frequency：0
+Style complexity：1
+Input threshold：1
+Core score：(0+1)*(1/2)=0.5
+Diversity score：(1+0+0)/3 = 0.33
+
+Although the PRUNE function is not actually used in the published papers, it still has the potential to be used when we optimize the reproduction of iTOL charts. This feature can be replaced by a number of similar tools, such as`ape::drop.tip`, which does the branch selection step before processing, so it is not irreplaceable. However, this function exists as a standalone feature and is not integrated into any other template features. In summary, this function is not the core function of iTOL.At the same time, as a basic function not displayed in the control panel, this function rarely cooperates with other functions, and does not support any extended functions. The application scenario is also relatively fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+
+## SPACING Adjusting the spacing
+Usage frequency：0
+Style complexity：1.41
+Input threshold：2
+Core score：(1+1)*(0/2)=0
+Diversity score：(0+0+0)/3 = 0
+
+The SPACING feature is not actually used in the published papers and has not been found to have potential to be used. This function has not found a use case, so it is replaceable, and is not a core function of iTOL. It does not support any extension functions and is a very independent function. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+
+TO sum up, the three template functions of the tree structure class have similarities in the following areas:
+
+1. Simple parameters
+
+2. Not core function
+
+3. Single application scenario
+
+For this type of function, although using itol.toolkit will not give users a great improvement in experience, it is also included in order to support the completeness of iTOL functions so that it can assist iTOL’s full application scenarios.

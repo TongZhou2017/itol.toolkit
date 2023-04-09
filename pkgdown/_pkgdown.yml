@@ -1,0 +1,86 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+navbar:
+  left:
+    - text: "Install"
+      href: articles/Installation.html
+    - text: "Get started"
+      href: articles/Get_Start.html
+    - text: "Single Functions"
+      menu:
+        - text: Tree Structure
+        - text: "COLLAPSE"
+          href: articles/COLLAPSE.html
+        - text: "PRUNE"
+          href: articles/PRUNE.html
+        - text: "SPACING"
+          href: articles/SPACING.html
+        - text: -------
+        - text: Theme Style
+        - text: "TREE_COLORS"
+          href: articles/TREE_COLORS.html
+        - text: "DATASET_STYLE"
+          href: articles/DATASET_STYLE.html
+        - text: -------
+        - text: Text
+        - text: "LABELS"
+          href: articles/LABELS.html
+        - text: "DATASET_TEXT"
+          href: articles/DATASET_TEXT.html
+        - text: "DATASET_COLORSTRIP"
+          href: articles/DATASET_COLORSTRIP.html
+        - text: -------
+        - text: Basic Plot
+        - text: "DATASET_BINARY"
+          href: articles/DATASET_BINARY.html
+        - text: "DATASET_GRADIENT"
+          href: articles/DATASET_GRADIENT.html
+        - text: "DATASET_HEATMAP"
+          href: articles/DATASET_HEATMAP.html
+        - text: "DATASET_SYMBOL"
+          href: articles/DATASET_SYMBOL.html
+        - text: "DATASET_EXTERNALSHAPE"
+          href: articles/DATASET_EXTERNALSHAPE.html
+        - text: "DATASET_DOMAINS"
+          href: articles/DATASET_DOMAINS.html
+        - text: "DATASET_SIMPLEBAR"
+          href: articles/DATASET_SIMPLEBAR.html
+        - text: "DATASET_MULTIBAR"
+          href: articles/DATASET_MULTIBAR.html
+        - text: "DATASET_BOXPLOT"
+          href: articles/DATASET_BOXPLOT.html
+        - text: "DATASET_LINECHART"
+          href: articles/DATASET_LINECHART.html
+        - text: "DATASET_PIECHART"
+          href: articles/DATASET_PIECHART.html
+        - text: -------
+        - text: Advanced Plot
+        - text: "DATASET_ALIGNMENT"
+          href: articles/DATASET_ALIGNMENT.html
+        - text: "DATASET_CONNECTION"
+          href: articles/DATASET_CONNECTION.html
+        - text: "DATASET_IMAGE"
+          href: articles/DATASET_IMAGE.html
+        - text: "POPUP_INFO"
+          href: articles/POPUP_INFO.html
+    - text: "Tips"
+      menu:
+      - text: "Overview"
+        href: articles/OVERVIEW_TREE_STRUCTURE.html
+      - text: "Colors"
+        href: articles/Color_Palette.html
+      - text: "Data Reproduction"
+        href: articles/Data_Reproduction.html
+      - text: "Tree Construction"
+        href: articles/tree_construction.html
+    - text: "Gallery"
+      href: articles/Image_Gallery.html
+  right:
+    - icon: fa-github
+      href: https://github.com/TongZhou2017/itol.toolkit
+    - icon: "fab fa-discord fa-lg"
+      href: https://discord.com/invite/n5TC7jCfGJ
+    - icon: fa-twitter
+      href: https://twitter.com/itol_toolkit
+

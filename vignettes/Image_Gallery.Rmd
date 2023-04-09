@@ -1,0 +1,38 @@
+---
+title: "Image_Gallery"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{Image_Gallery}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+In order to demonstrate how to use multiple functions from `itol.toolkit` comprehensively, we have selected some published diagrams created by iTOL to reproduce. The data necessary for reproduction includes tree files in `newick` format and metadata for annotation. If metadata is not available, metadata can be generated from template files shared by authors.
+
+This section lists the images we reproduced, and users can view the corresponding detailed reproduction steps through the links above the images.
+
+## Li et al. 2022 JHazardMater
+[Reproduce_Li_2022_JHazardMater](https://tongzhou2017.github.io/itol.toolkit/articles/Reproduce_Li_2022_JHazardMater.html)
+
+![Fig.2 of Li et al. 2022](https://ars.els-cdn.com/content/image/1-s2.0-S0304389422010202-gr2.jpg)
+
+## Zheng et al. 2022 EnvironPollut
+[Reproduce_Zheng_2022_EnvironPollut](https://tongzhou2017.github.io/itol.toolkit/articles/Reproduce_Zheng_2022_EnvironPollut.html)
+
+![Fig.3 of Zheng et al. 2022](https://ars.els-cdn.com/content/image/1-s2.0-S0269749122014579-gr3.jpg)
+
+![Fig.4 of Zheng et al. 2022](https://ars.els-cdn.com/content/image/1-s2.0-S0269749122014579-gr4.jpg)

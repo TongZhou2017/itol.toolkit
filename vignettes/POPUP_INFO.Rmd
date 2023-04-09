@@ -1,0 +1,49 @@
+---
+title: "POPUP_INFO"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Longzhao Li^[IOCAS, 2575760336@qq.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{POPUP_INFO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+The `POPUP_INFO` template is to display additional information in the popup windows which appear when hovering mouse pointer over tree nodes or labels. The `DATASET_GRADIENT` template belongs to the "Advanced graphics" class (refer to the [Class]() for detail information).
+
+For each tree node ID, users can define both the popup title and the content. Content can be plain text or any valid HTML (including links to external web sites, or IMG tags pointing to external images).
+
+This section describes how to `itol.toolkit` to prepare the popup info templates.
+
+## Load data
+The first step is to load the `newick` format tree file `tree_of_itol_templates.tree`.
+```{r load data}
+library(itol.toolkit)
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+```
+
+## Data processing and create the unit
+Using `POPUP_INFO`, you need tip/nodes names, and corresponding image URLs . It is recommended users to use convenient methods to organize these data (such as the tidyverse workflow). Of course, you can also enter your branch or node name and INFO URL directly in the R environment via the `data.frame()` function, as follows:
+```{r text color defind by parameter}
+df_data <- data.frame(ids = "POPUP_INFO", 
+                      text = "POPUP_INFO",
+                      content= "<h2>POPUP_INFO</h2>")
+unit <- create_unit(data = df_data, 
+                    key = "E019_text_2", 
+                    type = "POPUP_INFO",
+                    tree = tree)
+```

@@ -1,0 +1,172 @@
+---
+title: "Color_Palette"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{Color_Palette}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+In itol, most templates need users to specify color information manually, causing inconvenience when preparing large amounts of data for visualization. Therefore, itol.toolkit has been optimized to address this issue by allowing users to input only metadata, and the program will automatically generates corresponding color information through the built-in color palette. To best meet the needs of different users, there are several palettes in itol.toolkit for users to select, and, of course, itol.toolkit retaining the choice of setting colors manually. In addition, the limited number of colors provided in some existing itol helper packages makes it difficult to meet the user's usage needs when the user has a large amount of data. itol.toolkit provides up to 75 colors, which basically meets the user's usage needs. Users can modify the color palette by "color" parameter of the `create_unit()` function.
+
+This section describes several ways to modify the color scheme when creating a unit with `itol.toolkit`. To show each color scheme more visually, we use [dataset3](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset3) and the `DATASET_COLORSTRIP` template for demonstration. Users can download the data locally from the provided link above. The files are read using a relative path in this document, so please adjust the path based on your actual situation.
+
+Before we start, please load the packages and data.
+```{r load packages and data}
+library(itol.toolkit)
+library(data.table)
+library(ape)
+library(dplyr)
+library(stringr)
+tree <- read.tree("abunt-tree.nwk")
+df_data <- fread("abunt-metadata.txt")
+```
+
+## Built-in color palette
+
+### table2itol
+"table2itol" is the default color palette used by the widely used [table2itol.R](https://github.com/mgoeker/table2itol) tool, and itol.toolkit inherent. When the user does not set the color parameter when creating a unit, the program will use this color palette by default. The color palette supports up to 40 different colors, which is sufficient for most users when annotating taxonomic information. However, it may not be adequate for users with large trees or when annotating lower taxonomic ranks (e.g., genus, species).
+```{r table2itol}
+unit_1 <- create_unit(data = df_data %>% select(ID, Class), 
+                      key = "color_table2itol_1",
+                      type = "DATASET_COLORSTRIP",
+                      tree = tree)
+```
+
+### wesanderson
+When the default color palette is insufficient, the user can set the color parameter to "wesanderson" color palette (Refer to [wesanderson](https://github.com/karthik/wesanderson) for more detail information). The color palette supports up to 75 different colors, which can meet most of users' needs.
+```{r wesanderson1}
+unit_2 <- create_unit(data = df_data %>% select(ID, Genus), 
+                      key = "color_wesanderson_1",
+                      type = "DATASET_COLORSTRIP",
+                      color = "wesanderson",
+                      tree = tree)
+```
+Note that different random number seeds will produce different color schemes when using the wesanderson color palette, so it is recommended to set a random number seed using the `set.seed()` function before using it.
+```{r wesanderson2}
+set.seed(123)
+unit_3 <- create_unit(data = df_data %>% select(ID, Genus), 
+                      key = "color_wesanderson_2",
+                      type = "DATASET_COLORSTRIP",
+                      color = "wesanderson",
+                      tree = tree)
+```
+
+### RColorBrewer
+RColorBrewer package provides three categories of 44 color palettes (refer to the  [ColorBrewer2](http://ColorBrewer2.org) for detail information), users can view these palettes through `display.brewer.all()` function.
+```{r rcolorbrewer disply}
+library(RColorBrewer)
+display.brewer.all()
+```
+itol.toolkit supports using the RColorBrewer color palette. Note that when creating a unit using the RColorBrewer color palette, users need to set the "color" parameter to the **name of the palette** in RColorBrewer instead of setting it directly to "RColorBrewer".
+```{r rcolorbrewer}
+unit_4 <- create_unit(data = df_data %>% select(ID, Phylum), 
+                      key = "color_RColorBrewer_1",
+                      type = "DATASET_COLORSTRIP",
+                      color = "Set1",
+                      tree = tree)
+
+unit_5 <- create_unit(data = df_data %>% select(ID, Phylum), 
+                      key = "color_RColorBrewer_2",
+                      type = "DATASET_COLORSTRIP",
+                      color = "Set3",
+                      tree = tree)
+```
+
+### ggsci
+ggsci package offers a collection of high-quality color palettes inspired by colors used in scientific journals, data visualization libraries, science fiction movies, and TV shows (refer to the  [ggsci](https://nanx.me/ggsci/articles/ggsci.html) for detail information). itol.toolkit has built-in ggsci color palettes, and users can use these color palettes by setting the "color" parameter. Note that when creating a unit using the ggsci color palette, users need to set the "color" parameter to the name of the palette in ggsci instead of setting it directly to "ggsci".
+```{r ggsci1}
+unit_6 <- create_unit(data = df_data %>% select(ID, Phylum), 
+                      key = "color_ggsci_1",
+                      type = "DATASET_COLORSTRIP",
+                      color = "npg",
+                      tree = tree)
+```
+If different types exist for the color palettes, use an underscore `_` to separate the palettes name from the type.
+```{r ggsci2}
+unit_7 <- create_unit(data = df_data %>% select(ID, Phylum), 
+                      key = "color_ggsci_2",
+                      type = "DATASET_COLORSTRIP",
+                      color = "d3_category10",
+                      tree = tree)
+unit_8 <- create_unit(data = df_data %>% select(ID, Phylum), 
+                      key = "color_ggsci_3",
+                      type = "DATASET_COLORSTRIP",
+                      color = "d3_category8",
+                      tree = tree)
+```
+
+## Set colors manually
+Users can set the colors manually by adding columns containing color information to the metadata. The program supports hexadecimal, RGB, and RGBA color formats and automatically recognizes strings starting with "#" or "rgb" as color information.
+
+### Hexadecimal
+```{r color_manual hexadecimal}
+
+phylum_color <- tribble(
+  ~Phylum, Phylum_color,
+  "Proteobacteria", "#5a7860",
+  "Actinobacteria", "#92af83",
+  "Firmicutes",     "#f1e0a8",
+  "Nitrospirae",    "#dd7050",
+  "Bacteroidetes",  "#cca663"
+)
+df_data <- df_data %>%
+   left_join(phylum_color)
+unit_9 <- create_unit(data = df_data %>% 
+                        select(ID, Phylum, Phylum_color), 
+                      key = "color_manual_1",
+                      type = "DATASET_COLORSTRIP",
+                      tree = tree)
+```
+
+### RGB
+```{r color_manual rgb}
+phylum_color <- tribble(
+  ~Phylum, Phylum_color,
+  "Proteobacteria", "rgb(16, 70, 128)",
+  "Actinobacteria", "rgb(109, 173, 209)",
+  "Firmicutes",     "rgb(233, 241, 244)",
+  "Nitrospirae",    "rgb(220, 109, 87)",
+  "Bacteroidetes",  "rgb(183, 34, 48)"
+)
+df_data <- df_data %>%
+   left_join(phylum_color)
+unit_10 <- create_unit(data = df_data %>% 
+                        select(ID, Phylum, Phylum_color), 
+                      key = "color_manual_2",
+                      type = "DATASET_COLORSTRIP",
+                      tree = tree)
+```
+
+### RGBA
+```{r color_manual rgba}
+phylum_color <- tribble(
+  ~Phylum, Phylum_color,
+  "Proteobacteria", "rgba(16, 70, 128, 0.8)",
+  "Actinobacteria", "rgba(109, 173, 209, 0.8)",
+  "Firmicutes",     "rgba(233, 241, 244, 0.8)",
+  "Nitrospirae",    "rgba(220, 109, 87, 0.8)",
+  "Bacteroidetes",  "rgba(183, 34, 48, 0.8)"
+)
+df_data <- df_data %>%
+   left_join(phylum_color)
+unit_11 <- create_unit(data = df_data %>% 
+                         select(ID, Phylum, Phylum_color), 
+                      key = "color_manual_3",
+                      type = "DATASET_COLORSTRIP",
+                      tree = tree)
+```

@@ -1,0 +1,65 @@
+---
+title: "SPACING"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{SPACING_zh_CN}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The function of `SPACING` template is to adjust the branch spacing. Its parameter structure is simple, consisting only of template types and data. The `SPACING` template belongs to the "Tree structure" class (refer to the [Class]() for detail information).
+
+Users typically adjust the spacing of branches by entering branch names and spacing values. The function of this template is very simple. 
+
+This section shows how to use itol.toolkit to adjust the spacing of branches. The process is very simple, and the main difficulty is that the user needs to determine which branches need to be adjusted. Without itol.toolkit, users would have to perform data analysis and visualization preparation in fragmented environments. itol.toolkit provides consistency to the workflow, allowing users to filter branches based on background information in R environment and output template files seamlessly.
+
+## Basic use
+
+This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) as an example. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information)
+
+The first step is to load the `newick` and . The following example data `df_frequence` contains the usage of each template type in published studies.
+
+The purpose of our data processing in this section is to adjust the spacing of the branches.Based on usage data, the greater the usage, the greater the spacing of template types.
+
+```{r load data}
+library(itol.toolkit)
+library(data.table)
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+df_frequence <- fread(system.file("extdata",
+                                  "templates_frequence.txt",
+                                  package = "itol.toolkit"))
+```
+
+Sum the frequency of each template type used in published papers. In order to make the text content clear, the global font size has been adjusted to 35 on the iTOL console, with a rotation of 180 degrees, and an included angle of 180 degrees. To avoid overlapping when resizing fonts, set a base spacing of 2.
+
+The final data has two columns: tip id and its corresponding space.
+
+```{r}
+df_frequence <- data.frame(template = df_frequence$templates, 
+                           value = rowSums(df_frequence[,-1],na.rm = T) + 2)
+unit_6 <- create_unit(data = df_frequence, 
+                      key = "E006_spacing_1",
+                      type = "SPACING", 
+                      tree = tree)
+```
+## Note
+`SPACING` is the only template function that the author cannot think of as having any practical use. The actual effect of this function is far from what authors expected (to highlight the key points). If the upper and lower intervals of a branch can be defined, this function can have practical use. If you can explore the use of this function, welcome to contact me. This function is also the only one that does not support node level manipulation. So it’s not surprising that the usage rate of this feature is low.
+
+

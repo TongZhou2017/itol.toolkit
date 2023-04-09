@@ -1,0 +1,296 @@
+---
+title: "Data_Reproduction"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{Data_Reproduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  eval = FALSE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+Typically, existing iTOL-assisted R packages only support data flow from metadata to template files. However, in many cases, users have access to template files but not to metadata. With this situation in mind, itol.toolkit not only supports forward data flow, but also provides the function to extract metadata from template files. Users can get the original input file through intermediate files or objects in the workflow, such as hub, unit, or template files.
+
+This section describes the workflow for reproducing metadata from template files or unit objects, hub objects.
+
+## Data Reproduction
+Before performing metadata reproduction, users need to prepare tree files and template files, and set up working directories. We will use the [Tree of Life](https://itol.embl.de/itol.cgi) and example template files ([example_data.zip](https://itol.embl.de/help/example_data.zip), refer to the  [Tree annotation](https://itol.embl.de/help.cgi#annot) for detail information) provided by iTOL for demonstration, users can download the relevant files through the link above. The files are read using a relative path in this document, so please adjust the path based on actual situation.
+```{r load tree}
+library(itol.toolkit)
+library(dplyr)
+tree = "tree_of_life.tree.txt"
+```
+For template files, users can import them as "unit" objects with the `file_to_unit()` function. 
+```{r file_1 to unit_1}
+file_1 = "tol_spacing.txt"
+unit_1 <- file_to_unit(file = file_1, tree = tree)
+```
+After importing the template file into unit, we need to store the data in unit into a variable for bulk export. 
+```{r unit_1 to all_data}
+all_data <- list(spacing = unit_1)
+```
+When the user imports template files corresponding to the same tree file, the data in these units can be added to the same variable for bulk export.
+```{r unit_2}
+file_2 = "colors_no_range_tol.txt"
+unit_2 <- file_to_unit(file = file_2,tree = tree)
+all_data <- append(all_data, list(tree_color = unit_2))
+```
+Next, we go ahead and import the remaining template files and store them in the same variable.
+```{r file to unit}
+# TREE_COLOR
+file_3 = "colors_tol.txt"
+unit_3 <- file_to_unit(file = file_3, tree = tree)
+all_data <- append(all_data, list(tree_color_2 = unit_3))
+
+file_4 = "colors_dash.txt"
+unit_4 <- file_to_unit(file = file_4, tree = tree)
+all_data <- append(all_data, list(tree_color_3 = unit_4))
+
+file_5 = "ranges.txt"
+unit_5 <- file_to_unit(file = file_5, tree = tree)
+all_data <- append(all_data, list(tree_color_4 = unit_5))
+
+file_6 = "tol_ranges_legacy.txt"
+unit_6 <- file_to_unit(file = file_6, tree = tree)
+all_data <- append(all_data, list(tree_color_5 = unit_6))
+
+# DATASET_STYLE
+file_7 = "tol_styles.txt"
+unit_7 <- file_to_unit(file = file_7, tree = tree)
+all_data <- append(all_data, list(dataset_style = unit_7))
+
+# LABELS
+file_8 = "labels.txt"
+unit_8 <- file_to_unit(file = file_8, tree = tree)
+all_data <- append(all_data, list(labels = unit_8))
+
+# DATASET_TEXT
+file_9 = "tol_text1.txt"
+unit_9 <- file_to_unit(file = file_9, tree = tree)
+all_data <- append(all_data, list(dataset_text = unit_9))
+
+file_10 = "tol_text2.txt"
+unit_10 <- file_to_unit(file = file_10, tree = tree)
+all_data <- append(all_data, list(dataset_text_2 = unit_10))
+
+file_11 = "tol_text3.txt"
+unit_11 <- file_to_unit(file = file_11, tree = tree)
+all_data <- append(all_data, list(dataset_text_3 = unit_11))
+
+# DATASET_COLORSTRIP
+file_12 = "tol_color_strip.txt"
+unit_12 <- file_to_unit(file = file_12, tree = tree)
+all_data <- append(all_data, list(dataset_colorstrip = unit_12))
+
+file_13 = "tol_color_strip2.txt"
+unit_13 <- file_to_unit(file = file_13, tree = tree)
+all_data <- append(all_data, list(dataset_colorstrip_2 = unit_13))
+
+# DATASET_BINARY
+file_14 = "tol_binary.txt"
+unit_14 <- file_to_unit(file = file_14, tree = tree)
+all_data <- append(all_data, list(dataset_binary = unit_14))
+
+file_15 = "tol_binary2.txt"
+unit_15 <- file_to_unit(file = file_15, tree = tree)
+all_data <- append(all_data, list(dataset_binary_2 = unit_15))
+
+# DATASET_GRADIENT
+file_16 = "tol_gradient.txt"
+unit_16 <- file_to_unit(file = file_16, tree = tree)
+all_data <- append(all_data, list(dataset_gradient = unit_16))
+
+# DATASET_HEATMAP
+file_17 = "tol_heatmap1.txt"
+unit_17 <- file_to_unit(file = file_17, tree = tree)
+all_data <- append(all_data, list(dataset_heatmap = unit_17))
+
+file_18 = "tol_heatmap60.txt"
+unit_18 <- file_to_unit(file = file_18, tree = tree)
+all_data <- append(all_data, list(dataset_heatmap_2 = unit_18))
+
+# DATASET_SYMBOL
+file_19 = "tol_symbols.txt"
+unit_19 <- file_to_unit(file = file_19, tree = tree)
+all_data <- append(all_data, list(dataset_symbols = unit_19))
+
+file_20 = "tol_symbols1.txt"
+unit_20 <- file_to_unit(file = file_20, tree = tree)
+all_data <- append(all_data, list(dataset_symbols_2 = unit_20))
+
+file_21 = "tol_symbols2.txt"
+unit_21 <- file_to_unit(file = file_21, tree = tree)
+all_data <- append(all_data, list(dataset_symbols_3 = unit_21))
+
+# DATASET_EXTERNALSHAPE
+file_22 = "tol_external_shapes.txt"
+unit_22 <- file_to_unit(file = file_22, tree = tree)
+all_data <- append(all_data, list(dataset_external_shapes = unit_22))
+
+# DATASET_DOMAINS
+file_23 = "tol_domains.txt"
+unit_23 <- file_to_unit(file = file_23, tree = tree)
+all_data <- append(all_data, list(dataset_domains = unit_23))
+
+# DATASET_SIMPLEBAR
+file_24 = "tol_simple_bar.txt"
+unit_24 <- file_to_unit(file = file_24, tree = tree)
+all_data <- append(all_data, list(dataset_simple_bar = unit_24))
+
+file_25 = "tol_simple_bar2.txt"
+unit_25 <- file_to_unit(file = file_25, tree = tree)
+all_data <- append(all_data, list(dataset_simple_bar_2 = unit_25))
+
+file_26 = "tol_simple_bar3.txt"
+unit_26 <- file_to_unit(file = file_26, tree = tree)
+all_data <- append(all_data, list(dataset_simple_bar_3 = unit_26))
+
+# DATASET_MULTIBAR
+file_27 = "tol_multibar10.txt"
+unit_27 <- file_to_unit(file = file_27, tree = tree)
+all_data <- append(all_data, list(dataset_multibar = unit_27))
+
+file_28 = "tol_multibar50.txt"
+unit_28 <- file_to_unit(file = file_28, tree = tree)
+all_data <- append(all_data, list(dataset_multibar_2 = unit_28))
+
+# DATASET_BOXPLOT
+file_29 = "tol_boxplot.txt"
+unit_29 <- file_to_unit(file = file_29, tree = tree)
+all_data <- append(all_data, list(dataset_boxplot = unit_29))
+
+# DATASET_LINECHART
+file_30 = "tol_linechart.txt"
+unit_30 <- file_to_unit(file = file_30, tree = tree)
+all_data <- append(all_data, list(dataset_linechart = unit_30))
+
+file_31 = "tol_linechart-sine.txt"
+unit_31 <- file_to_unit(file = file_31, tree = tree)
+all_data <- append(all_data, list(dataset_linechart_2 = unit_31))
+
+# DATASET_PIECHART
+file_32 = "tol_pies1.txt"
+unit_32 <- file_to_unit(file = file_32, tree = tree)
+all_data <- append(all_data, list(dataset_piechart = unit_32))
+
+file_33 = "tol_pies2.txt"
+unit_33 <- file_to_unit(file = file_33, tree = tree)
+all_data <- append(all_data, list(dataset_piechart_2 = unit_33))
+
+file_34 = "tol_pies3.txt"
+unit_34 <- file_to_unit(file = file_34, tree = tree)
+all_data <- append(all_data, list(dataset_piechart_3 = unit_34))
+
+# DATASET_ALIGNMENT
+file_35 = "tol_alignment.txt"
+unit_35 <- file_to_unit(file = file_35, tree = tree)
+all_data <- append(all_data, list(dataset_alignment = unit_35))
+
+# DATASET_CONNECTION
+file_36 = "tol_connections.txt"
+unit_36 <- file_to_unit(file = file_36, tree = tree)
+all_data <- append(all_data, list(dataset_connection = unit_36))
+
+file_37 = "tol_connections_leaves.txt"
+unit_37 <- file_to_unit(file = file_37, tree = tree)
+all_data <- append(all_data, list(dataset_connection_2 = unit_37))
+
+# DATASET_IMAGE
+file_38 = "tol_images.txt"
+unit_38 <- file_to_unit(file = file_38, tree = tree)
+all_data <- append(all_data, list(dataset_image = unit_38))
+
+# POPUP_INFO
+file_39 = "popup_info_template.txt"
+unit_39 <- file_to_unit(file = file_39, tree = tree)
+all_data <- append(all_data, list(popup_info = unit_39))
+```
+Next, we create a hub and use the `learn_data_from_unit_list()` function to import the data of all the units into the hub.
+```{r learn data from unit}
+hub <- create_hub(tree = tree)
+hub <- learn_data_from_unit_list(hub, all_data)
+```
+By this point, the full metadata is stored in the hub. We can find the data we need in the hub object, store it in a variable or export it to a file. Metadata is usually stored in four objects in the hub object: seq, abundance, taxonomy, and meta.data, which correspond to different types of metadata. Among them, the data associated with leaf nodes are stored in the tip sub-table, and the data associated with internal nodes are stored in the node sub-table.
+
+Users can store all the metadata separately in variables and write them to .txt files using the `write.table()` function.
+```{r export to file}
+seq <- hub@seq
+write.table(seq,
+            file = "seq.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+
+abundance <- hub@abundance
+write.table(abundance,
+            file = "abundance.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+
+taxonomy <- hub@taxonomy$tip
+write.table(taxonomy,
+            file = "taxonomy.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+
+metadata_tip <- hub@meta.data$tip
+write.table(metadata_tip,
+            file = "metadata_tip.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+
+metadata_node <- hub@meta.data$node
+write.table(metadata_node,
+            file = "metadata_node.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+```
+Alternatively, users can select the required data in R and store it in separate variables for subsequent access or output to a file.
+```{r export to variables}
+metadata_tip <- hub@meta.data$tip
+multibar10 <- metadata_tip %>% select(id, starts_with("example_multi_bar_chart$"))
+write.table(multibar10,
+            file = "multibar10_metadata.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+
+binary <- metadata_tip %>% select(id, starts_with("binary_data$"))
+write.table(binary,
+            file = "binary_metadata.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = FALSE)
+```
+
+## Tips
+
+### File to Hub
+In addition to the above described method of importing template files to unit objects before importing a hub object, we also provide a method of bulk importing directly from template files to a hub object.
+```{r file to hub}
+hub_2 <- create_hub(tree = tree)
+hub <- learn_data_from_files(hub,
+                             dir = getwd(),
+                             pattern = "^[^.]*.txt$")
+# add unit into object
+hub <- learn_data_from_file(hub, file="tol_alignment.txt")
+```
+
+### Hub to File
+itol.toolkit allows users to start a forward or reverse data flow from any file or object in the workflow, increasing the flexibility of the data processing process. Users can share data and templates by sharing hubs. If users gets a hub object instead of a template file, they can also get the metadata backwards through the hub object by using the above method, or get the template file through the `write_hub()` function.

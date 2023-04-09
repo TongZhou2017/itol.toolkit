@@ -1,0 +1,113 @@
+---
+title: "OVERVIEW_STYLE"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{OVERVIEW_STYLE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+
+## Introduction
+According to parameter usage similarity and functional similarity of templates, 23 functional types of iTOL v6 templates are clustered, which can be divided into five parts:
+
+- Tree structure：COLLAPSE、PRUNE、SPACING
+
+- Style：TREE_COLORS、DATASET_STYLE
+
+- Text：LABELS、DATASET_TEXT、DATASET_COLORSTRIP
+
+- Basic graphics：DATASET_BINARY、DATASET_GRADIENT、DATASET_HEATMAP、DATASET_SYMBOL、DATASET_EXTERNALSHAPE、DATASET_DOMAINS、DATASET_SIMPLEBAR、DATASET_MULTIBAR、DATASET_BOXPLOT、DATASET_LINECHART、DATASET_PIECHART
+
+- Advanced graphics：DATASET_ALIGNMENT、DATASET_CONNECTION、DATASET_IMAGE、POPUP_INFO
+
+This section outlines the templates belong to "style class".  Five indicators were used to evaluate each template function from different dimensions. These five indicators are:
+
+|indicator|Points of view|
+|---|---|
+|Usage frequency|objective|
+|Style complexity|objective|
+|Input threshold|objective|
+|Core score|subjective|
+|Diversity score|subjective|
+
+
+- Usage frequency: The average number of times the template type used in published papers is calculated and logarithmic converted.
+```{r}
+library(itol.toolkit)
+df_frequence <- data.table::fread(system.file("extdata",
+                                              "templates_frequence.txt",
+                                              package = "itol.toolkit"))
+df_frequence <- data.frame(template = df_frequence$templates, 
+                           value = rowSums(df_frequence[,-1],na.rm = T))
+df_frequence$value <- round(log(df_frequence$value+1),2)
+```
+
+- Style complexity: The number of style class parameters and converted by square root conversion.
+```{r}
+data("template_parameters_count")
+round(sqrt(rowSums(template_parameters_count[,1:113])+1),2)
+```
+
+-Input threshold: The number of data class parameters + the number of terms of multiple choice parameters + the number of sub-parameters of aggregation parameters + the number of indirect data parameters. If there are infinite items, the single item value is denoted as 5 capping.
+```{r}
+data("template_parameters_count")
+rowSums(template_parameters_count[,114:148])
+```
+
+-Core score: According to the non-replaceability, the degree of overlap with other functions, and the application potential(used as weight), a core score is given. The lowest score is 0 points and the highest score is 5 points.
+
+-Diversity score: According to the frequency of collaboration with other templates, the scalability of its own functions, and the diversity of functional application scenarios, a diversity score is given. The lowest score for each item is 0 points and the highest score is 5 points. 0 points indicate that the function is monotonous, and 5 points indicate that the function is diverse
+（我直接把OVERVIWE_TREE_STRUCTURE的复制过来了，后续看看再改改）
+
+## TREE_COLORS Beautify style
+> Degree of usability：2.89
+>
+> Style complexity：1.41
+>
+> Threshold of entry：9
+>
+> Core index：(5+3)*(2.89/2)=11.56
+>
+> Diversity index：(5+0+2)/3 = 2.33
+
+By using the TREE_COLORS annotation file, you can define the colors, styles and widths/sizes for each individual node or tip in the tree. 
+
+In the iTOL template, the required input data is 4-5 columns in a strict order: branch name or node（没懂这个or node是什么意思）, subclass function name, color, label or style, size. There are five subclasses: range, clade, branch, label, label_background. Each has its own input data requirements, so it is very difficult for users to straighten out the complex data input requirements. The itol.toolkit greatly simplifies the threshold for data preparation by automating the identification of data through the program. It only needs at least 2 columns of input data.
+
+In all template functions, TREE_ COLORS is one of the most commonly used functions. It has rich style control functions and is often used in combination with other functions to achieve the unification of the overall visual style. It is the core function of iTOL with various functions, which is strongly recommended for users to master. The itol.toolkit implements a complete set of automated processing of all the parameters of this function, including extracing data, output, editing, and saving.
+
+## DATASET_STYLE Beautify branches
+>
+> Degree of usability：1.39
+>
+> Style complexity：3.46
+>
+> Threshold of entry：11
+>
+> Core index：(5+0)*(0/2) = 0
+>
+> Diversity index：(3+0+1)/3 = 1.33
+
+这个功能在iTOL里被叫做“Branch and label styles”，是否这里要补一句说明？ .The function was launched after the "TREE_COLORS" function in iTOL. This function was originally designed to solve the problem of too many sub-functions in TREE_COLORS by integrating the original five sub-functions into two based on positional information. However, this function drops the widely used range subclass function and made the input data more cumbersome: it expanded from four columns to six columns. Its complex data parameters make it one of the most difficult templates to learn and use.
+
+When using DATASET_STYLE, it can also cause style overwriting, deleting the previously set tree line style, and making it difficult for ordinary users to find out why the visual effect did not take effect as expected. The more optimized version of TREE_COLORS launched in iTOL v4 has not been accepted by users, who prefer to use the old version of the function. itol.toolkit replaces this function with a new one: users only need a minimum of two columns of data to output templates, and the other four columns can be automatically set by the program. In itol.toolkit, users can use both new and old versions of the beautification branch template function smoothly according to their preferences. It can be foreseen that as the number of itol.toolkit users increases in the future, the number of users using new and old versions will gradually balance.
+
+In summary, the characteristics of the 2 template functions of the style class are:
+1. Be heavily used
+2. Data and parameters are complex
+3. TREE_COLORS is more powerful than DATASET_STYLE
+
+For this class of functions, not using itol.toolkit can suffer a very steep learning curve, but many difficulties are not necessary for users to experience, which is caused by the difficulty of balancing functionality and ease of use in the design of iTOL templates. The built-in automatic workflow of itol.toolkit can help users avoid being bothered by complex data preparation,  minimizing the burden on users. It allows users to spend more energy on thinking, resulting in a more fluid data analysis experience.

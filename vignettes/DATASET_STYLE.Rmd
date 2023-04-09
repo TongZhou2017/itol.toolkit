@@ -1,0 +1,109 @@
+---
+title: "DATASET_STYLE"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
+vignette: >
+  %\VignetteIndexEntry{DATASET_STYLE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
+)
+```
+## Introduction
+The function of the `DATASET_STYLE` template is to adjust the style of branches at any level. It includes two subclasses: branch and label. The function parameter is simple, whereas the input data is more complex. The `DATASET_STYLE` template belongs to the "Style" class (refer to the [Class]() for detail information).
+
+Typically, users define a branch or node style by entering the branch or node name, subclass function name, action location, color, font or line style, and size. The selected branch will be displayed in new style changes specified by the sub function. This function has a high level of integration, and its data parameters are relatively complex, posing a great challenge to users.
+
+## Adjust style
+This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) as an example to show how to adjust the styles. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information)
+
+### Load data
+The first step is to load the `newick` format tree file `tree_of_itol_templates.tree` and its corresponding metadata `df_frequence`. 
+
+```{r load data}
+library(itol.toolkit)
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_data <- data.frame(id = unique(template_groups$group),
+                      data = unique(template_groups$group))
+```
+
+We can use the branch subtype function to adjust the color of the entire branch area. In E012, we only used two columns of information to implement the function. For other data, subtype information is passed through the "subtype" parameter, position information is passed by the "position" parameter, line thickness is passed by the "size_factor" parameter. When the line type is not explicitly defined, the default is normal line type. Also, colors are generated from the second column of input data as they are not explicitly specified. If the input data contains all six columns of data, the program will also automatically determine which column is subtype, which is color, and so on. In addition, colors can also be defined through the "color" parameter. Therefore, for various possible situations, the program has automated processing methods, reducing the threshold for users to prepare to input data.
+
+```{r dataset style branch in clade}
+unit_12 <- create_unit(data = df_data, 
+                       key = "E012_style_1",
+                       type = "DATASET_STYLE", 
+                       subtype = "branch",
+                       position = "clade",
+                       size_factor = 5,
+                       tree = tree)
+```
+
+We can use the "branch" subtype function to adjust the color of the node area. In E013, we only used two columns of information to implement the function. There is no location defined here, and the program defaults to the node location. Other parameters are consistent with E012. If you simplify it further, when the line thickness is 1, the size parameter can also be omitted and not written.
+
+```{r dataset style branch in node}
+unit_13 <- create_unit(data = df_data, 
+                       key = "E013_style_2", 
+                       type = "DATASET_STYLE", 
+                       subtype = "branch",
+                       size_factor = 5,
+                       tree = tree)
+```
+
+We can use the label subtype function to adjust the color of the labels to which the node area belongs. In E014, we only used 2 columns of information to adjust the style of some labels. Note that if the active location is a node area, the id column of the label subtype function can only use branch ids, which is a limitation imposed by iTOL itself.
+
+```{r dataset style label in node}
+unit_14 <- create_unit(data = template_groups[1:10,], 
+                       key = "E014_style_3",
+                       type = "DATASET_STYLE", 
+                       subtype = "label",
+                       position = "node",
+                       size_factor = 1.5,
+                       tree = tree)
+```
+
+We can use the label subtype function to adjust the color of the labels to which the branch area belongs. In E015, we only used 2 columns of information to adjust the style of all labels. For functions that cannot be implemented by E014, it is necessary to define the position as the entire branch in `DATASET_STYLE` in order to use the node id to control large area labels.
+
+```{r dataset style label in clade}
+unit_15 <- create_unit(data = df_data,
+                       key = "E015_style_4",
+                       type = "DATASET_STYLE",
+                       subtype = "label",
+                       position = "clade",
+                       size_factor = 1.5,
+                       tree = tree)
+```
+
+We can use the label subtype function to simultaneously adjust the color of the labels and backgrounds to which the branch area belongs. In E016, we only used 2 columns of information to adjust the style of all labels and backgrounds.
+
+```{r dataset style label in clade with background color}
+unit_16 <- create_unit(data = df_data, 
+                       key = "E016_style_5", 
+                       type = "DATASET_STYLE", 
+                       subtype = "label",
+                       position = "clade",
+                       size_factor = 1.5,
+                       font_type = "bold-italic",
+                       background_color = "#000000",
+                       tree = tree)
+```
+
+In all template functions, `TREE_COLORS` is one of the most commonly used functions, and it is strongly recommended that users master it. Using `itol.toolkit` allows users to easily implement complex functions and data preparation.  
+`DATASET_STYLE` is an improved version of `TREE_COLORS`, splitting the original 5 subtypes into positional parameters, but there is a significant overlap between the two functions. Also, `DATASET_STYLE` drops the common function of range subtype, which limits its application scenario. Moreover, `DATASET_STYLE` templates may overwrite previous settings, while `TREE_COLORS` can achieve an overlay effect. In addition, the input data of up to 6 columns pose challenge for users, so the use of this template function is not ideal. It is recommended that users master `TREE_COLORS`.
+
+## Style modification
+
+The template type parameters are simple and only contain the style parameters of the legend, which can be modified in `unit@common_themes$legend`.
