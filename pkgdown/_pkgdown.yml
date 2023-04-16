@@ -3,8 +3,6 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 navbar:
   left:
-    - text: "Install"
-      href: articles/Installation.html
     - text: "Get started"
       href: articles/Get_Start.html
     - text: "Single Functions"
@@ -58,8 +56,8 @@ navbar:
         - text: Advanced Plot
         - text: "DATASET_ALIGNMENT"
           href: articles/DATASET_ALIGNMENT.html
-        - text: "DATASET_CONNECTION"
-          href: articles/DATASET_CONNECTION.html
+        - text: "DATASET_CONNECTIONS"
+          href: articles/DATASET_CONNECTIONS.html
         - text: "DATASET_IMAGE"
           href: articles/DATASET_IMAGE.html
         - text: "POPUP_INFO"
@@ -68,6 +66,10 @@ navbar:
       menu:
       - text: "Overview"
         href: articles/OVERVIEW_TREE_STRUCTURE.html
+      - text: "Installation"
+        href: articles/Installation.html
+      - text: "Datasets"
+        href: articles/Datasets.html
       - text: "Colors"
         href: articles/Color_Palette.html
       - text: "Data Reproduction"

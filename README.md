@@ -1,6 +1,6 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/itol.toolkit)](https://CRAN.R-project.org/package=itol.toolkit)
 
-<img src="man/figures/itol.toolkit_logo.jpg" width="480"/>
+<img src="man/figures/itol.toolkit.gif" width="480"/>
 
 # itol.toolkit
 
@@ -85,13 +85,71 @@ write_hub(hub,getwd())
 
 We have documents for every single function and some important tips for users:
 
-### Single functions (Updating 20+)
+### Single functions
 
 - [COLLAPSE](https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html): collapse branches by range id or node id.
 
-### Tips (Updating 5+)
+- [PRUNE](https://tongzhou2017.github.io/itol.toolkit/articles/PRUNE.html): drop out branches.
+
+- [SPACING](https://tongzhou2017.github.io/itol.toolkit/articles/SPACING.html): adjust branch spacing.
+
+- [TREE_COLORS](https://tongzhou2017.github.io/itol.toolkit/articles/TREE_COLORS.html): set branch style at range, clade, branch, label, and background level.
+
+- [DATASET_STYLE](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_STYLE.html): set branch style at branch and label level.
+
+- [LABELS](https://tongzhou2017.github.io/itol.toolkit/articles/LABELS.html): change node name.
+
+- [DATASET_TEXT](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_TEXT.html): add text by HTML.
+
+- [DATASET_COLORSTRIP](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_COLORSTRIP.html): add color strip with text.
+
+- [DATASET_BINARY](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BINARY.html): multi columns with one shape symbol.
+
+- [DATASET_GRADIENT](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_GRADIENT.html): one column heatmap.
+
+- [DATASET_HEATMAP](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_HEATMAP.html): heatmap with field tree.
+
+- [DATASET_SYMBOL](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SYMBOL.html): internal tree one column with multi shape symbol.
+
+- [DATASET_EXTERNALSHAPE](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_EXTERNALSHAPE.html): outside multi column with multi shape symbol.
+
+- [DATASET_DOMAINS](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_DOMAINS.html): strucutre with multi shape symbol.
+
+- [DATASET_SIMPLEBAR](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SIMPLEBAR.html): bar plot.
+
+- [DATASET_MULTIBAR](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_MULTIBAR.html): multi bar plot.
+
+- [DATASET_BOXPLOT](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BOXPLOT.html): box plot.
+
+- [DATASET_LINECHART](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_LINECHART.html): line plot.
+
+- [DATASET_PIECHART](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_PIECHART.html): pie plot.
+
+- [DATASET_ALIGNMENT](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_ALIGNMENT.html): sequence alignment.
+
+- [DATASET_CONNECTIONS](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_CONNECTIONS.html): network between braches.
+
+- [DATASET_IMAGE](https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_IMAGE.html): add image.
+
+- [POPUP_INFO](https://tongzhou2017.github.io/itol.toolkit/articles/POPUP_INFO.html): interactive external information.
+
+### Tips
+
+- [Overview](https://tongzhou2017.github.io/itol.toolkit/articles/OVERVIEW_TREE_STRUCTURE.html): overview for all functions.
+
+- [Installation](https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html): FAQ about installation.
 
 - [Datasets](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html): overview of 5 example datasets for demo.
+
+- [Colors](https://tongzhou2017.github.io/itol.toolkit/articles/Color_Palette.html): buildin color palette.
+
+- [Data reproduction](https://tongzhou2017.github.io/itol.toolkit/articles/Data_Reproduction.html): learn data from template files.
+
+- [Tree construction](https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html): create a tree by different data and methods.
+
+## Gallery
+
+We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/itol.toolkit/articles/Image_Gallery.html) page.
 
 ## Support
 
