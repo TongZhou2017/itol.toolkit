@@ -292,7 +292,11 @@ hub_to_unit <- function(object, theme, key) {
     names_tip <- names(data_tip)
     node_id <- "node"
     tip_id <- "tip"
-    eval(parse(text = paste0("data[[node_id]] <- tidyr::separate_rows(data_node,`", paste0(key, "$X"), "`,`", paste0(key, "$Y"), "`,sep = pattern)")))
+    if(ncol(data_node)==1){
+      data[['node']] <- data_node
+    }else{
+      eval(parse(text = paste0("data[[node_id]] <- tidyr::separate_rows(data_node,`", paste0(key, "$X"), "`,`", paste0(key, "$Y"), "`,sep = pattern)")))
+    }
     eval(parse(text = paste0("data[[tip_id]] <- tidyr::separate_rows(data_tip,`", paste0(key, "$X"), "`,`", paste0(key, "$Y"), "`,sep = pattern)")))
     data[["node"]][data[["node"]] == "NA"] <- NA
     data[["tip"]][data[["tip"]] == "NA"] <- NA

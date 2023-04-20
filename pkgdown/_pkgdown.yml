@@ -74,6 +74,8 @@ navbar:
         href: articles/Color_Palette.html
       - text: "Data Reproduction"
         href: articles/Data_Reproduction.html
+      - text: "vs table2itol"
+        href: articles/Comparison_table2itol.html
       - text: "Tree Construction"
         href: articles/tree_construction.html
     - text: "Gallery"

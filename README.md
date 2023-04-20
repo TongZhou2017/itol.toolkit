@@ -143,6 +143,8 @@ We have documents for every single function and some important tips for users:
 
 - [Data reproduction](https://tongzhou2017.github.io/itol.toolkit/articles/Data_Reproduction.html): learn data from template files.
 
+- [VS table2itol](https://tongzhou2017.github.io/itol.toolkit/articles/Comparison_table2itol.html): compare with the other iTOL helper tool, table2itol.
+
 - [Tree construction](https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html): create a tree by different data and methods.
 
 ## Gallery

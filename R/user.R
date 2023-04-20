@@ -1142,6 +1142,20 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type == "DATASET_DOMAINS"){
+    shape_by = NULL
+    if(length(names(data)) == 3){
+      data <- data[order(data[[2]],data[[3]]),]
+      shape_by <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+      print(shape_by)
+      levels(shape_by) <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")[1:length(levels(shape_by))]
+      shape = shape_by
+            print(shape)
+      data <- data[,-2]
+      data[,2] <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+    }
+    if(length(names(data)) == 2){
+      data <- data.frame(data,length=rep(10,nrow(data)),start=rep(0,nrow(data)),end=rep(10,nrow(data)))
+    }
     length = NULL
     start = NULL
     end = NULL
@@ -1267,7 +1281,15 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
-    common_themes$legend$shapes <- levels(as.factor(shape))
+    if(is.null(shape_by)){
+      if(length(levels(as.factor(shape)))==1){
+        common_themes$legend$shapes <- rep(levels(as.factor(shape)),length(levels(as.factor(color))))
+      }else {
+         common_themes$legend$shapes <- levels(as.factor(shape))
+      }
+    }else {
+       common_themes$legend$shapes <- shape_by[!duplicated(data[[colname_data]])]
+    }
     common_themes$legend$colors <- levels(as.factor(color))
     common_themes$legend$labels <- levels(as.factor(data[[colname_data]]))
     specific_themes$basic_plot$dataset_scale <- start %>% unique() %>% sort()

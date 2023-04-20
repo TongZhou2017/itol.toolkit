@@ -2,15 +2,19 @@
 title: "Comparison between itol.toolkit and table2itol"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Comparison between itol.toolkit and table2itol}
+  %\VignetteIndexEntry{Comparison_table2itol}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  collapse = TRUE,
   eval = FALSE,
-  echo = TRUE
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE,
+  comment = "#>"
 )
 ```
 
@@ -141,7 +145,7 @@ hub_1 <- hub_1 +
   
 write_hub(hub_1,getwd())
 ```
-### FIgure itol.toolkit
+### Figure itol.toolkit
 
 ## Comparison between itol.toolkit and table2itol
 
