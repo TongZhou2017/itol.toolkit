@@ -39,7 +39,7 @@
 #' write_unit(unit,tempfile())
 write_unit <- function(unit, file = getwd()) {
   if(file_test("-d",file)){
-    file = paste0(file,"/",unit@profile$name,".txt")
+    file = paste0(file,"/",unique(stringr::str_remove(c(names(unit@data$node)[-1],names(unit@data$tip)[-1]),"\\$.*$")),".txt")
   }
   lines <- paste0(unit@type)
   if (!is.null(unit@sep)) {

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 16 April,
+            <h4 data-toc-skip class="date">Last compiled on 20 April,
 2023</h4>
       
       
@@ -251,13 +251,11 @@ type in 21 published studies.</p>
 <span>                            <span class="st">"templates_frequence.txt"</span>,</span>
 <span>                             package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span>
 <span><span class="va">df_frequence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">df_frequence</span><span class="op">)</span></span></code></pre></div>
-<p>We perform a simple process on the input raw data to convert the long
-data to a wide data
-(到底是要长数据还是宽数据？这写的是长转宽，但是下面代码跑出来是宽转长，请确认).
-The first column of the converted table shows the templates used in each
-study, and the second column shows the frequency of each template used
-in each article. Next, we use this as input data to generate a box plot
-template.</p>
+<p>We perform a simple process on the input raw data to convert the wide
+data to a long data. The first column of the converted table shows the
+templates used in each study, and the second column shows the frequency
+of each template used in each article. Next, we use this as input data
+to generate a box plot template.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_data</span> <span class="op">&lt;-</span> <span class="va">df_frequence</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span>id.vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"templates"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -280,7 +278,7 @@ then use it to draw a box plot.</p>
 <h2 id="style-modification">Style modification<a class="anchor" aria-label="anchor" href="#style-modification"></a>
 </h2>
 <p>You can adjust the height of the box plot by adjusting
-<code>unit@specific_themes$basic_plot$width</code>.（单位是啥？）</p>
+<code>unit@specific_themes$basic_plot$width</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unit_32</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">width</span> <span class="op">&lt;-</span> <span class="fl">500</span></span></code></pre></div>
 </div>

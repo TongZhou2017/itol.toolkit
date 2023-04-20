@@ -65,7 +65,7 @@ To fully demonstrate `itol.toolkit` functions, we presented five datasets:
 3. Zheng_2022_EnvironPollut. This includes a small phylogenetic tree, a large phylogenetic tree, and a comprehensive dataset for multi-dimensional data comparison. 
 It is mainly used for palette display, browser overload testing, and demonstrate the comprehensive use of multiple functions.
 
-4. Microbiome. This is a standard dataset from table2itol software, mainly used for comparing different operations between different softwares.
+4. Zhou_2022_FoodRes. This is a dataset mainly used for comparing with table2itol.
 
 5. Tree of life. This is an official standard dataset from iTOL, mainly used for demonstrating how to extract and combine metadata from existing templates.
 
@@ -96,7 +96,10 @@ It is mainly used for palette display, browser overload testing, and demonstrate
 
 ### Dataset 4
 
-Coming Soon
+|Name|GitHub url|Note|
+| --- | --- | --- |
+|Tree file|[otus.contree](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset4/otus.contree)|Newick format，branches are 186 ASV IDs|
+|Metadata|[annotation.txt](https://github.com/TongZhou2017/itol.toolkit/blob/master/inst/extdata/dataset4/annotation.txt)|Tab seperated file, the first column is ASV id，the 2-8 columns are taxonomy name in different level，the 9th column is total abundance，the 10-12 columns are abundance in different sample|
 
 ### Dataset 5
 

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 16 April,
+            <h4 data-toc-skip class="date">Last compiled on 20 April,
 2023</h4>
       
       
@@ -325,16 +325,67 @@ to change the shape of each protein domain. By assigning the domain
 label column to a new column and using the
 <code><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">stringr::str_replace_all</a></code> function to replace each label
 with a shape, you can quickly modify the shape.</p>
-<p>Domain shape codes are as follows:<br>
-|Character|Shape| |—|—| |RE| rectangle|<br>
-|HH| horizontal hexagon| |HV| vertical hexagon| |EL| ellipse| |DI|
-rhombus (diamond)|<br>
-|TR| right pointing triangle|<br>
-|TL| left pointing triangle| |PL|left pointing pentagram|<br>
-|PR|right pointing pentagram|<br>
-|PU| up pointing pentagram| |PD| down pointing pentagram|<br>
-|OC| octagon|<br>
-|GP| rectangle|</p>
+<p>Domain shape codes are as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Character</th>
+<th>Shape</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>RE</td>
+<td>rectangle</td>
+</tr>
+<tr class="even">
+<td>HH</td>
+<td>horizontal hexagon</td>
+</tr>
+<tr class="odd">
+<td>HV</td>
+<td>vertical hexagon</td>
+</tr>
+<tr class="even">
+<td>EL</td>
+<td>ellipse</td>
+</tr>
+<tr class="odd">
+<td>DI</td>
+<td>rhombus (diamond)</td>
+</tr>
+<tr class="even">
+<td>TR</td>
+<td>right pointing triangle</td>
+</tr>
+<tr class="odd">
+<td>TL</td>
+<td>left pointing triangle</td>
+</tr>
+<tr class="even">
+<td>PL</td>
+<td>left pointing pentagram</td>
+</tr>
+<tr class="odd">
+<td>PR</td>
+<td>right pointing pentagram</td>
+</tr>
+<tr class="even">
+<td>PU</td>
+<td>up pointing pentagram</td>
+</tr>
+<tr class="odd">
+<td>PD</td>
+<td>down pointing pentagram</td>
+</tr>
+<tr class="even">
+<td>OC</td>
+<td>octagon</td>
+</tr>
+<tr class="odd">
+<td>GP</td>
+<td>rectangle</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="va">template_end_group_long</span><span class="op">$</span><span class="va">group</span></span>
 <span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"type"</span>,<span class="st">"HH"</span><span class="op">)</span></span>

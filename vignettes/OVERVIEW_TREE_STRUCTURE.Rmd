@@ -79,7 +79,7 @@ Input threshold：1
 Core score：(1+1)*(1.10/2)=1.1
 Diversity score：(1+0+0)/3 = 0.33
 
-COLLAPSE directly controls branch aggregation and is irreplaceable. However, this function only works within the software, so it cannot change the raw tree file. This feature is relatively simple and is not intergrated into other features. It is less used and thus is not a core feature of iTOL. As a basic function not displayed in the control panel, this function rarely cooperates with other functions. Moreover, does not support any extended functions. The application scenario of this function is also fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+COLLAPSE directly controls branch aggregation and is irreplaceable. However, this function only works within the software, so it cannot change the raw tree file. This feature is relatively simple and is not intergrated into other features. It is less used and thus is not a core feature of iTOL. As a basic function not displayed in the control panel, this function rarely cooperates with other functions. Moreover, does not support any extended functions. The application scenario of this function is also fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to [COLLAPSE single function document](https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html) for more details
 
 ## PRUNE Choose a branch
 Usage frequency：0
@@ -88,7 +88,7 @@ Input threshold：1
 Core score：(0+1)*(1/2)=0.5
 Diversity score：(1+0+0)/3 = 0.33
 
-Although the PRUNE function is not actually used in the published papers, it still has the potential to be used when we optimize the reproduction of iTOL charts. This feature can be replaced by a number of similar tools, such as`ape::drop.tip`, which does the branch selection step before processing, so it is not irreplaceable. However, this function exists as a standalone feature and is not integrated into any other template features. In summary, this function is not the core function of iTOL.At the same time, as a basic function not displayed in the control panel, this function rarely cooperates with other functions, and does not support any extended functions. The application scenario is also relatively fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+Although the PRUNE function is not actually used in the published papers, it still has the potential to be used when we optimize the reproduction of iTOL charts. This feature can be replaced by a number of similar tools, such as`ape::drop.tip`, which does the branch selection step before processing, so it is not irreplaceable. However, this function exists as a standalone feature and is not integrated into any other template features. In summary, this function is not the core function of iTOL.At the same time, as a basic function not displayed in the control panel, this function rarely cooperates with other functions, and does not support any extended functions. The application scenario is also relatively fixed. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to [PRUNE single function document](https://tongzhou2017.github.io/itol.toolkit/articles/PRUNE.html) for more details
 
 ## SPACING Adjusting the spacing
 Usage frequency：0
@@ -97,7 +97,7 @@ Input threshold：2
 Core score：(1+1)*(0/2)=0
 Diversity score：(0+0+0)/3 = 0
 
-The SPACING feature is not actually used in the published papers and has not been found to have potential to be used. This function has not found a use case, so it is replaceable, and is not a core function of iTOL. It does not support any extension functions and is a very independent function. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to ()[]要补链接！！！！ for more details
+The SPACING feature is not actually used in the published papers and has not been found to have potential to be used. This function has not found a use case, so it is replaceable, and is not a core function of iTOL. It does not support any extension functions and is a very independent function. `itol.toolkit` implements a full set of automated processing for all the parameters of this function, including extracting, output, editing, and saving. Please refer to [SPACING single function document](https://tongzhou2017.github.io/itol.toolkit/articles/SPACING.html) for more details
 
 TO sum up, the three template functions of the tree structure class have similarities in the following areas:
 

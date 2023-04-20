@@ -43,7 +43,7 @@ df_frequence <- system.file("extdata",
                              package = "itol.toolkit")
 df_frequence <- fread(df_frequence)
 ```
-We perform a simple process on the input raw data to convert the long data to a wide data (到底是要长数据还是宽数据？这写的是长转宽，但是下面代码跑出来是宽转长，请确认). The first column of the converted table shows the templates used in each study, and the second column shows the frequency of each template used in each article. Next, we use this as input data to generate a box plot template.
+We perform a simple process on the input raw data to convert the wide data to a long data. The first column of the converted table shows the templates used in each study, and the second column shows the frequency of each template used in each article. Next, we use this as input data to generate a box plot template.
 ```{r box plot}
 df_data <- df_frequence %>% 
   melt(id.vars=c("templates")) %>% 
@@ -64,7 +64,7 @@ unit_32 <- create_unit(data = df_data_log,
 ```
 
 ## Style modification
-You can adjust the height of the box plot by adjusting `unit@specific_themes$basic_plot$width`.（单位是啥？）
+You can adjust the height of the box plot by adjusting `unit@specific_themes$basic_plot$width`.
 ```{r style modify}
 unit_32@specific_themes$basic_plot$width <- 500
 ```

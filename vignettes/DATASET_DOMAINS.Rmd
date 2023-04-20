@@ -99,7 +99,8 @@ unit_28 <- create_unit(data = template_end_group_long,
 ## Style modification
 Users can add a column to the long table used to generate templates to change the shape of each protein domain. By assigning the domain label column to a new column and using the `stringr::str_replace_all` function to replace each label with a shape, you can quickly modify the shape. 
 
-Domain shape codes are as follows:  
+Domain shape codes are as follows: 
+
 |Character|Shape|
 |---|---|
 |RE|  rectangle|  
@@ -115,6 +116,7 @@ Domain shape codes are as follows:
 |PD|  down pointing pentagram|  
 |OC|  octagon|  
 |GP|  rectangle|
+
 ```{r style modify}
 template_end_group_long$shape <- template_end_group_long$group
 template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"type","HH")

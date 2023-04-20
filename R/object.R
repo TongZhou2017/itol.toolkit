@@ -260,12 +260,20 @@ hub_to_unit <- function(object, theme, key) {
     pattern_2 <- "\\|"
     names_node <- names(data_node)
     names_tip <- names(data_tip)
-    eval(parse(text = paste0("data_node <- tidyr::separate_rows(data_node,`", paste0(key, "$DOMAINS"), "`,sep = pattern_1)")))
+    if(ncol(data_node)==1){
+      data[['node']] <- data_node
+    }else{
+      eval(parse(text = paste0("data_node <- tidyr::separate_rows(data_node,`", paste0(key, "$DOMAINS"), "`,sep = pattern_1)")))
+    }
     eval(parse(text = paste0("data_tip <- tidyr::separate_rows(data_tip,`", key, "$DOMAINS`,sep = pattern_1)")))
     node_id <- "node"
     tip_id <- "tip"
     colnames_new <- paste0(key, "$", c("SHAPE", "START", "END", "COLOR", "LABEL"))
-    eval(parse(text = paste0("data[[node_id]] <- data_node %>% tidyr::separate(`", paste0(key, "$DOMAINS"), "`, sep = pattern_2, into = colnames_new, remove = FALSE) %>% select(-`", paste0(key, "$DOMAINS"), "`)")))
+    if(ncol(data_node)==1){
+
+    }else{
+      eval(parse(text = paste0("data[[node_id]] <- data_node %>% tidyr::separate(`", paste0(key, "$DOMAINS"), "`, sep = pattern_2, into = colnames_new, remove = FALSE) %>% select(-`", paste0(key, "$DOMAINS"), "`)")))
+    }
     eval(parse(text = paste0("data[[tip_id]] <- data_tip %>% tidyr::separate(`", paste0(key, "$DOMAINS"), "`, sep = pattern_2, into = colnames_new, remove = FALSE) %>% select(-`", paste0(key, "$DOMAINS"), "`)")))
     data[["node"]][data[["node"]] == "NA"] <- NA
     data[["tip"]][data[["tip"]] == "NA"] <- NA

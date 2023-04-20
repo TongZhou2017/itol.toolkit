@@ -61,7 +61,7 @@ unit_21 <- create_unit(data = df_data,
 ```
 It is worth noting that when adding a color strip through node, the color strip is not displayed outside the tree by default, and can be displayed by turning on `Display internal node values` on the iTOL control panel. At the same time, users can display labels through `Display strip labels` on the iTOL control panel.
 
-## Dataset 3
+### Dataset 3
 In actual use, there may be a large number of groups entered by users, which may exceed the number of color plates in some R  packages. In itol.toolkit, automatic generation of up to 75 colors is supported. Tree file `rare-tree.nwk` is a large tree composed of rare OTUs. The `rare-metadata.txt` file stores the abundance information and taxonomy information of rare OTUs.
 The purpose of this part is to display taxonomy information at class level of each OTUs through color strips.
 ```{r load data2}
