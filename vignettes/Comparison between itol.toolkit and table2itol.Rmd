@@ -1,0 +1,157 @@
+---
+title: "Comparison between itol.toolkit and table2itol"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comparison between itol.toolkit and table2itol}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  echo = TRUE
+)
+```
+
+## table2itol
+
+```{bash}
+[TOC]
+#!/bin/bash
+###Zhou xin
+
+## Beautifying evolutionary tree
+
+## Scheme 1. Outer ring color, shape classification and abundance scheme
+# annotation.txt OTU correspond to species annotations and abundance，
+# -a Cannot find the input column will terminate the run (not executed by default)
+#-c Converts an integer column to a factor or a number with a decimal point
+#-t Transforms the ID column when deviating from the hint label
+#-w Color band, area width, etc
+#-D Output directory
+#-i OTU column name
+#-l OTU display names such as species/genus/family names
+# cd ${wd}/result/tree
+Rscript ./table2itol.R -a -c double -D plan1 -i OTUID -l Genus -t %s -w 0.5 annotation.txt
+# Generate a separate file for each column in the comment file
+
+## Scheme 2. Generate annotation file of abundance column bar chart
+Rscript ./table2itol.R -a -d -c none -D plan2 -b Phylum -i OTUID -l Genus -t %s -w 0.5 annotation.txt
+
+## Scheme 3. Generate annotation file of heat map 
+Rscript ./table2itol.R -c keep -D plan3 -i OTUID -t %s otutab_high.mean
+
+## Scheme 4. Convert integers into factors to generate comment files
+Rscript ./table2itol.R -a -c factor -D plan4 -i OTUID -l Genus -t %s -w 0 annotation.txt
+
+# Return to the working directory
+cd ${wd}
+```
+### Figure table2itol
+
+
+## itol.toolkit
+
+```{r}
+library(itol.toolkit) # main package
+library(dplyr) # data manipulation
+library(data.table) # file read
+library(ape) # tree operation
+library(stringr) # string operation
+library(tidyr) # data manipulation
+```
+
+```{r}
+setwd("~/Documents/GitHub/itol.toolkit/inst/extdata/dataset4/")
+tree_1 <- "./otus.contree"
+hub_1 <- create_hub(tree_1)
+data_file_1 <- "./annotation.txt"
+data_file_2 <- "./otutab_high.mean"
+data_1 <- data.table::fread(data_file_1)
+data_2 <- data.table::fread(data_file_2)
+```
+### figure 0
+```{r}
+# relabel by genus
+unit_1 <- create_unit(data = data_1 %>% select(ID, Genus), 
+                      key = "rep_Zhou_1_labels", 
+                      type = "LABELS",
+                      tree = tree_1)
+write_unit(unit_1)
+```
+### figure 1
+```{r}
+# tree_colors range by phylum
+unit_2 <- create_unit(data = data_1 %>% select(ID, Phylum), 
+                    key = "rep_Zhou_2_range", 
+                    type = "TREE_COLORS", 
+                    subtype = "range", 
+                    tree = tree_1)
+write_unit(unit_2)
+```
+### figure 2
+```{r}
+# color_strip by class
+set.seed(123)
+unit_3 <- create_unit(data = data_1 %>% select(ID, Class), 
+                      key = "rep_Zhou_3_strip",
+                      type = "DATASET_COLORSTRIP",
+                      color = "wesanderson",
+                      tree = tree_1)
+unit_3@common_themes$basic_theme$margin <- 50
+```
+### figure 3
+```{r}
+# simple_bar by NS
+unit_4 <- create_unit(data = data_1 %>% select(ID, South_America, Asia, North_America), 
+                      key = "rep_Zhou_4_multibar", 
+                      type = "DATASET_MULTIBAR",
+                      tree = tree_1)
+unit_4@specific_themes$basic_plot$size_max <- 100
+```
+### figure 4
+```{r}
+#Adding comment tag
+data_1 <- data_1 %>% arrange(Class)
+df_domain <- data_1 %>% select(ID, Family)
+df_domain$length <- 10
+df_domain$start <- 0
+df_domain$end <- 10
+df_domain <- df_domain %>% relocate(Family,.after = end)
+shapes <- as.factor(data_1$Class)
+levels(shapes) <- c("HH","RE","DI","PL","OC")
+unit_5 <- create_unit(data = df_domain, 
+                      key = "rep_Zhou_5_binary",
+                      type = "DATASET_DOMAINS",
+                      color = "wesanderson",
+                      shape = shapes,
+                      tree = tree_1)
+unit_5@common_themes$legend$shapes <- shapes[!duplicated(data_1$Family)]
+write_unit(unit_5)
+```
+### figure 5
+```{r}
+#Storing drawing information
+hub_1 <- hub_1 + 
+  unit_1 + 
+  unit_2 + 
+  unit_3 + 
+  unit_4 
+  
+write_hub(hub_1,getwd())
+```
+### FIgure itol.toolkit
+
+## Comparison between itol.toolkit and table2itol
+
+| Function | itol.toolkit | table2itol |
+| --- | --- | --- |
+| Support template types | 23 | 11 |
+| Usage | interactive R or script | command |
+| Maxiuim color platter | 76 | 40 |
+| Theme adjustable | TRUE | FALSE |
+| Share format | All-in-one hub object | separated code and data |
+| Can extact data from template files | TRUE | FALSE |
+| Output files | Flexibel | Output non-related files (Non-modifiable workflow) |
+
