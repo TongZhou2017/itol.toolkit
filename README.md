@@ -147,6 +147,10 @@ We have documents for every single function and some important tips for users:
 
 - [Tree construction](https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html): create a tree by different data and methods.
 
+### Video
+
+[![Watch the video](https://img.youtube.com/vi/aacPCzLi404/maxresdefault.jpg)](https://youtu.be/aacPCzLi404)
+
 ## Gallery
 
 We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/itol.toolkit/articles/Image_Gallery.html) page.
