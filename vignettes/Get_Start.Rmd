@@ -199,5 +199,3 @@ hub <- hub +
 
 write_hub(hub,getwd())
 ```
-
-![](images/itol_toolkit_v1_functions.jpg){width="640"}

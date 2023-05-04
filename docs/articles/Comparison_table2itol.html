@@ -243,10 +243,7 @@ table2itol</h1>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Return to the working directory</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${wd}</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="figure-table2itol">Figure table2itol<a class="anchor" aria-label="anchor" href="#figure-table2itol"></a>
-</h3>
-</div>
+<p><img src="images/table2itol.svg"></p>
 </div>
 <div class="section level2">
 <h2 id="itol-toolkit">itol.toolkit<a class="anchor" aria-label="anchor" href="#itol-toolkit"></a>
@@ -266,9 +263,7 @@ table2itol</h1>
 <span><span class="va">data_file_2</span> <span class="op">&lt;-</span> <span class="st">"./otutab_high.mean"</span></span>
 <span><span class="va">data_1</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">data_file_1</span><span class="op">)</span></span>
 <span><span class="va">data_2</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">data_file_2</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="figure-0">figure 0<a class="anchor" aria-label="anchor" href="#figure-0"></a>
-</h3>
+<p><img src="images/0.svg"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># relabel by genus</span></span>
 <span><span class="va">unit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Genus</span><span class="op">)</span>, </span>
@@ -276,10 +271,7 @@ table2itol</h1>
 <span>                      type <span class="op">=</span> <span class="st">"LABELS"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_1</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-1">figure 1<a class="anchor" aria-label="anchor" href="#figure-1"></a>
-</h3>
+<p><img src="images/1.svg"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># tree_colors range by phylum</span></span>
 <span><span class="va">unit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Phylum</span><span class="op">)</span>, </span>
@@ -288,10 +280,7 @@ table2itol</h1>
 <span>                    subtype <span class="op">=</span> <span class="st">"range"</span>, </span>
 <span>                    tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_2</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-2">figure 2<a class="anchor" aria-label="anchor" href="#figure-2"></a>
-</h3>
+<p><img src="images/2.svg"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># color_strip by class</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
@@ -301,10 +290,7 @@ table2itol</h1>
 <span>                      color <span class="op">=</span> <span class="st">"wesanderson"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
 <span><span class="va">unit_3</span><span class="op">@</span><span class="va">common_themes</span><span class="op">$</span><span class="va">basic_theme</span><span class="op">$</span><span class="va">margin</span> <span class="op">&lt;-</span> <span class="fl">50</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-3">figure 3<a class="anchor" aria-label="anchor" href="#figure-3"></a>
-</h3>
+<p><img src="images/3.svg"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simple_bar by NS</span></span>
 <span><span class="va">unit_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">South_America</span>, <span class="va">Asia</span>, <span class="va">North_America</span><span class="op">)</span>, </span>
@@ -312,10 +298,7 @@ table2itol</h1>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_MULTIBAR"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
 <span><span class="va">unit_4</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-4">figure 4<a class="anchor" aria-label="anchor" href="#figure-4"></a>
-</h3>
+<p><img src="images/4.svg"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Adding comment tag</span></span>
 <span><span class="va">data_1</span> <span class="op">&lt;-</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">Class</span><span class="op">)</span></span>
@@ -332,26 +315,18 @@ table2itol</h1>
 <span>                      color <span class="op">=</span> <span class="st">"wesanderson"</span>,</span>
 <span>                      shape <span class="op">=</span> <span class="va">shapes</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
-<span><span class="va">unit_5</span><span class="op">@</span><span class="va">common_themes</span><span class="op">$</span><span class="va">legend</span><span class="op">$</span><span class="va">shapes</span> <span class="op">&lt;-</span> <span class="va">shapes</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">data_1</span><span class="op">$</span><span class="va">Family</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_5</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-5">figure 5<a class="anchor" aria-label="anchor" href="#figure-5"></a>
-</h3>
+<span><span class="va">unit_5</span><span class="op">@</span><span class="va">common_themes</span><span class="op">$</span><span class="va">legend</span><span class="op">$</span><span class="va">shapes</span> <span class="op">&lt;-</span> <span class="va">shapes</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">data_1</span><span class="op">$</span><span class="va">Family</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<p><img src="images/5.svg"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Storing drawing information</span></span>
 <span><span class="va">hub_1</span> <span class="op">&lt;-</span> <span class="va">hub_1</span> <span class="op">+</span> </span>
 <span>  <span class="va">unit_1</span> <span class="op">+</span> </span>
 <span>  <span class="va">unit_2</span> <span class="op">+</span> </span>
 <span>  <span class="va">unit_3</span> <span class="op">+</span> </span>
-<span>  <span class="va">unit_4</span> </span>
+<span>  <span class="va">unit_4</span> <span class="op">+</span></span>
+<span>  <span class="va">unit_5</span></span>
 <span>  </span>
 <span><span class="fu"><a href="../reference/write_hub.html">write_hub</a></span><span class="op">(</span><span class="va">hub_1</span>,<span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="figure-itol-toolkit">Figure itol.toolkit<a class="anchor" aria-label="anchor" href="#figure-itol-toolkit"></a>
-</h3>
-</div>
 </div>
 <div class="section level2">
 <h2 id="comparison-between-itol-toolkit-and-table2itol">Comparison between itol.toolkit and table2itol<a class="anchor" aria-label="anchor" href="#comparison-between-itol-toolkit-and-table2itol"></a>
