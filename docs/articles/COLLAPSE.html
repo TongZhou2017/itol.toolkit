@@ -264,6 +264,7 @@ branch:</p>
 <span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_1</span>,</span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"/E001_collapse_1.txt"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/COLLAPSE_1.png"></p>
 <p>While the first two sets of folded branches are relatively simple to
 define because no other branches exist between them, the third set of
 folded branches is slightly complex, requiring the user to select the
@@ -299,13 +300,14 @@ using the node name directly .</p>
 <p>Therefore, you could specify the group you want to merge
 directly.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">group_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="st">"tree_sturcture"</span>, <span class="st">"theme_style"</span>, <span class="st">"text"</span>, <span class="st">"basic_plot"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">group_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tree_sturcture"</span>, <span class="st">"theme_style"</span>, <span class="st">"text"</span>, <span class="st">"basic_plot"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">unit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">group_names</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"E002_collapse_2"</span>, </span>
 <span>                      type <span class="op">=</span> <span class="st">"COLLAPSE"</span>, </span>
 <span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_2</span>,</span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"/E002_collapse_2.txt"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/COLLAPSE_2.png"></p>
 <p>If you have questions about how to upload results files from iTOL
 toolkit for interactive visualization on iTOL, please refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Operation.html" class="external-link">Operation</a>
 document for step-by-step guidance.</p>

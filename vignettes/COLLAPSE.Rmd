@@ -55,6 +55,8 @@ write_unit(unit_1,
            paste0(getwd(),"/E001_collapse_1.txt"))
 ```
 
+![](images/COLLAPSE_1.png)
+
 While the first two sets of folded branches are relatively simple to define because no other branches exist between them, the third set of folded branches is slightly complex, requiring the user to select the two branches with the longest spacing among the four to accurately describe the extent to be folded. Writing the code as `DATASET_ALIGNMENT | POPUP_INFO` may result in the omission of the `DATASET_CONNECTIONS` branch, because the branch does not belong to MCRA of `DATASET_ALIGNMENT` and `POPUP_INFO`.
 
 Because the process of defining branches is very cumbersome and requires manual judgment, this function is not used frequently in the 23 templates in iTOL v6.
@@ -80,7 +82,7 @@ ape::read.tree(tree)
 Therefore, you could specify the group you want to merge directly.
 
 ```{r E0022, message=FALSE, warning=FALSE}
-group_names <- unique("tree_sturcture", "theme_style", "text", "basic_plot")
+group_names <- unique(c("tree_sturcture", "theme_style", "text", "basic_plot"))
 unit_2 <- create_unit(data = group_names, 
                       key = "E002_collapse_2", 
                       type = "COLLAPSE", 
@@ -88,5 +90,7 @@ unit_2 <- create_unit(data = group_names,
 write_unit(unit_2,
            paste0(getwd(),"/E002_collapse_2.txt"))
 ```
+
+![](images/COLLAPSE_2.png)
 
 If you have questions about how to upload results files from iTOL toolkit for interactive visualization on iTOL, please refer to the [Operation](https://tongzhou2017.github.io/itol.toolkit/articles/Operation.html) document for step-by-step guidance.
