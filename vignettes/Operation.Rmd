@@ -14,5 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r eval=TRUE, include=FALSE}
+library("vembedr")
+```
 
-Coming Soon
+```{r}
+embed_url("https://www.youtube.com/watch?v=aacPCzLi404")
+```
+
+
+https://youtu.be/aacPCzLi404
