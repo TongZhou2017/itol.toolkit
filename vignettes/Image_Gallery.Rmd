@@ -26,12 +26,12 @@ In order to demonstrate how to use multiple functions from `itol.toolkit` compre
 This section lists the images we reproduced, and users can view the corresponding detailed reproduction steps through the links above the images.
 
 ## Li et al. 2022 JHazardMater
-[Reproduce_Li_2022_JHazardMater](https://tongzhou2017.github.io/itol.toolkit/articles/Reproduce_Li_2022_JHazardMater.html)
+[Reproduce_Li_2022_JHazardMater](https://github.com/TongZhou2017/itol.toolkit/discussions/9)
 
 ![Fig.2 of Li et al. 2022](https://ars.els-cdn.com/content/image/1-s2.0-S0304389422010202-gr2.jpg)
 
 ## Zheng et al. 2022 EnvironPollut
-[Reproduce_Zheng_2022_EnvironPollut](https://tongzhou2017.github.io/itol.toolkit/articles/Reproduce_Zheng_2022_EnvironPollut.html)
+[Reproduce_Zheng_2022_EnvironPollut](https://github.com/TongZhou2017/itol.toolkit/discussions/13)
 
 ![Fig.3 of Zheng et al. 2022](https://ars.els-cdn.com/content/image/1-s2.0-S0269749122014579-gr3.jpg)
 
