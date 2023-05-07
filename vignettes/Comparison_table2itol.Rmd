@@ -127,21 +127,11 @@ unit_4@specific_themes$basic_plot$size_max <- 100
 
 ```{r}
 #Adding comment tag
-data_1 <- data_1 %>% arrange(Class)
-df_domain <- data_1 %>% select(ID, Family)
-df_domain$length <- 10
-df_domain$start <- 0
-df_domain$end <- 10
-df_domain <- df_domain %>% relocate(Family,.after = end)
-shapes <- as.factor(data_1$Class)
-levels(shapes) <- c("HH","RE","DI","PL","OC")
-unit_5 <- create_unit(data = df_domain, 
+unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family), 
                       key = "rep_Zhou_5_binary",
                       type = "DATASET_DOMAINS",
                       color = "wesanderson",
-                      shape = shapes,
                       tree = tree_1)
-unit_5@common_themes$legend$shapes <- shapes[!duplicated(data_1$Family)]
 ```
 
 ![](images/5.svg)
