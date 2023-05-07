@@ -153,7 +153,7 @@ We have documents for every single function and some important tips for users. W
 
 ## Gallery
 
-We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/itol.toolkit/articles/Image_Gallery.html) page.
+We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/itol.toolkit-gallery/) page.
 
 ## Support
 

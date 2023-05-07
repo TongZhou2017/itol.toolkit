@@ -79,7 +79,7 @@ navbar:
       - text: "Tree Construction"
         href: articles/tree_construction.html
     - text: "Gallery"
-      href: articles/Image_Gallery.html
+      href: "https://tongzhou2017.github.io/itol.toolkit-gallery/"
   right:
     - icon: fa-github
       href: https://github.com/TongZhou2017/itol.toolkit
