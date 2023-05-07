@@ -59,7 +59,10 @@ unit_3 <- create_unit(data = select_item,
                       key = "E003_prune_1", 
                       type = "PRUNE", 
                       tree = tree)
+write_unit(unit_3)
 ```
+
+![](images/PRUNE_1.png)
 
 We can also filter branches according to their names. For example, E004 selects branches beginning with "DATASET_", which typically have complex parameter and format template requirements.
 
@@ -70,7 +73,10 @@ unit_4 <- create_unit(data = select_tip,
                                  key = "E004_prune_2", 
                                  type = "PRUNE", 
                                  tree = tree)
+write_unit(unit_4)
 ```
+
+![](images/PRUNE_2.png)
 
 We can also filter branches based on other information. For example, we used `template_parameters_count` data to filter templates with more than 30 parameters in `unit_5`.
 
@@ -81,6 +87,10 @@ unit_5 <- create_unit(data = select_tip,
                       key = "E005_prune_3", 
                       type = "PRUNE", 
                       tree = tree)
+write_unit(unit_5)
 ```
+
+![](images/PRUNE_3.png)
+
 ## Note
 As the only function that changes the topology of a tree, `PRUNE` typically exists in the pre processing stage of a workflow, so it cannot be reflected in published papers. However, R language users are more likely to use `ape::drop.tip` to achieve this requirement, so the application prospects of this template are worrying. Unless users need to avoid relying too much on tools, it is possible to use this function on demand.

@@ -1,0 +1,26 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+SPACING	label	#fb9a99	bold-italic	2
+COLLAPSE	label	#fb9a99	bold-italic	2
+PRUNE	label	#fb9a99	bold-italic	2
+TREE_COLORS	label	#33a02c	bold-italic	2
+DATASET_STYLE	label	#33a02c	bold-italic	2
+DATASET_CONNECTIONS	label	#a6cee3	bold-italic	2
+DATASET_ALIGNMENT	label	#a6cee3	bold-italic	2
+DATASET_IMAGE	label	#a6cee3	bold-italic	2
+POPUP_INFO	label	#a6cee3	bold-italic	2
+DATASET_COLORSTRIP	label	#b2df8a	bold-italic	2
+LABELS	label	#b2df8a	bold-italic	2
+DATASET_TEXT	label	#b2df8a	bold-italic	2
+DATASET_LINECHART	label	#1f78b4	bold-italic	2
+DATASET_GRADIENT	label	#1f78b4	bold-italic	2
+DATASET_HEATMAP	label	#1f78b4	bold-italic	2
+DATASET_BINARY	label	#1f78b4	bold-italic	2
+DATASET_EXTERNALSHAPE	label	#1f78b4	bold-italic	2
+DATASET_SYMBOL	label	#1f78b4	bold-italic	2
+DATASET_PIECHART	label	#1f78b4	bold-italic	2
+DATASET_DOMAINS	label	#1f78b4	bold-italic	2
+DATASET_BOXPLOT	label	#1f78b4	bold-italic	2
+DATASET_SIMPLEBAR	label	#1f78b4	bold-italic	2
+DATASET_MULTIBAR	label	#1f78b4	bold-italic	2

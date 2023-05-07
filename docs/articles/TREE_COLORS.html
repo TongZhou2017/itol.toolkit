@@ -274,7 +274,9 @@ which users are preparing for input data.</p>
 <span>                      key <span class="op">=</span> <span class="st">"E007_tree_colors_1"</span>, </span>
 <span>                      type <span class="op">=</span> <span class="st">"TREE_COLORS"</span>, </span>
 <span>                      subtype <span class="op">=</span> <span class="st">"range"</span>, </span>
-<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_7</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/TREE_COLORS_1.png"></p>
 <p>We can use the “clade” attribute to apply color adjustments to all
 branches contained in a node . Like <code>unit_7</code>, we used only 2
 columns data to implement the “branch” attribute in <code>unit_8</code>.
@@ -295,7 +297,9 @@ also be defined using the color parameter.</p>
 <span>                      subtype <span class="op">=</span> <span class="st">"clade"</span>, </span>
 <span>                      line_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"normal"</span>,<span class="fl">4</span><span class="op">)</span>,<span class="st">"dashed"</span><span class="op">)</span>,</span>
 <span>                      size_factor <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_8</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/TREE_COLORS_2.png"></p>
 <p>We can use the “branch” attribute to adjust color of the node or tip
 like “clade” attribute. However, “branch” attribute does not broadcast
 these settings to its offspring branches. See <code>unit_9</code></p>
@@ -306,7 +310,9 @@ these settings to its offspring branches. See <code>unit_9</code></p>
 <span>                      subtype <span class="op">=</span> <span class="st">"branch"</span>, </span>
 <span>                      line_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"normal"</span>,<span class="fl">4</span><span class="op">)</span>,<span class="st">"dashed"</span><span class="op">)</span>,</span>
 <span>                      size_factor <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_9</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/TREE_COLORS_3.png"></p>
 <p>We can use “label” attribute to adjust colors and font styles at the
 branch level. We also used only 2 columns data to implement the “branch”
 attribute in <code>unit_10</code>. The font type is defined by the
@@ -321,8 +327,8 @@ parameter.</p>
 <span>                       font_type <span class="op">=</span> <span class="st">"bold-italic"</span>,</span>
 <span>                       size_factor <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_10</span>,</span>
-<span>           <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"/E010_tree_colors_4.txt"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_10</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/TREE_COLORS_4.png"></p>
 <p>We can use the “label_background” attribute to adjust the color
 scheme of the label background at the branch level. We only used 2
 columns of information to show how to implement the “label_background”
@@ -341,8 +347,8 @@ work.</p>
 <span>                       subtype <span class="op">=</span> <span class="st">"label_background"</span>,</span>
 <span>                       color <span class="op">=</span> <span class="st">"#000000"</span>, </span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_11</span>,</span>
-<span>           <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"/E011_tree_colors_5.txt"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_11</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/TREE_COLORS_5.png"></p>
 <p>Of all templates, <code>TREE_COLORS</code> is one of the most
 frequently used function and highly recommended by authors. The
 itol.toolkit enables users to make fewer mistakes, and save effort in

@@ -1,0 +1,26 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+SPACING	range	#fb9a99	tree_sturcture
+COLLAPSE	range	#fb9a99	tree_sturcture
+PRUNE	range	#fb9a99	tree_sturcture
+TREE_COLORS	range	#33a02c	theme_style
+DATASET_STYLE	range	#33a02c	theme_style
+DATASET_CONNECTIONS	range	#a6cee3	advanced_plot
+DATASET_ALIGNMENT	range	#a6cee3	advanced_plot
+DATASET_IMAGE	range	#a6cee3	advanced_plot
+POPUP_INFO	range	#a6cee3	advanced_plot
+DATASET_COLORSTRIP	range	#b2df8a	text
+LABELS	range	#b2df8a	text
+DATASET_TEXT	range	#b2df8a	text
+DATASET_LINECHART	range	#1f78b4	basic_plot
+DATASET_GRADIENT	range	#1f78b4	basic_plot
+DATASET_HEATMAP	range	#1f78b4	basic_plot
+DATASET_BINARY	range	#1f78b4	basic_plot
+DATASET_EXTERNALSHAPE	range	#1f78b4	basic_plot
+DATASET_SYMBOL	range	#1f78b4	basic_plot
+DATASET_PIECHART	range	#1f78b4	basic_plot
+DATASET_DOMAINS	range	#1f78b4	basic_plot
+DATASET_BOXPLOT	range	#1f78b4	basic_plot
+DATASET_SIMPLEBAR	range	#1f78b4	basic_plot
+DATASET_MULTIBAR	range	#1f78b4	basic_plot

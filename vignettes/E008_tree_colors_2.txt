@@ -1,0 +1,8 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+tree_sturcture	clade	#fb9a99	normal	5
+theme_style	clade	#33a02c	normal	5
+advanced_plot	clade	#a6cee3	dashed	5
+text	clade	#b2df8a	normal	5
+basic_plot	clade	#1f78b4	normal	5

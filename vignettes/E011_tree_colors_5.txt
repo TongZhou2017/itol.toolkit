@@ -1,0 +1,26 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+SPACING	label_background	#000000
+COLLAPSE	label_background	#000000
+PRUNE	label_background	#000000
+TREE_COLORS	label_background	#000000
+DATASET_STYLE	label_background	#000000
+DATASET_CONNECTIONS	label_background	#000000
+DATASET_ALIGNMENT	label_background	#000000
+DATASET_IMAGE	label_background	#000000
+POPUP_INFO	label_background	#000000
+DATASET_COLORSTRIP	label_background	#000000
+LABELS	label_background	#000000
+DATASET_TEXT	label_background	#000000
+DATASET_LINECHART	label_background	#000000
+DATASET_GRADIENT	label_background	#000000
+DATASET_HEATMAP	label_background	#000000
+DATASET_BINARY	label_background	#000000
+DATASET_EXTERNALSHAPE	label_background	#000000
+DATASET_SYMBOL	label_background	#000000
+DATASET_PIECHART	label_background	#000000
+DATASET_DOMAINS	label_background	#000000
+DATASET_BOXPLOT	label_background	#000000
+DATASET_SIMPLEBAR	label_background	#000000
+DATASET_MULTIBAR	label_background	#000000
