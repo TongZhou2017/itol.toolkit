@@ -51,4 +51,7 @@ unit_17 <- create_unit(data = df_data,
                        key = "E017_label_1",
                        type = "LABELS",
                        tree = tree)
+write_unit(unit_17)
 ```
+
+![](images/LABELS_1.png)

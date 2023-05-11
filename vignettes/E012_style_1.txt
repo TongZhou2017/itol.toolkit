@@ -1,0 +1,10 @@
+DATASET_STYLE
+SEPARATOR COMMA
+DATASET_LABEL,E012_style_1
+COLOR,#ffff00
+DATA
+tree_sturcture,branch,clade,#fb9a99,5,normal
+theme_style,branch,clade,#33a02c,5,normal
+advanced_plot,branch,clade,#a6cee3,5,normal
+text,branch,clade,#b2df8a,5,normal
+basic_plot,branch,clade,#1f78b4,5,normal

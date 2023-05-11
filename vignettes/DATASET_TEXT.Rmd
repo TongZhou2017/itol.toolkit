@@ -58,6 +58,7 @@ unit_18 <- create_unit(data = df_data,
                        size_factor = 6,
                        rotation = 66,
                        tree = tree)
+write_unit(unit_18)
 ```
 Users can input data with only only two columns(i.e., node ID and text), and set the color manually through the "color" parameter.
 ```{r text color defind by parameter}
@@ -69,7 +70,9 @@ unit_19 <- create_unit(data = df_data,
                        rotation=66,
                        color = "#0000FF",
                        tree = tree)
+write_unit(unit_19)
 ```
+
 Users can define multi-style text by adding different tags to the text:
 
 - \<n> \</n> : normal text
@@ -105,6 +108,7 @@ unit_20 <- create_unit(data = df_data,
                        position = -1,
                        color = "#000000",
                        tree = tree)
+write_unit(unit_20)
 ```
 
 ## Style modification
