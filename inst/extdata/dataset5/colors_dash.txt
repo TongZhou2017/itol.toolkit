@@ -1,0 +1,7 @@
+TREE_COLORS
+SEPARATOR COMMA
+DATA
+9031|9606,clade,#0000ff,normal,2
+601|340,clade,#ff0000,dashed,2
+915|777,branch,#00ff00,dashed,10
+9606|5664,branch,#00ff00,dashed,5

@@ -1,0 +1,20 @@
+SPACING
+#use this template to change the vertical spacing for individual leaf nodes
+#=================================================================#
+#                    MANDATORY SETTINGS                           #
+#=================================================================#
+#select the separator which is used to delimit the data below (TAB,SPACE or COMMA).This separator must be used throughout this file.
+SEPARATOR TAB
+
+
+#=================================================================#
+#       Actual data follows after the "DATA" keyword              #
+#=================================================================#
+DATA
+#NODE_ID VERTICAL_SPACING_FACTOR
+
+#The spacing factor should be a number above zero. For example, leaf node with a factor of 2 will have twice the distance to its neighbouring leaves, compared to the regular spacing in the tree
+
+#Examples
+9606	2
+31033	4

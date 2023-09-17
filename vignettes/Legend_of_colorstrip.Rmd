@@ -1,0 +1,29 @@
+---
+title: "Legend_of_colorstrip"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Legend_of_colorstrip}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(itol.toolkit)
+```
+
+```{r}
+tree <- "~/Projects/TV-CRAN230526/01_data/tree.newick"
+data <- read.csv("~/Projects/TV-CRAN230526/01_data/data.txt", sep='\t')
+hub <- create_hub(tree = tree)
+unit = create_unit(data = data, key = 'organism', type = "DATASET_COLORSTRIP", tree = tree)
+hub <- hub + unit
+write_hub(hub, dir = './')
+```
+

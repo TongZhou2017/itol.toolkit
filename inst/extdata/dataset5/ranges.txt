@@ -1,0 +1,5 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+I148	range	#eeffee	test1
+I110	range	#ddddff	test2

@@ -30,6 +30,7 @@ articles:
   Image_Gallery: Image_Gallery.html
   Installation: Installation.html
   LABELS: LABELS.html
+  Legend_of_colorstrip: Legend_of_colorstrip.html
   OVERVIEW_STYLE: OVERVIEW_STYLE.html
   OVERVIEW_TREE_STRUCTURE: OVERVIEW_TREE_STRUCTURE.html
   Operation: Operation.html
@@ -38,5 +39,5 @@ articles:
   SPACING: SPACING.html
   TREE_COLORS: TREE_COLORS.html
   tree_construction: tree_construction.html
-last_built: 2023-05-07T22:43Z
+last_built: 2023-09-17T16:54Z
 

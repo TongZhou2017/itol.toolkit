@@ -1,0 +1,23 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+I127	range	#76f987	Range 0
+I7	range	#123701	Range 1
+I121	range	#1d609f	Range 2
+777	range	#a3d1d1	Range 3
+I16	range	#ad0065	Range 4
+237895	range	#8ba786	Range 5
+1639	range	#f20259	Range 6
+I124	range	#c92b5d	Range 7
+85963	range	#0c3d70	Range 8
+2097	range	#57ef3b	Range 9
+2287	range	#a2fd83	Range 10
+1502	range	#53f7ea	Range 11
+I136	range	#94e872	Range 12
+160	range	#82696f	Range 13
+I157	range	#c9f935	Range 14
+672	range	#98f244	Range 15
+I157	range	#154e14	Range 16
+141679	range	#3b66d8	Range 17
+I98	range	#6b32cc	Range 18
+83332	range	#1d1cd5	Range 19

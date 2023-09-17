@@ -1,0 +1,66 @@
+DATASET_COLORSTRIP
+SEPARATOR TAB
+DATASET_LABEL	organism
+COLOR	#ff0000
+LEGEND_TITLE	organism
+LEGEND_POSITION_X	100
+LEGEND_POSITION_Y	100
+LEGEND_HORIZONTAL	1
+LEGEND_SHAPES	1	1	1	1	1
+LEGEND_COLORS	#a6cee3	#1f78b4	#b2df8a	#33a02c	#fb9a99
+LEGEND_LABELS	Escherichia coli	Shigella boydii	Shigella dysenteriae	Shigella flexneri	Shigella sonnei
+SHOW_INTERNAL	0
+MARGIN	0
+BORDER_WIDTH	1
+BORDER_COLOR	#000
+STRIP_WIDTH	25
+COLOR_BRANCHES	1
+DATA
+GCA_022354085.1	#b2df8a	Shigella dysenteriae
+GCA_022354065.1	#b2df8a	Shigella dysenteriae
+GCA_005222005.1	#a6cee3	Escherichia coli
+GCA_013374815.1	#fb9a99	Shigella sonnei
+GCA_022354325.1	#33a02c	Shigella flexneri
+GCA_001679985.1	#a6cee3	Escherichia coli
+GCA_022354645.1	#33a02c	Shigella flexneri
+GCA_019976835.1	#a6cee3	Escherichia coli
+GCA_015571915.1	#a6cee3	Escherichia coli
+GCA_022493155.1	#a6cee3	Escherichia coli
+GCA_022353545.1	#33a02c	Shigella flexneri
+GCA_022354205.1	#33a02c	Shigella flexneri
+GCA_022493955.1	#33a02c	Shigella flexneri
+GCA_022494355.1	#33a02c	Shigella flexneri
+GCA_001559635.1	#a6cee3	Escherichia coli
+GCA_022494015.1	#33a02c	Shigella flexneri
+GCA_001886535.1	#a6cee3	Escherichia coli
+GCA_022353965.1	#33a02c	Shigella flexneri
+GCA_002077195.1	#a6cee3	Escherichia coli
+GCA_002950395.1	#fb9a99	Shigella sonnei
+GCA_000283715.1	#fb9a99	Shigella sonnei
+GCA_022870065.1	#fb9a99	Shigella sonnei
+GCA_001518855.1	#fb9a99	Shigella sonnei
+GCA_001558295.2	#fb9a99	Shigella sonnei
+GCA_000092525.1	#fb9a99	Shigella sonnei
+GCA_900659655.1	#fb9a99	Shigella sonnei
+GCA_013394555.1	#1f78b4	Shigella boydii
+GCA_001027225.1	#1f78b4	Shigella boydii
+GCA_000012025.1	#1f78b4	Shigella boydii
+GCA_002949475.1	#1f78b4	Shigella boydii
+GCA_007106565.1	#1f78b4	Shigella boydii
+GCA_002949535.1	#1f78b4	Shigella boydii
+GCA_013394535.1	#1f78b4	Shigella boydii
+GCA_000020185.1	#1f78b4	Shigella boydii
+GCA_002950275.1	#1f78b4	Shigella boydii
+GCA_002949175.1	#1f78b4	Shigella boydii
+GCA_000006925.2	#33a02c	Shigella flexneri
+GCA_008370775.1	#33a02c	Shigella flexneri
+GCA_020883255.1	#a6cee3	Escherichia coli
+GCA_002741615.1	#b2df8a	Shigella dysenteriae
+GCA_002949855.1	#b2df8a	Shigella dysenteriae
+GCA_015475595.1	#b2df8a	Shigella dysenteriae
+GCA_000012005.1	#b2df8a	Shigella dysenteriae
+GCA_002949835.1	#b2df8a	Shigella dysenteriae
+GCA_002949755.1	#b2df8a	Shigella dysenteriae
+GCA_002949675.1	#b2df8a	Shigella dysenteriae
+GCA_002949715.1	#b2df8a	Shigella dysenteriae
+GCA_004135915.1	#a6cee3	Escherichia coli

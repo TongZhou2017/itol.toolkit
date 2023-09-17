@@ -1,0 +1,237 @@
+DATASET_GRADIENT
+#lines starting with a hash are comments and ignored during parsing
+#select the separator which is used to delimit the data below (TAB SPACE or COMMA).This separator must be used throught this file (except in the SEPARATOR line, which uses space).
+
+#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA
+
+#label is used in the legend table (can be changed later)
+DATASET_LABEL label1_gradient
+
+#dataset color (can be changed later)
+COLOR #ff0000
+
+#optional settings
+
+#all other optional settings can be set or changed later in the web interface (under 'Datasets' tab)
+
+#width of the gradient strip
+STRIP_WIDTH 25
+
+#left margin  used to increase/decrease the spacing to the next dataset. Can be negative, causing datasets to overlap.
+MARGIN 0
+
+#border width; if set above 0  a border of specified width (in pixels) will be drawn around the gradient strip
+BORDER_WIDTH 0
+
+#border color; used whern BORDER_WIDTH is above 0
+BORDER_COLOR #0000ff
+
+#define the gradient colors. Values in the dataset will be mapped onto the corresponding color gradient.
+COLOR_MIN #ff0000
+COLOR_MAX #0000ff
+
+#you can specify a gradient with three colors (e.g red to yellow to green) by setting 'USE_MID_COLOR' to 1  and specifying the midpoint color
+USE_MID_COLOR 1
+COLOR_MID #ffff00
+
+#In gradients  each ID is associated to a single numeric value which is converted to a colored box based on the gradient defined.
+#Internal tree nodes can be specified using IDs directly  or using the 'last common ancestor' method described in iTOL help pages
+#Actual data follows after the "DATA" keyword
+DATA
+#ID1 value1
+#ID2 value2
+#9606 10000
+#LEAF1|LEAF2 11000
+155864 483
+83334 338
+217992 306
+562 93
+198215 285
+623 606
+209261 226
+601 886
+602 144
+229193 446
+187410 326
+632 277
+141679 946
+203907 455
+36870 468
+135842 781
+118099 731
+98794 408
+747 245
+727 834
+730 62
+196600 367
+672 123
+670 377
+666 251
+74109 433
+70863 524
+160488 629
+323 311
+287 295
+183190 716
+2371 844
+92829 651
+340 543
+777 949
+65699 944
+491 125
+536 262
+520 298
+519 250
+518 827
+305 411
+915 616
+181661 742
+180835 859
+382 24
+29461 64
+29459 105
+381 283
+1076 358
+375 733
+155892 774
+66077 585
+782 623
+781 114
+85963 204
+210 860
+32025 547
+844 598
+197 922
+882 518
+35554 672
+959 239
+240015 120
+234267 866
+76856 614
+63363 470
+2336 298
+262724 367
+1299 976
+243164 735
+103690 114
+1148 830
+32046 385
+84588 542
+74547 644
+1219 918
+59919 212
+33072 354
+214688 597
+117 860
+44275 147
+173 595
+160 520
+158 671
+139 209
+218496 319
+203267 645
+216816 512
+196627 665
+1718 387
+152794 74
+1717 20
+1765 476
+83331 434
+83332 447
+1769 828
+1770 252
+33903 61
+1902 101
+59374 460
+1097 514
+837 748
+818 134
+182082 295
+138677 148
+115713 400
+115711 234
+83557 950
+83560 380
+813 950
+119072 855
+1513 533
+1502 339
+1488 277
+267748 721
+2107 161
+2104 436
+2097 802
+2096 315
+28227 606
+134821 882
+44101 129
+100379 965
+265669 592
+1639 980
+1642 233
+182710 965
+86665 165
+226900 775
+222523 838
+198094 813
+1423 367
+196620 609
+158879 645
+158878 440
+1282 612
+216495 544
+216466 368
+1314 943
+186103 370
+198466 276
+193567 558
+1309 726
+171101 912
+1313 858
+1360 208
+1351 744
+33959 620
+1590 185
+296543 371
+237895 408
+36329 40
+4530 212
+3702 649
+45157 971
+44689 200
+33169 229
+4932 676
+4896 339
+180454 75
+7227 523
+31033 124
+7955 49
+10116 440
+10090 63
+9606 87
+9598 782
+9031 107
+6239 44
+6238 75
+5664 432
+184922 308
+160232 759
+111955 714
+2287 994
+56636 548
+13773 884
+50339 74
+2303 49
+187420 501
+2320 697
+39152 695
+2190 693
+53953 672
+29292 416
+2261 394
+2234 162
+64091 439
+2214 367
+2209 867

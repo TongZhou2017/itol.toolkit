@@ -1,0 +1,67 @@
+DATASET_IMAGE
+#In image datasets, each ID is associated to an image file, which can be displayed directly on the node branch, or outside the tree
+#lines starting with a hash are comments and ignored during parsing
+#=================================================================#
+#                    MANDATORY SETTINGS                           #
+#=================================================================#
+#select the separator which is used to delimit the data below (TAB,SPACE or COMMA).This separator must be used throughout this file (except in the SEPARATOR line, which uses space).
+#SEPARATOR TAB
+#SEPARATOR SPACE
+SEPARATOR COMMA
+
+#label is used in the legend table (can be changed later)
+DATASET_LABEL,example image dataset
+
+#dataset color (can be changed later)
+COLOR,#ff0000
+
+#=================================================================#
+#                    OPTIONAL SETTINGS                            #
+#=================================================================#
+
+#=================================================================#
+#     all other optional settings can be set or changed later     #
+#           in the web interface (under 'Datasets' tab)           #
+#=================================================================#
+
+#left margin, used to increase/decrease the spacing to the next dataset. Can be negative, causing datasets to overlap. Used only for images which are displayed on the outside
+MARGIN,0
+
+#applies to external images only (displayed outside the tree); if set,images associated to internal nodes will be displayed even if these nodes are not collapsed. It could cause overlapping in the dataset display.
+SHOW_INTERNAL,0
+
+#Rotate all images by the specified angle
+IMAGE_ROTATION,0
+
+#Shift all images vertically by the specified pixel value
+IMAGE_SHIFT_V,0
+
+#Shift all images horizontally by the specified pixel value
+IMAGE_SHIFT_H,0
+
+#size factor for all images;  values from 0 to 1 will decrease the size, values above 1 will increase it; note that each individual image can have a separate size factor
+SIZE_FACTOR,1
+
+#Internal tree nodes can be specified using IDs directly, or using the 'last common ancestor' method described in iTOL help pages
+#=================================================================#
+#       Actual data follows after the "DATA" keyword              #
+#=================================================================#
+#the following fields are possible for each node:
+#ID,position,size_factor,rotation,horizontal_shift,vertical_shift,image_url
+
+#position defines the position of the image on the tree:
+#  -1 = external label
+#  a number between 0 and 1 = internal image positioned at the specified value along the node branch (for example, position 0 is exactly at the start of node branch, position 0.5 is in the middle, and position 1 is at the end)
+
+#horizontal_shift is a pixel value; can be used to shift the image position left or right. By default, image's top left corner is aligned to the node position
+#vertical_shift is a pixel value; can be used to shift the image position below or above the node
+#image_url is a full URL pointing to the image, and should be available to your browser when the tree is displayed (ie. it is not accessed by iTOL directly, it can be an internal server only visible to your browser).
+
+DATA
+#Examples
+#example 3 below (for ID 2190) is a dynamically generated SVG image
+
+9606,-1,1,0,0,0,http://itol.embl.de/img/species/9606.jpg
+4530,1,1,0,0,0,http://itol.embl.de/img/species/4530.jpg
+2190,1,1,0,0,0,http://smart.embl.de/smart/DDvec.cgi?smart=1086:TyrKc(189|448)+SH3(454|510)+Pfam_Inhibitor_Mig-6(852|918)+0(57|62)+1(117|122)+0(141|146)+0(215|220)+0(266|271)+2(358|363)+0(401|406)+0(450|455)+2(481|486)+2(546|551)+1(577|582)+1(592|597)+0(1042|1047)+2(1084|1089)+0(1086|1091)
+6239|6239,0,1,90,0,0,http://itol.embl.de/img/species/6239.jpg

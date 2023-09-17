@@ -1,0 +1,294 @@
+TREE_COLORS
+SEPARATOR TAB
+DATA
+155892	clade	#d59c9d
+I54	clade	#399ca8
+214688	clade	#d823bc
+83331	clade	#11247c
+I112	clade	#aa6e31
+1488	clade	#ac96a5
+I140	clade	#41c639
+193567	clade	#d5588b
+44689	clade	#80edad
+562	clade	#18a9e1
+86665	clade	#2de38e
+I182	clade	#6e369d
+I172	clade	#a1f50a
+I123	clade	#f8f38e
+197	clade	#886cb9
+I148	clade	#7d6137
+I156	clade	#d58066
+I7	clade	#60e000
+2371	clade	#c19ab1
+33903	clade	#6b9e02
+I139	clade	#b9a845
+I79	clade	#b5cb36
+I92	clade	#fc39d2
+730	clade	#68ec9c
+666	clade	#05ad5f
+I88	clade	#9546f6
+217992	clade	#bf7ff9
+I162	clade	#e25406
+I25	clade	#2f1934
+I163	clade	#8e7310
+I75	clade	#2d5ba5
+28227	clade	#4f662a
+193567	clade	#763aa2
+519	clade	#e3cba9
+I128	clade	#59a4a4
+35554	clade	#28a7db
+83560	clade	#6da85a
+I67	clade	#90cd4c
+100379	clade	#2d356c
+2107	clade	#a07574
+5664	clade	#7a1980
+I65	clade	#785f89
+I103	clade	#d1485e
+59374	clade	#7701c3
+I77	clade	#09b583
+I171	clade	#056379
+I11	clade	#cdb3d3
+2234	clade	#562f61
+I33	clade	#6b2785
+217992	clade	#c6d3ec
+I185	clade	#dcede9
+28227	clade	#ddaaeb
+I40	clade	#725a76
+I178	clade	#af52de
+I161	clade	#23dba3
+1309	clade	#913402
+I8	clade	#557f42
+I20	clade	#e7152c
+I184	clade	#9bdb3f
+I13	clade	#85601c
+I137	clade	#22a736
+182710	clade	#3d0602
+I8	clade	#567e78
+I35	clade	#1b6aa6
+I57	clade	#291e86
+I52	clade	#5908ca
+323	clade	#90daee
+I185	clade	#3c815f
+I16	clade	#5bd784
+I43	clade	#1aa6ab
+I21	clade	#0ca5aa
+I149	clade	#34c9ad
+I165	clade	#c6a67b
+267748	clade	#c2070a
+83557	clade	#27a72f
+134821	clade	#c9c229
+9598	clade	#e258ad
+I46	clade	#0f1c25
+I114	clade	#320254
+9031	clade	#2a3942
+I84	clade	#244220
+I12	clade	#bd4b51
+I167	clade	#0b7619
+53953	clade	#fe7548
+118099	clade	#a314b5
+I78	clade	#ef720b
+I76	clade	#ca2cc4
+I15	clade	#efbf46
+4896	clade	#2b9cd8
+1309	clade	#ce90cc
+I138	clade	#68f531
+13773	clade	#02790b
+I97	clade	#c0d60b
+1148	clade	#2e7ec5
+1423	clade	#963d0d
+I118	clade	#7fe1c6
+I100	clade	#7128e2
+I76	clade	#add262
+I118	clade	#cbc83f
+243164	clade	#78e8f6
+155864	label	#4ec8d8		1
+83334	label	#1e7756		2
+217992	label	#1b0a3d	bold-italic	3
+562	label	#894b2e	italic	1.6
+198215	label	#155549		2.9
+623	label	#139183	italic	0.6
+209261	label	#9b5939	italic	2.2
+601	label	#142ad6		0.3
+602	label	#002e63	italic	0.3
+229193	label	#a2f54f		0.3
+187410	label	#3c902e	bold	0.7
+632	label	#ca5280	italic	1.4
+141679	label	#12ce81		1.6
+203907	label	#e3be5e	bold-italic	2.5
+36870	label	#44d02c	italic	1.8
+135842	label	#61a868	italic	0.6
+118099	label	#610095	bold	1.6
+98794	label	#a79539	italic	0.1
+747	label	#548c6d	italic	2.6
+727	label	#197192		2.8
+730	label	#d5f00f	italic	1
+196600	label	#f99ad1		3
+672	label	#c83f8a	bold	2.1
+670	label	#191eef	bold	2.2
+666	label	#96542a		2.2
+74109	label	#318d17		2.6
+70863	label	#b04dd4		1.6
+160488	label	#ffa1fd		2.5
+323	label	#19ac81	bold-italic	1.1
+287	label	#55d392		0.2
+183190	label	#6e001d		0.3
+2371	label	#1a1967	italic	1.1
+92829	label	#579f7f	bold-italic	2
+340	label	#e58d2c		2.1
+777	label	#73571d		0.5
+65699	label	#f99021	bold-italic	1.8
+491	label	#3bfef1		2.8
+536	label	#a41642	bold-italic	1.9
+520	label	#55fd91		1.9
+519	label	#05f1cd		2.7
+518	label	#55bfe8		3
+305	label	#63c414	bold-italic	0.5
+915	label	#9c4626		2.9
+181661	label	#8b6ab3	bold	0.5
+180835	label	#2b25a6	bold	1.9
+382	label	#41550e	bold-italic	1.1
+29461	label	#33249f	bold	0.1
+29459	label	#4c152b	bold-italic	1.5
+381	label	#fa8e16	bold	1.1
+1076	label	#2e66d2	bold	1.2
+375	label	#86404a	bold-italic	2.8
+155892	label	#5894a8	italic	2.2
+66077	label	#cb25cd	italic	0.3
+782	label	#3c5086	italic	2.7
+781	label	#6e8296	bold-italic	1.1
+85963	label	#a233d9	italic	0.1
+210	label	#ff7900	bold-italic	2.2
+32025	label	#f817fe	bold-italic	2.5
+844	label	#6f58f4	bold-italic	0.4
+197	label	#5c2323		1
+882	label	#fcc564		1.6
+35554	label	#0f9c26		0.1
+959	label	#79b55b	bold	1.6
+240015	label	#f7b168	bold	1.7
+234267	label	#127b3f	bold	1.5
+76856	label	#f17a58	italic	0.3
+63363	label	#90a355	bold	0.9
+2336	label	#4e8b57	italic	1.6
+262724	label	#3bfcd1	bold-italic	2.3
+1299	label	#054bc2		0.8
+243164	label	#66e411		2.7
+103690	label	#265049	bold	1.5
+1148	label	#89a4c7	bold-italic	1.6
+32046	label	#5ead9e	bold-italic	2.1
+84588	label	#4f63c9	bold-italic	2.5
+74547	label	#aa9864	bold-italic	1
+1219	label	#c38fa3	italic	0.1
+59919	label	#fa6d94	bold-italic	1.8
+33072	label	#37e7a9	bold-italic	1.2
+214688	label	#5b05b3	italic	2
+117	label	#b81976	italic	1
+44275	label	#bb6429		0.7
+173	label	#83ebc0	bold-italic	2.9
+160	label	#492f07	italic	2.3
+158	label	#61c3b7		2
+139	label	#b4c54b		2.2
+218496	label	#04c94a	italic	0.2
+203267	label	#2e3529	bold	1.3
+216816	label	#a1e65c		3
+196627	label	#61f4a6	italic	0
+1718	label	#848d42		3
+152794	label	#0f0160	italic	1.3
+1717	label	#986b24	bold	1
+1765	label	#e35c6c		1.4
+83331	label	#216059	bold	2.4
+83332	label	#22b0b2	italic	2.4
+1769	label	#94335f	italic	1
+1770	label	#2a9e2b	bold-italic	1.7
+33903	label	#461ab8	italic	1
+1902	label	#ac7912	bold-italic	2.4
+59374	label	#903a8a	bold-italic	1.3
+1097	label	#41323f	bold	1.9
+837	label	#4b0e39	bold-italic	2.4
+818	label	#8de36b	italic	0.4
+182082	label	#dea709	bold-italic	1.4
+138677	label	#2aa65a	bold-italic	1.6
+115713	label	#cd94db	bold	2.9
+115711	label	#aea241	bold	1.3
+83557	label	#5b09cf	italic	2.7
+83560	label	#93eb7f	bold-italic	1.2
+813	label	#d1c9e8	italic	2.3
+119072	label	#dfe385	bold	0.8
+1513	label	#450786	bold-italic	1.3
+1502	label	#eb36c8	italic	1.2
+1488	label	#f805a0	italic	1.6
+267748	label	#f49ff0		1.8
+2107	label	#767abd	bold-italic	1.2
+2104	label	#501b6a	bold-italic	1.8
+2097	label	#736ef0		1.4
+2096	label	#9a15dc		2.6
+28227	label	#c35d6b	bold	1.3
+134821	label	#f7774a		0
+44101	label	#f30088	bold-italic	1.4
+100379	label	#a8d375	bold	1.3
+265669	label	#67924c		0.4
+1639	label	#6d5f8f		0.6
+1642	label	#f79d5f	bold	0
+182710	label	#9ef4b3	bold	1.7
+86665	label	#1bd38d	bold-italic	1.8
+226900	label	#bc3cda	bold	0
+222523	label	#b0b252		1
+198094	label	#28fc0a	italic	1.2
+1423	label	#dd6b41	italic	1.6
+196620	label	#ec3a76		1.5
+158879	label	#20f9ff		1.8
+158878	label	#05a4cb		0.8
+1282	label	#48bd64	italic	0.3
+216495	label	#d12b6f	italic	1.9
+216466	label	#44ce76	italic	0.8
+1314	label	#070ed6	bold	0.9
+186103	label	#05ec2c	italic	1.7
+198466	label	#702bd8		2.9
+193567	label	#7179ec	italic	1
+1309	label	#2fc5dc		0.6
+171101	label	#e2c03d	italic	3
+1313	label	#10d04e	italic	0.3
+1360	label	#661d87	italic	0.6
+1351	label	#c6420a	italic	2.8
+33959	label	#cc0f0c	bold	2.9
+1590	label	#917c5e	italic	1
+296543	label	#80a0e9	bold	1
+237895	label	#5906ff		2.4
+36329	label	#2f323f		2.2
+4530	label	#1158ec	bold-italic	0.2
+3702	label	#d4acb0	italic	2.1
+45157	label	#924a16	italic	2.2
+44689	label	#513e91	italic	0
+33169	label	#064b7c	italic	2.5
+4932	label	#655e0b	bold	0.4
+4896	label	#535ae5	bold-italic	1.9
+180454	label	#4fb8b2	bold	1.8
+7227	label	#b1504c	bold	2.7
+31033	label	#8e1223	bold	2.6
+7955	label	#ce9aaa		1.6
+10116	label	#66a8dc	bold	2
+10090	label	#8a0606	italic	0.2
+9606	label	#37a632		2.4
+9598	label	#834ccb		2.5
+9031	label	#74a0fd	bold-italic	3
+6239	label	#632a27	bold	1.6
+6238	label	#18f555	bold	2.4
+5664	label	#e4c05b	bold-italic	0.1
+184922	label	#611001	bold	0
+160232	label	#3453bb	italic	2.6
+111955	label	#46ba7e		1.8
+2287	label	#dcdf91	italic	1.9
+56636	label	#7c249a		2.6
+13773	label	#1357c8	bold-italic	1.8
+50339	label	#4a23a7	bold-italic	2.9
+2303	label	#13fab7		0.2
+187420	label	#7a6d6b	bold-italic	2.5
+2320	label	#6cc975	italic	2.8
+39152	label	#a65f47	bold-italic	0.5
+2190	label	#222336	bold-italic	1.3
+53953	label	#57bcb2	italic	0.1
+29292	label	#175c27	bold-italic	1.6
+2261	label	#ac0260	bold-italic	2.9
+2234	label	#3e0fe8	italic	1.1
+64091	label	#3a38ce		0.4
+2214	label	#2ab1b0		1.4
+2209	label	#7e30a1	italic	2.2

@@ -1,0 +1,61 @@
+DATASET_PIECHART
+#In pie chart datasets, each ID is associated to multiple numeric values, which are displayed as a pie chart directly on the node branch, or outside the tree
+#lines starting with a hash are comments and ignored during parsing
+
+#=================================================================#
+#                    MANDATORY SETTINGS                           #
+#=================================================================#
+#select the separator which is used to delimit the data below (TAB,SPACE or COMMA).This separator must be used throughout this file (except in the SEPARATOR line, which uses space).
+#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA
+
+#label is used in the legend table (can be changed later)
+DATASET_LABEL example_pie_charts3
+
+#dataset color (can be changed later)
+COLOR #ff0000
+
+#define colors for each individual field column (use hexadecimal, RGB or RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)
+
+#field labels
+
+#=================================================================#
+#                    OPTIONAL SETTINGS                            #
+#=================================================================#
+
+#=================================================================#
+#     all other optional settings can be set or changed later     #
+#           in the web interface (under 'Datasets' tab)           #
+#=================================================================#
+
+#left margin, used to increase/decrease the spacing to the next dataset. Can be negative, causing datasets to overlap. Used only for piecharts which are displayed on the outside
+MARGIN 0
+
+#maximum pie chart radius will be displayed with this size, others will be proportionally smaller. This setting applies to internal pie charts only.
+MAXIMUM_SIZE 50
+
+#pie chart height factor; For external pie charts, default radius will be slightly less than the available space between leaves, but you can set a multiplication factor here to increase/decrease it (values from 0 to 1 will decrease it, values above 1 will increase it)
+HEIGHT_FACTOR 10
+SHOW_INTERNAL 1
+#Internal tree nodes can be specified using IDs directly, or using the 'last common ancestor' method described in iTOL help pages
+#=================================================================#
+#       Actual data follows after the "DATA" keyword              #
+#=================================================================#
+#the following fields are required for each node:
+#ID,position,radius,value1,value2,value3...
+#position defines the position of the pie chart on the tree:
+#  -1 = external pie chart
+#  a number between 0 and 1 = internal pie chart positioned at the specified value along the node branch (for example, position 0 is exactly at the start of node branch, position 0.5 is in the middle, and position 1 is at the end)
+
+#Examples
+
+#node 9606 will have an external pie chart
+#9606,-1,10,10000,15000,9000
+#LEAF1|LEAF2,0,50,11000,9000,120007
+
+FIELD_LABELS rl0 rl1 rl2 rl3 rl4 rl5
+FIELD_COLORS rgba(43,191,247,1.0) rgba(127,134,206,0.3) rgba(161,209,188,0.2) rgba(137,46,186,0.9) rgba(56,38,221,0.2) rgba(137,243,107,1.0)
+DATA
+9606|5664 -1 1 54 19 87 65 29 73
+837|2104 -1 1 23 3 27 52 29 22

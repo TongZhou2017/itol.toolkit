@@ -1,0 +1,228 @@
+DATASET_COLORSTRIP
+#lines starting with a hash are comments and ignored during parsing
+#select the separator which is used to delimit the data below (TAB,SPACE or COMMA).This separator must be used throught this file (except in the SEPARATOR line, which uses space).
+
+#SEPARATOR TAB
+SEPARATOR SPACE
+#SEPARATOR COMMA
+
+#label is used in the legend table (can be changed later)
+DATASET_LABEL color_strip2
+
+#dataset color (can be changed later)
+COLOR #ff0000
+
+#optional settings
+
+#all other optional settings can be set or changed later in the web interface (under 'Datasets' tab)
+
+#maximum width
+STRIP_WIDTH 25
+
+#left margin, used to increase/decrease the spacing to the next dataset. Can be negative, causing datasets to overlap.
+MARGIN 0
+
+#border width; if set above 0, a black border of specified width (in pixels) will be drawn around the color strip 
+BORDER_WIDTH 1
+BORDER_COLOR #000
+
+#show internal values; if set, values associated to internal nodes will be displayed even if these nodes are not collapsed. It could cause overlapping in the dataset display.
+SHOW_INTERNAL 0
+
+#In colored strip charts, each ID is associated to a color. Color can be specified in hexadecimal, RGB or RGBA notation
+#Internal tree nodes can be specified using IDs directly, or using the 'last common ancestor' method described in iTOL help pages
+#Actual data follows after the "DATA" keyword
+DATA
+#ID1 value1
+#ID2 value2
+160232 #efff22 COL#efff22
+13773 #efff22 COL#efff22
+56636 #efff22 COL#efff22
+111955 #efff22 COL#efff22
+2287 #efff22 COL#efff22
+50339 #efff22 COL#efff22
+2303 #efff22 COL#efff22
+2234 #efff22 COL#efff22
+64091 #efff22 COL#efff22
+2214 #efff22 COL#efff22
+2209 #117355 COL#117355
+2261 #117355 COL#117355
+53953 #117355 COL#117355
+29292 #117355 COL#117355
+187420 #7405af COL#7405af
+2320 #7405af COL#7405af
+39152 #7405af COL#7405af
+2190 #7405af COL#7405af
+184922 #e126ac COL#e126ac
+5664 #e126ac COL#e126ac
+296543 #e126ac COL#e126ac
+237895 #e126ac COL#e126ac
+36329 #e126ac COL#e126ac
+45157 #e126ac COL#e126ac
+4530 #e126ac COL#e126ac
+3702 #e126ac COL#e126ac
+44689 #e126ac COL#e126ac
+4896 #e126ac COL#e126ac
+33169 #e126ac COL#e126ac
+4932 #d9ff5c COL#d9ff5c
+6239 #d9ff5c COL#d9ff5c
+6238 #d9ff5c COL#d9ff5c
+180454 #d9ff5c COL#d9ff5c
+7227 #d9ff5c COL#d9ff5c
+31033 #d9ff5c COL#d9ff5c
+7955 #d9ff5c COL#d9ff5c
+9031 #71c2f4 COL#71c2f4
+10116 #71c2f4 COL#71c2f4
+10090 #00eb32 COL#00eb32
+9606 #00eb32 COL#00eb32
+9598 #00eb32 COL#00eb32
+119072 #00eb32 COL#00eb32
+1488 #00eb32 COL#00eb32
+1513 #00eb32 COL#00eb32
+1502 #00eb32 COL#00eb32
+100379 #00eb32 COL#00eb32
+44101 #00eb32 COL#00eb32
+267748 #00eb32 COL#00eb32
+2107 #89d399 COL#89d399
+134821 #89d399 COL#89d399
+28227 #89d399 COL#89d399
+2096 #89d399 COL#89d399
+2104 #89d399 COL#89d399
+2097 #89d399 COL#89d399
+1282 #89d399 COL#89d399
+196620 #89d399 COL#89d399
+158879 #89d399 COL#89d399
+158878 #9ba1d8 COL#9ba1d8
+1642 #9ba1d8 COL#9ba1d8
+265669 #9ba1d8 COL#9ba1d8
+1639 #9ba1d8 COL#9ba1d8
+182710 #9ba1d8 COL#9ba1d8
+86665 #9ba1d8 COL#9ba1d8
+1423 #9ba1d8 COL#9ba1d8
+198094 #43fb83 COL#43fb83
+226900 #43fb83 COL#43fb83
+222523 #43fb83 COL#43fb83
+33959 #43fb83 COL#43fb83
+1590 #43fb83 COL#43fb83
+1351 #43fb83 COL#43fb83
+1360 #a8ee8e COL#a8ee8e
+171101 #a8ee8e COL#a8ee8e
+1313 #a8ee8e COL#a8ee8e
+1309 #a8ee8e COL#a8ee8e
+216495 #b1f1bb COL#b1f1bb
+216466 #b1f1bb COL#b1f1bb
+1314 #b1f1bb COL#b1f1bb
+186103 #b1f1bb COL#b1f1bb
+198466 #b1f1bb COL#b1f1bb
+193567 #3421e0 COL#3421e0
+59374 #3421e0 COL#3421e0
+1097 #3421e0 COL#3421e0
+837 #3421e0 COL#3421e0
+818 #3421e0 COL#3421e0
+83560 #3421e0 COL#3421e0
+813 #3421e0 COL#3421e0
+83557 #69f9d5 COL#69f9d5
+182082 #69f9d5 COL#69f9d5
+138677 #69f9d5 COL#69f9d5
+115713 #69f9d5 COL#69f9d5
+115711 #69f9d5 COL#69f9d5
+214688 #69f9d5 COL#69f9d5
+117 #69f9d5 COL#69f9d5
+44275 #69f9d5 COL#69f9d5
+173 #69f9d5 COL#69f9d5
+139 #69f9d5 COL#69f9d5
+160 #69f9d5 COL#69f9d5
+158 #e0b866 COL#e0b866
+216816 #e0b866 COL#e0b866
+218496 #e0b866 COL#e0b866
+203267 #e0b866 COL#e0b866
+33903 #e0b866 COL#e0b866
+1902 #e0b866 COL#e0b866
+1717 #e0b866 COL#e0b866
+152794 #e0b866 COL#e0b866
+196627 #e0b866 COL#e0b866
+1718 #e0b866 COL#e0b866
+1770 #e0b866 COL#e0b866
+1769 #78052d COL#78052d
+1765 #78052d COL#78052d
+83331 #78052d COL#78052d
+83332 #78052d COL#78052d
+76856 #78052d COL#78052d
+63363 #78052d COL#78052d
+2336 #78052d COL#78052d
+243164 #78052d COL#78052d
+262724 #78052d COL#78052d
+1299 #78052d COL#78052d
+33072 #78052d COL#78052d
+32046 #aafc03 COL#aafc03
+103690 #aafc03 COL#aafc03
+1148 #aafc03 COL#aafc03
+59919 #aafc03 COL#aafc03
+1219 #aafc03 COL#aafc03
+84588 #aafc03 COL#aafc03
+74547 #5cc2a5 COL#5cc2a5
+240015 #5cc2a5 COL#5cc2a5
+234267 #5cc2a5 COL#5cc2a5
+882 #5cc2a5 COL#5cc2a5
+35554 #5cc2a5 COL#5cc2a5
+959 #5cc2a5 COL#5cc2a5
+197 #5cc2a5 COL#5cc2a5
+844 #5cc2a5 COL#5cc2a5
+32025 #5cc2a5 COL#5cc2a5
+85963 #5cc2a5 COL#5cc2a5
+210 #5cc2a5 COL#5cc2a5
+66077 #9bb477 COL#9bb477
+782 #9bb477 COL#9bb477
+781 #9bb477 COL#9bb477
+155892 #9bb477 COL#9bb477
+1076 #9bb477 COL#9bb477
+375 #9bb477 COL#9bb477
+382 #89ba42 COL#89ba42
+181661 #89ba42 COL#89ba42
+180835 #89ba42 COL#89ba42
+381 #89ba42 COL#89ba42
+29461 #89ba42 COL#89ba42
+29459 #89ba42 COL#89ba42
+915 #2dd945 COL#2dd945
+536 #2dd945 COL#2dd945
+65699 #2dd945 COL#2dd945
+491 #2dd945 COL#2dd945
+305 #2dd945 COL#2dd945
+520 #2a7f54 COL#2a7f54
+519 #4e2bc2 COL#4e2bc2
+518 #4e2bc2 COL#4e2bc2
+777 #4e2bc2 COL#4e2bc2
+183190 #4e2bc2 COL#4e2bc2
+2371 #2a152f COL#2a152f
+92829 #2a152f COL#2a152f
+340 #2a152f COL#2a152f
+287 #2a152f COL#2a152f
+160488 #2a152f COL#2a152f
+323 #2a152f COL#2a152f
+70863 #2a152f COL#2a152f
+74109 #2a152f COL#2a152f
+666 #2a152f COL#2a152f
+670 #2a152f COL#2a152f
+196600 #da7e62 COL#da7e62
+672 #da7e62 COL#da7e62
+730 #da7e62 COL#da7e62
+747 #da7e62 COL#da7e62
+727 #da7e62 COL#da7e62
+203907 #da7e62 COL#da7e62
+36870 #da7e62 COL#da7e62
+135842 #da7e62 COL#da7e62
+118099 #da7e62 COL#da7e62
+98794 #21cb47 COL#21cb47
+141679 #21cb47 COL#21cb47
+229193 #21cb47 COL#21cb47
+187410 #21cb47 COL#21cb47
+632 #21cb47 COL#21cb47
+602 #21cb47 COL#21cb47
+209261 #21cb47 COL#21cb47
+601 #21cb47 COL#21cb47
+155864 #16a55d COL#16a55d
+83334 #16a55d COL#16a55d
+217992 #16a55d COL#16a55d
+562 #16a55d COL#16a55d
+198215 #16a55d COL#16a55d
+623 #16a55d COL#16a55d

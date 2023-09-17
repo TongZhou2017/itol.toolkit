@@ -58,19 +58,19 @@ library(dplyr)
   tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
   order <- c("type","separator","profile","field","common themes",
     "specific themes","data")
-  tab_tmp_01_long <- tab_tmp_01 \%>\% 
+  tab_tmp_01_long <- tab_tmp_01 \%>\%
                        tidyr::gather(key = "variable",
                                      value = "value",
                                      c(-parameter,-group))
-  template_start_group <- tab_tmp_01_long \%>\% 
-                            group_by(group,variable) \%>\% 
-                            summarise(sublen = sum(value)) \%>\% 
+  template_start_group <- tab_tmp_01_long \%>\%
+                            group_by(group,variable) \%>\%
+                            summarise(sublen = sum(value)) \%>\%
                             tidyr::spread(key=variable,
                                           value=sublen)
   template_start_group$group <- factor(template_start_group$group,
                                        levels = order)
   template_start_group <- template_start_group \%>\% arrange(group)
-  start_group <- data.frame(Var1 = template_start_group$group, 
+  start_group <- data.frame(Var1 = template_start_group$group,
                             Freq = apply(template_start_group[,-1], 1, max))
   start_group$start <- 0
   for (i in 2:nrow(start_group)) {
@@ -79,7 +79,7 @@ library(dplyr)
   template_start_group[template_start_group == 0] <- NA
   template_end_group <- template_start_group[,2:(ncol(template_start_group)-1)] + start_group$start
   template_end_group <- data.frame(group = order,template_end_group)
-  template_end_group_long <- template_end_group \%>\% 
+  template_end_group_long <- template_end_group \%>\%
                                tidyr::gather(key = "variable",
                                              value = "value",
                                              -group)

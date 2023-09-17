@@ -461,3 +461,48 @@ file_get_dir <- function(str, up = FALSE) {
   }
   return(str)
 }
+
+#' Search tree file
+#' @description Search Newick format tree file in dir
+#' @param dir a path with tree file and other template files
+#' @param n 'first', 'last', 'all'
+#' @param method sort by 'mtime', 'ctime', 'atime', 'character'
+#' @param max_size limit file size to accelerate searching
+#' @importFrom ape read.tree
+#' @importFrom stringr str_detect
+#' @return a vector of characters specifying the file name
+#' @export
+search_tree_file <- function(dir=getwd(),
+                             n="first",
+                             method="mtime",
+                             max_size = 10240){
+  files = setdiff(list.files(path = dir,
+                             full.names = TRUE),
+                  list.dirs(path = dir,
+                            recursive = FALSE,
+                            full.names = TRUE))
+  results <- c()
+  for (file in files) {
+    if(file.size(file) < max_size){
+      con <- file(file,"r")
+      first_line <- readLines(con,n=1)
+      close(con)
+      if(length(first_line)==0) next
+      if(suppressWarnings(stringr::str_detect(first_line,'^#NEXUS|^\\('))){
+        results <- c(results,file)
+      }
+    }
+  }
+  df <- file.info(results)
+  df$fname <- file_get_name(rownames(df))
+  if(method!='character'){
+    suppressWarnings(df <- df %>% arrange_(method))
+  }
+  if(n == 'first'){
+    df <- df %>% head(1)
+  }
+  if(n == 'last'){
+    df <- df %>% tail(1)
+  }
+  return(rownames(df))
+}

@@ -1,0 +1,216 @@
+LABELS
+#use this template to change the leaf labels, or define/change the internal node names (displayed in mouseover popups)
+
+#lines starting with a hash are comments and ignored during parsing
+
+#=================================================================#
+#                    MANDATORY SETTINGS                           #
+#=================================================================#
+#select the separator which is used to delimit the data below (TAB,SPACE or COMMA).This separator must be used throughout this file (except in the SEPARATOR line, which uses space).
+
+SEPARATOR TAB
+#SEPARATOR SPACE
+#SEPARATOR COMMA
+
+#Internal tree nodes can be specified using IDs directly, or using the 'last common ancestor' method described in iTOL help pages
+#=================================================================#
+#       Actual data follows after the "DATA" keyword              #
+#=================================================================#
+DATA
+#NODE_ID,LABEL
+
+#Examples
+#defined a name for an internal node
+9606|9031	Metazoa
+#change the label for leaf node 9606
+4530	Oryza sativa
+45157	Cyanidioschyzon merolae
+237895	Cryptosporidium hominis
+184922	Giardia lamblia
+56636	Aeropyrum pernix
+3702	Arabidopsis thaliana
+33169	Eremothecium gossypii
+222523	Bacillus cereus ATCC 10987
+1423	Bacillus subtilis
+216816	Bifidobacterium longum
+518	Bordetella bronchiseptica
+29461	Brucella suis
+118099	Buchnera aphidicola APS
+6239	Caenorhabditis elegans
+155892	Caulobacter crescentus
+83560	Chlamydia muridarum
+115711	Chlamydia pneumoniae AR39
+115713	Chlamydia pneumoniae CWL029
+138677	Chlamydia pneumoniae J138
+813	Chlamydia trachomatis
+83557	Chlamydophila caviae
+536	Chromobacterium violaceum
+1502	Clostridium perfringens
+1513	Clostridium tetani
+1717	Corynebacterium diphtheriae
+152794	Corynebacterium efficiens
+882	Desulfovibrio vulgaris
+7227	Drosophila melanogaster
+1351	Enterococcus faecalis
+217992	Escherichia coli O6
+76856	Fusobacterium nucleatum
+35554	Geobacter sulfurreducens
+730	Haemophilus ducreyi
+727	Haemophilus influenzae
+64091	Halobacterium sp. NRC-1
+32025	Helicobacter hepaticus
+1360	Lactococcus lactis
+44275	Leptospira interrogans L1-130
+265669	Listeria monocytogenes F2365
+187420	Methanobacterium thermautotrophicum
+2190	Methanococcus jannaschii
+39152	Methanococcus maripaludis
+10090	Mus musculus
+83331	Mycobacterium tuberculosis CDC1551
+2097	Mycoplasma genitalium
+267748	Mycoplasma mobile
+44101	Mycoplasma mycoides
+2107	Mycoplasma pulmonis
+160232	Nanoarchaeum equitans
+491	Neisseria meningitidis B
+100379	Phytoplasma Onion yellows
+747	Pasteurella multocida
+141679	Photorhabdus luminescens
+837	Porphyromonas gingivalis
+323	Pseudomonas syringae
+29292	Pyrococcus abyssi
+305	Ralstonia solanacearum
+381	Rhizobium loti
+1076	Rhodopseudomonas palustris
+781	Rickettsia conorii
+4932	Saccharomyces cerevisiae
+209261	Salmonella enterica
+602	Salmonella typhimurium
+70863	Shewanella oneidensis
+198215	Shigella flexneri 2a 2457T
+196620	Staphylococcus aureus MW2
+158879	Staphylococcus aureus N315
+1313	Streptococcus pneumoniae TIGR4
+198466	Streptococcus pyogenes MGAS315
+33903	Streptomyces avermitilis
+1902	Streptomyces coelicolor
+111955	Sulfolobus tokodaii
+1148	Synechocystis sp. PCC6803
+119072	Thermoanaerobacter tengcongensis
+2303	Thermoplasma acidophilum
+50339	Thermoplasma volcanium
+2336	Thermotoga maritima
+158	Treponema denticola
+218496	Tropheryma whipplei TW08/27
+203267	Tropheryma whipplei Twist
+666	Vibrio cholerae
+196600	Vibrio vulnificus YJ016
+36870	Wigglesworthia brevipalpis
+66077	Wolbachia sp. wMel
+844	Wolinella succinogenes
+92829	Xanthomonas axonopodis
+183190	Xylella fastidiosa 700964
+229193	Yersinia pestis Medievalis
+180454	Anopheles gambiae
+31033	Takifugu rubripes
+7955	Danio rerio
+240015	Acidobacterium capsulatum
+234267	Solibacter usitatus
+59374	Fibrobacter succinogenes
+243164	Dehalococcoides ethenogenes
+44689	Dictyostelium discoideum
+296543	Thalassiosira pseudonana
+5664	Leishmania major
+181661	Agrobacterium tumefaciens Cereon
+180835	Agrobacterium tumefaciens WashU
+103690	Nostoc sp. PCC 7120
+63363	Aquifex aeolicus
+2234	Archaeoglobus fulgidus
+198094	Bacillus anthracis
+226900	Bacillus cereus ATCC 14579
+86665	Bacillus halodurans
+818	Bacteroides thetaiotaomicron
+959	Bdellovibrio bacteriovorus
+519	Bordetella parapertussis
+520	Bordetella pertussis
+139	Borrelia burgdorferi
+375	Bradyrhizobium japonicum
+29459	Brucella melitensis
+135842	Buchnera aphidicola Bp
+98794	Buchnera aphidicola Sg
+197	Campylobacter jejuni
+203907	Blochmannia floridanus
+182082	Chlamydophila pneumoniae TW183
+1097	Chlorobium tepidum
+1488	Clostridium acetobutylicum
+1718	Corynebacterium glutamicum
+196627	Corynebacterium glutamicum 13032
+777	Coxiella burnetii
+1299	Deinococcus radiodurans
+562	Escherichia coli K12
+83334	Escherichia coli O157:H7
+155864	Escherichia coli EDL933
+33072	Gloeobacter violaceus
+210	Helicobacter pylori 26695
+85963	Helicobacter pylori J99
+9606	Homo sapiens
+33959	Lactobacillus johnsonii
+1590	Lactobacillus plantarum
+173	Leptospira interrogans 56601
+1642	Listeria innocua
+1639	Listeria monocytogenes EGD
+2320	Methanopyrus kandleri
+2214	Methanosarcina acetivorans
+2209	Methanosarcina mazei
+1765	Mycobacterium bovis
+1769	Mycobacterium leprae
+1770	Mycobacterium paratuberculosis
+83332	Mycobacterium tuberculosis H37Rv
+2096	Mycoplasma gallisepticum
+28227	Mycoplasma penetrans
+2104	Mycoplasma pneumoniae
+65699	Neisseria meningitidis A
+915	Nitrosomonas europaea
+182710	Oceanobacillus iheyensis
+74109	Photobacterium profundum
+36329	Plasmodium falciparum
+1219	Prochlorococcus marinus SS120
+74547	Prochlorococcus marinus MIT9313
+59919	Prochlorococcus marinus CCMP1378
+287	Pseudomonas aeruginosa
+160488	Pseudomonas putida
+13773	Pyrobaculum aerophilum
+2261	Pyrococcus furiosus
+53953	Pyrococcus horikoshii
+10116	Rattus norvegicus
+382	Rhizobium meliloti
+117	Rhodopirellula baltica
+782	Rickettsia prowazekii
+601	Salmonella typhi
+4896	Schizosaccharomyces pombe
+623	Shigella flexneri 2a 301
+158878	Staphylococcus aureus Mu50
+1282	Staphylococcus epidermidis
+216495	Streptococcus agalactiae III
+216466	Streptococcus agalactiae V
+1309	Streptococcus mutans
+171101	Streptococcus pneumoniae R6
+1314	Streptococcus pyogenes M1
+186103	Streptococcus pyogenes MGAS8232
+193567	Streptococcus pyogenes SSI-1
+2287	Sulfolobus solfataricus
+32046	Synechococcus elongatus
+84588	Synechococcus sp. WH8102
+262724	Thermus thermophilus
+160	Treponema pallidum
+134821	Ureaplasma parvum
+670	Vibrio parahaemolyticus
+672	Vibrio vulnificus CMCP6
+340	Xanthomonas campestris
+2371	Xylella fastidiosa 9a5c
+632	Yersinia pestis CO92
+187410	Yersinia pestis KIM
+6238	Caenorhabditis briggsae
+9031	Gallus gallus
+9598	Pan troglodytes
+214688	Gemmata obscuriglobus

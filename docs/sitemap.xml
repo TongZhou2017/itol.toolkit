@@ -100,6 +100,9 @@
     <loc>/articles/LABELS.html</loc>
   </url>
   <url>
+    <loc>/articles/Legend_of_colorstrip.html</loc>
+  </url>
+  <url>
     <loc>/articles/OVERVIEW_STYLE.html</loc>
   </url>
   <url>
@@ -313,6 +316,9 @@
     <loc>/reference/plus.html</loc>
   </url>
   <url>
+    <loc>/reference/search_tree_file.html</loc>
+  </url>
+  <url>
     <loc>/reference/show-itol.hub-method.html</loc>
   </url>
   <url>
@@ -320,6 +326,9 @@
   </url>
   <url>
     <loc>/reference/template_parameters_count.html</loc>
+  </url>
+  <url>
+    <loc>/reference/train_theme.html</loc>
   </url>
   <url>
     <loc>/reference/unite_rows.html</loc>

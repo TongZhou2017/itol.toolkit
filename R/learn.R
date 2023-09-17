@@ -388,10 +388,10 @@ learn_field <- function(lines, sep) {
 #' @return a list of profile parameters containing
 #' @return \item{name}{a character specifying label, which is used in the legend
 #' table}
-#' @return \item{color}{dataset color in the legend (use hexadecimal, RGB or 
+#' @return \item{color}{dataset color in the legend (use hexadecimal, RGB or
 #' RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)}
 #' @export
-#' @examples 
+#' @examples
 #' tree <- system.file("extdata",
 #'                     "tree_of_itol_templates.tree",
 #'                     package = "itol.toolkit")
@@ -430,26 +430,26 @@ learn_profile <- function(lines, sep) {
 #' @param lines a vector of character strings from template file.
 #' @param sep a character specifying the separator.
 #' @return a list of label parameters containing
-#' @return \item{display}{1/0 specifying display or hide the text labels above 
+#' @return \item{display}{1/0 specifying display or hide the text labels above
 #' each field column}
 #' @return \item{size}{a number specifying the size factor for the text labels}
 #' @return \item{top}{1/0 specifying the labels position. If 0, label text which
 #' does not fit into the shape will be hidden}
 #' @return \item{below}{1/0 specifying the labels position. By default, internal
-#' labels will be placed above the branches. If 1, labels will be below the 
+#' labels will be placed above the branches. If 1, labels will be below the
 #' branches}
 #' @return \item{rotation}{a number specifying text label rotation angle}
-#' @return \item{straight}{1/0 specifying tree rotation. If set to 1, tree 
+#' @return \item{straight}{1/0 specifying tree rotation. If set to 1, tree
 #' rotation will not influence the individual label rotation}
-#' @return \item{vertical}{a number specifying the label vertical shift. Shift 
+#' @return \item{vertical}{a number specifying the label vertical shift. Shift
 #' internal labels vertically by this amount of pixels (positive or negative)}
 #' @return \item{shift}{a number specifying the label shift. text label shift in
 #' pixels (positive or negative)}
-#' @return \item{external_shift}{1/0 specifying label external shift that add 
-#' extra horizontal shift to the external labels. Useful in unrooted display 
+#' @return \item{external_shift}{1/0 specifying label external shift that add
+#' extra horizontal shift to the external labels. Useful in unrooted display
 #' mode to shift text labels further away from the node labels.}
 #' @export
-#' @examples 
+#' @examples
 #' library(dplyr)
 #'   tree <- system.file("extdata",
 #'                       "tree_of_itol_templates.tree",
@@ -463,19 +463,19 @@ learn_profile <- function(lines, sep) {
 #'   tab_tmp_01 <- cbind(tab_id_group,tab_tmp_01)
 #'   order <- c("type","separator","profile","field","common themes",
 #'     "specific themes","data")
-#'   tab_tmp_01_long <- tab_tmp_01 %>% 
+#'   tab_tmp_01_long <- tab_tmp_01 %>%
 #'                        tidyr::gather(key = "variable",
 #'                                      value = "value",
 #'                                      c(-parameter,-group))
-#'   template_start_group <- tab_tmp_01_long %>% 
-#'                             group_by(group,variable) %>% 
-#'                             summarise(sublen = sum(value)) %>% 
+#'   template_start_group <- tab_tmp_01_long %>%
+#'                             group_by(group,variable) %>%
+#'                             summarise(sublen = sum(value)) %>%
 #'                             tidyr::spread(key=variable,
 #'                                           value=sublen)
 #'   template_start_group$group <- factor(template_start_group$group,
 #'                                        levels = order)
 #'   template_start_group <- template_start_group %>% arrange(group)
-#'   start_group <- data.frame(Var1 = template_start_group$group, 
+#'   start_group <- data.frame(Var1 = template_start_group$group,
 #'                             Freq = apply(template_start_group[,-1], 1, max))
 #'   start_group$start <- 0
 #'   for (i in 2:nrow(start_group)) {
@@ -484,7 +484,7 @@ learn_profile <- function(lines, sep) {
 #'   template_start_group[template_start_group == 0] <- NA
 #'   template_end_group <- template_start_group[,2:(ncol(template_start_group)-1)] + start_group$start
 #'   template_end_group <- data.frame(group = order,template_end_group)
-#'   template_end_group_long <- template_end_group %>% 
+#'   template_end_group_long <- template_end_group %>%
 #'                                tidyr::gather(key = "variable",
 #'                                              value = "value",
 #'                                              -group)
@@ -1444,6 +1444,71 @@ learn_data_from_files <- function(object, files = NULL, dir = NULL, pattern = ".
   }
   return(object)
 }
+
+#' Train inbuilt theme
+#'
+#' @description The inbuilt theme is the template of all output file and unit.
+#' Using this function can train the inbuilt theme object by custom files.
+#' @param dir the path of tree file and template files
+#' @return replace the global variable inbuilt_themes
+#' @export
+train_theme <- function(dir=getwd()){
+  object_default <- create_hub(tree = search_tree_file(dir))
+  object_default <- learn_data_from_files(object_default,dir=dir,pattern = "^[^.]*.txt$")
+  theme_default_spacing <- object_default@theme$tol_spacing
+  theme_default_tree_colors <- object_default@theme$colors_no_range_tol
+  theme_default_style <- object_default@theme$example_style
+  theme_default_collapse <- object_default@theme$collapse
+  theme_default_prune <- theme_default_collapse
+  theme_default_prune@type <- "PRUNE"
+  theme_default_labels <- object_default@theme$labels
+  theme_default_text <- object_default@theme$example_text_dataset
+  theme_default_colorstrip <- object_default@theme$color_strip1
+  theme_default_colorstrip@sep <- "\t"
+  theme_default_binary <- object_default@theme$binary_data
+  theme_default_gradient <- object_default@theme$label1_gradient
+  theme_default_gradient@sep <- "\t"
+  theme_default_heatmap <- object_default@theme$example_heatmap
+  theme_default_heatmap@sep <- "\t"
+  theme_default_symbol <- object_default@theme$example_symbols
+  theme_default_externalshape <- object_default@theme$example_shapes_dataset
+  theme_default_domains <- object_default@theme$domain_testing
+  theme_default_simplebar <- object_default@theme$simple_bar_testing
+  theme_default_multibar <- object_default@theme$example_multi_bar_chart
+  theme_default_boxplot <- object_default@theme$example_box_plot
+  theme_default_linechart <- object_default@theme$example_line_chart
+  theme_default_piechart <- object_default@theme$example_piechart1
+  theme_default_alignment <- object_default@theme$example_alignment
+  theme_default_connection <- object_default@theme$example_connections
+  theme_default_image <- object_default@theme$example_image_dataset
+  theme_default_popup <- object_default@theme$popup_info_template
+  inbuilt_themes <<- list(
+    COLLAPSE = list(default = theme_default_collapse),
+    PRUNE = list(default = theme_default_prune),
+    SPACING = list(default = theme_default_spacing),
+    TREE_COLORS = list(default = theme_default_tree_colors),
+    DATASET_STYLE = list(default = theme_default_style),
+    LABELS = list(default = theme_default_labels),
+    DATASET_TEXT = list(default = theme_default_text),
+    DATASET_COLORSTRIP = list(default = theme_default_colorstrip),
+    DATASET_BINARY = list(default = theme_default_binary),
+    DATASET_GRADIENT = list(default = theme_default_gradient),
+    DATASET_HEATMAP = list(default = theme_default_heatmap),
+    DATASET_SYMBOL = list(default = theme_default_symbol),
+    DATASET_EXTERNALSHAPE = list(default = theme_default_externalshape),
+    DATASET_DOMAINS = list(default = theme_default_domains),
+    DATASET_SIMPLEBAR = list(default = theme_default_simplebar),
+    DATASET_MULTIBAR = list(default = theme_default_multibar),
+    DATASET_BOXPLOT = list(default = theme_default_boxplot),
+    DATASET_LINECHART = list(default = theme_default_linechart),
+    DATASET_PIECHART = list(default = theme_default_piechart),
+    DATASET_ALIGNMENT = list(default = theme_default_alignment),
+    DATASET_CONNECTION = list(default = theme_default_connection),
+    DATASET_IMAGE = list(default = theme_default_image),
+    POPUP_INFO = list(default = theme_default_popup)
+  )
+}
+
 
 ## Network
 

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.6</span>
       </span>
     </div>
 
@@ -205,8 +205,8 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 08 May,
-2023</h4>
+            <h4 data-toc-skip class="date">Last compiled on 18
+September, 2023</h4>
       
       
       <div class="hidden name"><code>DATASET_STYLE.Rmd</code></div>
@@ -272,7 +272,9 @@ data.</p>
 <span>                       subtype <span class="op">=</span> <span class="st">"branch"</span>,</span>
 <span>                       position <span class="op">=</span> <span class="st">"clade"</span>,</span>
 <span>                       size_factor <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_12</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_STYLE_1.png"></p>
 <p>We can use the “branch” subtype function to adjust the color of the
 node area. In E013, we only used two columns of information to implement
 the function. There is no location defined here, and the program
@@ -285,7 +287,9 @@ parameter can also be omitted and not written.</p>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_STYLE"</span>, </span>
 <span>                       subtype <span class="op">=</span> <span class="st">"branch"</span>,</span>
 <span>                       size_factor <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_13</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_STYLE_2.png"></p>
 <p>We can use the label subtype function to adjust the color of the
 labels to which the node area belongs. In E014, we only used 2 columns
 of information to adjust the style of some labels. Note that if the
@@ -299,7 +303,9 @@ itself.</p>
 <span>                       subtype <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>                       position <span class="op">=</span> <span class="st">"node"</span>,</span>
 <span>                       size_factor <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_14</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_STYLE_3.png"></p>
 <p>We can use the label subtype function to adjust the color of the
 labels to which the branch area belongs. In E015, we only used 2 columns
 of information to adjust the style of all labels. For functions that
@@ -313,7 +319,9 @@ id to control large area labels.</p>
 <span>                       subtype <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>                       position <span class="op">=</span> <span class="st">"clade"</span>,</span>
 <span>                       size_factor <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_15</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_STYLE_4.png"></p>
 <p>We can use the label subtype function to simultaneously adjust the
 color of the labels and backgrounds to which the branch area belongs. In
 E016, we only used 2 columns of information to adjust the style of all
@@ -327,7 +335,9 @@ labels and backgrounds.</p>
 <span>                       size_factor <span class="op">=</span> <span class="fl">1.5</span>,</span>
 <span>                       font_type <span class="op">=</span> <span class="st">"bold-italic"</span>,</span>
 <span>                       background_color <span class="op">=</span> <span class="st">"#000000"</span>,</span>
-<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_16</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_STYLE_5.png"></p>
 <p>In all template functions, <code>TREE_COLORS</code> is one of the
 most commonly used functions, and it is strongly recommended that users
 master it. Using <code>itol.toolkit</code> allows users to easily
