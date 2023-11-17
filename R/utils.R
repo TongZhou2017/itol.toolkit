@@ -1,15 +1,13 @@
 #' Read fasta file
 #' @description Read the fasta format sequences file into data.frame
-#' @importFrom Biostrings readBStringSet
+#' @importFrom ape read.FASTA
 #' @param file input file in fasta format
 #' @return a data frame with sequence id and sequence
 #' @export
 fa_read <- function(file) {
-  #  fastaFile <- Biostrings::readDNAStringSet(file)
-  fasta_file <- Biostrings::readBStringSet(file)
-  seq_name <- names(fasta_file)
-  sequence <- paste(fasta_file)
-  df <- data.frame(seq_name, sequence)
+  dna <- ape::read.FASTA(file)
+  df <- data.frame(seq_name=labels(dna),
+                   sequence=sapply(as.character(dna), paste, collapse=""))
   df$seq_name <- as.character(df$seq_name)
   return(df)
 }
@@ -431,8 +429,12 @@ unite_rows <- function(df) {
 
 file_get_name <- function(str, with_ext = TRUE, keep_dir = FALSE) {
   dir <- file_get_dir(str)
-  str <- stringr::str_extract(str, "/[^/]*$")
-  str <- substr(str, 2, nchar(str))
+  if(dir=="./"){
+    str <- str
+  }else{
+    str <- stringr::str_extract(str, "/[^/]*$")
+    str <- substr(str, 2, nchar(str))
+  }
   if (!with_ext) {
     ext <- stringr::str_extract(str, "\\.[^.]*$")
     str <- substr(str, 1, nchar(str) - nchar(ext))
@@ -459,6 +461,9 @@ file_get_dir <- function(str, up = FALSE) {
   } else {
     str <- stringr::str_extract(str, "^.*[/]")
   }
+  if(is.na(str)){
+    str <- "./"
+  }
   return(str)
 }
 
@@ -470,6 +475,8 @@ file_get_dir <- function(str, up = FALSE) {
 #' @param max_size limit file size to accelerate searching
 #' @importFrom ape read.tree
 #' @importFrom stringr str_detect
+#' @importFrom utils head
+#' @importFrom utils tail
 #' @return a vector of characters specifying the file name
 #' @export
 search_tree_file <- function(dir=getwd(),

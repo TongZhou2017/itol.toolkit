@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.1.6
+Version: 1.1.7
 Authors@R: 
     person(
     given = "Tong",
@@ -23,7 +23,6 @@ Imports:
     seqinr,
     utils,
     methods,
-    Biostrings,
     tidyr,
     ape,
     data.table,

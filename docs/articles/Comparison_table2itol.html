@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.7</span>
       </span>
     </div>
 
@@ -266,7 +266,7 @@ table2itol</h1>
 <p><img src="images/0.svg"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># relabel by genus</span></span>
-<span><span class="va">unit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Genus</span><span class="op">)</span>, </span>
+<span><span class="va">unit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Genus</span><span class="op">)</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_1_labels"</span>, </span>
 <span>                      type <span class="op">=</span> <span class="st">"LABELS"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
@@ -274,7 +274,7 @@ table2itol</h1>
 <p><img src="images/1.svg"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># tree_colors range by phylum</span></span>
-<span><span class="va">unit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Phylum</span><span class="op">)</span>, </span>
+<span><span class="va">unit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Phylum</span><span class="op">)</span>, </span>
 <span>                    key <span class="op">=</span> <span class="st">"rep_Zhou_2_range"</span>, </span>
 <span>                    type <span class="op">=</span> <span class="st">"TREE_COLORS"</span>, </span>
 <span>                    subtype <span class="op">=</span> <span class="st">"range"</span>, </span>
@@ -284,7 +284,7 @@ table2itol</h1>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># color_strip by class</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="va">unit_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Class</span><span class="op">)</span>, </span>
+<span><span class="va">unit_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Class</span><span class="op">)</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_3_strip"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_COLORSTRIP"</span>,</span>
 <span>                      color <span class="op">=</span> <span class="st">"wesanderson"</span>,</span>
@@ -293,7 +293,7 @@ table2itol</h1>
 <p><img src="images/3.svg"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simple_bar by NS</span></span>
-<span><span class="va">unit_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">South_America</span>, <span class="va">Asia</span>, <span class="va">North_America</span><span class="op">)</span>, </span>
+<span><span class="va">unit_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">South_America</span>, <span class="va">Asia</span>, <span class="va">North_America</span><span class="op">)</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_4_multibar"</span>, </span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_MULTIBAR"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span>
@@ -301,7 +301,7 @@ table2itol</h1>
 <p><img src="images/4.svg"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Adding comment tag</span></span>
-<span><span class="va">unit_5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Class</span>, <span class="va">Family</span><span class="op">)</span>, </span>
+<span><span class="va">unit_5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Class</span>, <span class="va">Family</span><span class="op">)</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_5_binary"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_DOMAINS"</span>,</span>
 <span>                      color <span class="op">=</span> <span class="st">"wesanderson"</span>,</span>

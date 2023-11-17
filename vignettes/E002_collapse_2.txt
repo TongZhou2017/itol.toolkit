@@ -1,7 +1,0 @@
-COLLAPSE
-SEPARATOR TAB
-DATA
-tree_sturcture
-theme_style
-text
-basic_plot

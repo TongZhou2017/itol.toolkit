@@ -1064,7 +1064,6 @@ line_split <- function(lines, param = "data") {
 #' @importFrom tidyr separate
 #' @importFrom stringr str_remove_all
 #' @importFrom stringr str_remove
-#' @importFrom Biostrings readBStringSet
 #' @import dplyr
 #' @export
 learn_subdf <- function(lines, type, sep, dataset_name = NULL, field_labels = NULL) {
@@ -1138,12 +1137,8 @@ learn_subdf <- function(lines, type, sep, dataset_name = NULL, field_labels = NU
         if (type == "DATASET_ALIGNMENT") {
           temp <- tempfile()
           cat(lines, file = temp, sep = "\n")
-          fasta_file <- Biostrings::readBStringSet(temp)
-          NODE_ID <- names(fasta_file)
-          SEQUENCE <- paste(fasta_file)
-          df_data <- data.frame(NODE_ID, SEQUENCE)
-          df_data$NODE_ID <- as.character(df_data$NODE_ID)
-          names(df_data)[2] <- paste0(dataset_name, "$SEQUENCE")
+          df_data <- fa_read(temp)
+          names(df_data) <- c("NODE_ID",paste0(dataset_name, "$SEQUENCE"))
         } else {
           df_data <- data.table::fread(text = c(subdf_colnames, lines), sep = sep, fill = TRUE, header = TRUE)
         }

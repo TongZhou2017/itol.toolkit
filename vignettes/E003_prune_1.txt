@@ -1,6 +1,0 @@
-PRUNE
-SEPARATOR TAB
-DATA
-theme_style
-basic_plot
-DATASET_COLORSTRIP

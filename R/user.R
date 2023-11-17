@@ -1478,11 +1478,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
   if(type == "DATASET_ALIGNMENT"){
     if(!is.data.frame(data)){
       if(file.exists(data)){
-        fasta_file <- Biostrings::readBStringSet(data)
-        NODE_ID <- names(fasta_file)
-        SEQUENCE <- paste(fasta_file)
-        df_data <- data.frame(NODE_ID, SEQUENCE)
-        df_data$NODE_ID <- as.character(df_data$NODE_ID)
+        df_data <- fa_read(data)
         names(df_data) <- c("id",paste0(key,c("$SEQUENCE")))
       }
       stop("The input data class should be a data frame or a alignment file")
