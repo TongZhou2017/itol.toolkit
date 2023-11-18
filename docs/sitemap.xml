@@ -136,6 +136,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/color_distance.html</loc>
+  </url>
+  <url>
     <loc>/reference/complex_html_text.html</loc>
   </url>
   <url>
@@ -182,6 +185,9 @@
   </url>
   <url>
     <loc>/reference/get_color.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gradient_color.html</loc>
   </url>
   <url>
     <loc>/reference/head_line.html</loc>

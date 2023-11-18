@@ -43,7 +43,7 @@ Rscript ./table2itol.R -a -c double -D plan1 -i OTUID -l Genus -t %s -w 0.5 anno
 ## Scheme 2. Generate annotation file of abundance column bar chart
 Rscript ./table2itol.R -a -d -c none -D plan2 -b Phylum -i OTUID -l Genus -t %s -w 0.5 annotation.txt
 
-## Scheme 3. Generate annotation file of heat map 
+## Scheme 3. Generate annotation file of heat map
 Rscript ./table2itol.R -c keep -D plan3 -i OTUID -t %s otutab_high.mean
 
 ## Scheme 4. Convert integers into factors to generate comment files
@@ -67,11 +67,10 @@ library(tidyr) # data manipulation
 ```
 
 ```{r}
-setwd("~/Documents/GitHub/itol.toolkit/inst/extdata/dataset4/")
-tree_1 <- "./otus.contree"
+tree_1 <- system.file("extdata","dataset4/otus.contree",package = "itol.toolkit")
 hub_1 <- create_hub(tree_1)
-data_file_1 <- "./annotation.txt"
-data_file_2 <- "./otutab_high.mean"
+data_file_1 <- system.file("extdata","dataset4/annotation.txt",package = "itol.toolkit")
+data_file_2 <- system.file("extdata","dataset4/otutab_high.mean",package = "itol.toolkit")
 data_1 <- data.table::fread(data_file_1)
 data_2 <- data.table::fread(data_file_2)
 ```
@@ -80,8 +79,8 @@ data_2 <- data.table::fread(data_file_2)
 
 ```{r}
 # relabel by genus
-unit_1 <- create_unit(data = data_1 %>% select(ID, Genus), 
-                      key = "rep_Zhou_1_labels", 
+unit_1 <- create_unit(data = data_1 %>% select(ID, Genus),
+                      key = "rep_Zhou_1_labels",
                       type = "LABELS",
                       tree = tree_1)
 write_unit(unit_1)
@@ -91,10 +90,10 @@ write_unit(unit_1)
 
 ```{r}
 # tree_colors range by phylum
-unit_2 <- create_unit(data = data_1 %>% select(ID, Phylum), 
-                    key = "rep_Zhou_2_range", 
-                    type = "TREE_COLORS", 
-                    subtype = "range", 
+unit_2 <- create_unit(data = data_1 %>% select(ID, Phylum),
+                    key = "rep_Zhou_2_range",
+                    type = "TREE_COLORS",
+                    subtype = "range",
                     tree = tree_1)
 write_unit(unit_2)
 ```
@@ -104,7 +103,7 @@ write_unit(unit_2)
 ```{r}
 # color_strip by class
 set.seed(123)
-unit_3 <- create_unit(data = data_1 %>% select(ID, Class), 
+unit_3 <- create_unit(data = data_1 %>% select(ID, Class),
                       key = "rep_Zhou_3_strip",
                       type = "DATASET_COLORSTRIP",
                       color = "wesanderson",
@@ -116,8 +115,8 @@ unit_3@common_themes$basic_theme$margin <- 50
 
 ```{r}
 # simple_bar by NS
-unit_4 <- create_unit(data = data_1 %>% select(ID, South_America, Asia, North_America), 
-                      key = "rep_Zhou_4_multibar", 
+unit_4 <- create_unit(data = data_1 %>% select(ID, South_America, Asia, North_America),
+                      key = "rep_Zhou_4_multibar",
                       type = "DATASET_MULTIBAR",
                       tree = tree_1)
 unit_4@specific_themes$basic_plot$size_max <- 100
@@ -127,7 +126,7 @@ unit_4@specific_themes$basic_plot$size_max <- 100
 
 ```{r}
 #Adding comment tag
-unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family), 
+unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family),
                       key = "rep_Zhou_5_binary",
                       type = "DATASET_DOMAINS",
                       color = "wesanderson",
@@ -136,17 +135,32 @@ unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family),
 
 ![](images/5.svg)
 
+### write by hub level
 ```{r}
 #Storing drawing information
-hub_1 <- hub_1 + 
-  unit_1 + 
-  unit_2 + 
-  unit_3 + 
+hub_1 <- hub_1 +
+  unit_1 +
+  unit_2 +
+  unit_3 +
   unit_4 +
   unit_5
-  
+
 write_hub(hub_1,getwd())
 ```
+
+## New in v1.1.8
+Pencil Plot
+```{r}
+set.seed(123)
+unit_6 <- create_unit(data = data_1 %>% select(ID, Class, Family),
+                      key = "New_in_v1.1.8",
+                      type = "DATASET_DOMAINS",
+                      color = "wesanderson",
+                      shape = "TL",
+                      tree = tree_1)
+write_unit(unit_6)
+```
+![](images/6.svg)
 
 ## Comparison between itol.toolkit and table2itol
 

@@ -1477,7 +1477,7 @@ train_theme <- function(dir=getwd()){
   theme_default_connection <- object_default@theme$example_connections
   theme_default_image <- object_default@theme$example_image_dataset
   theme_default_popup <- object_default@theme$popup_info_template
-  inbuilt_themes <<- list(
+  inbuilt_themes <- list(
     COLLAPSE = list(default = theme_default_collapse),
     PRUNE = list(default = theme_default_prune),
     SPACING = list(default = theme_default_spacing),
@@ -1502,6 +1502,7 @@ train_theme <- function(dir=getwd()){
     DATASET_IMAGE = list(default = theme_default_image),
     POPUP_INFO = list(default = theme_default_popup)
   )
+  eval(parse(text = "inbuilt_themes <<- inbuilt_themes"))
 }
 
 

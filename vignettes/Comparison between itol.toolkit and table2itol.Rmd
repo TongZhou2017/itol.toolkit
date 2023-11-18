@@ -63,11 +63,10 @@ library(tidyr) # data manipulation
 ```
 
 ```{r}
-setwd("~/Documents/GitHub/itol.toolkit/inst/extdata/dataset4/")
-tree_1 <- "./otus.contree"
+tree_1 <- system.file("extdata","dataset4/otus.contree",package = "itol.toolkit")
 hub_1 <- create_hub(tree_1)
-data_file_1 <- "./annotation.txt"
-data_file_2 <- "./otutab_high.mean"
+data_file_1 <- system.file("extdata","dataset4/annotation.txt",package = "itol.toolkit")
+data_file_2 <- system.file("extdata","dataset4/otutab_high.mean",package = "itol.toolkit")
 data_1 <- data.table::fread(data_file_1)
 data_2 <- data.table::fread(data_file_2)
 ```
@@ -83,10 +82,12 @@ write_unit(unit_1)
 ### figure 1
 ```{r}
 # tree_colors range by phylum
+set.seed(123)
 unit_2 <- create_unit(data = data_1 %>% select(ID, Phylum), 
                     key = "rep_Zhou_2_range", 
                     type = "TREE_COLORS", 
                     subtype = "range", 
+                    color = "wesanderson",
                     tree = tree_1)
 write_unit(unit_2)
 ```
@@ -110,38 +111,44 @@ unit_4 <- create_unit(data = data_1 %>% select(ID, South_America, Asia, North_Am
                       tree = tree_1)
 unit_4@specific_themes$basic_plot$size_max <- 100
 ```
+
 ### figure 4
 ```{r}
 #Adding comment tag
-data_1 <- data_1 %>% arrange(Class)
-df_domain <- data_1 %>% select(ID, Family)
-df_domain$length <- 10
-df_domain$start <- 0
-df_domain$end <- 10
-df_domain <- df_domain %>% relocate(Family,.after = end)
-shapes <- as.factor(data_1$Class)
-levels(shapes) <- c("HH","RE","DI","PL","OC")
-unit_5 <- create_unit(data = df_domain, 
+set.seed(123)
+unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family), 
                       key = "rep_Zhou_5_binary",
                       type = "DATASET_DOMAINS",
                       color = "wesanderson",
-                      shape = shapes,
                       tree = tree_1)
-unit_5@common_themes$legend$shapes <- shapes[!duplicated(data_1$Family)]
 write_unit(unit_5)
 ```
-### figure 5
+
+### write by hub level
 ```{r}
 #Storing drawing information
 hub_1 <- hub_1 + 
   unit_1 + 
   unit_2 + 
   unit_3 + 
-  unit_4 
+  unit_4 +
+  unit_5
   
-write_hub(hub_1,getwd())
+write_hub(hub_1)
 ```
-### FIgure itol.toolkit
+
+## New in v1.1.8
+```{r}
+set.seed(123)
+unit_6 <- create_unit(data = data_1 %>% select(ID, Class, Family), 
+                      key = "New_in_v1.1.8",
+                      type = "DATASET_DOMAINS",
+                      color = "wesanderson",
+                      shape = "TL",
+                      tree = tree_1)
+write_unit(unit_6)
+```
+
 
 ## Comparison between itol.toolkit and table2itol
 

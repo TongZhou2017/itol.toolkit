@@ -1148,16 +1148,37 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
   if(type == "DATASET_DOMAINS"){
     shape_by = NULL
     if(length(names(data)) == 3){
-      data <- data[order(data[[2]],data[[3]]),]
-      shape_by <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
-      print(shape_by)
-      levels(shape_by) <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")[1:length(levels(shape_by))]
-      shape = shape_by
-            print(shape)
-      data <- data[,-2]
-      data[,2] <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+      if(is.null(shape)){
+        data <- data[order(data[[2]],data[[3]]),]
+        shape_by <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+        levels(shape_by) <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")[1:length(levels(shape_by))]
+        shape = shape_by
+        data <- data[,-2]
+        data[,2] <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+      }else{
+        data <- data[order(data[[2]],data[[3]]),]
+        color_by <- factor(pull(data[,2]),levels = unique(pull(data[,2])))
+        if(color %in% get_color(set="ls")){
+          levels(color_by) <- get_color(n=length(levels(color_by)),set = color)
+        }else{
+          stop("The color parameter should be within get_color sets.")
+        }
+        data_with_colors <- data.frame()
+        for (i in 1:length(levels(color_by))) {
+          sub_data <- data[which(data[,2]==unique(pull(data[,2]))[i]),]
+          n = length(unique(pull(sub_data[,3])))
+          sub_color_by <- gradient_color(n,levels(color_by)[i])
+          sub_data$colors <- factor(pull(sub_data[,3]),levels = unique(pull(sub_data[,3])))
+          levels(sub_data$colors) <- sub_color_by
+          sub_data <- sub_data[,-2]
+          sub_data[,2] <- factor(pull(sub_data[,2]),levels = unique(pull(sub_data[,2])))
+          data_with_colors <- rbind(data_with_colors,sub_data)
+        }
+        data <- data_with_colors
+        color = data$colors
+      }
     }
-    if(length(names(data)) == 2){
+    if(length(names(data)) %in% c(2,3)){
       data <- data.frame(data,length=rep(10,nrow(data)),start=rep(0,nrow(data)),end=rep(10,nrow(data)))
     }
     length = NULL
@@ -1244,12 +1265,17 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
           }
         }
       }
+    }else{
+      if("colors"%in%names(data)){
+        colname_color = "colors"
+        color = data$colors
+      }
     }
     colname_data <- names(data)[!names(data)%in%c("id", colname_length, colname_shape, colname_start, colname_end, colname_color)]
     if(length(color) != nrow(data)){
       message("Identifying data column to auto setup color parameter")
       if(length(colname_data)!=1){
-        stop("Unable to indentify data column")
+        #stop("Unable to indentify data column")
       }
     }
     if(is.null(color)){

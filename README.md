@@ -86,7 +86,7 @@ write_hub(hub,getwd())
 
 ## Documents
 
-We have documents for every single function and some important tips for users. We also provided a ChatBot to help users learn the package interactively on [Chat Thing](https://chatthing.ai/bots/4de00ca8-a0f6-4e2d-8bd7-da65f10dc688/) and [Slack](https://join.slack.com/t/itoltoolkit/shared_invite/zt-1u3scgzlw-EwUG_axGTTSq9CrDmVRSDQ).
+We have documents for every single function and some important tips for users. We also provided a ChatBot to help users learn the package interactively on [Chat Thing](https://chatthing.ai/bots/4de00ca8-a0f6-4e2d-8bd7-da65f10dc688/).
 
 ### Single functions
 
