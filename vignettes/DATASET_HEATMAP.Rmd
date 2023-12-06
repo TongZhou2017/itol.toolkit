@@ -21,12 +21,12 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-Through the `DATASET_HEATMAP` template, each tree tip is associated to multiple numeric values, which are displayed as a set of colored boxes (a heatmap). The `DATASET_HEATMAP` template belongs to the "Basic graphics" class (refer to the [Class]() for detail information).
+Through the `DATASET_HEATMAP` template, each tree tip is associated to multiple numeric values, which are displayed as a set of colored boxes (a heatmap). The `DATASET_HEATMAP` template belongs to the "Basic plot" class (refer to the [Class]() for detail information).
 
 This section shows how to use the `DATASET_HEATMAP` template to draw a heatmap from multi-column wide data. Without itol.toolkit, users would have to perform data analysis and visualization preparation in different environments. The itol.toolkit provides consistency to the workflow, enabling the user to perform data processing and visualization preparation seamlessly.
 
 ## Drawing heatmap
-This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) and [dataset 3](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset3) as examples to show the drawing of heatmaps. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information). Users can download the data locally from the provided link above. The files are read using a relative path in this document, so please adjust the path based on actual situation.
+This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) and [dataset 3](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset3) as examples to show the drawing of heatmap. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information). Users can download the data locally from the provided link above. The files are read using a relative path in this document, so please adjust the path based on actual situation.
 
 ### Dataset 1
 The first step is to load the `newick` format tree file `tree_of_itol_templates.tree` and its corresponding metadata `templates_frequence.txt`. The following example data `templates_frequence.txt` contains the usage of each template type in 21 published studies.
@@ -42,16 +42,19 @@ df_frequence <- system.file("extdata",
                              package = "itol.toolkit")
 df_frequence <- fread(df_frequence)
 ```
-By setting the `unit@specific_themes$heatmap$color$max` and `unit@specific_themes$heatmap$color$min`, we can manually control the colors corresponding to the maximum and minimum values. In addition, there is an intermediate value for the default color setting, and we can manually cancel setting the intermediate value: `unit@specific_themes$heatmap$use_mid <- 0`
+By setting the `unit@specific_themes$heatmap$color$max` and `unit@specific_themes$heatmap$color$min`, we can manually control the colors corresponding to the maximum and minimum values. In addition, there is a mid value for the default color setting, and we can manually cancel setting the mid value: `unit@specific_themes$heatmap$use_mid <- 0`
 ```{r heatmap of dataset 1, message=FALSE, warning=FALSE}
 unit_25 <- create_unit(data = df_frequence,
                        key = "E025_heatmap_1",
                        type = "DATASET_HEATMAP",
-                       tree = tree_1)
+                       tree = tree)
 unit_25@specific_themes$heatmap$color$min <- "#ffd966"
 unit_25@specific_themes$heatmap$color$max <- "#cc0000"
 unit_25@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_25)
 ```
+
+![](images/DATASET_HEATMAP_1.png)
 
 ### Dataset 3
 The data in dataset3 comes from Lei Zheng et al. *Comparing with oxygen, trate simplifies microbial community assembly and improve functions as an electric acceptor in waste water treatment*, published in 2022 in Environmental Pollution.
@@ -62,8 +65,14 @@ library(itol.toolkit)
 library(data.table)
 library(ape)
 library(dplyr)
-tree_2 <- read.tree("assembly-tree.nwk")
-df_metadata <- fread("assembly-metadata.txt")
+tree_2_path <- system.file("extdata",
+                    "dataset3/assembly-tree.nwk",
+                    package = "itol.toolkit")
+tree_2 <- read.tree(tree_2_path)
+metadata_path <- system.file("extdata",
+                    "dataset3/assembly-metadata.txt",
+                    package = "itol.toolkit")
+df_metadata <- data.table::fread(metadata_path)
 ```
 First, we prepare a heatmap drawing template using NS group data.
 ```{r heatmap of NS}
@@ -77,6 +86,7 @@ unit_26 <- create_unit(data = df_cap_NS,
 unit_26@specific_themes$heatmap$color$min <- "#ffffff"
 unit_26@specific_themes$heatmap$color$max <- "#8ccdd7"
 unit_26@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_26)
 ```
 Next, use the same method to visualize OS group data.
 ```{r heatmap of OS}
@@ -88,7 +98,11 @@ unit_27 <- create_unit(data = df_cap_OS,
 unit_27@specific_themes$heatmap$color$min <- "#ffffff"
 unit_27@specific_themes$heatmap$color$max <- "#f89b9b"
 unit_27@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_27)
 ```
+
+![](images/DATASET_HEATMAP_2.png)
+
 It is worth noting that the column names of the data used to draw the heatmap will be displayed on the side of the heatmap. Users should try to avoid using special symbols in the column names, otherwise errors may occur when applying the template to the iTOL: 
 *Failed to decode the file. Make sure it is in ASCII or UTF8 plain text format. Try using the dataset templates available on iTOL's help pages.*
 

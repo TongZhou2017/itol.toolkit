@@ -1,5 +1,5 @@
 ---
-title: "DATASET_MULTIBAR"
+title: "DATASET MULTIBAR"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 author: Longzhao Li^[IOCAS, 2575760336@qq.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
@@ -21,14 +21,14 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-The function of `DATASET_MULTIBAR` is to prepare templates for drawing multi-value bar charts. In multi-value bar charts, each tree node is associated to multiple numeric values, which are displayed as a stacked or aligned bar chart outside the tree. The `DATASET_MULTIBAR` template belongs to the "Basic graphics" class (refer to the [Class]() for detail information).
+The function of `DATASET_MULTIBAR` is to prepare templates for drawing multi-value bar charts. In multibar charts, each tip node is associated to multiple numeric values, which are displayed as a stacked or aligned bar chart outside the tree. The `DATASET_MULTIBAR` template belongs to the "Basic graphics" class (refer to the [Class]() for detail information).
 
-In multi-value bar charts, individual fields (values) require corresponding labels and colors that are defined using "FIELD_LABELS" and "FIELD_COLOR" lines in the template. Additionally, these values are typically statistics derived from raw data, such as the average and sum. Unfortunately, iTOL does not support statistical analysis, making it necessary for users to use other tools to perform such analysis. Additionally, the raw data was excluded in iTOL templates, posing difficulties in reproducing pictures or sharing them with others.
+In multibar charts, individual fields (values) require corresponding labels and colors that are defined using "FIELD_LABELS" and "FIELD_COLOR" lines in the template. Additionally, these values are typically statistics derived from raw data, such as the average and sum. Unfortunately, iTOL does not support statistical analysis, making it necessary for users to use other tools to perform such analysis. Additionally, the raw data was excluded in iTOL templates, posing difficulties in reproducing figures or sharing them with others.
 
-Here, we provide a convenient way to  calculate  **statistics** for multi-value bar charts and store `FIELD_LABELS` and `FIELD_COLOR` values. This section describes how to use `itol.toolkit` to prepare the multi-value bar charts templates.
+Here, we provide a convenient way to calculate **statistics** for multibar charts and store `FIELD_LABELS` and `FIELD_COLOR` values. This section describes how to use `itol.toolkit` to prepare the multi-value bar charts templates.
 
 ## Plot multibar plot
-This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) as an example to show how to draw the multi value bar charts. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information)
+This section uses [dataset 1](https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1) as an example to show how to draw the multibar charts. (refer to the  [Dataset](https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html) for detail information)
 
 ### Load data
 The first step is to load the `newick` format tree file `tree_of_itol_templates.tree` and its corresponding metadata `df_frequence`. 
@@ -45,7 +45,7 @@ tree <- system.file("extdata",
 df_frequence <- system.file("extdata",
                             "templates_frequence.txt",
                              package = "itol.toolkit")
-df_frequence <- fread(df_frequence)
+df_frequence <- data.table::fread(df_frequence)
 names(df_frequence) <- c(
   "id",
   "Li,S. et al. (2022) J. Hazard. Mater.","Zheng,L. et al. (2022) Environ. Pollut.",
@@ -83,10 +83,11 @@ df_frequence_years <- df_frequence %>%
    summarise(value = sum(value)) %>%
    spread(years,value) %>%
    replace(is.na(.), 0)
-unit <- create_unit(data = df_frequence_years,
+unit_30 <- create_unit(data = df_frequence_years,
                     key = "E030_simplebar_2", 
                     type = "DATASET_MULTIBAR", 
                     tree = tree)
+write_unit(unit_30)
 ```
-
+![](images/DATASET_MULTIBAR_1.png)
 

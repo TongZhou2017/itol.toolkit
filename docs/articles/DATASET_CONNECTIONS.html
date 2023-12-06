@@ -205,7 +205,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 19 November,
+            <h4 data-toc-skip class="date">Last compiled on 07 December,
 2023</h4>
       
       
@@ -262,7 +262,7 @@ belongs to.</p>
 <span><span class="va">parameter_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
 <span>                                <span class="st">"parameter_groups.txt"</span>,</span>
 <span>                                package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span>
-<span><span class="va">parameter_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">parameter_groups</span><span class="op">)</span></span>
+<span><span class="va">parameter_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">parameter_groups</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"template_groups"</span><span class="op">)</span></span></code></pre></div>
 <p>The table used to create the connection should have four columns. The
 first two columns for the connected points, the third column for the
@@ -276,12 +276,12 @@ contain. The template is stored in the variable
 <span>                   <span class="fu"><a href="../reference/convert_01.html">convert_01</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>                   <span class="fu"><a href="../reference/convert_01_to_connect.html">convert_01_to_connect</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">tab_tmp_connect</span><span class="op">$</span><span class="va">val</span> <span class="op">&lt;-</span> <span class="va">tab_tmp_connect</span><span class="op">$</span><span class="va">val</span> <span class="op">-</span><span class="fl">1</span></span>
-<span><span class="va">tab_tmp_connect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">tab_tmp_connect</span>,</span>
+<span><span class="va">tab_tmp_connect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">tab_tmp_connect</span>,</span>
 <span>                             <span class="va">template_groups</span>,</span>
 <span>                             by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span> <span class="op">=</span> <span class="st">"template"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">tab_tmp_connect</span> <span class="op">&lt;-</span> <span class="va">tab_tmp_connect</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">val</span> <span class="op">&gt;</span> <span class="fl">9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">row</span> <span class="op">!=</span> <span class="va">col</span><span class="op">)</span></span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">val</span> <span class="op">&gt;</span> <span class="fl">9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">row</span> <span class="op">!=</span> <span class="va">col</span><span class="op">)</span></span>
 <span><span class="va">unit_32</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tab_tmp_connect</span>,</span>
 <span>                       key <span class="op">=</span> <span class="st">"E032_connection_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_CONNECTION"</span>,</span>

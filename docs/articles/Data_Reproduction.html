@@ -205,7 +205,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 19 November,
+            <h4 data-toc-skip class="date">Last compiled on 07 December,
 2023</h4>
       
       
@@ -484,14 +484,14 @@ them to .txt files using the <code><a href="https://rdrr.io/r/utils/write.table.
 in separate variables for subsequent access or output to a file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_tip</span> <span class="op">&lt;-</span> <span class="va">hub</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">tip</span></span>
-<span><span class="va">multibar10</span> <span class="op">&lt;-</span> <span class="va">metadata_tip</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"example_multi_bar_chart$"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">multibar10</span> <span class="op">&lt;-</span> <span class="va">metadata_tip</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"example_multi_bar_chart$"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.table</a></span><span class="op">(</span><span class="va">multibar10</span>,</span>
 <span>            file <span class="op">=</span> <span class="st">"multibar10_metadata.txt"</span>,</span>
 <span>            sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
 <span>            quote <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>            row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">binary</span> <span class="op">&lt;-</span> <span class="va">metadata_tip</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"binary_data$"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">binary</span> <span class="op">&lt;-</span> <span class="va">metadata_tip</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"binary_data$"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.table</a></span><span class="op">(</span><span class="va">binary</span>,</span>
 <span>            file <span class="op">=</span> <span class="st">"binary_metadata.txt"</span>,</span>
 <span>            sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
