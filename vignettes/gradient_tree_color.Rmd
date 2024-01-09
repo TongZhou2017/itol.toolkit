@@ -1,0 +1,84 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+pie(1:5,col = get_color(5))
+main_colors <- get_color(6,get_color(set = "ls")[32])
+pie(1:6,col = get_color(6,get_color(set = "ls")[32]))
+pie(1:10,col = gradient_color(10,start = main_colors[1],end = main_colors[2]))
+# pie
+pie(rep(1,60),col = c(gradient_color(10,start = main_colors[1],end = main_colors[2]),gradient_color(10,start = main_colors[2],end = main_colors[3]),gradient_color(10,start = main_colors[3],end = main_colors[4]),gradient_color(10,start = main_colors[4],end = main_colors[5]),gradient_color(10,start = main_colors[5],end = main_colors[1])))
+# line
+layout(matrix(1:2,ncol=2), width = c(2,1),height = c(1,1))
+plot(1:20, 1:20, pch = 19, cex=2, col = c(gradient_color(10,start = main_colors[1],end = main_colors[2]),gradient_color(10,start = main_colors[2],end = main_colors[3])))
+# legend
+legend_image <- as.raster(matrix(c(gradient_color(10,start = main_colors[1],end = main_colors[2])[-c(2,7)],gradient_color(10,start = main_colors[2],end = main_colors[3])[-c(1,10)],gradient_color(10,start = main_colors[3],end = main_colors[4])[-c(1,10)],gradient_color(10,start = main_colors[4],end = main_colors[5])[-c(1,10)],gradient_color(10,start = main_colors[5],end = main_colors[6])[-c(2,7)]), ncol=1))
+plot(c(0,2),c(0,1),type = 'n', axes = F,xlab = '', ylab = '', main = 'legend title')
+text(x=1.5, y = seq(0,1,l=6), labels = seq(0,1,l=6))
+rasterImage(legend_image, 0, 0, 1,1)
+```
+
+从这开始
+```{r}
+library(itol.toolkit) # main package
+library(dplyr) # data manipulation
+library(data.table) # file read
+library(ape) # tree operation
+library(stringr) # string operation
+library(tidyr) # data manipulation
+tree_1 <- system.file("extdata","dataset4/otus.contree",package = "itol.toolkit")
+hub_1 <- create_hub(tree_1)
+data_file_1 <- system.file("extdata","dataset4/annotation.txt",package = "itol.toolkit")
+data_file_2 <- system.file("extdata","dataset4/otutab_high.mean",package = "itol.toolkit")
+data_1 <- data.table::fread(data_file_1)
+#data_1$All <- log(1+data_1$All)
+data_2 <- data.table::fread(data_file_2)
+data_3 <- data_1 %>% select(ID, All)
+data_3$All <- cut(data_1$All,breaks = seq(min(data_1$All),max(data_1$All),length.out = 41))
+labs <- levels(data_3$All)
+levels(data_3$All) <- rev(c(gradient_color(10,start = main_colors[1],end = main_colors[2])[-c(2,7)],gradient_color(10,start = main_colors[2],end = main_colors[3])[-c(1,10)],gradient_color(10,start = main_colors[3],end = main_colors[4])[-c(1,10)],gradient_color(10,start = main_colors[4],end = main_colors[5])[-c(1,10)],gradient_color(10,start = main_colors[5],end = main_colors[6])[-c(2,7)]))
+data_3$All <- as.character(data_3$All)
+data_3 <- na.omit(data_3)
+labs <- cbind(lower = as.numeric( sub("\\((.+),.*", "\\1", labs) ),upper = as.numeric( sub("[^,]*,([^]]*)\\]", "\\1", labs)))
+unit_8 <- create_unit(data = data_3, 
+                      key = "E008_tree_colors_2", 
+                      type = "TREE_COLORS", 
+                      subtype = "clade", 
+                      
+                      size_factor = 5, 
+                      tree = tree_1)
+write_unit(unit_8)
+
+legend_image <- as.raster(matrix(c(gradient_color(10,start = main_colors[1],end = main_colors[2])[-c(2,7)],gradient_color(10,start = main_colors[2],end = main_colors[3])[-c(1,10)],gradient_color(10,start = main_colors[3],end = main_colors[4])[-c(1,10)],gradient_color(10,start = main_colors[4],end = main_colors[5])[-c(1,10)],gradient_color(10,start = main_colors[5],end = main_colors[6])[-c(2,7)]), ncol=1))
+plot(c(0,2),c(0,1),type = 'n', axes = F,xlab = '', ylab = '', main = 'legend title')
+text(x=1.5, y = seq(0,1,l=6), labels = seq(min(data_1$All),max(data_1$All),l=6))
+rasterImage(legend_image, 0, 0, 1,1)
+```
+rank model
+```{r}
+data_1 <- data.table::fread(data_file_1)
+data_1$All <- rank(data_1$All)
+data_2 <- data.table::fread(data_file_2)
+data_3 <- data_1 %>% select(ID, All)
+data_3$All <- cut(data_1$All,breaks = seq(min(data_1$All),max(data_1$All),length.out = 41))
+labs <- levels(data_3$All)
+levels(data_3$All) <- rev(c(gradient_color(10,start = main_colors[1],end = main_colors[2])[-c(2,7)],gradient_color(10,start = main_colors[2],end = main_colors[3])[-c(1,10)],gradient_color(10,start = main_colors[3],end = main_colors[4])[-c(1,10)],gradient_color(10,start = main_colors[4],end = main_colors[5])[-c(1,10)],gradient_color(10,start = main_colors[5],end = main_colors[6])[-c(2,7)]))
+data_3$All <- as.character(data_3$All)
+data_3 <- na.omit(data_3)
+labs <- cbind(lower = as.numeric( sub("\\((.+),.*", "\\1", labs) ),upper = as.numeric( sub("[^,]*,([^]]*)\\]", "\\1", labs)))
+unit_8 <- create_unit(data = data_3, 
+                      key = "E008_tree_colors_2", 
+                      type = "TREE_COLORS", 
+                      subtype = "clade", 
+                      
+                      size_factor = 5, 
+                      tree = tree_1)
+write_unit(unit_8)
+
+legend_image <- as.raster(matrix(c(gradient_color(10,start = main_colors[1],end = main_colors[2])[-c(2,7)],gradient_color(10,start = main_colors[2],end = main_colors[3])[-c(1,10)],gradient_color(10,start = main_colors[3],end = main_colors[4])[-c(1,10)],gradient_color(10,start = main_colors[4],end = main_colors[5])[-c(1,10)],gradient_color(10,start = main_colors[5],end = main_colors[6])[-c(2,7)]), ncol=1))
+plot(c(0,2),c(0,1),type = 'n', axes = F,xlab = '', ylab = '', main = 'Rank')
+text(x=1.5, y = seq(0,1,l=6), labels = seq(min(data_1$All),max(data_1$All),l=6))
+rasterImage(legend_image, 0, 0, 1,1)
+```
