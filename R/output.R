@@ -228,11 +228,13 @@ write_unit <- function(unit, file = getwd()) {
     lines <- c(lines, paste("USER_MAX_VALUE", paste(unit@specific_themes$heatmap$value$max, collapse = unit@sep), sep = unit@sep))
   }
   ### tree
-  if (!is.null(unit@specific_themes$heatmap$tree$tree)) {
-    lines <- c(lines, paste("FIELD_TREE", paste(unit@specific_themes$heatmap$tree$tree, collapse = unit@sep), sep = unit@sep))
-  }
   if (!is.null(unit@specific_themes$heatmap$tree$tree_display)) {
     lines <- c(lines, paste("SHOW_TREE", paste(unit@specific_themes$heatmap$tree$tree_display, collapse = unit@sep), sep = unit@sep))
+  }
+  if (!is.null(unit@specific_themes$heatmap$tree$tree)) {
+    if(unit@specific_themes$heatmap$tree$tree_display == 1){
+      lines <- c(lines, paste("FIELD_TREE", paste(unit@specific_themes$heatmap$tree$tree, collapse = unit@sep), sep = unit@sep))
+    }
   }
   ### use_mid
   if (!is.null(unit@specific_themes$heatmap$use_mid)) {
@@ -541,6 +543,7 @@ write_unit <- function(unit, file = getwd()) {
 #' @param dir output dir path. Define the output files location using absolute
 #' or relative path. The template files will output by the key information from
 #' theme name in the hub object.
+#' @param with_tree output with tree file in newick format.
 #' @return No return value, only output template files
 #' @export
 #' @examples
@@ -566,11 +569,14 @@ write_unit <- function(unit, file = getwd()) {
 #' ## write hub
 #' hub <- hub + unit_1 + unit_2
 #' write_hub(hub,tempdir())
-write_hub <- function(object, dir = getwd()) {
+write_hub <- function(object, dir = getwd(), with_tree = FALSE) {
   keys <- names(object@theme)
   for (key in keys) {
     unit <- hub_to_unit(object, object@theme[[key]], key)
     write_unit(unit, dir)
+  }
+  if(with_tree){
+    ape::write.tree(object@tree$main, paste0(dir,"/tree.nwk"))
   }
 }
 

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.9</span>
       </span>
     </div>
 
@@ -138,6 +138,17 @@
       <a href="../articles/tree_construction.html">Tree Construction</a>
     </li>
   </ul></li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Version history</li>
+    <li>
+      <a href="../articles/v1.1.9.html">version 1.1.9</a>
+    </li>
+  </ul></li>
 <li>
   <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">Gallery</a>
 </li>
@@ -178,7 +189,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_hub</span><span class="op">(</span><span class="va">object</span>, dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_hub</span><span class="op">(</span><span class="va">object</span>, dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, with_tree <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -205,6 +216,10 @@ name to be output consistent with the data name prefix.</p></dd>
 <dd><p>output dir path. Define the output files location using absolute
 or relative path. The template files will output by the key information from
 theme name in the hub object.</p></dd>
+
+
+<dt>with_tree</dt>
+<dd><p>output with tree file in newick format.</p></dd>
 
 </dl></div>
     <div id="value">

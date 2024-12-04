@@ -78,6 +78,11 @@ navbar:
         href: articles/Comparison_table2itol.html
       - text: "Tree Construction"
         href: articles/tree_construction.html
+    - text: "News"
+      menu:
+        - text: Version history
+        - text: "version 1.1.9"
+          href: articles/v1.1.9.html
     - text: "Gallery"
       href: "https://tongzhou2017.github.io/itol.toolkit-gallery/"
   right:

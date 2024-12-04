@@ -955,13 +955,22 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data[is.na(data)] <- 0
     names(data) <- str_replace_all(names(data)," ","_")
     field_names <- names(data)[-1]
-    field_tree <- write.tree(ape::as.phylo(hclust(dist(t(data %>% select(field_names))))))
+    #print(field_names)
+    if(length(names(data)) == 2){
+      field_tree <- NULL
+    }else{
+      field_tree <- write.tree(ape::as.phylo(hclust(dist(t(data %>% select(field_names))))))
+    }
     names(data) <- c("id",paste0(key,"$",field_names))
     data <- convert_range_to_node(data, tree)
     data_left[["node"]] <- df_merge(data_left[["node"]], data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field$labels <- field_names
-    specific_themes[["heatmap"]][["tree"]][["tree"]] <- field_tree
+    if(length(names(data)) == 2){
+      specific_themes[["heatmap"]][["tree"]][["tree_display"]] <- 0
+    }else{
+      specific_themes[["heatmap"]][["tree"]][["tree"]] <- field_tree
+    }
     profile$name <- key
     sep = "\t"
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
@@ -1350,13 +1359,13 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     }
     id <- data[["id"]]
     data <- data[,-1]
+    data <- mutate_all(data, function(x) as.numeric(as.character(x)))
     min <- min(data)
-    mean <- mean(data)
+    mean <- data %>% rowMeans() %>% mean()
     max <- max(data)
     data[is.na(data)] <- 0
     method = case_when(method == "sum" ~ "rowSums",
       method == "mean" ~ "rowMeans")
-    data <- mutate_all(data, function(x) as.numeric(as.character(x)))
     eval(parse(text = paste0('result <- ',method,'(data)')))
     data <- data.frame(id = id, data = result)
     names(data) <- c("id",paste0(key,"$",stringr::str_replace_all(field_name," ","_")))
@@ -1815,7 +1824,7 @@ count_to_tree <- function(count,group=NULL,weight=0){
     group_number <- length(group_names)
     group_templates_mrca_min_node_ids <- c()
     for (i in 1:group_number) {
-      group_templates <- tempalte_groups %>%
+      group_templates <- template_groups %>%
         filter(group == group_names[i]) %>%
         pull(template)
       group_templates_mrca <- mrca[group_templates,group_templates]

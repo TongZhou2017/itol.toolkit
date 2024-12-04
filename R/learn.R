@@ -1349,6 +1349,7 @@ learn_data_from_unit <- function(object, unit) {
       id <- abundance$id
       abundance <- abundance[, -1]
       abundance[abundance == "X"] <- NA
+      abundance <- as.data.frame(abundance)
       abundance <- mutate_all(abundance, function(x) as.numeric(as.character(x)))
       abundance <- cbind(id, abundance)
       if (unit_name %in% unique(stringr::str_remove(names(object@abundance), "\\$.*$"))) {

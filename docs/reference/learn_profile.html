@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.9</span>
       </span>
     </div>
 
@@ -138,6 +138,17 @@
       <a href="../articles/tree_construction.html">Tree Construction</a>
     </li>
   </ul></li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Version history</li>
+    <li>
+      <a href="../articles/v1.1.9.html">version 1.1.9</a>
+    </li>
+  </ul></li>
 <li>
   <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">Gallery</a>
 </li>
@@ -212,7 +223,7 @@ RGBA notation; if using RGB/RGBA, COMMA cannot be used as SEPARATOR)</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>                    <span class="st">"tree_of_itol_templates.tree"</span>,</span></span>
 <span class="r-in"><span>                    package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">df_frequence</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span><span class="va">df_frequence</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>                                              <span class="st">"templates_frequence.txt"</span>,</span></span>
 <span class="r-in"><span>                                              package <span class="op">=</span> <span class="st">"itol.toolkit"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## create unit</span></span></span>

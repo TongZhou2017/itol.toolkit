@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.1.8
+Version: 1.1.9
 Authors@R: 
     person(
     given = "Tong",
@@ -53,4 +53,5 @@ Collate:
     'output.R'
     'user.R'
     'ops.R'
+    'tree.R'
     'zzz.R'

@@ -58,3 +58,42 @@ gradient_color <- function(n,start,mid=NULL,end="#FFFFFF"){
   }
   return(colors)
 }
+
+#' Sort colors
+#' @description sort colors by similarity
+#' @param colors a vector of colors in hex format
+#' @param root sort from root color
+#' @param rev sort order by similarity(default) or difference
+#' @param plot preview color order
+#' @importFrom ape as.phylo
+#' @importFrom ape root
+#' @importFrom stats as.dist
+#' @return a vector of sorted colors
+#' @export
+sort_color <- function(colors,root=NULL,rev=FALSE,plot=FALSE){
+  colors <- as.character(colors)
+  if(!is.null(root)){
+    colors <- c(colors,root)
+  }
+  mtx <- matrix(0,ncol=length(colors),nrow=length(colors))
+  for (i in 1:length(colors)){
+    for (j in 1:length(colors)){
+      mtx[i,j] <- color_distance(color_1=colors[i],colors[j])
+    }
+  }
+  tree <- as.phylo(hclust(as.dist(mtx),method="complete"))
+  if(!is.null(root)){
+    tree <- root(tree, outgroup = as.character(length(colors)), resolve.root = TRUE)
+  }
+  if(plot){
+    plot(tree,tip.col=colors)
+  }
+  is_tip <- tree$edge[,2] <= length(tree$tip.label)
+  ordered_tips <- tree$edge[is_tip, 2]
+  old_order <- tree$tip.label[ordered_tips]
+  new_colors <- colors[order(old_order)]
+  if(!is.null(root)){
+    new_colors <- new_colors[-which(old_order == length(colors))]
+  }
+  return(new_colors)
+}

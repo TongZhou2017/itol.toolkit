@@ -133,6 +133,9 @@
     <loc>/articles/tree_construction.html</loc>
   </url>
   <url>
+    <loc>/articles/v1.1.9.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -170,6 +173,9 @@
   </url>
   <url>
     <loc>/reference/df_merge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/df_tree.html</loc>
   </url>
   <url>
     <loc>/reference/fa_read.html</loc>
@@ -331,6 +337,9 @@
     <loc>/reference/show-itol.hub-method.html</loc>
   </url>
   <url>
+    <loc>/reference/sort_color.html</loc>
+  </url>
+  <url>
     <loc>/reference/template_groups.html</loc>
   </url>
   <url>
@@ -344,6 +353,9 @@
   </url>
   <url>
     <loc>/reference/use.theme.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vector_tree.html</loc>
   </url>
   <url>
     <loc>/reference/write_hub.html</loc>

@@ -4,7 +4,7 @@
 \alias{write_hub}
 \title{Write all data object into files}
 \usage{
-write_hub(object, dir = getwd())
+write_hub(object, dir = getwd(), with_tree = FALSE)
 }
 \arguments{
 \item{object}{itol.hub object holds the complete data and theme information.
@@ -26,6 +26,8 @@ name to be output consistent with the data name prefix.}
 \item{dir}{output dir path. Define the output files location using absolute
 or relative path. The template files will output by the key information from
 theme name in the hub object.}
+
+\item{with_tree}{output with tree file in newick format.}
 }
 \value{
 No return value, only output template files
