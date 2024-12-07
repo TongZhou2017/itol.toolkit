@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 07 December,
 2024</h4>
       
       
@@ -275,18 +275,20 @@ columns: The first column is the leaf node name and the second is the
 group name.We can add color strips to the tips by entering the branch
 name.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">template_groups</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E020_color_strip_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_21</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">template_groups</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E021_color_strip_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_COLORSTRIP"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_COLORSTRIP_1.png"></p>
 <p>Color strips can also be added through nodes.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tree_sturcture"</span>, <span class="st">"theme_style"</span>, <span class="st">"text"</span>, <span class="st">"basic_plot"</span>, <span class="st">"advanced_plot"</span><span class="op">)</span>,</span>
 <span>                      data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tree_sturcture"</span>, <span class="st">"theme_style"</span>, <span class="st">"text"</span>, <span class="st">"basic_plot"</span>, <span class="st">"advanced_plot"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">unit_21</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E021_color_strip_2"</span>,</span>
+<span><span class="va">unit_22</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E022_color_strip_2"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_COLORSTRIP"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_COLORSTRIP_2.png"></p>
 <p>It is worth noting that when adding a color strip through node, the
 color strip is not displayed outside the tree by default, and can be
 displayed by turning on <code>Display internal node values</code> on the
@@ -315,12 +317,13 @@ through color strips.</p>
 <p>Filter the taxonomy information of class in the metadata and generate
 color strips based on it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">unit_23</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Class</span><span class="op">)</span>, </span>
 <span>                      key <span class="op">=</span> <span class="st">"Zheng2022ep_3al_3_strip"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_COLORSTRIP"</span>,</span>
 <span>                      color <span class="op">=</span> <span class="st">"wesanderson"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_COLORSTRIP_3.png"></p>
 <p>It should be noted that when the tree is large or there are too many
 annotation information dimensions, it may cause the browser to crash.
 You should choose another browser or close the browser tab at this

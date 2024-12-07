@@ -2,7 +2,7 @@
   packageStartupMessage(
     "
 
-itol.toolkit v1.1.8 For help: https://tongzhou2017.github.io/itol.toolkit
+itol.toolkit v1.1.9 For help: https://tongzhou2017.github.io/itol.toolkit
 
 If you use the itol.toolkit package in published research, please cite:
 

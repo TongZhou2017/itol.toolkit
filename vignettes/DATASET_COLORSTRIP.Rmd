@@ -45,20 +45,26 @@ data("template_groups")
 ```
 The input data for `DATASET_COLORSTRIP` contains two columns: The first column is the leaf node name and the second is the group name.We can add color strips to the tips by entering the branch name. 
 ```{r color strip in tip}
-unit_20 <- create_unit(data = template_groups,
-                       key = "E020_color_strip_1",
+unit_21 <- create_unit(data = template_groups,
+                       key = "E021_color_strip_1",
                        type = "DATASET_COLORSTRIP",
                        tree = tree_1)
 ```
+
+![](images/DATASET_COLORSTRIP_1.png)
+
 Color strips can also be added through nodes.
 ```{r color strip in node}
 df_data <- data.frame(id = c("tree_sturcture", "theme_style", "text", "basic_plot", "advanced_plot"),
                       data = c("tree_sturcture", "theme_style", "text", "basic_plot", "advanced_plot"))
-unit_21 <- create_unit(data = df_data,
-                       key = "E021_color_strip_2",
+unit_22 <- create_unit(data = df_data,
+                       key = "E022_color_strip_2",
                        type = "DATASET_COLORSTRIP",
                        tree = tree_1)
 ```
+
+![](images/DATASET_COLORSTRIP_2.png)
+
 It is worth noting that when adding a color strip through node, the color strip is not displayed outside the tree by default, and can be displayed by turning on `Display internal node values` on the iTOL control panel. At the same time, users can display labels through `Display strip labels` on the iTOL control panel.
 
 ### Dataset 3
@@ -75,11 +81,14 @@ df_metadata <- fread("rare-metadata.txt")
 ```
 Filter the taxonomy information of class in the metadata and generate color strips based on it.
 ```{r color strip by class}
-unit_3 <- create_unit(data = df_metadata %>% 
+unit_23 <- create_unit(data = df_metadata %>% 
                         select(ID, Class), 
                       key = "Zheng2022ep_3al_3_strip",
                       type = "DATASET_COLORSTRIP",
                       color = "wesanderson",
                       tree = tree_2)
 ```
+
+![](images/DATASET_COLORSTRIP_3.png)
+
 It should be noted that when the tree is large or there are too many annotation information dimensions, it may cause the browser to crash. You should choose another browser or close the browser tab at this time.

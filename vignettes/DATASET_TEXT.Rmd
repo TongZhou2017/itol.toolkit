@@ -60,6 +60,9 @@ unit_18 <- create_unit(data = df_data,
                        tree = tree)
 write_unit(unit_18)
 ```
+
+![](images/DATASET_TEXT_1.png)
+
 Users can input data with only only two columns(i.e., node ID and text), and set the color manually through the "color" parameter.
 ```{r text color defind by parameter}
 df_data <- data.frame(id = "I1", text = "itol.toolkit")
@@ -72,6 +75,8 @@ unit_19 <- create_unit(data = df_data,
                        tree = tree)
 write_unit(unit_19)
 ```
+
+![](images/DATASET_TEXT_2.png)
 
 Users can define multi-style text by adding different tags to the text:
 
@@ -101,7 +106,7 @@ Multiple styles can be used only on external labels (ie. position is set to -1),
 ```{r multi-style text}
 df_data <- data.frame(id = "DATASET_COLORSTRIP", text = '<i color="#0000FF">itol.</i><b>toolkit</b>')
 unit_20 <- create_unit(data = df_data,
-                       key = "E019_text_3",
+                       key = "E020_text_3",
                        type = "DATASET_TEXT",
                        size_factor = 1,
                        rotation = 0,
@@ -110,6 +115,8 @@ unit_20 <- create_unit(data = df_data,
                        tree = tree)
 write_unit(unit_20)
 ```
+
+![](images/DATASET_TEXT_3.png)
 
 ## Style modification
 Users can adjust the position of the text label with the following variables:
