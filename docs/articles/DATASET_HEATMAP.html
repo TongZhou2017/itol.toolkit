@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -278,14 +278,14 @@ addition, there is a mid value for the default color setting, and we can
 manually cancel setting the mid value:
 <code>unit@specific_themes$heatmap$use_mid &lt;- 0</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_25</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E025_heatmap_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_28</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E028_heatmap_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_HEATMAP"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
-<span><span class="va">unit_25</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffd966"</span></span>
-<span><span class="va">unit_25</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#cc0000"</span></span>
-<span><span class="va">unit_25</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_25</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffd966"</span></span>
+<span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#cc0000"</span></span>
+<span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_28</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/DATASET_HEATMAP_1.png"></p>
 </div>
 <div class="section level3">
@@ -318,25 +318,25 @@ please adjust the path based on actual situation.</p>
 <code class="sourceCode R"><span><span class="va">df_cap_NS</span> <span class="op">&lt;-</span> <span class="va">df_metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"NS"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"bar"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">unit_26</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_cap_NS</span>, </span>
-<span>                       key <span class="op">=</span> <span class="st">"Zheng2022ep_4a_heatmap_NS"</span>,</span>
+<span><span class="va">unit_29a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_cap_NS</span>, </span>
+<span>                       key <span class="op">=</span> <span class="st">"E029_heatmap_2a"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_HEATMAP"</span>, </span>
 <span>                       tree <span class="op">=</span> <span class="va">tree_2</span><span class="op">)</span></span>
-<span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffffff"</span></span>
-<span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#8ccdd7"</span></span>
-<span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_26</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">unit_29a</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffffff"</span></span>
+<span><span class="va">unit_29a</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#8ccdd7"</span></span>
+<span><span class="va">unit_29a</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_29a</span><span class="op">)</span></span></code></pre></div>
 <p>Next, use the same method to visualize OS group data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_cap_OS</span> <span class="op">&lt;-</span> <span class="va">df_metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"OS"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"bar"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">unit_27</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_cap_OS</span>, </span>
-<span>                       key <span class="op">=</span> <span class="st">"Zheng2022ep_4a_heatmap_OS"</span>,</span>
+<span><span class="va">unit_29b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_cap_OS</span>, </span>
+<span>                       key <span class="op">=</span> <span class="st">"E029_heatmap_2b"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_HEATMAP"</span>, </span>
 <span>                       tree <span class="op">=</span> <span class="va">tree_2</span><span class="op">)</span></span>
-<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffffff"</span></span>
-<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#f89b9b"</span></span>
-<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_27</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">unit_29b</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#ffffff"</span></span>
+<span><span class="va">unit_29b</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#f89b9b"</span></span>
+<span><span class="va">unit_29b</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">use_mid</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_29b</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/DATASET_HEATMAP_2.png"></p>
 <p>It is worth noting that the column names of the data used to draw the
 heatmap will be displayed on the side of the heatmap. Users should try
@@ -354,14 +354,15 @@ side of the heat map by default. If you do not want to display the
 cluster tree, you can modify it through
 <code>unit@specific_themes$heatmap$tree$tree_display &lt;- 0</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">tree</span><span class="op">$</span><span class="va">tree_display</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">tree</span><span class="op">$</span><span class="va">tree_display</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">tree</span><span class="op">$</span><span class="va">tree_display</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">unit_29a</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">tree</span><span class="op">$</span><span class="va">tree_display</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">unit_29b</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">tree</span><span class="op">$</span><span class="va">tree_display</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div>
 <p>The maximum and minimum values of the heatmap can be set through
 <code>unit_26@specific_themes$heatmap$value$max</code> and
 <code>unit_26@specific_themes$heatmap$value$min</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">value</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
-<span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">value</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">value</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
+<span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">value</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

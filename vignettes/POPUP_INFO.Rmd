@@ -42,8 +42,10 @@ Using `POPUP_INFO`, you need tip/nodes names, and corresponding image URLs . It 
 df_data <- data.frame(ids = "POPUP_INFO", 
                       text = "POPUP_INFO",
                       content= "<h2>POPUP_INFO</h2>")
-unit <- create_unit(data = df_data, 
-                    key = "E019_text_2", 
+unit_45 <- create_unit(data = df_data, 
+                    key = "E045_popupinfo_1", 
                     type = "POPUP_INFO",
                     tree = tree)
 ```
+
+![](images/POPUP_INFO_1.png)

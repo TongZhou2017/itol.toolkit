@@ -55,11 +55,13 @@ tab_tmp_connect <- full_join(tab_tmp_connect,
 tab_tmp_connect <- tab_tmp_connect %>%
                    filter(val > 9) %>%
                    filter(row != col)
-unit_32 <- create_unit(data = tab_tmp_connect,
-                       key = "E032_connection_1",
+unit_43 <- create_unit(data = tab_tmp_connect,
+                       key = "E043_connection_1",
                        type = "DATASET_CONNECTION",
                        tree = tree)
 ```
+
+![](images/DATASET_CONNECTION_1.png)
 
 ## Style modification
 The maximum line width can be set with the `unit@specific_themes$connection$line$width_max` variable. Arrows can be displayed by setting the `unit@specific_themes$connection$arrow$display` variable to 1. 

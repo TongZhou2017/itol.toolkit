@@ -45,27 +45,31 @@ df_frequence <- fread(df_frequence)
 ```
 Suppose users want to sum the frequency of each template used in 21 articles, and visualizing it using gradient color, users could use following codes. Notably, if users enter multiple columns of data and does not specify a method, itol.toolkit uses the `sum` method to process the data by default.
 ```{r gradient auto sum}
-unit_23 <- create_unit(data = df_frequence,
-                       key = "E023_gradient_1",
+unit_26 <- create_unit(data = df_frequence,
+                       key = "E026_gradient_1",
                        type = "DATASET_GRADIENT",
                        tree = tree)
 ```
+
+![](images/DATASET_GRADIENT_1.png)
+
 We can also calculate the average usage frequency of each template in published articles by specifying the `method` parameter as `mean`, and use it in gradient coloring.
 ```{r gradient mean}
-unit_24 <- create_unit(data = df_frequence,
-                       key = "E024_gradient_2",
+unit_27 <- create_unit(data = df_frequence,
+                       key = "E027_gradient_2",
                        type = "DATASET_GRADIENT",
                        method = "mean",
                        tree = tree)
 ```
+![](images/DATASET_GRADIENT_2.png)
 
 ## Style modification
 By adjusting `unit@specific_themes$heatmap$color$min`, `unit@specific_themes$heatmap$color$mid`, and `unit@specific_themes$heatmap$color$max`, users can customize the color gradient of the rectangle. Here, we set different colors for `unit_23` and `unit_24`.
 ```{r set color}
-unit_23@specific_themes$heatmap$color$min <- "#0000ff"
-unit_23@specific_themes$heatmap$color$max <- "#ff0000"
+unit_26@specific_themes$heatmap$color$min <- "#0000ff"
+unit_26@specific_themes$heatmap$color$max <- "#ff0000"
 
-unit_24@specific_themes$heatmap$color$min <- "#FFF7ED"
-unit_24@specific_themes$heatmap$color$mid <- "#FC8E58"
-unit_24@specific_themes$heatmap$color$max <- "#800000"
+unit_27@specific_themes$heatmap$color$min <- "#FFF7ED"
+unit_27@specific_themes$heatmap$color$mid <- "#FC8E58"
+unit_27@specific_themes$heatmap$color$max <- "#800000"
 ```

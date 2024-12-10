@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -279,19 +279,21 @@ following codes. Notably, if users enter multiple columns of data and
 does not specify a method, itol.toolkit uses the <code>sum</code> method
 to process the data by default.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_23</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E023_gradient_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_26</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E026_gradient_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_GRADIENT"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_GRADIENT_1.png"></p>
 <p>We can also calculate the average usage frequency of each template in
 published articles by specifying the <code>method</code> parameter as
 <code>mean</code>, and use it in gradient coloring.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_24</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E024_gradient_2"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_27</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E027_gradient_2"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_GRADIENT"</span>,</span>
 <span>                       method <span class="op">=</span> <span class="st">"mean"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_GRADIENT_2.png"></p>
 </div>
 <div class="section level2">
 <h2 id="style-modification">Style modification<a class="anchor" aria-label="anchor" href="#style-modification"></a>
@@ -302,12 +304,12 @@ published articles by specifying the <code>method</code> parameter as
 the color gradient of the rectangle. Here, we set different colors for
 <code>unit_23</code> and <code>unit_24</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_23</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#0000ff"</span></span>
-<span><span class="va">unit_23</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#ff0000"</span></span>
+<code class="sourceCode R"><span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#0000ff"</span></span>
+<span><span class="va">unit_26</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#ff0000"</span></span>
 <span></span>
-<span><span class="va">unit_24</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#FFF7ED"</span></span>
-<span><span class="va">unit_24</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">mid</span> <span class="op">&lt;-</span> <span class="st">"#FC8E58"</span></span>
-<span><span class="va">unit_24</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#800000"</span></span></code></pre></div>
+<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">min</span> <span class="op">&lt;-</span> <span class="st">"#FFF7ED"</span></span>
+<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">mid</span> <span class="op">&lt;-</span> <span class="st">"#FC8E58"</span></span>
+<span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">heatmap</span><span class="op">$</span><span class="va">color</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="st">"#800000"</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

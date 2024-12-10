@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -286,11 +286,12 @@ binary dataset as outlined or filled circles.We can adjust the size of
 the symbols through
 <code>unit@specific_themes$basic_plot$height_factor</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_21</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E021_binary_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_24</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E024_binary_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_BINARY"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
-<span><span class="va">unit_21</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">height_factor</span> <span class="op">&lt;-</span> <span class="fl">0.4</span></span></code></pre></div>
+<span><span class="va">unit_24</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">height_factor</span> <span class="op">&lt;-</span> <span class="fl">0.4</span></span></code></pre></div>
+<p><img src="images/DATASET_BINARY_1.png"></p>
 <p>It is worth noting that the same symbol size will be displayed
 differently in different tree shapes. Therefore, here we create symbols
 suitable for a rectangular tree by adjusting
@@ -298,12 +299,13 @@ suitable for a rectangular tree by adjusting
 can add labels to the symbols through
 <code>unit@common_themes$label$display</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_22</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E022_binary_2"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_25</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E025_binary_2"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_BINARY"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
-<span><span class="va">unit_22</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">height_factor</span> <span class="op">&lt;-</span> <span class="fl">0.8</span></span>
-<span><span class="va">unit_22</span><span class="op">@</span><span class="va">common_themes</span><span class="op">$</span><span class="va">label</span><span class="op">$</span><span class="va">display</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<span><span class="va">unit_25</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">height_factor</span> <span class="op">&lt;-</span> <span class="fl">0.8</span></span>
+<span><span class="va">unit_25</span><span class="op">@</span><span class="va">common_themes</span><span class="op">$</span><span class="va">label</span><span class="op">$</span><span class="va">display</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<p><img src="images/DATASET_BINARY_2.png"></p>
 </div>
 <div class="section level2">
 <h2 id="style-modification">Style modification<a class="anchor" aria-label="anchor" href="#style-modification"></a>

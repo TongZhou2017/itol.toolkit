@@ -74,22 +74,26 @@ names(df_frequence) <- stringr::str_replace_all(names(df_frequence),",","-")
 ## Data processing and create the unit
 Let's say the user intends to calculate the **sum** of each template's frequency in 21 articles as a basis for creating Simple bar charts. In the event that the user enters multiple columns of data without specifying a method, itol.toolkit will automatically use the sum method to process the data.
 ```{r simple bar auto sum}
-unit_29 <- create_unit(data = df_frequence,
-                       key = "E029_simplebar_1",
+unit_35 <- create_unit(data = df_frequence,
+                       key = "E035_simplebar_1",
                        type = "DATASET_SIMPLEBAR",
                        tree = tree)
 ```
+
+![](images/DATASET_SIMPLEBAR_1.png)
+
 We can also calculate the average usage frequency of each template in published articles by specifying the `method` parameter as `mean`, and use this as a basis for drawing Simple bar charts.
 ```{r simple bar mean}
-unit_30 <- create_unit(data = df_frequence,
-                       key = "E030_simplebar_2",
+unit_36 <- create_unit(data = df_frequence,
+                       key = "E036_simplebar_2",
                        type = "DATASET_SIMPLEBAR",
                        method = "mean",
                        tree = tree)
 ```
 
 ## Style modification
-By adjusting `unit@specific_themes$basic_plot$size_max`, users can customize the size of the plot. Here, we set a standard size for E029 and E030.
+By adjusting `unit@specific_themes$basic_plot$size_max`, users can customize the size of the plot. Here, we set a standard size for E035 and E036.
 ```{r set size}
-unit@specific_themes$basic_plot$size_max <- 100
+unit_35@specific_themes$basic_plot$size_max <- 100
+unit_36@specific_themes$basic_plot$size_max <- 100
 ```

@@ -51,8 +51,8 @@ a number between 0 and 1 = internal image positioned at the specified value alon
 - `rotation`: defines the rotation angle of the image (0 ~ 360)
 
 ```{r creat unit}
-unit_19 <- create_unit(data = df_data,
-                       key = "E019_text_2",
+unit_44 <- create_unit(data = df_data,
+                       key = "E044_image_1",
                        type = "DATASET_IMAGE",
                        position = 0,
                        size_factor = 0.2,
@@ -60,10 +60,12 @@ unit_19 <- create_unit(data = df_data,
                        tree = tree)
 ```
 
+![](images/DATASET_IMAGE_1.png)
+
 ## Style modification
 `unit@specific_themes$image$shift_h` is a pixel value; can be used to shift the image position left or right. By default, image's top left corner is aligned to the node position.  
 `unit@specific_themes$image$shift_v` is a pixel value; can be used to shift the image position below or above the node
 ```{r style modify}
-unit_19@specific_themes$image$shift_v <- 0
-unit_19@specific_themes$image$shift_h <- -850
+unit_44@specific_themes$image$shift_v <- -150
+unit_44@specific_themes$image$shift_h <- -920
 ```

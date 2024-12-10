@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -308,7 +308,7 @@ the fifth column is the parameter types (i.e., the domain label).</p>
 <span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>sublen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>                   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span>key<span class="op">=</span><span class="va">variable</span>,</span>
 <span>                          value<span class="op">=</span><span class="va">sublen</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">group</span>,levels <span class="op">=</span> <span class="va">order</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">group</span>,levels <span class="op">=</span> <span class="va">para_order</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span></span>
 <span><span class="va">group_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">template_with_start</span><span class="op">$</span><span class="va">group</span>, </span>
 <span>                          Freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">template_with_start</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -325,22 +325,35 @@ the fifth column is the parameter types (i.e., the domain label).</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">group_start</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'group'</span>,<span class="st">'start'</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>length<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">group_start</span><span class="op">$</span><span class="va">Freq</span><span class="op">)</span>,</span>
 <span>         group <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">group</span>, levels<span class="op">=</span><span class="va">para_order</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">length</span>, <span class="va">start</span>, <span class="va">end</span>, <span class="va">group</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">length</span>, <span class="va">start</span>, <span class="va">end</span>, <span class="va">group</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group2shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">group</span>,               <span class="op">~</span><span class="va">shape</span>,</span>
+<span>  <span class="st">"type"</span>,               <span class="st">"HH"</span>,</span>
+<span>  <span class="st">"separator"</span>,          <span class="st">"HV"</span>,</span>
+<span>  <span class="st">"profile"</span>,            <span class="st">"EL"</span>,</span>
+<span>  <span class="st">"field"</span>,              <span class="st">"DI"</span>,</span>
+<span>  <span class="st">"common themes"</span>,      <span class="st">"TR"</span>,</span>
+<span>  <span class="st">"specific themes"</span>,    <span class="st">"TL"</span>,</span>
+<span>  <span class="st">"data"</span>,               <span class="st">"PL"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">template_end_group_long</span> <span class="op">&lt;-</span> <span class="va">template_with_start_and_end</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">group2shape</span><span class="op">)</span></span></code></pre></div>
 <p>Using prepared data to create unit</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_28</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">template_end_group_long</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E028_domains_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_34</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">template_end_group_long</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E034_domains_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_DOMAINS"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_DOMAINS_1.png"></p>
 </div>
 <div class="section level2">
 <h2 id="style-modification">Style modification<a class="anchor" aria-label="anchor" href="#style-modification"></a>
 </h2>
 <p>Users can add a column to the long table used to generate templates
 to change the shape of each protein domain. By assigning the domain
-label column to a new column and using the
-<code><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">stringr::str_replace_all</a></code> function to replace each label
-with a shape, you can quickly modify the shape.</p>
+label column to a new column and replace each label with a shape, you
+can quickly modify the shape.</p>
 <p>Domain shape codes are as follows:</p>
 <table class="table">
 <thead><tr class="header">
@@ -402,29 +415,6 @@ with a shape, you can quickly modify the shape.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="va">template_end_group_long</span><span class="op">$</span><span class="va">group</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"type"</span>,<span class="st">"HH"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"separator"</span>,<span class="st">"HV"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"profile"</span>,<span class="st">"EL"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"field"</span>,<span class="st">"DI"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"common themes"</span>,<span class="st">"TR"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"specific themes"</span>,<span class="st">"TL"</span><span class="op">)</span></span>
-<span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">template_end_group_long</span><span class="op">$</span><span class="va">shape</span>,<span class="st">"data"</span>,<span class="st">"PL"</span><span class="op">)</span></span></code></pre></div>
-<p>我给你改的，供参考</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">group2shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span><span class="va">group</span>,               <span class="op">~</span><span class="va">shape</span>,</span>
-<span>  <span class="st">"type"</span>,               <span class="st">"HH"</span>,</span>
-<span>  <span class="st">"separator"</span>,          <span class="st">"HV"</span>,</span>
-<span>  <span class="st">"profile"</span>,            <span class="st">"EL"</span>,</span>
-<span>  <span class="st">"field"</span>,              <span class="st">"DI"</span>,</span>
-<span>  <span class="st">"common themes"</span>,      <span class="st">"TR"</span>,</span>
-<span>  <span class="st">"specific themes"</span>,    <span class="st">"TL"</span>,</span>
-<span>  <span class="st">"data"</span>,               <span class="st">"PL"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">template_with_start_and_end</span>  <span class="op">%&lt;&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">group2shape</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

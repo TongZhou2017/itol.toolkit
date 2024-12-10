@@ -285,35 +285,36 @@ groups exceeds 6, the program will use different colors shapes to
 distinguish different groups automatically.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">template_parameters_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">template_parameters_count</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">template_parameters_count</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">template_parameters_count</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
-<span><span class="va">template_parameters_count</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="va">df_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">template_groups</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">template_parameters_count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">unit_26</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
-<span>                    key <span class="op">=</span> <span class="st">"E026_symbol_1"</span>,</span>
+<span><span class="va">unit_30</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
+<span>                    key <span class="op">=</span> <span class="st">"E030_symbol_1"</span>,</span>
 <span>                    type <span class="op">=</span> <span class="st">"DATASET_SYMBOL"</span>,</span>
 <span>                    position <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_SYMBOL_1.png"></p>
 <p>We can use the “position” parameter to set the position where the
 symbol appears.Position should be a number between 0 and 1, specifying
 the ratio of the branch length where the center of the symbol should be
 positioned. Here, we set the position to 0.5 to place the symbol in the
 middle of the branch.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_27</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
-<span>                    key <span class="op">=</span> <span class="st">"E027_symbol_2"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_31</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
+<span>                    key <span class="op">=</span> <span class="st">"E031_symbol_2"</span>,</span>
 <span>                    type <span class="op">=</span> <span class="st">"DATASET_SYMBOL"</span>,</span>
 <span>                    position <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>                    tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_SYMBOL_2.png"></p>
 <p>We can determine whether the symbol is filled by changing the
 <code>fill</code> parameter. 0 represents a outlined symbol, and 1
 represents a filled symbol.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_28</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
-<span>                    key <span class="op">=</span> <span class="st">"E028_symbol_3"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_32</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_data</span>,</span>
+<span>                    key <span class="op">=</span> <span class="st">"E032_symbol_3"</span>,</span>
 <span>                    type <span class="op">=</span> <span class="st">"DATASET_SYMBOL"</span>,</span>
 <span>                    position <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>                    tree <span class="op">=</span> <span class="va">tree</span>,</span>
 <span>                    fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_SYMBOL_3.png"></p>
 </div>
 </div>
 <div class="section level2">
@@ -322,7 +323,7 @@ represents a filled symbol.</p>
 <p>By modifying <code>unit@specific_themes$basic_plot$size_max</code>,
 we can adjust the maximum size of the symbol.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_28</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">40</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">unit_32</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">40</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

@@ -87,11 +87,13 @@ template_start_group <- template_start_group %>%
 ```
 The processed data is stored in the variable `template_start_group`, with the first column being the template name and the second column being the sequence.
 ```{r visualize multiple sequence alignments}
-unit_32 <- create_unit(data = template_start_group,
-                       key = "E032_ALIGNMENT_1",
+unit_42 <- create_unit(data = template_start_group,
+                       key = "E042_alignment_1",
                        type = "DATASET_ALIGNMENT",
                        tree = tree)
 ```
+
+![](images/DATASET_ALIGNMENT_1.png)
 
 ## Style modification
 

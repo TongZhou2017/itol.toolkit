@@ -84,8 +84,10 @@ df_frequence_years <- df_frequence %>%
   pivot_wider(names_from=years,values_from=value) %>% 
   replace(is.na(.), 0) %>% 
   pivot_longer(-id)
-unit <- create_unit(data = df_frequence_years,
-                    key = "E030_simplebar_2",
+unit_40 <- create_unit(data = df_frequence_years,
+                    key = "E040_linechart_1",
                     type = "DATASET_LINECHART",
                     tree = tree)
 ```
+
+![](images/DATASET_LINECHART_1.png)

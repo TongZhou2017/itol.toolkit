@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -305,17 +305,18 @@ bar charts. In the event that the user enters multiple columns of data
 without specifying a method, itol.toolkit will automatically use the sum
 method to process the data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_29</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E029_simplebar_1"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_35</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E035_simplebar_1"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_SIMPLEBAR"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_SIMPLEBAR_1.png"></p>
 <p>We can also calculate the average usage frequency of each template in
 published articles by specifying the <code>method</code> parameter as
 <code>mean</code>, and use this as a basis for drawing Simple bar
 charts.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_30</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                       key <span class="op">=</span> <span class="st">"E030_simplebar_2"</span>,</span>
+<code class="sourceCode R"><span><span class="va">unit_36</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                       key <span class="op">=</span> <span class="st">"E036_simplebar_2"</span>,</span>
 <span>                       type <span class="op">=</span> <span class="st">"DATASET_SIMPLEBAR"</span>,</span>
 <span>                       method <span class="op">=</span> <span class="st">"mean"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
@@ -325,9 +326,10 @@ charts.</p>
 </h2>
 <p>By adjusting <code>unit@specific_themes$basic_plot$size_max</code>,
 users can customize the size of the plot. Here, we set a standard size
-for E029 and E030.</p>
+for E035 and E036.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">unit_35</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">unit_36</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">basic_plot</span><span class="op">$</span><span class="va">size_max</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

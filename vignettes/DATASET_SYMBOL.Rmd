@@ -49,35 +49,41 @@ tree <- read.tree(tree)
 We can use different symbols for different groups. The program will automatically identify and set different colors and symbol shapes based on group information in `template_groups`. When the number of groups exceeds 6, the program will use different colors shapes to distinguish different groups automatically.
 ```{r symbol at the end of a branch}
 template_parameters_count <- data.frame(template_parameters_count)
-rownames(template_parameters_count) <- template_parameters_count[, 1]
-template_parameters_count[, 1] <- NULL
 df_data <- cbind(template_groups,as.data.frame(rowSums(template_parameters_count)))
-unit_26 <- create_unit(data = df_data,
-                    key = "E026_symbol_1",
+unit_30 <- create_unit(data = df_data,
+                    key = "E030_symbol_1",
                     type = "DATASET_SYMBOL",
                     position = 1,
                     tree = tree)
 ```
+
+![](images/DATASET_SYMBOL_1.png)
+
 We can use the "position" parameter to set the position where the symbol appears.Position should be a number between 0 and 1, specifying the ratio of the branch length where the center of the symbol should be positioned. Here, we set the position to 0.5 to place the symbol in the middle of the branch.
 ```{r symbol at the middle of a branch}
-unit_27 <- create_unit(data = df_data,
-                    key = "E027_symbol_2",
+unit_31 <- create_unit(data = df_data,
+                    key = "E031_symbol_2",
                     type = "DATASET_SYMBOL",
                     position = 0.5,
                     tree = tree)
 ```
+
+![](images/DATASET_SYMBOL_2.png)
+
 We can determine whether the symbol is filled by changing the `fill` parameter. 0 represents a outlined symbol, and 1 represents a filled symbol.
 ```{r outlined symbol}
-unit_28 <- create_unit(data = df_data,
-                    key = "E028_symbol_3",
+unit_32 <- create_unit(data = df_data,
+                    key = "E032_symbol_3",
                     type = "DATASET_SYMBOL",
                     position = 0.5,
                     tree = tree,
                     fill = 0)
 ```
 
+![](images/DATASET_SYMBOL_3.png)
+
 ## Style modification
 By modifying `unit@specific_themes$basic_plot$size_max`, we can adjust the maximum size of the symbol.
 ```{r resize symbols}
-unit_28@specific_themes$basic_plot$size_max <- 40
+unit_32@specific_themes$basic_plot$size_max <- 40
 ```

@@ -84,9 +84,11 @@ df_frequence_years <- df_frequence %>%
   replace(is.na(.), 0) %>% 
   mutate(size = log(sum(`2018`,`2019`, `2021`, `2022`)+2)) %>% 
   relocate(size, .after = id)
-unit <- create_unit(data = df_frequence_years, 
-                    key = "E030_simplebar_2",
+unit_41 <- create_unit(data = df_frequence_years, 
+                    key = "E041_piechart_1",
                     type = "DATASET_PIECHART",
                     position = 0,
                     tree = tree)
 ```
+
+![](images/DATASET_PIECHART_1.png)

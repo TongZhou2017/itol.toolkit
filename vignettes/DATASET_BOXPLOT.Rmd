@@ -49,22 +49,24 @@ df_data <- df_frequence %>%
   melt(id.vars=c("templates")) %>% 
   na.omit() %>% 
   select(templates,value)
-unit_31 <- create_unit(data = df_data,
-                       key = "E031_boxplot_1",
-                       type = "DATASET_BOXPLOT",
-                       tree = tree)
-```
-We can also convert the original data, such as log conversion, and then use it to draw a box plot.
-```{r box plot log}
-df_data_log$value <- log(df_data$value)
-unit_32 <- create_unit(data = df_data_log,
-                       key = "E032_boxplot_2",
+unit_38 <- create_unit(data = df_data,
+                       key = "E038_boxplot_1",
                        type = "DATASET_BOXPLOT",
                        tree = tree)
 ```
 
+![](images/DATASET_BOXPLOT_1.png)
+
+We can also convert the original data, such as log conversion, and then use it to draw a box plot.
+```{r box plot log}
+df_data$value <- log(df_data$value)
+unit_39 <- create_unit(data = df_data,
+                       key = "E039_boxplot_2",
+                       type = "DATASET_BOXPLOT",
+                       tree = tree)
+```
+
+![](images/DATASET_BOXPLOT_2.png)
+
 ## Style modification
 You can adjust the height of the box plot by adjusting `unit@specific_themes$basic_plot$width`.
-```{r style modify}
-unit_32@specific_themes$basic_plot$width <- 500
-```

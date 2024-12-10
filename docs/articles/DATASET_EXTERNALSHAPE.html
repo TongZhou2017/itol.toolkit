@@ -218,7 +218,7 @@ Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
 Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 05 December,
+            <h4 data-toc-skip class="date">Last compiled on 10 December,
 2024</h4>
       
       
@@ -274,10 +274,11 @@ input and visualize it using the <code>DATASET_EXTERNALSHAPE</code>
 template.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_frequence</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df_frequence</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">unit_27</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
-<span>                      key <span class="op">=</span> <span class="st">"E027_external_shape_1"</span>,</span>
+<span><span class="va">unit_33</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_frequence</span>,</span>
+<span>                      key <span class="op">=</span> <span class="st">"E033_external_shape_1"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_EXTERNALSHAPE"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<p><img src="images/DATASET_EXTERNALSHAPE_1.png"></p>
 <p>It is worth noting that when using <code>DATASET_EXTERNALSHAPE</code>
 template in <code>itol.toolkit</code> &lt; v1.1.1, you may encounter the
 problem <em>Error in get_color(field_length, set = color) : object
@@ -294,7 +295,7 @@ is shown below:<br>
 |5|left triangle | For example, we can adjust the shape of
 <code>unit_27</code> to the circle by:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unit_27</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">externalshape</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">unit_33</span><span class="op">@</span><span class="va">specific_themes</span><span class="op">$</span><span class="va">externalshape</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></code></pre></div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>

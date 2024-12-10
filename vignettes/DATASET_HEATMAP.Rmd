@@ -44,14 +44,14 @@ df_frequence <- fread(df_frequence)
 ```
 By setting the `unit@specific_themes$heatmap$color$max` and `unit@specific_themes$heatmap$color$min`, we can manually control the colors corresponding to the maximum and minimum values. In addition, there is a mid value for the default color setting, and we can manually cancel setting the mid value: `unit@specific_themes$heatmap$use_mid <- 0`
 ```{r heatmap of dataset 1, message=FALSE, warning=FALSE}
-unit_25 <- create_unit(data = df_frequence,
-                       key = "E025_heatmap_1",
+unit_28 <- create_unit(data = df_frequence,
+                       key = "E028_heatmap_1",
                        type = "DATASET_HEATMAP",
                        tree = tree)
-unit_25@specific_themes$heatmap$color$min <- "#ffd966"
-unit_25@specific_themes$heatmap$color$max <- "#cc0000"
-unit_25@specific_themes$heatmap$use_mid <- 0
-write_unit(unit_25)
+unit_28@specific_themes$heatmap$color$min <- "#ffd966"
+unit_28@specific_themes$heatmap$color$max <- "#cc0000"
+unit_28@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_28)
 ```
 
 ![](images/DATASET_HEATMAP_1.png)
@@ -79,26 +79,26 @@ First, we prepare a heatmap drawing template using NS group data.
 df_cap_NS <- df_metadata %>%
   select(ID, starts_with("NS")) %>% 
   select(-ends_with("bar"))
-unit_26 <- create_unit(data = df_cap_NS, 
-                       key = "Zheng2022ep_4a_heatmap_NS",
+unit_29a <- create_unit(data = df_cap_NS, 
+                       key = "E029_heatmap_2a",
                        type = "DATASET_HEATMAP", 
                        tree = tree_2)
-unit_26@specific_themes$heatmap$color$min <- "#ffffff"
-unit_26@specific_themes$heatmap$color$max <- "#8ccdd7"
-unit_26@specific_themes$heatmap$use_mid <- 0
-write_unit(unit_26)
+unit_29a@specific_themes$heatmap$color$min <- "#ffffff"
+unit_29a@specific_themes$heatmap$color$max <- "#8ccdd7"
+unit_29a@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_29a)
 ```
 Next, use the same method to visualize OS group data.
 ```{r heatmap of OS}
 df_cap_OS <- df_metadata %>% select(ID, starts_with("OS")) %>% select(-ends_with("bar"))
-unit_27 <- create_unit(data = df_cap_OS, 
-                       key = "Zheng2022ep_4a_heatmap_OS",
+unit_29b <- create_unit(data = df_cap_OS, 
+                       key = "E029_heatmap_2b",
                        type = "DATASET_HEATMAP", 
                        tree = tree_2)
-unit_27@specific_themes$heatmap$color$min <- "#ffffff"
-unit_27@specific_themes$heatmap$color$max <- "#f89b9b"
-unit_27@specific_themes$heatmap$use_mid <- 0
-write_unit(unit_27)
+unit_29b@specific_themes$heatmap$color$min <- "#ffffff"
+unit_29b@specific_themes$heatmap$color$max <- "#f89b9b"
+unit_29b@specific_themes$heatmap$use_mid <- 0
+write_unit(unit_29b)
 ```
 
 ![](images/DATASET_HEATMAP_2.png)
@@ -109,11 +109,12 @@ It is worth noting that the column names of the data used to draw the heatmap wi
 ## Style modification
 The program will generate a cluster tree based on heatmap data on the side of the heat map by default. If you do not want to display the cluster tree, you can modify it through `unit@specific_themes$heatmap$tree$tree_display <- 0`:
 ```{r tree display, message=FALSE, warning=FALSE}
-unit_26@specific_themes$heatmap$tree$tree_display <- 0
-unit_27@specific_themes$heatmap$tree$tree_display <- 0
+unit_28@specific_themes$heatmap$tree$tree_display <- 0
+unit_29a@specific_themes$heatmap$tree$tree_display <- 0
+unit_29b@specific_themes$heatmap$tree$tree_display <- 0
 ```
 The maximum and minimum values of the heatmap can be set through `unit_26@specific_themes$heatmap$value$max` and `unit_26@specific_themes$heatmap$value$min`:
 ```{r value_max value_min}
-unit_26@specific_themes$heatmap$value$max <- 8
-unit_26@specific_themes$heatmap$value$min <- 0
+unit_28@specific_themes$heatmap$value$max <- 8
+unit_28@specific_themes$heatmap$value$min <- 0
 ```

@@ -43,11 +43,14 @@ df_frequence <- fread(df_frequence)
 Next, we process the metadata by replacing the missing values (representing that the template was not used in this study) with 0. By processing the data, we ended up with a data frame with the first column being the tip name and the subsequent columns being the usage frequency of the template in the study. Finally, we take the obtained data as input and visualize it using the `DATASET_EXTERNALSHAPE` template.
 ```{r external shape}
 df_frequence[is.na(df_frequence)] <- 0
-unit_27 <- create_unit(data = df_frequence,
-                      key = "E027_external_shape_1",
+unit_33 <- create_unit(data = df_frequence,
+                      key = "E033_external_shape_1",
                       type = "DATASET_EXTERNALSHAPE",
                       tree = tree)
 ```
+
+![](images/DATASET_EXTERNALSHAPE_1.png)
+
 It is worth noting that when using `DATASET_EXTERNALSHAPE` template in `itol.toolkit` < v1.1.1, you may encounter the problem *Error in get_color(field_length, set = color) : object 'field_length' not found*, please update `itol.toolkit` in this case.
 
 ## Style modification
@@ -61,5 +64,5 @@ The user can adjust the shape with `unit@specific_themes$externalshape$type` and
 |5|left triangle |
 For example, we can adjust the shape of `unit_27` to the circle by:
 ```{r change shape}
-unit_27@specific_themes$externalshape$type <- 2
+unit_33@specific_themes$externalshape$type <- 2
 ```

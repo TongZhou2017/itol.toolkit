@@ -69,7 +69,7 @@ template_with_start <- tab_tmp_01 %>%
                    summarise(sublen = sum(value)) %>%
                    spread(key=variable,
                           value=sublen) %>%
-                   mutate(group=factor(group,levels = order)) %>%
+                   mutate(group=factor(group,levels = para_order)) %>%
                    arrange(group)
 group_start <- data.frame(group = template_with_start$group, 
                           Freq = apply(template_with_start[,-1], 1, max)) %>%
@@ -87,17 +87,32 @@ template_with_start_and_end <- sapply(as.list(template_with_start[,-1]),
   mutate(length=sum(group_start$Freq),
          group =factor(.$group, levels=para_order)) %>%
   relocate(variable, length, start, end, group)
+
+group2shape <- tribble(
+  ~group,               ~shape,
+  "type",               "HH",
+  "separator",          "HV",
+  "profile",            "EL",
+  "field",              "DI",
+  "common themes",      "TR",
+  "specific themes",    "TL",
+  "data",               "PL"
+)
+template_end_group_long <- template_with_start_and_end  %>% 
+  left_join(group2shape)
 ```
 Using prepared data to create unit
 ```{r domain based on parameters}
-unit_28 <- create_unit(data = template_end_group_long,
-                       key = "E028_domains_1",
+unit_34 <- create_unit(data = template_end_group_long,
+                       key = "E034_domains_1",
                        type = "DATASET_DOMAINS",
                        tree = tree)
 ```
 
+![](images/DATASET_DOMAINS_1.png)
+
 ## Style modification
-Users can add a column to the long table used to generate templates to change the shape of each protein domain. By assigning the domain label column to a new column and using the `stringr::str_replace_all` function to replace each label with a shape, you can quickly modify the shape. 
+Users can add a column to the long table used to generate templates to change the shape of each protein domain. By assigning the domain label column to a new column and replace each label with a shape, you can quickly modify the shape. 
 
 Domain shape codes are as follows: 
 
@@ -117,28 +132,3 @@ Domain shape codes are as follows:
 |OC|  octagon|  
 |GP|  rectangle|
 
-```{r style modify}
-template_end_group_long$shape <- template_end_group_long$group
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"type","HH")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"separator","HV")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"profile","EL")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"field","DI")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"common themes","TR")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"specific themes","TL")
-template_end_group_long$shape <- stringr::str_replace_all(template_end_group_long$shape,"data","PL")
-```
-我给你改的，供参考
-```{r}
-group2shape <- tribble(
-  ~group,               ~shape,
-  "type",               "HH",
-  "separator",          "HV",
-  "profile",            "EL",
-  "field",              "DI",
-  "common themes",      "TR",
-  "specific themes",    "TL",
-  "data",               "PL"
-)
-template_with_start_and_end  %<>% 
-  left_join(group2shape)
-```
