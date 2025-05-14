@@ -9,27 +9,29 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 概要
+## Overview
 
-v1.1.9 主要更新内容：
+Key updates in v1.1.9:
 
-1. 修复：simplebar 模版中的无意义 warning。
-2. 修复：heatmap 输入为单列时的聚类报错。
-3. 新增：Hub 中支持同时输出树。
-4. 修复：多个 heatmap 单元 + 操作时的 bug。
-5. 新增：颜色排序算法，支持自定义根节点颜色。
-6. 新增：两种建树方法（基于字符串向量及数据框行列名）。
+1. Fix: Meaningless warning in the simplebar template.
+2. Fix: Clustering error when input is a single column in the heatmap.
+3. New: Support for outputting trees in the Hub.
+4. Fix: Bug when multiple heatmap units are used together.
+5. New: Color sorting algorithm, supports custom root node color.
+6. New: Two tree-building methods (based on string vectors and data frame row/column names).
 
-内容格式说明：
+Document Format Notes:
 
-1. 后续会将本文档改为英文版。
-2. 引用块内容为报错信息；代码块内容为用户端代码或源代码，源代码中会标注文件行号用以与用户端代码区分。
+1. The document will be converted to English in the future.
+2. Blockquotes contain error messages; code blocks contain either user-side code or source code, with line numbers in source code to differentiate them from user-side code.
 
+## Feature Details and Problem Analysis
 
-## 功能详解与问题分析
-### 1.Simplebar 模版的 Warning 修复
-#### 问题描述
-在使用 create_unit 创建 DATASET_SIMPLEBAR 数据集时，例如：
+### 1. Fixing the Warning in the Simplebar Template
+
+#### Problem Description
+
+When creating a `DATASET_SIMPLEBAR` unit with `create_unit`, for example:
 
 ```{r message=FALSE, warning=FALSE}
 library(itol.toolkit) # main package
@@ -49,51 +51,56 @@ unit_4 <- create_unit(data = data_1 %>% select(ID, Asia),
                       tree = tree_1)
 ```
 
-在v1.1.8及之前版本会触发以下警告：
+In versions v1.1.8 and earlier, the following warning would be triggered:
 
 > Warning in mean.default(data) :
->  argument is not numeric or logical: returning NA
+> argument is not numeric or logical: returning NA
 
-生成的模版文件中可能包含以下类似内容：
+The generated template file might contain something like this:
 
-> DATASET_SCALE	0.009113938	NA	4.09978
+> DATASET_SCALE 0.009113938 NA 4.09978
 
-#### 问题排查
+#### Problem Investigation
 
-当直接使用mean时，由于select的数据框并非单纯的数值向量，因而无法计算得到结果。
+When using `mean` directly, since the selected data frame is not purely a numeric vector, the result cannot be calculated.
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 data_1 %>% select(Asia) %>% mean()
 data_1 %>% select(North_America, Asia) %>% mean()
-# 返回： 
+# Returns: 
 # [1] NA
 # Warning message:
 # In mean.default(.) : argument is not numeric or logical: returning NA
 ```
 
-所以本质上的办法是将数据框转为向量，通过按行或列计算mean可以获得数值向量，之后再计算总体的mean，是可以解决这一问题的：
+Thus, the solution is to convert the data frame to a vector, then calculate `mean` by rows or columns, which will yield a numeric vector and resolve the issue:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 data_1 %>% select(North_America, Asia) %>% rowMeans() %>% mean()
 data_1 %>% select(North_America, Asia) %>% colMeans() %>% mean()
 # [1] 0.2529557
 
-# 并且在单列数据中也同样有效：
+# Also works for single-column data:
 data_1 %>% select(Asia) %>% rowMeans() %>% mean()
 # [1] 0.2657
 ```
 
-因此对于user.R脚本第1364行代码进行如下修改即可解决：
+To fix the issue, change the code at line 1364 in `user.R` to:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 mean <- data %>% rowMeans() %>% mean()
 ```
 
-#### 延伸思考
-在 gradient 模版中，mean() 不会引发类似问题，因为 gradient 不需要 scale 值，而是自动生成legend。未来可以设计一个统一函数来处理不同模版的 scale 信息。
+#### Further Thoughts
 
+In the gradient template, `mean()` does not trigger a similar issue because gradient does not require a scale value, and instead automatically generates the legend. In the future, a unified function could be designed to handle scale information for different templates.
 
-### 2. heatmap输入为单列时报错的修复
-#### 问题描述
-虽然heatmap通常输入为多列数据，且单列heatmap功能可用gradient代替，但heatmap的单列使用仍然具有更多样的调整参数的优势，所以依然有用户使用单列heatmap功能，但调用 create_unit 创建unit时会报错：
+### 2. Fixing the Clustering Error When Heatmap Input is a Single Column
+
+#### Problem Description
+
+While heatmaps typically take multi-column data as input, and single-column heatmaps can be replaced by the gradient, single-column heatmaps still offer more adjustable parameters. Hence, some users still use the single-column heatmap feature. However, when calling `create_unit` to create a unit, an error is thrown:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 unit_6 <- create_unit(data = data_1 %>% select(ID, Asia),
                       key = "rep_Zhou_6_multibar",
@@ -103,8 +110,10 @@ unit_6 <- create_unit(data = data_1 %>% select(ID, Asia),
 #   must have n >= 2 objects to cluster
 ```
 
-#### 问题排查
-hclust聚类时，如果输入数据只有1列，无法进行聚类，所以对于field tree的生成会报错。因此需要对user.R代码第959行附近增加条件判断，当输入为单列时不进行field tree的构建：
+#### Problem Investigation
+
+When `hclust` is used for clustering, if the input data has only one column, clustering cannot be performed, leading to an error when generating the field tree. Therefore, a conditional check should be added near line 959 in `user.R` to skip field tree generation if the input is a single column:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 if(length(names(data)) == 2){
   field_tree <- NULL
@@ -113,17 +122,16 @@ if(length(names(data)) == 2){
 }
 ```
 
-如此能够成功生成模版文件，且在代码运行时不产生报错。但是改模版文件提交iTOL时会提示：
+This ensures that the template file is generated successfully without errors. However, when submitting the updated template to iTOL, the following message is displayed:
 
 > Leaf 'undefined' in the heatmap field tree is not present in the FIELD_LABELS.
-> 
+>
 > Field label 'Asia' is not present in the heatmap field tree.
-> 
+>
 > Failed to parse the FIELD_TREE. Make sure it is in Newick format.
 
-这是由于当field tree为空时，会自动继承样式模版的内容。由于更新样式模版的继承逻辑需要系统梳理，暂时通过在输出模版文件内容时跳过来实现。当输入为单列时关闭树显示参数，当树显示参数关闭时跳过输出field tree内容而实现：
+This occurs because, when the field tree is empty, it automatically inherits the style template content. Since updating the logic for style template inheritance requires system-level review, the issue is temporarily resolved by skipping the field tree output when the input has a single column. The following changes are made in `user.R` at line 969 and in `output.R` at line 230:
 
-具体改动分别在user.R文件第969行和output.R文件第230行。
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 # user.R L969
 if(length(names(data)) == 2){
@@ -140,9 +148,11 @@ if (!is.null(unit@specific_themes$heatmap$tree$tree)) {
 }
 ```
 
-### 3. 多个单元的加法运算修复
-#### 问题描述
-由于包内置了多套示例数据，由于之前的版本中，write_hub只会批量输出模版文件，而不输出树文件，这对于初学者来说很难找到树文件在包内的位置。为了方便用户一次性获得上传iTOL的全部文件，在v1.1.9版本write_hub增加with_tree参数，当with_tree参数为TRUE时，同时输出树文件。为了保持对之前版本的兼容，该参数默认为FLASE。
+### 3. Fixing the Issue with Addition of Multiple Units
+
+#### Problem Description
+
+Due to the previous version's limitation, `write_hub` only output template files in bulk without outputting tree files, which made it difficult for beginners to locate tree files within the package. To make it easier for users to obtain all files for uploading to iTOL at once, the `write_hub` function in v1.1.9 introduces the `with_tree` parameter. When `with_tree = TRUE`, tree files are also outputted. This parameter defaults to `FALSE` to maintain backward compatibility.
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 hub_1 <- create_hub(tree_1)
@@ -150,27 +160,30 @@ hub_1 <- hub_1 + unit_4 + unit_5 + unit_6
 write_hub(hub_1, "~/Downloads/", with_tree = T)
 ```
 
-但在v1.1.8及之前版本运行时可能会报错：
+However, in versions v1.1.8 and earlier, running this might cause an error:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-# 以下代码不报错：
+# No error with the following:
 hub_1 <- hub_1 + unit_4 #+ unit_5 + unit_6
 hub_1 <- (hub_1 + unit_4) + unit_5 #+ unit_6
 
-# 然而以下代码报错
+# Error with the following:
 hub_1 <- ((hub_1 + unit_4) + unit_5) + unit_6
 # Error in UseMethod("tbl_vars") : 
 # no applicable method for 'tbl_vars' applied to an object of class "c('double', 'numeric')"
 ```
 
+#### Problem Investigation
 
-#### 问题排查
-这是由于在将heatmap向hub中合并时，如果数据格式为data.table会导致格式转换报错，所以在learn.R代码第1352行增加一句格式转换即可修复：
+This error occurs because when a heatmap is merged into the hub, if the data format is `data.table`, it results in a format conversion error. To fix this, add a format conversion at line 1352 in `learn.R`:
+
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 abundance <- as.data.frame(abundance)
 ```
 
-### 4. 颜色排序算法
-支持颜色排序算法，用户可以通过 sort_color() 方法自定义排序规则，并指定以特定颜色为基准排序。该功能仍在探索阶段，后续将提供具体实例展示用途。
+### 4. Color Sorting Algorithm
+
+A color sorting algorithm is supported, allowing users to define custom sorting rules through the `sort_color()` method and specify a reference color for sorting. This feature is still being explored, and concrete examples will be provided in the future.
 
 ```{r}
 set.seed(123)
@@ -178,21 +191,24 @@ colors <- get_color(10,set = "wesanderson")
 sort_color(colors,plot = T, root="#FF0000")
 ```
 
-### 5. 新增建树方法
-该功能仍在探索阶段，后续将提供具体实例展示用途。方法2后续会有重构优化。
+### 5. New Tree-Building Methods
 
-#### 方法1: 基于字符串向量
-通过模板字符串直接生成树：
+This feature is still in the exploration stage, and concrete examples will be provided later. Method 2 will be further optimized.
+
+#### Method 1: Based on String Vector
+
+Generate a tree directly from a template string:
+
 ```{r}
 data("template_groups")
 plot(vector_tree(template_groups$template))
 ```
 
-#### 方法 2：基于数据框行列名
+#### Method 2: Based on Data Frame Row/Column Names
 
-通过数据框的行列名生成树：
+Generate a tree based on the row and column names of a data frame:
+
 ```{r}
 data("template_parameters_count")
 plot(template_parameters_count[c("TREE_COLORS","DATASET_STYLE","DATASET_COLORSTRIP"),1:5] %>% df_tree(main = "row"))
 ```
-

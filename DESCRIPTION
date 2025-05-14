@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.1.9
+Version: 1.1.10
 Authors@R: 
     person(
     given = "Tong",
@@ -33,7 +33,9 @@ Imports:
     rstudioapi,
     colourpicker,
     ggsci,
-    RColorBrewer
+    RColorBrewer,
+    stringdist,
+    cli
 Suggests: 
     knitr,
     rmarkdown,

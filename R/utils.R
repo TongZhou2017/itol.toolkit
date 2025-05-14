@@ -513,3 +513,84 @@ search_tree_file <- function(dir=getwd(),
   }
   return(rownames(df))
 }
+
+#' Correct type parameter
+#'
+#' @description Correct type parameter input by string similarity and synonym mapping.
+#' @param str A character string representing a type name to correct.
+#' @importFrom stringdist stringsim
+#' @return A character string of the corrected type name.
+#' @export
+#' @examples
+#' correct_type("line")
+correct_type <- function(str) {
+    vec <- c('COLLAPSE', 'PRUNE', 'SPACING', 'TREE_COLORS', 'DATASET_STYLE', 'LABELS',
+             'DATASET_TEXT', 'DATASET_COLORSTRIP', 'DATASET_BINARY', 'DATASET_GRADIENT',
+             'DATASET_HEATMAP', 'DATASET_SYMBOL', 'DATASET_EXTERNALSHAPE', 'DATASET_DOMAINS',
+             'DATASET_SIMPLEBAR', 'DATASET_MULTIBAR', 'DATASET_BOXPLOT', 'DATASET_LINECHART',
+             'DATASET_PIECHART', 'DATASET_ALIGNMENT', 'DATASET_CONNECTIONS', 'DATASET_IMAGE', 'POPUP_INFO')
+    if(str %in% vec){
+      return(str)
+    }else{
+
+    input_str_lower <- tolower(str)
+
+    vec_lower <- tolower(vec)
+    vec_lower_no_prefix <- gsub("^dataset_", "", vec_lower)
+
+    best_match <- NULL
+    best_match_score <- -1
+
+    for (i in 1:length(vec)) {
+      target_str <- vec[i]
+      target_str_no_prefix <- vec_lower_no_prefix[i]
+
+      match_score_with_prefix <- longest_continuous_match(input_str_lower, target_str)
+      match_score_no_prefix <- longest_continuous_match(input_str_lower, target_str_no_prefix)
+
+      if (match_score_with_prefix > best_match_score) {
+        best_match_score <- match_score_with_prefix
+        best_match <- target_str
+      }
+      if (match_score_no_prefix > best_match_score) {
+        best_match_score <- match_score_no_prefix
+        best_match <- target_str
+      }
+    }
+
+    return(best_match)
+
+    }
+}
+
+#' Calculate longest continuous match between input and target strings
+#'
+#' @description This function calculates the longest continuous matching substring between an input string and a target string.
+#' @param input_str A character string to match against the target string.
+#' @param target_str A character string to compare with the input string.
+#' @return An integer value representing the longest continuous match.
+#' @export
+longest_continuous_match <- function(input_str, target_str) {
+  max_match_length <- 0
+  input_str <- gsub("[^a-zA-Z]", "", input_str)
+  target_str <- gsub("[^a-zA-Z]", "", target_str)
+
+  for (i in 1:(nchar(target_str) - nchar(input_str) + 1)) {
+    substring_target <- substr(target_str, i, i + nchar(input_str) - 1)
+
+    match_length <- 0
+    for (j in 1:nchar(input_str)) {
+      if (substr(input_str, j, j) == substr(substring_target, j, j)) {
+        match_length <- match_length + 1
+      } else {
+        break
+      }
+    }
+
+    max_match_length <- max(max_match_length, match_length)
+  }
+  return(max_match_length)
+
+}
+
+

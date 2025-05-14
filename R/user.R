@@ -152,6 +152,7 @@ use.theme <- function(type,style="default"){
 #' @importFrom stringr str_remove_all
 #' @importFrom stringr str_length
 #' @importFrom grDevices boxplot.stats
+#' @importFrom stringdist stringsim
 #' @export
 #' @examples
 #' tree <- system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")
@@ -181,6 +182,10 @@ use.theme <- function(type,style="default"){
 #' tree = tree)
 #' object <- learn_data_from_unit(object,unit)
 create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,line_type=NULL,font_type=NULL,size_factor=NULL,position=NULL,background_color=NULL,rotation=NULL,method=NULL,shape=NULL,fill=NULL,tree){
+  type <- correct_type(type)
+  print(type)
+  #data_name <- substitute(data)
+  #print(data_name)
   data_left <- learn_df(tree = tree, node = T, tip = T)
   theme <- use.theme(type,style)
   sep <- theme@sep
@@ -1837,4 +1842,4 @@ count_to_tree <- function(count,group=NULL,weight=0){
   return(tree)
 }
 
-utils::globalVariables(c("inbuilt_themes",":=","tempalte_groups","template","result"))
+utils::globalVariables(c("inbuilt_themes",":=","tempalte_groups","template","result", "template_groups"))

@@ -1,0 +1,85 @@
+---
+title: "v1.1.10"
+author: "Tong Zhou"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+Updates:
+
+1. New: Correcting the spelling of the `type` parameter.
+2. Update: Beautifying the loading prompt format.
+3. Update: Fixing the SHOW_VALUE output parameter for the simplebar unit. 
+
+## 1. Correcting the Spelling of the `type` Parameter
+
+This feature can be used to simplify the process and reduce error rates.
+For example, with `DATASET_COLORSTRIP`, it supports partial input, case insensitivity, and recognition of misspellings.
+
+```{r}
+library(itol.toolkit)
+# read data
+tree <- system.file("extdata",
+                    "tree_of_itol_templates.tree",
+                    package = "itol.toolkit")
+data("template_groups")
+df_group <- data.frame(id = unique(template_groups$group), 
+                       data = unique(template_groups$group))
+
+# 1. Partial input "COLORSTRIP" can be correctly recognized
+unit <- create_unit(data = df_group, 
+                    key = "Quickstart", 
+                    type = "COLORSTRIP", 
+                    tree = tree)
+# [1] "DATASET_COLORSTRIP"
+
+# 2. Partial input "STRIP" can be correctly recognized
+unit <- create_unit(data = df_group, 
+                    key = "Quickstart", 
+                    type = "STRIP", 
+                    tree = tree)
+# [1] "DATASET_COLORSTRIP"
+
+# 3. Lowercase input "strip" can be correctly recognized
+unit <- create_unit(data = df_group, 
+                    key = "Quickstart", 
+                    type = "strip", 
+                    tree = tree)
+# [1] "DATASET_COLORSTRIP"
+
+# 4. Misspelled input "strib" can be correctly recognized
+unit <- create_unit(data = df_group, 
+                    key = "Quickstart", 
+                    type = "strib", 
+                    tree = tree)
+# [1] "DATASET_COLORSTRIP"
+```
+
+## 2. Optimizing Loading Prompts
+
+The previous loading prompts were red, which could mislead users into thinking there was an error. Therefore, the font color has been optimized, but the content still serves as a reminder to properly cite the papers.
+
+```{r}
+# You can try running it to see the actual effect
+library(itol.toolkit)
+# ── Loading ───────────────────────────────────────── itol.toolkit 1.1.9 ──
+#
+# If you use the itol.toolkit package in published research, please cite:
+#
+# Zhou, T., Xu, K., Zhao, F., Liu, W., Li, L., Hua, Z., & Zhou, X. (2023).
+# itol.toolkit accelerates working with iTOL (Interactive Tree of Life) by an
+# automated generation of annotation files. Bioinformatics, 39(6), btad339.
+```
+
+## 3. Correcting the SHOW_VALUE Output for Simplebar
+
+An issue was identified during the creation of the `DATASET_SIMPLEBAR` unit, where the output parameter for `value_display` was incorrectly set to `SHOW_VALUES` instead of `SHOW_VALUE`. Setting `unit_3@specific_themes$basic_plot$value_display <- 1` previously generated the field `SHOW_VALUES 1`, but the iTOL web template requires `SHOW_VALUE 1`. The extra "S" in the field name prevented the setting from being properly recognized. After reviewing the `show_value` setting across all templates, it was confirmed that only `DATASET_SIMPLEBAR` requires `SHOW_VALUE`, while other templates continue to use `SHOW_VALUES`.
+
+
+

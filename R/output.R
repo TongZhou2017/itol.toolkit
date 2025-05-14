@@ -166,7 +166,11 @@ write_unit <- function(unit, file = getwd()) {
     lines <- c(lines, paste("MAXIMUM_SIZE", paste(unit@specific_themes$basic_plot$size_max, collapse = unit@sep), sep = unit@sep))
   }
   if (!is.null(unit@specific_themes$basic_plot$value_display)) {
-    lines <- c(lines, paste("SHOW_VALUES", paste(unit@specific_themes$basic_plot$value_display, collapse = unit@sep), sep = unit@sep))
+    if(unit@type == "DATASET_SIMPLEBAR"){
+      lines <- c(lines, paste("SHOW_VALUE", paste(unit@specific_themes$basic_plot$value_display, collapse = unit@sep), sep = unit@sep))
+    }else{
+      lines <- c(lines, paste("SHOW_VALUES", paste(unit@specific_themes$basic_plot$value_display, collapse = unit@sep), sep = unit@sep))
+    }
   }
   if (!is.null(unit@specific_themes$basic_plot$dashed_lines)) {
     lines <- c(lines, paste("DASHED_LINES", paste(unit@specific_themes$basic_plot$dashed_lines, collapse = unit@sep), sep = unit@sep))
