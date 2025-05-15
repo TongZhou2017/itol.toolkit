@@ -82,4 +82,3 @@ library(itol.toolkit)
 An issue was identified during the creation of the `DATASET_SIMPLEBAR` unit, where the output parameter for `value_display` was incorrectly set to `SHOW_VALUES` instead of `SHOW_VALUE`. Setting `unit_3@specific_themes$basic_plot$value_display <- 1` previously generated the field `SHOW_VALUES 1`, but the iTOL web template requires `SHOW_VALUE 1`. The extra "S" in the field name prevented the setting from being properly recognized. After reviewing the `show_value` setting across all templates, it was confirmed that only `DATASET_SIMPLEBAR` requires `SHOW_VALUE`, while other templates continue to use `SHOW_VALUES`.
 
 
-

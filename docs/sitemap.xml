@@ -133,6 +133,9 @@
     <loc>/articles/tree_construction.html</loc>
   </url>
   <url>
+    <loc>/articles/v1.1.10.html</loc>
+  </url>
+  <url>
     <loc>/articles/v1.1.9.html</loc>
   </url>
   <url>
@@ -158,6 +161,9 @@
   </url>
   <url>
     <loc>/reference/correct_get_color.html</loc>
+  </url>
+  <url>
+    <loc>/reference/correct_type.html</loc>
   </url>
   <url>
     <loc>/reference/count_to_tree.html</loc>
@@ -317,6 +323,9 @@
   </url>
   <url>
     <loc>/reference/line_split.html</loc>
+  </url>
+  <url>
+    <loc>/reference/longest_continuous_match.html</loc>
   </url>
   <url>
     <loc>/reference/merge_unit.html</loc>

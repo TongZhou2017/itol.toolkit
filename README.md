@@ -164,6 +164,15 @@ We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/
 
 update history:
 
+Version 1.1.10
+
+- **Added:** Correcting the spelling of the `type` parameter.
+
+- **Added:** Beautifying the loading prompt format.
+
+- **Fixed:** Fixing the SHOW_VALUE output parameter for the simplebar unit. 
+
+
 Version 1.1.9
 
 - **Fixed:** Meaningless warning in the `simplebar` template.
