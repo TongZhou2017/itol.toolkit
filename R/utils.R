@@ -594,3 +594,25 @@ longest_continuous_match <- function(input_str, target_str) {
 }
 
 
+#' Transpose a data.table using the first column as new header
+#'
+#' Transpose a data.table such that the first column's values become the new column names,
+#' and the original column names (excluding the first) become a new 'Sample' column.
+#'
+#' @param dt A data.table to transpose. The first column contains the new column names.
+#' @return A transposed data.table with updated column names and a 'Sample' column.
+#' @import data.table
+#' @export
+dt_transpose_header <- function(dt) {
+  if (!data.table::is.data.table(dt)) {
+    stop("Input must be a data.table.")
+  }
+  new_col_names <- dt[[1]]
+  transposed_dt <- data.table::transpose(dt[, -1, with = FALSE])
+  data.table::setnames(transposed_dt, new_col_names)
+  transposed_dt[, Sample := names(dt)[-1]]
+  data.table::setcolorder(transposed_dt, c("Sample", new_col_names))
+  return(transposed_dt)
+}
+
+

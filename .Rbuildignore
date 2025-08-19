@@ -10,3 +10,4 @@
 ^man/figures$
 ^vignettes/[^G].*$
 ^pkgdown$
+^note$

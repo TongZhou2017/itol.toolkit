@@ -183,7 +183,7 @@ use.theme <- function(type,style="default"){
 #' object <- learn_data_from_unit(object,unit)
 create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,line_type=NULL,font_type=NULL,size_factor=NULL,position=NULL,background_color=NULL,rotation=NULL,method=NULL,shape=NULL,fill=NULL,tree){
   type <- correct_type(type)
-  print(type)
+  #print(type)
   #data_name <- substitute(data)
   #print(data_name)
   data_left <- learn_df(tree = tree, node = T, tip = T)
@@ -191,6 +191,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
   sep <- theme@sep
   profile <- theme@profile
   field <- theme@field
+  #print(field$shapes)
   common_themes <- theme@common_themes
   specific_themes <- theme@specific_themes
   if (type == "COLLAPSE") {
@@ -872,14 +873,31 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
     common_themes$legend$title <- colname_data
-    common_themes$legend$colors <- levels(as.factor(color))
-    common_themes$legend$labels <- levels(as.factor(data[[colname_data]]))
+    
+    # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
+    # 获取唯一的标签和对应的颜色，保持原始顺序
+    unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
+    unique_data <- unique_data[!duplicated(unique_data$label), ]
+    
+    common_themes$legend$colors <- unique_data$color
+    common_themes$legend$labels <- unique_data$label
     common_themes$legend$shapes <- rep(1,length(common_themes$legend$labels))
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if (type == "DATASET_BINARY") {
     if(!is.data.frame(data)){
       stop("The input data class should be a data frame")
+    }
+    col_classes <- sapply(data, class)
+    char_count <- sum(col_classes == "character")
+    if(char_count > 1){
+      cols_to_keep <- c(names(data)[1], names(data)[!(col_classes == "character")])
+      metacols <- c(names(data)[1], names(data)[(col_classes == "character")])
+      data_meta <- data[, ..metacols]
+      #print(cols_to_keep)
+      data_sub <- data[, ..cols_to_keep]
+      data <- dt_transpose_header(data_sub)
+      #print(data)
     }
     if(names(data)[1] != "id"){
         message(paste0("Using the first column as id: ",names(data)[1]))
@@ -902,9 +920,98 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
       field$colors <- get_color(field_length,set = color)
     }else{
-      field$colors <- get_color(field_length)
+      if(all(color %in% names(data_meta))){
+        if(length(color)==1 & shape %in% names(data_meta)){
+          color_level_main     <- shape
+          color_level_gradient <- color
+        }
+        if(length(color)==2){
+          color_level_main     <- color[1]
+          color_level_gradient <- color[2]
+        }
+
+        # ------------------ 开始补充配色代码 ------------------
+
+        # 1. 提取主分组列和梯度分组列
+        main_vec     <- as.factor(data_meta[[color_level_main]])
+        gradient_vec <- data_meta[[color_level_gradient]]
+
+        # 2. 确定有多少个主分组（level）
+        main_levels <- levels(main_vec)
+        n_main      <- length(main_levels)
+
+        # 3. 先用 get_color() 为每个主分组生成一个"基色"
+        #    get_color(n_main) 会返回长度为 n_main 的颜色向量
+        base_colors_main <- get_color(n_main)  # 例如：["#E41A1C", "#377EB8", "#4DAF4A", ...]
+
+        # 4. 为 field$colors 预分配空间
+        field$colors <- character(field_length)
+
+        # 5. 按主分组循环
+        for(i in seq_len(n_main)){
+          this_main   <- main_levels[i]         # 当前主分组标签（比如 "A"、"B"...）
+          base_color  <- base_colors_main[i]    # 对应的基色字符串，比如 "#377EB8"
+
+          # 取出 data_meta 中属于 this_main 的行索引
+          idx_main <- which(main_vec == this_main)
+
+          # 提取这些行对应的梯度列值，并去重
+          grad_vals    <- gradient_vec[idx_main]
+          unique_grads <- unique(grad_vals)
+          n_grads      <- length(unique_grads)
+
+          # 调用 gradient_color，为这 n_grads 个梯度级别生成一段渐变色
+          # 第二个参数传入 base_color，就以 base_color 为起点往下生成
+          colors_grad <- gradient_color(n_grads, base_color)
+          # 例如，若 base_color="#377EB8"，n_grads=3，则 colors_grad 可能是 ["#377EB8", "#5E8EC2", "#86B4CC"]
+
+          # 建立从梯度值到"渐变色" 的映射
+          grad_color_map <- setNames(colors_grad, unique_grads)
+
+          # 按行给 field$colors 填值
+          for(j in seq_along(idx_main)){
+            row_idx  <- idx_main[j]
+            grad_val <- grad_vals[j]
+            field$colors[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+          }
+        }
+
+        # 最后将字符向量转换为 factor（若下游需要 factor）
+        field$colors <- factor(field$colors)
+
+        # ------------------- 结束补充配色代码 -------------------
+      } else {
+        field$colors <- get_color(field_length)
+      }
+
     }
-    field$shapes <- rep(2,field_length)
+    if(is.null(shape)){
+      print("c3")
+      field$shapes <- rep(2,field_length)
+    }else{
+      shapes <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")
+      if(shape %in% shapes){
+        print("c1")
+        field$shapes <- rep(shape,field_length)
+      }else{
+        print("c4")
+        if(shape %in% names(data_meta)){
+          field$shapes <- data_meta[[shape]]
+          print("c2")
+          print(field$shapes)
+          old_levels <- levels(as.factor(field$shapes))
+          new_levels <- 1:length(old_levels)
+          print(old_levels)
+          print(new_levels)
+          char_vector <- as.character(field$shapes)
+          char_vector <- new_levels[match(char_vector, old_levels)]
+          field$shapes <- factor(char_vector)
+          print(field$shapes)
+
+        }
+      }
+    }
+
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type == "DATASET_GRADIENT"){
@@ -1122,10 +1229,21 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
     common_themes$legend$title <- colname_data
-    common_themes$legend$shapes <- levels(as.factor(shape))
-    common_themes$legend$colors <- levels(as.factor(color))
-    common_themes$legend$labels <- levels(as.factor(data[[colname_data]]))
-    common_themes$legend$shape_scales <- rep(1,length(levels(as.factor(shape))))
+    
+    # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
+    # 获取唯一的标签和对应的形状、颜色，保持原始顺序
+    unique_data <- data.frame(
+      label = data[[colname_data]], 
+      shape = shape, 
+      color = color, 
+      stringsAsFactors = FALSE
+    )
+    unique_data <- unique_data[!duplicated(unique_data$label), ]
+    
+    common_themes$legend$shapes <- unique_data$shape
+    common_themes$legend$colors <- unique_data$color
+    common_themes$legend$labels <- unique_data$label
+    common_themes$legend$shape_scales <- rep(1,length(unique_data$label))
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type == "DATASET_EXTERNALSHAPE"){
@@ -1326,16 +1444,36 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
     if(is.null(shape_by)){
-      if(length(levels(as.factor(shape)))==1){
-        common_themes$legend$shapes <- rep(levels(as.factor(shape)),length(levels(as.factor(color))))
+      # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
+      # 获取唯一的标签和对应的形状、颜色，保持原始顺序
+      unique_data <- data.frame(
+        label = data[[colname_data]], 
+        shape = shape, 
+        color = color, 
+        stringsAsFactors = FALSE
+      )
+      unique_data <- unique_data[!duplicated(unique_data$label), ]
+      
+      if(length(unique(unique_data$shape))==1){
+        common_themes$legend$shapes <- rep(unique(unique_data$shape), length(unique(unique_data$color)))
       }else {
-         common_themes$legend$shapes <- levels(as.factor(shape))
+         common_themes$legend$shapes <- unique_data$shape
       }
+      common_themes$legend$colors <- unique_data$color
+      common_themes$legend$labels <- unique_data$label
     }else {
        common_themes$legend$shapes <- shape_by[!duplicated(data[[colname_data]])]
+       # 对于shape_by的情况，也需要修复颜色和标签的顺序
+       unique_data <- data.frame(
+         label = data[[colname_data]], 
+         color = color, 
+         stringsAsFactors = FALSE
+       )
+       unique_data <- unique_data[!duplicated(unique_data$label), ]
+       common_themes$legend$colors <- unique_data$color
+       common_themes$legend$labels <- unique_data$label
     }
-    common_themes$legend$colors <- levels(as.factor(color))
-    common_themes$legend$labels <- levels(as.factor(data[[colname_data]]))
+           # 标签已经在上面设置过了，这里不需要重复设置
     specific_themes$basic_plot$dataset_scale <- start %>% unique() %>% sort()
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }

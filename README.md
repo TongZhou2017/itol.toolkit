@@ -187,6 +187,93 @@ Version 1.1.9
 
 - **Added:** Two tree construction methods (based on string vectors and data frame row/column names).
 
+Version 1.1.8
+
+- **Added:** Citation information while loading itol.toolkit package
+
+- **Added:** Color distance calculation and gradient color generation
+
+- **Added:** Color generation by two factors
+
+Version 1.1.7
+
+- **Fixed:** Remove the dependence on the Biostrings package to make the installation easier.
+
+- **Fixed:** Debug the file_get_dir and file_get_name functions while without an uplevel path.
+
+Version 1.1.6
+
+- **Added:** Add search_tree_files function to search the NEWICK format files in a directory.
+
+- **Added:** Add train_theme function to learn themes from template files in a directory.
+
+- **Added:** Update dataset5 files.
+
+- **Fixed:** Update inbuilt_theme data, which corrected the legend block in the COLOR_STRIP template file.
+
+- **Fixed:** Fix the create_uint function about the COLOR_STRIP type, which makes the legend function work in the COLOR_STRIP template.
+
+Version 1.1.5
+
+- **Added:** Support two factor for shape and color in DATASET_DOMAIN
+
+- **Fixed:** write_hub error in DATASET_LINECHART, while node data is empty
+
+Version 1.1.4
+
+- **Fixed:** write_hub error in DATASET_DOMAIN, while node data is empty
+
+- **Fixed:** write_unit error in LABLE, while the file parameter is empty
+
+Version 1.1.3
+
+- **Added:** Set getwd() as default value of file parameter in write_unit function
+
+- **Added:** Added new case of the file parameter in write_unit function: If the value is a director, then use the key value in unit@profile$name as the output file name.
+
+Version 1.1.2
+
+- **Fixed:** the dependence of nchar related to Rcpp package for R version lower than 4.0.0
+
+Version 1.1.1
+
+- **Added:** description in Get_Start doc
+
+- **Fixed:** DATASET_EXTERNALSHAPE loss field_length error
+
+- **Fixed:** DATASET_SYMBOL no legend
+
+- **Fixed:** simplify key parameter description in create_unit function
+
+Version 1.1.0
+
+- **Added:** DATASET_STYLE, DATASET_COLORSTRIP, TREE_COLORS range, DATASET_SYMBOL, DATASET_DOMAINS, DATASET_CONNECTION, DATASET_MULTIBAR, DATASET_BINARY, DATASET_TEXT, DATASET_EXTERNALSHAPE, DATASET_PIECHART support full color palette(table2itol wesanderson npg aaas nejm lancet jama jco ucscgb d3 igv locuszoom uchicago simpsons futurama rickandmorty startrek tron gsea material BrBG PiYG PRGn PuOr RdBu RdGy RdYlBu RdYlGn Spectral Accent Dark2 Paired Pastel1 Pastel2 Set1 Set2 Set3 Blues BuGn BuPu GnBu Greens Greys Oranges OrRd PuBu PuBuGn PuRd Purples RdPu Reds YlGn YlGnBu YlOrBr YlOrRd)
+
+- **Added:** user level add DATASET_MULTIBAR, DATASET_LINECHART, DATASET_PIECHART, DATASET_ALIGNMENT, DATASET_IMAGE, POPUP_INFO support
+
+- **Added:** create_hub supports direct input of phylo objects for the tree parameter, not just the tree file path
+
+- **Fixed:** wesanderson color palette random picking function changed from runif to sample, fixed the problem of repeated color matching
+
+Version 1.0.5
+
+- **Added:** a new S4 method + for itol.unit and itol.unit. This method will merge the data from the same template method.
+
+Version 1.0.4
+
+- **Added:** Add wesanderson palettes in range case of DATASET_COLORSTRIP type
+
+Version 1.0.3
+
+- **Added:** interactive complex_html_text RStudio Addins for DATASET_TEXT
+
+Version 1.0.2
+
+- **Fixed:** while create_unit(type="DATASET_TEXT"), unable to use one character to setup color parameter (Unable to indentify data column)
+
+- **Fixed:** while unit type is TREE_COLORS and node data is empty, unable to use hub_to_unit (attempt to use zero-length variable name)
+
+- **Added:** Add wesanderson palettes in range case of TREE_COLORS type
 
 ## Support
 
