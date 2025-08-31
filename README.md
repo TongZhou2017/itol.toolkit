@@ -1,6 +1,6 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/itol.toolkit)](https://CRAN.R-project.org/package=itol.toolkit)
 
-<img src="man/figures/itol.toolkit.gif" width="160"/>
+<img src="man/figures/itol.toolkit.gif" width="160" alt="itol.toolkit package logo and demonstration"/>
 
 The itol.toolkit is an R package that provides helper functions for the [Interactive Tree Of Life (iTOL)](https://itol.embl.de/). This package has been selected as a third-party tool in [iTOL documentation](https://itol.embl.de/help.cgi#external) and is recommended as one of the [Top 40 New CRAN packages in January 2023](https://rviews.rstudio.com/2023/02/28/january-2023-top-40-new-cran-packages/) by the R Views channel of RStudio.
 
@@ -163,6 +163,12 @@ We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/
 ## News
 
 update history:
+
+Version 1.1.11
+
+- **Added:** Dual-factor coloring support for binary dataset visualization.
+
+- **Fixed:** Legend order issues in DATASET_COLORSTRIP, DATASET_SYMBOL, and DATASET_DOMAINS functions.
 
 Version 1.1.10
 

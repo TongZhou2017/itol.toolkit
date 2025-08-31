@@ -4,222 +4,116 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>v1.1.9 • itol.toolkit</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="v1.1.9">
-<meta property="og:description" content="itol.toolkit">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="v1.1.9">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.10</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/Get_Start.html">Get started</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Single Functions
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tree Structure</li>
-    <li>
-      <a href="../articles/COLLAPSE.html">COLLAPSE</a>
-    </li>
-    <li>
-      <a href="../articles/PRUNE.html">PRUNE</a>
-    </li>
-    <li>
-      <a href="../articles/SPACING.html">SPACING</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Theme Style</li>
-    <li>
-      <a href="../articles/TREE_COLORS.html">TREE_COLORS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_STYLE.html">DATASET_STYLE</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Text</li>
-    <li>
-      <a href="../articles/LABELS.html">LABELS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_TEXT.html">DATASET_TEXT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Basic Plot</li>
-    <li>
-      <a href="../articles/DATASET_BINARY.html">DATASET_BINARY</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_LINECHART.html">DATASET_LINECHART</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_PIECHART.html">DATASET_PIECHART</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced Plot</li>
-    <li>
-      <a href="../articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_IMAGE.html">DATASET_IMAGE</a>
-    </li>
-    <li>
-      <a href="../articles/POPUP_INFO.html">POPUP_INFO</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">itol.toolkit</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.11</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/Get_Start.html">Get started</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-single-functions" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Single Functions</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-single-functions">
+<li><h6 class="dropdown-header" data-toc-skip>Tree Structure</h6></li>
+    <li><a class="dropdown-item" href="../articles/COLLAPSE.html">COLLAPSE</a></li>
+    <li><a class="dropdown-item" href="../articles/PRUNE.html">PRUNE</a></li>
+    <li><a class="dropdown-item" href="../articles/SPACING.html">SPACING</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Theme Style</h6></li>
+    <li><a class="dropdown-item" href="../articles/TREE_COLORS.html">TREE_COLORS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_STYLE.html">DATASET_STYLE</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Text</h6></li>
+    <li><a class="dropdown-item" href="../articles/LABELS.html">LABELS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_TEXT.html">DATASET_TEXT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Basic Plot</h6></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_BINARY.html">DATASET_BINARY</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_LINECHART.html">DATASET_LINECHART</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_PIECHART.html">DATASET_PIECHART</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Advanced Plot</h6></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_IMAGE.html">DATASET_IMAGE</a></li>
+    <li><a class="dropdown-item" href="../articles/POPUP_INFO.html">POPUP_INFO</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tips
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a>
-    </li>
-    <li>
-      <a href="../articles/Installation.html">Installation</a>
-    </li>
-    <li>
-      <a href="../articles/Datasets.html">Datasets</a>
-    </li>
-    <li>
-      <a href="../articles/Color_Palette.html">Colors</a>
-    </li>
-    <li>
-      <a href="../articles/Data_Reproduction.html">Data Reproduction</a>
-    </li>
-    <li>
-      <a href="../articles/Comparison_table2itol.html">vs table2itol</a>
-    </li>
-    <li>
-      <a href="../articles/tree_construction.html">Tree Construction</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tips" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Tips</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-tips">
+<li><a class="dropdown-item" href="../articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a></li>
+    <li><a class="dropdown-item" href="../articles/Installation.html">Installation</a></li>
+    <li><a class="dropdown-item" href="../articles/Datasets.html">Datasets</a></li>
+    <li><a class="dropdown-item" href="../articles/Color_Palette.html">Colors</a></li>
+    <li><a class="dropdown-item" href="../articles/Data_Reproduction.html">Data Reproduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Comparison_table2itol.html">vs table2itol</a></li>
+    <li><a class="dropdown-item" href="../articles/tree_construction.html">Tree Construction</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Version history</li>
-    <li>
-      <a href="../articles/v1.1.9.html">version 1.1.9</a>
-    </li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Version history</h6></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.9.html">version 1.1.9</a></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.10.html">version 1.1.10</a></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.11.html">version 1.1.11</a></li>
   </ul>
 </li>
-<li>
-  <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">Gallery</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="https://tongzhou2017.github.io/itol.toolkit-gallery/">Gallery</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/TongZhou2017/itol.toolkit" class="external-link">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://discord.com/invite/n5TC7jCfGJ" class="external-link">
-    <span class="fab fa-discord fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/itol_toolkit" class="external-link">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/TongZhou2017/itol.toolkit" aria-label="GitHub repository"><span class="fa fa-github"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://discord.com/invite/n5TC7jCfGJ" aria-label="Discord community"><span class="fa fab fa-discord fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://twitter.com/itol_toolkit" aria-label="Twitter profile"><span class="fa fa-twitter"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>v1.1.9</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>v1.1.9</h1>
                         <h4 data-toc-skip class="author">Tong Zhou</h4>
             
-            <h4 data-toc-skip class="date">2025-05-15</h4>
+            <h4 data-toc-skip class="date">2025-09-01</h4>
       
-      
-      <div class="hidden name"><code>v1.1.9.Rmd</code></div>
 
+      <div class="d-none name"><code>v1.1.9.Rmd</code></div>
     </div>
 
     
@@ -258,7 +152,7 @@ differentiate them from user-side code.</li>
 <p>When creating a <code>DATASET_SIMPLEBAR</code> unit with
 <code>create_unit</code>, for example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">itol.toolkit</span><span class="op">)</span> <span class="co"># main package</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tongzhou2017.github.io/itol.toolkit/">itol.toolkit</a></span><span class="op">)</span> <span class="co"># main package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># data manipulation</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span> <span class="co"># file read</span></span>
 <span></span>
@@ -273,7 +167,6 @@ differentiate them from user-side code.</li>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_4_multibar"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_SIMPLEBAR"</span>,</span>
 <span>                      tree <span class="op">=</span> <span class="va">tree_1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "DATASET_SIMPLEBAR"</span></span></code></pre>
 <p>In versions v1.1.8 and earlier, the following warning would be
 triggered:</p>
 <blockquote>
@@ -290,7 +183,7 @@ returning NA</p>
 </h4>
 <p>When using <code>mean</code> directly, since the selected data frame
 is not purely a numeric vector, the result cannot be calculated.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Asia</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">North_America</span>, <span class="va">Asia</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Returns: </span></span>
@@ -300,7 +193,7 @@ is not purely a numeric vector, the result cannot be calculated.</p>
 <p>Thus, the solution is to convert the data frame to a vector, then
 calculate <code>mean</code> by rows or columns, which will yield a
 numeric vector and resolve the issue:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">North_America</span>, <span class="va">Asia</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">North_America</span>, <span class="va">Asia</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># [1] 0.2529557</span></span>
@@ -310,7 +203,7 @@ numeric vector and resolve the issue:</p>
 <span><span class="co"># [1] 0.2657</span></span></code></pre></div>
 <p>To fix the issue, change the code at line 1364 in <code>user.R</code>
 to:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -335,7 +228,7 @@ single-column heatmaps can be replaced by the gradient, single-column
 heatmaps still offer more adjustable parameters. Hence, some users still
 use the single-column heatmap feature. However, when calling
 <code>create_unit</code> to create a unit, an error is thrown:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unit_6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_unit.html">create_unit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Asia</span><span class="op">)</span>,</span>
 <span>                      key <span class="op">=</span> <span class="st">"rep_Zhou_6_multibar"</span>,</span>
 <span>                      type <span class="op">=</span> <span class="st">"DATASET_HEATMAP"</span>,</span>
@@ -351,11 +244,11 @@ has only one column, clustering cannot be performed, leading to an error
 when generating the field tree. Therefore, a conditional check should be
 added near line 959 in <code>user.R</code> to skip field tree generation
 if the input is a single column:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">field_tree</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
-<span>  <span class="va">field_tree</span> <span class="op">&lt;-</span> <span class="fu">write.tree</span><span class="op">(</span><span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">as.phylo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">field_names</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">field_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/write.tree.html" class="external-link">write.tree</a></span><span class="op">(</span><span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">as.phylo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">field_names</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>This ensures that the template file is generated successfully without
 errors. However, when submitting the updated template to iTOL, the
@@ -373,7 +266,7 @@ temporarily resolved by skipping the field tree output when the input
 has a single column. The following changes are made in
 <code>user.R</code> at line 969 and in <code>output.R</code> at line
 230:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># user.R L969</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">specific_themes</span><span class="op">[[</span><span class="st">"heatmap"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"tree"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"tree_display"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
@@ -403,13 +296,13 @@ once, the <code>write_hub</code> function in v1.1.9 introduces the
 <code>with_tree</code> parameter. When <code>with_tree = TRUE</code>,
 tree files are also outputted. This parameter defaults to
 <code>FALSE</code> to maintain backward compatibility.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hub_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_hub.html">create_hub</a></span><span class="op">(</span><span class="va">tree_1</span><span class="op">)</span></span>
 <span><span class="va">hub_1</span> <span class="op">&lt;-</span> <span class="va">hub_1</span> <span class="op">+</span> <span class="va">unit_4</span> <span class="op">+</span> <span class="va">unit_5</span> <span class="op">+</span> <span class="va">unit_6</span></span>
 <span><span class="fu"><a href="../reference/write_hub.html">write_hub</a></span><span class="op">(</span><span class="va">hub_1</span>, <span class="st">"~/Downloads/"</span>, with_tree <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p>However, in versions v1.1.8 and earlier, running this might cause an
 error:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># No error with the following:</span></span>
 <span><span class="va">hub_1</span> <span class="op">&lt;-</span> <span class="va">hub_1</span> <span class="op">+</span> <span class="va">unit_4</span> <span class="co">#+ unit_5 + unit_6</span></span>
 <span><span class="va">hub_1</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">hub_1</span> <span class="op">+</span> <span class="va">unit_4</span><span class="op">)</span> <span class="op">+</span> <span class="va">unit_5</span> <span class="co">#+ unit_6</span></span>
@@ -426,7 +319,7 @@ error:</p>
 the data format is <code>data.table</code>, it results in a format
 conversion error. To fix this, add a format conversion at line 1352 in
 <code>learn.R</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abundance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">abundance</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -437,13 +330,13 @@ conversion error. To fix this, add a format conversion at line 1352 in
 custom sorting rules through the <code><a href="../reference/sort_color.html">sort_color()</a></code> method and
 specify a reference color for sorting. This feature is still being
 explored, and concrete examples will be provided in the future.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_color.html">get_color</a></span><span class="op">(</span><span class="fl">10</span>,set <span class="op">=</span> <span class="st">"wesanderson"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/sort_color.html">sort_color</a></span><span class="op">(</span><span class="va">colors</span>,plot <span class="op">=</span> <span class="cn">T</span>, root<span class="op">=</span><span class="st">"#FF0000"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v1.1.9_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<pre><code><span><span class="co">##  [1] "#D8B70A" "#A42820" "#FF0000" "#C27D38" "#FAD77B" "#02401B" "#EABE94"</span></span>
-<span><span class="co">##  [8] "#DD8D29" "#8D8680" "#3B9AB2"</span></span></code></pre>
+<p><img src="v1.1.9_files/figure-html/unnamed-chunk-11-1.png" alt="Color sorting algorithm demonstration with Wes Anderson color palette" width="700"></p>
+<pre><code><span><span class="co">##  [1] "#CEB175" "#EBCC2A" "#FF0000" "#C18748" "#F1BB7B" "#BDC881" "#FAEFD1"</span></span>
+<span><span class="co">##  [8] "#02401B" "#54D8B1" "#9986A5"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="new-tree-building-methods">5. New Tree-Building Methods<a class="anchor" aria-label="anchor" href="#new-tree-building-methods"></a>
@@ -454,52 +347,43 @@ will be provided later. Method 2 will be further optimized.</p>
 <h4 id="method-1-based-on-string-vector">Method 1: Based on String Vector<a class="anchor" aria-label="anchor" href="#method-1-based-on-string-vector"></a>
 </h4>
 <p>Generate a tree directly from a template string:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"template_groups"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/vector_tree.html">vector_tree</a></span><span class="op">(</span><span class="va">template_groups</span><span class="op">$</span><span class="va">template</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v1.1.9_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="v1.1.9_files/figure-html/unnamed-chunk-12-1.png" alt="Tree visualization based on template string vector" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="method-2-based-on-data-frame-rowcolumn-names">Method 2: Based on Data Frame Row/Column Names<a class="anchor" aria-label="anchor" href="#method-2-based-on-data-frame-rowcolumn-names"></a>
 </h4>
 <p>Generate a tree based on the row and column names of a data
 frame:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"template_parameters_count"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">template_parameters_count</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TREE_COLORS"</span>,<span class="st">"DATASET_STYLE"</span>,<span class="st">"DATASET_COLORSTRIP"</span><span class="op">)</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/df_tree.html">df_tree</a></span><span class="op">(</span>main <span class="op">=</span> <span class="st">"row"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v1.1.9_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p><img src="v1.1.9_files/figure-html/unnamed-chunk-13-1.png" alt="Tree visualization based on data frame row/column names" width="700"></p>
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Tong Zhou.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Tong Zhou.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>

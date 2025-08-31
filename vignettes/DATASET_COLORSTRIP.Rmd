@@ -51,7 +51,7 @@ unit_21 <- create_unit(data = template_groups,
                        tree = tree_1)
 ```
 
-![](images/DATASET_COLORSTRIP_1.png)
+![Color strip visualization example 1](images/DATASET_COLORSTRIP_1.png)
 
 Color strips can also be added through nodes.
 ```{r color strip in node}
@@ -63,7 +63,7 @@ unit_22 <- create_unit(data = df_data,
                        tree = tree_1)
 ```
 
-![](images/DATASET_COLORSTRIP_2.png)
+![Color strip visualization example 2](images/DATASET_COLORSTRIP_2.png)
 
 It is worth noting that when adding a color strip through node, the color strip is not displayed outside the tree by default, and can be displayed by turning on `Display internal node values` on the iTOL control panel. At the same time, users can display labels through `Display strip labels` on the iTOL control panel.
 
@@ -89,6 +89,6 @@ unit_23 <- create_unit(data = df_metadata %>%
                       tree = tree_2)
 ```
 
-![](images/DATASET_COLORSTRIP_3.png)
+![Color strip visualization example 3](images/DATASET_COLORSTRIP_3.png)
 
 It should be noted that when the tree is large or there are too many annotation information dimensions, it may cause the browser to crash. You should choose another browser or close the browser tab at this time.

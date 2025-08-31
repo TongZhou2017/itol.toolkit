@@ -109,7 +109,7 @@ unit_34 <- create_unit(data = template_end_group_long,
                        tree = tree)
 ```
 
-![](images/DATASET_DOMAINS_1.png)
+![Dataset domains visualization example](images/DATASET_DOMAINS_1.png)
 
 ## Style modification
 Users can add a column to the long table used to generate templates to change the shape of each protein domain. By assigning the domain label column to a new column and replace each label with a shape, you can quickly modify the shape. 

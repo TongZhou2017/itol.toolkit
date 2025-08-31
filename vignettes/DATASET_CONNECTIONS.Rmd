@@ -61,7 +61,7 @@ unit_43 <- create_unit(data = tab_tmp_connect,
                        tree = tree)
 ```
 
-![](images/DATASET_CONNECTION_1.png)
+![Dataset connections visualization example](images/DATASET_CONNECTION_1.png)
 
 ## Style modification
 The maximum line width can be set with the `unit@specific_themes$connection$line$width_max` variable. Arrows can be displayed by setting the `unit@specific_themes$connection$arrow$display` variable to 1. 

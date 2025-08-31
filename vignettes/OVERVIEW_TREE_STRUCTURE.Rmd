@@ -1,10 +1,10 @@
 ---
-title: "TREE_STRUCTURE"
+title: "OVERVIEW_TREE_STRUCTURE"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
 vignette: >
-  %\VignetteIndexEntry{TREE_STRUCTURE}
+  %\VignetteIndexEntry{OVERVIEW_TREE_STRUCTURE}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 editor_options: 

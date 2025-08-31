@@ -60,7 +60,7 @@ unit_44 <- create_unit(data = df_data,
                        tree = tree)
 ```
 
-![](images/DATASET_IMAGE_1.png)
+![Dataset image visualization example](images/DATASET_IMAGE_1.png)
 
 ## Style modification
 `unit@specific_themes$image$shift_h` is a pixel value; can be used to shift the image position left or right. By default, image's top left corner is aligned to the node position.  

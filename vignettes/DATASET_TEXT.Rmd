@@ -61,7 +61,7 @@ unit_18 <- create_unit(data = df_data,
 write_unit(unit_18)
 ```
 
-![](images/DATASET_TEXT_1.png)
+![Text visualization example 1](images/DATASET_TEXT_1.png)
 
 Users can input data with only only two columns(i.e., node ID and text), and set the color manually through the "color" parameter.
 ```{r text color defind by parameter}
@@ -76,7 +76,7 @@ unit_19 <- create_unit(data = df_data,
 write_unit(unit_19)
 ```
 
-![](images/DATASET_TEXT_2.png)
+![Text visualization example 2](images/DATASET_TEXT_2.png)
 
 Users can define multi-style text by adding different tags to the text:
 
@@ -116,7 +116,7 @@ unit_20 <- create_unit(data = df_data,
 write_unit(unit_20)
 ```
 
-![](images/DATASET_TEXT_3.png)
+![Text visualization example 3](images/DATASET_TEXT_3.png)
 
 ## Style modification
 Users can adjust the position of the text label with the following variables:

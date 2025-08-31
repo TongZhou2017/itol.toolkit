@@ -49,7 +49,7 @@ unit_33 <- create_unit(data = df_frequence,
                       tree = tree)
 ```
 
-![](images/DATASET_EXTERNALSHAPE_1.png)
+![External shape visualization example](images/DATASET_EXTERNALSHAPE_1.png)
 
 It is worth noting that when using `DATASET_EXTERNALSHAPE` template in `itol.toolkit` < v1.1.1, you may encounter the problem *Error in get_color(field_length, set = color) : object 'field_length' not found*, please update `itol.toolkit` in this case.
 

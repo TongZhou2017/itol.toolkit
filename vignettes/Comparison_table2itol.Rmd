@@ -1,5 +1,5 @@
 ---
-title: "Comparison between itol.toolkit and table2itol"
+title: "Comparison_table2itol"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Comparison_table2itol}
@@ -53,7 +53,7 @@ Rscript ./table2itol.R -a -c factor -D plan4 -i OTUID -l Genus -t %s -w 0 annota
 cd ${wd}
 ```
 
-![](images/table2itol.svg)
+![table2itol workflow diagram](images/table2itol.svg)
 
 ## itol.toolkit
 
@@ -75,7 +75,7 @@ data_1 <- data.table::fread(data_file_1)
 data_2 <- data.table::fread(data_file_2)
 ```
 
-![](images/0.svg)
+![itol.toolkit workflow diagram](images/0.svg)
 
 ```{r}
 # relabel by genus
@@ -86,7 +86,7 @@ unit_1 <- create_unit(data = data_1 %>% select(ID, Genus),
 write_unit(unit_1)
 ```
 
-![](images/1.svg)
+![Labels example with genus names](images/1.svg)
 
 ```{r}
 # tree_colors range by phylum
@@ -98,7 +98,7 @@ unit_2 <- create_unit(data = data_1 %>% select(ID, Phylum),
 write_unit(unit_2)
 ```
 
-![](images/2.svg)
+![Tree colors by phylum](images/2.svg)
 
 ```{r}
 # color_strip by class
@@ -111,7 +111,7 @@ unit_3 <- create_unit(data = data_1 %>% select(ID, Class),
 unit_3@common_themes$basic_theme$margin <- 50
 ```
 
-![](images/3.svg)
+![Color strip by class](images/3.svg)
 
 ```{r}
 # simple_bar by NS
@@ -122,7 +122,7 @@ unit_4 <- create_unit(data = data_1 %>% select(ID, South_America, Asia, North_Am
 unit_4@specific_themes$basic_plot$size_max <- 100
 ```
 
-![](images/4.svg)
+![Multibar chart example](images/4.svg)
 
 ```{r}
 #Adding comment tag
@@ -133,7 +133,7 @@ unit_5 <- create_unit(data = data_1 %>% select(ID, Class, Family),
                       tree = tree_1)
 ```
 
-![](images/5.svg)
+![Pie chart example](images/5.svg)
 
 ### write by hub level
 ```{r}
@@ -160,7 +160,7 @@ unit_6 <- create_unit(data = data_1 %>% select(ID, Class, Family),
                       tree = tree_1)
 write_unit(unit_6)
 ```
-![](images/6.svg)
+![Final combined visualization](images/6.svg)
 
 ## Comparison between itol.toolkit and table2itol
 

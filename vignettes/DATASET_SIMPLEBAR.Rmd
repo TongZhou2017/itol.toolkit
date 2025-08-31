@@ -80,7 +80,7 @@ unit_35 <- create_unit(data = df_frequence,
                        tree = tree)
 ```
 
-![](images/DATASET_SIMPLEBAR_1.png)
+![Simple bar chart visualization example](images/DATASET_SIMPLEBAR_1.png)
 
 We can also calculate the average usage frequency of each template in published articles by specifying the `method` parameter as `mean`, and use this as a basis for drawing Simple bar charts.
 ```{r simple bar mean}

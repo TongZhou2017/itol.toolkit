@@ -161,7 +161,7 @@ hub_1 <- hub_1 + unit_6 + unit_7
 write_hub(hub_1, "~/Downloads/", with_tree = TRUE)
 ```
 
-![](images/v1.1.11.jpg)
+![Version 1.1.11 update overview](images/v1.1.11.jpg)
 
 ## 2. Legend Order Fixes
 

@@ -4,7 +4,7 @@ date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 author: Weiyue Liu^[IOCAS, weiyLiu@outlook.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
 vignette: >
-  %\VignetteIndexEntry{SPACING_zh_CN}
+  %\VignetteIndexEntry{SPACING}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -60,7 +60,7 @@ unit_6 <- create_unit(data = df_frequence,
                       tree = tree)
 write_unit(unit_6)
 ```
-![](images/SPACING.png)
+![Branch spacing adjustment example](images/SPACING.png)
 
 ## Note
 `SPACING` is the only template function that the author cannot think of as having any practical use. The actual effect of this function is far from what authors expected (to highlight the key points). If the upper and lower intervals of a branch can be defined, this function can have practical use. If you can explore the use of this function, welcome to contact me. This function is also the only one that does not support node level manipulation. So it’s not surprising that the usage rate of this feature is low.

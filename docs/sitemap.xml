@@ -1,378 +1,125 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/README-copy.html</loc>
-  </url>
-  <url>
-    <loc>/articles/COLLAPSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Color_Palette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Comparison between itol.toolkit and table2itol.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Comparison_table2itol.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_ALIGNMENT.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_BINARY.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_BOXPLOT.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_COLORSTRIP.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_CONNECTIONS.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_DOMAIN.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_DOMAINS.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_EXTERNALSHAPE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_GRADIENT.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_HEATMAP.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_IMAGE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_LINECHART.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_MULTIBAR.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_PIECHART.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_SIMPLEBAR.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_STYLE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_SYMBOL.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DATASET_TEXT.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Data_Reproduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Datasets.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Get_Start.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Image_Gallery.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Installation.html</loc>
-  </url>
-  <url>
-    <loc>/articles/LABELS.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Legend_of_colorstrip.html</loc>
-  </url>
-  <url>
-    <loc>/articles/OVERVIEW_STYLE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/OVERVIEW_TREE_STRUCTURE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Operation.html</loc>
-  </url>
-  <url>
-    <loc>/articles/POPUP_INFO.html</loc>
-  </url>
-  <url>
-    <loc>/articles/PRUNE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/SPACING.html</loc>
-  </url>
-  <url>
-    <loc>/articles/TREE_COLORS.html</loc>
-  </url>
-  <url>
-    <loc>/articles/hub_by_ggtree.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/tree_construction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/v1.1.10.html</loc>
-  </url>
-  <url>
-    <loc>/articles/v1.1.9.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/color_distance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/complex_html_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_01.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_01_to_connect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_range_to_node.html</loc>
-  </url>
-  <url>
-    <loc>/reference/correct_get_color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/correct_type.html</loc>
-  </url>
-  <url>
-    <loc>/reference/count_to_tree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_hub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_theme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/df_merge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/df_tree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fa_read.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fa_write.html</loc>
-  </url>
-  <url>
-    <loc>/reference/file_get_dir.html</loc>
-  </url>
-  <url>
-    <loc>/reference/file_get_name.html</loc>
-  </url>
-  <url>
-    <loc>/reference/file_to_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gradient_color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/head_line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hub_to_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inbuilt_themes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/itol.hub-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/itol.theme-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/itol.unit-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_data_from_file.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_data_from_files.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_data_from_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_data_from_unit_list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_field.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_legend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_profile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_separator.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_subdf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_align.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_alignment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_bar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_basic_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_basic_theme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_binary.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_border.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_common_themes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_connection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_domain.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_externalshape.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_heatmap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_image.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_linechart.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_piechart.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_specific_themes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_theme_strip_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/learn_type.html</loc>
-  </url>
-  <url>
-    <loc>/reference/line_clean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/line_split.html</loc>
-  </url>
-  <url>
-    <loc>/reference/longest_continuous_match.html</loc>
-  </url>
-  <url>
-    <loc>/reference/merge_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plus-itol.hub-itol.unit-method.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plus-methods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/search_tree_file.html</loc>
-  </url>
-  <url>
-    <loc>/reference/show-itol.hub-method.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sort_color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/template_groups.html</loc>
-  </url>
-  <url>
-    <loc>/reference/template_parameters_count.html</loc>
-  </url>
-  <url>
-    <loc>/reference/train_theme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unite_rows.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use.theme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vector_tree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/write_hub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/write_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/write_unit.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/404.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/LICENSE-text.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/LICENSE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Color_Palette.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Comparison between itol.toolkit and table2itol.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Comparison_table2itol.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_ALIGNMENT.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BINARY.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BOXPLOT.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_COLORSTRIP.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_CONNECTIONS.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_DOMAINS.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_EXTERNALSHAPE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_GRADIENT.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_HEATMAP.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_IMAGE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_LINECHART.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_MULTIBAR.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_PIECHART.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SIMPLEBAR.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_STYLE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SYMBOL.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_TEXT.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Data_Reproduction.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Get_Start.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Image_Gallery.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/LABELS.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Legend_of_colorstrip.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/OVERVIEW_STYLE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/OVERVIEW_TREE_STRUCTURE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/Operation.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/POPUP_INFO.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/PRUNE.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/SPACING.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/TREE_COLORS.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/index.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/v1.1.10.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/v1.1.11.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/articles/v1.1.9.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/authors.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/index.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/color_distance.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/complex_html_text.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/convert_01.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/convert_01_to_connect.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/convert_range_to_node.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/correct_get_color.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/correct_type.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/count_to_tree.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/create_hub.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/create_theme.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/create_unit.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/df_merge.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/df_tree.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/dt_transpose_header.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/fa_read.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/fa_write.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/file_get_dir.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/file_get_name.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/file_to_unit.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/get_color.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/gradient_color.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/head_line.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/hub_to_unit.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/inbuilt_themes.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/index.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/itol.hub-class.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/itol.theme-class.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/itol.unit-class.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_data.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_data_from_file.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_data_from_files.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_data_from_unit.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_data_from_unit_list.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_df.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_field.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_legend.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_line.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_profile.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_separator.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_subdf.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_align.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_alignment.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_bar.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_basic_plot.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_basic_theme.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_binary.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_border.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_common_themes.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_connection.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_domain.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_externalshape.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_heatmap.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_image.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_label.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_linechart.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_piechart.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_specific_themes.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_theme_strip_label.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/learn_type.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/line_clean.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/line_split.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/longest_continuous_match.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/merge_unit.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/plus-methods.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/search_tree_file.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/show-itol.hub-method.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/sort_color.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/template_groups.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/template_parameters_count.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/train_theme.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/unite_rows.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/use.theme.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/vector_tree.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/write_hub.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/write_raw.html</loc></url>
+<url><loc>https://tongzhou2017.github.io/itol.toolkit/reference/write_unit.html</loc></url>
 </urlset>
+

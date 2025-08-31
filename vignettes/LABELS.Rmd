@@ -54,4 +54,4 @@ unit_17 <- create_unit(data = df_data,
 write_unit(unit_17)
 ```
 
-![](images/LABELS_1.png)
+![Labels visualization example](images/LABELS_1.png)

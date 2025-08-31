@@ -54,7 +54,7 @@ unit_7 <- create_unit(data = template_groups,
 write_unit(unit_7)
 ```
 
-![](images/TREE_COLORS_1.png)
+![Tree colors visualization example 1](images/TREE_COLORS_1.png)
 
 We can use the "clade" attribute to apply color adjustments to all branches contained in a node . Like `unit_7`, we used only 2 columns data  to implement the "branch" attribute in `unit_8`. The attribute are fed to the `subtype` parameter. The line type is defined by the `line_type` parameter, which controls whether the line is a dotted line or not, and here we define the different line types as a set of vectors. The line thickness is defined by the `size_factor` parameter.
 
@@ -72,7 +72,7 @@ unit_8 <- create_unit(data = df_data,
 write_unit(unit_8)
 ```
 
-![](images/TREE_COLORS_2.png)
+![Tree colors visualization example 2](images/TREE_COLORS_2.png)
 
 We can use the "branch" attribute to adjust color of the node or tip like "clade" attribute. However, "branch" attribute does not broadcast these settings to its offspring branches. See `unit_9`
 ```{r tree colors branch in node}
@@ -86,7 +86,7 @@ unit_9 <- create_unit(data = df_data,
 write_unit(unit_9)
 ```
 
-![](images/TREE_COLORS_3.png)
+![Tree colors visualization example 3](images/TREE_COLORS_3.png)
 
 We can use "label" attribute to adjust colors and font styles at the branch level. We  also used only 2 columns data  to implement the "branch" attribute in  `unit_10`. The font type is defined by the `font_type parameter`, which controls whether the lines are bold or italic; The font size is defined by the `size_factor` parameter. 
 ```{r tree colors label in tip}
@@ -100,7 +100,7 @@ unit_10 <- create_unit(data = template_groups,
 write_unit(unit_10)
 ```
 
-![](images/TREE_COLORS_4.png)
+![Tree colors visualization example 4](images/TREE_COLORS_4.png)
 
 We can use the "label_background" attribute to adjust the color scheme of the label background at the branch level. We only used 2 columns of information to show how to implement the "label_background" attribute in `unit_11`. Usually, the background is a uniform color, so the color parameter defines a single color. However, you can set different colors by entering a vector of colors. If no color was set, `itol.toolkit` will automatically set colors based on the data. In practice, it's important to note that backgrounds often don't work the first time you drag them into iTOL, and you need to switch between the ring, rectangle, and unrooted tree types to make them work.
 ```{r tree colors label background in tip}
@@ -113,6 +113,6 @@ unit_11 <- create_unit(data = template_groups,
 write_unit(unit_11)
 ```
 
-![](images/TREE_COLORS_5.png)
+![Tree colors visualization example 5](images/TREE_COLORS_5.png)
 
 Of all templates, `TREE_COLORS` is one of the most frequently used function  and highly recommended by authors. The itol.toolkit enables users to make fewer mistakes, and save effort in complex function and data preparation.

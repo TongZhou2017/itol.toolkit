@@ -48,4 +48,4 @@ unit_45 <- create_unit(data = df_data,
                     tree = tree)
 ```
 
-![](images/POPUP_INFO_1.png)
+![Popup info visualization example](images/POPUP_INFO_1.png)

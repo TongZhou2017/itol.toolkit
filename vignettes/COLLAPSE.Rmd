@@ -55,7 +55,7 @@ write_unit(unit_1,
            paste0(getwd(),"/E001_collapse_1.txt"))
 ```
 
-![](images/COLLAPSE_1.png)
+![Collapse branches example 1: Simple and text branches collapsed](images/COLLAPSE_1.png)
 
 While the first two sets of folded branches are relatively simple to define because no other branches exist between them, the third set of folded branches is slightly complex, requiring the user to select the two branches with the longest spacing among the four to accurately describe the extent to be folded. Writing the code as `DATASET_ALIGNMENT | POPUP_INFO` may result in the omission of the `DATASET_CONNECTIONS` branch, because the branch does not belong to MCRA of `DATASET_ALIGNMENT` and `POPUP_INFO`.
 
@@ -91,6 +91,6 @@ write_unit(unit_2,
            paste0(getwd(),"/E002_collapse_2.txt"))
 ```
 
-![](images/COLLAPSE_2.png)
+![Collapse branches example 2: Node-based branch collapsing](images/COLLAPSE_2.png)
 
 If you have questions about how to upload results files from iTOL toolkit for interactive visualization on iTOL, please refer to the [Operation](https://tongzhou2017.github.io/itol.toolkit/articles/Operation.html) document for step-by-step guidance.

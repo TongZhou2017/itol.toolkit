@@ -57,7 +57,7 @@ unit_30 <- create_unit(data = df_data,
                     tree = tree)
 ```
 
-![](images/DATASET_SYMBOL_1.png)
+![Symbol visualization example 1](images/DATASET_SYMBOL_1.png)
 
 We can use the "position" parameter to set the position where the symbol appears.Position should be a number between 0 and 1, specifying the ratio of the branch length where the center of the symbol should be positioned. Here, we set the position to 0.5 to place the symbol in the middle of the branch.
 ```{r symbol at the middle of a branch}
@@ -68,7 +68,7 @@ unit_31 <- create_unit(data = df_data,
                     tree = tree)
 ```
 
-![](images/DATASET_SYMBOL_2.png)
+![Symbol visualization example 2](images/DATASET_SYMBOL_2.png)
 
 We can determine whether the symbol is filled by changing the `fill` parameter. 0 represents a outlined symbol, and 1 represents a filled symbol.
 ```{r outlined symbol}
@@ -80,7 +80,7 @@ unit_32 <- create_unit(data = df_data,
                     fill = 0)
 ```
 
-![](images/DATASET_SYMBOL_3.png)
+![Symbol visualization example 3](images/DATASET_SYMBOL_3.png)
 
 ## Style modification
 By modifying `unit@specific_themes$basic_plot$size_max`, we can adjust the maximum size of the symbol.

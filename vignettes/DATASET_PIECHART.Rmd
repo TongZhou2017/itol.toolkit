@@ -91,4 +91,4 @@ unit_41 <- create_unit(data = df_frequence_years,
                     tree = tree)
 ```
 
-![](images/DATASET_PIECHART_1.png)
+![Pie chart visualization example](images/DATASET_PIECHART_1.png)

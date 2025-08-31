@@ -1,12 +1,11 @@
 pandoc: 2.19.2
-pkgdown: 2.0.7
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   COLLAPSE: COLLAPSE.html
   Color_Palette: Color_Palette.html
-  Comparison between itol.toolkit and table2itol: Comparison between itol.toolkit
-    and table2itol.html
   Comparison_table2itol: Comparison_table2itol.html
+  Data_Reproduction: Data_Reproduction.html
   DATASET_ALIGNMENT: DATASET_ALIGNMENT.html
   DATASET_BINARY: DATASET_BINARY.html
   DATASET_BOXPLOT: DATASET_BOXPLOT.html
@@ -24,22 +23,24 @@ articles:
   DATASET_STYLE: DATASET_STYLE.html
   DATASET_SYMBOL: DATASET_SYMBOL.html
   DATASET_TEXT: DATASET_TEXT.html
-  Data_Reproduction: Data_Reproduction.html
   Datasets: Datasets.html
   Get_Start: Get_Start.html
   Image_Gallery: Image_Gallery.html
   Installation: Installation.html
   LABELS: LABELS.html
   Legend_of_colorstrip: Legend_of_colorstrip.html
+  Operation: Operation.html
   OVERVIEW_STYLE: OVERVIEW_STYLE.html
   OVERVIEW_TREE_STRUCTURE: OVERVIEW_TREE_STRUCTURE.html
-  Operation: Operation.html
   POPUP_INFO: POPUP_INFO.html
   PRUNE: PRUNE.html
   SPACING: SPACING.html
   TREE_COLORS: TREE_COLORS.html
   tree_construction: tree_construction.html
   v1.1.10: v1.1.10.html
+  v1.1.11: v1.1.11.html
   v1.1.9: v1.1.9.html
-last_built: 2025-05-15T15:00Z
-
+last_built: 2025-08-31T20:00Z
+urls:
+  reference: https://tongzhou2017.github.io/itol.toolkit/reference
+  article: https://tongzhou2017.github.io/itol.toolkit/articles

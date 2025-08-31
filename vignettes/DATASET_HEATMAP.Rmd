@@ -54,7 +54,7 @@ unit_28@specific_themes$heatmap$use_mid <- 0
 write_unit(unit_28)
 ```
 
-![](images/DATASET_HEATMAP_1.png)
+![Heatmap visualization example 1](images/DATASET_HEATMAP_1.png)
 
 ### Dataset 3
 The data in dataset3 comes from Lei Zheng et al. *Comparing with oxygen, trate simplifies microbial community assembly and improve functions as an electric acceptor in waste water treatment*, published in 2022 in Environmental Pollution.
@@ -101,7 +101,7 @@ unit_29b@specific_themes$heatmap$use_mid <- 0
 write_unit(unit_29b)
 ```
 
-![](images/DATASET_HEATMAP_2.png)
+![Heatmap visualization example 2](images/DATASET_HEATMAP_2.png)
 
 It is worth noting that the column names of the data used to draw the heatmap will be displayed on the side of the heatmap. Users should try to avoid using special symbols in the column names, otherwise errors may occur when applying the template to the iTOL: 
 *Failed to decode the file. Make sure it is in ASCII or UTF8 plain text format. Try using the dataset templates available on iTOL's help pages.*

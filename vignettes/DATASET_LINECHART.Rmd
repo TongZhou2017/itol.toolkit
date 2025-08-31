@@ -90,4 +90,4 @@ unit_40 <- create_unit(data = df_frequence_years,
                     tree = tree)
 ```
 
-![](images/DATASET_LINECHART_1.png)
+![Line chart visualization example](images/DATASET_LINECHART_1.png)

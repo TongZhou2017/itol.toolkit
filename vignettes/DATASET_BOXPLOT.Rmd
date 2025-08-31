@@ -55,7 +55,7 @@ unit_38 <- create_unit(data = df_data,
                        tree = tree)
 ```
 
-![](images/DATASET_BOXPLOT_1.png)
+![Boxplot visualization example 1](images/DATASET_BOXPLOT_1.png)
 
 We can also convert the original data, such as log conversion, and then use it to draw a box plot.
 ```{r box plot log}
@@ -66,7 +66,7 @@ unit_39 <- create_unit(data = df_data,
                        tree = tree)
 ```
 
-![](images/DATASET_BOXPLOT_2.png)
+![Boxplot visualization example 2](images/DATASET_BOXPLOT_2.png)
 
 ## Style modification
 You can adjust the height of the box plot by adjusting `unit@specific_themes$basic_plot$width`.

@@ -1,5 +1,5 @@
 ---
-title: "DATASET MULTIBAR"
+title: "DATASET_MULTIBAR"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 author: Longzhao Li^[IOCAS, 2575760336@qq.com], Zhongyi Hua^[CACMS, njbxhzy@hotmail.com], Tong Zhou^[IOCAS, tongzhou2017@gmail.com]
@@ -89,5 +89,5 @@ unit_37 <- create_unit(data = df_frequence_years,
                     tree = tree)
 write_unit(unit_37)
 ```
-![](images/DATASET_MULTIBAR_1.png)
+![Multibar chart visualization example](images/DATASET_MULTIBAR_1.png)
 

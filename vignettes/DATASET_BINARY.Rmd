@@ -66,7 +66,7 @@ unit_24 <- create_unit(data = df_frequence,
 unit_24@specific_themes$basic_plot$height_factor <- 0.4
 ```
 
-![](images/DATASET_BINARY_1.png)
+![Binary dataset visualization example 1](images/DATASET_BINARY_1.png)
 
 It is worth noting that the same symbol size will be displayed differently in different tree shapes. Therefore, here we create symbols suitable for a rectangular tree by adjusting `unit@specific_themes$basic_plot$height_factor` to 0.8. We can add labels to the symbols through `unit@common_themes$label$display`.
 ```{r binary for rectangular symbol height factor}
@@ -78,7 +78,7 @@ unit_25@specific_themes$basic_plot$height_factor <- 0.8
 unit_25@common_themes$label$display <- 1
 ```
 
-![](images/DATASET_BINARY_2.png)
+![Binary dataset visualization example 2](images/DATASET_BINARY_2.png)
 
 ## Style modification
 You can adjust the symbol size to fit your tree by adjusting `unit@specific_themes$basic_plot$height_factor`.

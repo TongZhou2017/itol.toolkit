@@ -185,7 +185,7 @@ abundance <- as.data.frame(abundance)
 
 A color sorting algorithm is supported, allowing users to define custom sorting rules through the `sort_color()` method and specify a reference color for sorting. This feature is still being explored, and concrete examples will be provided in the future.
 
-```{r}
+```{r, fig.alt="Color sorting algorithm demonstration with Wes Anderson color palette"}
 set.seed(123)
 colors <- get_color(10,set = "wesanderson")
 sort_color(colors,plot = T, root="#FF0000")
@@ -199,7 +199,7 @@ This feature is still in the exploration stage, and concrete examples will be pr
 
 Generate a tree directly from a template string:
 
-```{r}
+```{r, fig.alt="Tree visualization based on template string vector"}
 data("template_groups")
 plot(vector_tree(template_groups$template))
 ```
@@ -208,7 +208,7 @@ plot(vector_tree(template_groups$template))
 
 Generate a tree based on the row and column names of a data frame:
 
-```{r}
+```{r, fig.alt="Tree visualization based on data frame row/column names"}
 data("template_parameters_count")
 plot(template_parameters_count[c("TREE_COLORS","DATASET_STYLE","DATASET_COLORSTRIP"),1:5] %>% df_tree(main = "row"))
 ```

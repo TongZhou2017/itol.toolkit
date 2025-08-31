@@ -4,226 +4,120 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>DATASET_TEXT • itol.toolkit</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="DATASET_TEXT">
-<meta property="og:description" content="itol.toolkit">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="DATASET_TEXT">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.9</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/Get_Start.html">Get started</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Single Functions
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tree Structure</li>
-    <li>
-      <a href="../articles/COLLAPSE.html">COLLAPSE</a>
-    </li>
-    <li>
-      <a href="../articles/PRUNE.html">PRUNE</a>
-    </li>
-    <li>
-      <a href="../articles/SPACING.html">SPACING</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Theme Style</li>
-    <li>
-      <a href="../articles/TREE_COLORS.html">TREE_COLORS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_STYLE.html">DATASET_STYLE</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Text</li>
-    <li>
-      <a href="../articles/LABELS.html">LABELS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_TEXT.html">DATASET_TEXT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Basic Plot</li>
-    <li>
-      <a href="../articles/DATASET_BINARY.html">DATASET_BINARY</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_LINECHART.html">DATASET_LINECHART</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_PIECHART.html">DATASET_PIECHART</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced Plot</li>
-    <li>
-      <a href="../articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a>
-    </li>
-    <li>
-      <a href="../articles/DATASET_IMAGE.html">DATASET_IMAGE</a>
-    </li>
-    <li>
-      <a href="../articles/POPUP_INFO.html">POPUP_INFO</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">itol.toolkit</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.11</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/Get_Start.html">Get started</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-single-functions" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Single Functions</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-single-functions">
+<li><h6 class="dropdown-header" data-toc-skip>Tree Structure</h6></li>
+    <li><a class="dropdown-item" href="../articles/COLLAPSE.html">COLLAPSE</a></li>
+    <li><a class="dropdown-item" href="../articles/PRUNE.html">PRUNE</a></li>
+    <li><a class="dropdown-item" href="../articles/SPACING.html">SPACING</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Theme Style</h6></li>
+    <li><a class="dropdown-item" href="../articles/TREE_COLORS.html">TREE_COLORS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_STYLE.html">DATASET_STYLE</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Text</h6></li>
+    <li><a class="dropdown-item" href="../articles/LABELS.html">LABELS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_TEXT.html">DATASET_TEXT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Basic Plot</h6></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_BINARY.html">DATASET_BINARY</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_LINECHART.html">DATASET_LINECHART</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_PIECHART.html">DATASET_PIECHART</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Advanced Plot</h6></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a></li>
+    <li><a class="dropdown-item" href="../articles/DATASET_IMAGE.html">DATASET_IMAGE</a></li>
+    <li><a class="dropdown-item" href="../articles/POPUP_INFO.html">POPUP_INFO</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tips
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a>
-    </li>
-    <li>
-      <a href="../articles/Installation.html">Installation</a>
-    </li>
-    <li>
-      <a href="../articles/Datasets.html">Datasets</a>
-    </li>
-    <li>
-      <a href="../articles/Color_Palette.html">Colors</a>
-    </li>
-    <li>
-      <a href="../articles/Data_Reproduction.html">Data Reproduction</a>
-    </li>
-    <li>
-      <a href="../articles/Comparison_table2itol.html">vs table2itol</a>
-    </li>
-    <li>
-      <a href="../articles/tree_construction.html">Tree Construction</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tips" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Tips</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-tips">
+<li><a class="dropdown-item" href="../articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a></li>
+    <li><a class="dropdown-item" href="../articles/Installation.html">Installation</a></li>
+    <li><a class="dropdown-item" href="../articles/Datasets.html">Datasets</a></li>
+    <li><a class="dropdown-item" href="../articles/Color_Palette.html">Colors</a></li>
+    <li><a class="dropdown-item" href="../articles/Data_Reproduction.html">Data Reproduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Comparison_table2itol.html">vs table2itol</a></li>
+    <li><a class="dropdown-item" href="../articles/tree_construction.html">Tree Construction</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Version history</li>
-    <li>
-      <a href="../articles/v1.1.9.html">version 1.1.9</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Version history</h6></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.9.html">version 1.1.9</a></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.10.html">version 1.1.10</a></li>
+    <li><a class="dropdown-item" href="../articles/v1.1.11.html">version 1.1.11</a></li>
   </ul>
 </li>
-<li>
-  <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">Gallery</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="https://tongzhou2017.github.io/itol.toolkit-gallery/">Gallery</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/TongZhou2017/itol.toolkit" class="external-link">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://discord.com/invite/n5TC7jCfGJ" class="external-link">
-    <span class="fab fa-discord fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/itol_toolkit" class="external-link">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/TongZhou2017/itol.toolkit" aria-label="GitHub repository"><span class="fa fa-github"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://discord.com/invite/n5TC7jCfGJ" aria-label="Discord community"><span class="fa fab fa-discord fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://twitter.com/itol_toolkit" aria-label="Twitter profile"><span class="fa fa-twitter"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>DATASET_TEXT</h1>
-                        <h4 data-toc-skip class="author">Weiyue Liu<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Zhongyi
-Hua<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>,
-Tong Zhou<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>DATASET_TEXT</h1>
+                        <h4 data-toc-skip class="author">Weiyue Liu<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;IOCAS, &lt;a href="mailto:weiyLiu@outlook.com" class="email"&gt;weiyLiu@outlook.com&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>, Zhongyi
+Hua<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;CACMS, &lt;a href="mailto:njbxhzy@hotmail.com" class="email"&gt;njbxhzy@hotmail.com&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a>,
+Tong Zhou<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;IOCAS, &lt;a href="mailto:tongzhou2017@gmail.com" class="email"&gt;tongzhou2017@gmail.com&lt;/a&gt;&lt;/p&gt;'><sup>3</sup></a>
 </h4>
             
-            <h4 data-toc-skip class="date">Last compiled on 07 December,
-2024</h4>
+            <h4 data-toc-skip class="date">Last compiled on 01
+September, 2025</h4>
       
-      
-      <div class="hidden name"><code>DATASET_TEXT.Rmd</code></div>
 
+      <div class="d-none name"><code>DATASET_TEXT.Rmd</code></div>
     </div>
 
     
@@ -250,14 +144,14 @@ colors manually to meet most of users’ needs.</p>
 <h2 id="text-label">Text Label<a class="anchor" aria-label="anchor" href="#text-label"></a>
 </h2>
 <p>This section uses <a href="https://github.com/TongZhou2017/itol.toolkit/tree/master/inst/extdata/dataset1" class="external-link">dataset
-1</a> to demonstrate adding text labels to the tree (refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html" class="external-link">Dataset</a>
+1</a> to demonstrate adding text labels to the tree (refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html">Dataset</a>
 for detail information).</p>
 <p>The first step is to load the newick format tree file
 “tree_of_itol_templates.tree”. The purpose of data processing in this
 section is to add some text labels at specific locations in the tree.
 .</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">itol.toolkit</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tongzhou2017.github.io/itol.toolkit/">itol.toolkit</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
@@ -293,7 +187,9 @@ bold-italic</p></li>
 <span>                       rotation <span class="op">=</span> <span class="fl">66</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_18</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images/DATASET_TEXT_1.png"></p>
+<div class="figure">
+<img src="images/DATASET_TEXT_1.png" alt=""><p class="caption">Text visualization example 1</p>
+</div>
 <p>Users can input data with only only two columns(i.e., node ID and
 text), and set the color manually through the “color” parameter.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -306,7 +202,9 @@ text), and set the color manually through the “color” parameter.</p>
 <span>                       color <span class="op">=</span> <span class="st">"#0000FF"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_19</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images/DATASET_TEXT_2.png"></p>
+<div class="figure">
+<img src="images/DATASET_TEXT_2.png" alt=""><p class="caption">Text visualization example 2</p>
+</div>
 <p>Users can define multi-style text by adding different tags to the
 text:</p>
 <ul>
@@ -341,7 +239,9 @@ set to -1), and that are not aligned to the tree.</p>
 <span>                       color <span class="op">=</span> <span class="st">"#000000"</span>,</span>
 <span>                       tree <span class="op">=</span> <span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_unit.html">write_unit</a></span><span class="op">(</span><span class="va">unit_20</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images/DATASET_TEXT_3.png"></p>
+<div class="figure">
+<img src="images/DATASET_TEXT_3.png" alt=""><p class="caption">Text visualization example 3</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="style-modification">Style modification<a class="anchor" aria-label="anchor" href="#style-modification"></a>
@@ -359,43 +259,27 @@ labels will be below the branches</p></li>
 tree rotation will not influence the individual label rotation</p></li>
 </ul>
 </div>
-<div class="footnotes footnotes-end-of-document">
-<hr>
-<ol>
-<li id="fn1"><p>IOCAS, <a href="mailto:weiyLiu@outlook.com" class="email">weiyLiu@outlook.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>CACMS, <a href="mailto:njbxhzy@hotmail.com" class="email">njbxhzy@hotmail.com</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>IOCAS, <a href="mailto:tongzhou2017@gmail.com" class="email">tongzhou2017@gmail.com</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-  </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Tong Zhou.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Tong Zhou.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>

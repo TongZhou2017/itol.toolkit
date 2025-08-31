@@ -93,7 +93,7 @@ unit_42 <- create_unit(data = template_start_group,
                        tree = tree)
 ```
 
-![](images/DATASET_ALIGNMENT_1.png)
+![Dataset alignment visualization example](images/DATASET_ALIGNMENT_1.png)
 
 ## Style modification
 

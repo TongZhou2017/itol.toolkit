@@ -4,219 +4,107 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Helper Functions for Interactive Tree Of Life • itol.toolkit</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Helper Functions for Interactive Tree Of Life">
-<meta property="og:description" content="
-    The Interactive Tree Of Life &lt;https://itol.embl.de/&gt; online server can 
-    edit and annotate trees interactively. The itol.toolkit package can 
-    support all types of annotation templates.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helper Functions for Interactive Tree Of Life">
+<meta name="description" content="The Interactive Tree Of Life &lt;https://itol.embl.de/&gt; online server can edit and annotate trees interactively. The itol.toolkit package can support all types of annotation templates.">
+<meta property="og:description" content="The Interactive Tree Of Life &lt;https://itol.embl.de/&gt; online server can edit and annotate trees interactively. The itol.toolkit package can support all types of annotation templates.">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">itol.toolkit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.10</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="articles/Get_Start.html">Get started</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Single Functions
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Tree Structure</li>
-    <li>
-      <a href="articles/COLLAPSE.html">COLLAPSE</a>
-    </li>
-    <li>
-      <a href="articles/PRUNE.html">PRUNE</a>
-    </li>
-    <li>
-      <a href="articles/SPACING.html">SPACING</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Theme Style</li>
-    <li>
-      <a href="articles/TREE_COLORS.html">TREE_COLORS</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_STYLE.html">DATASET_STYLE</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Text</li>
-    <li>
-      <a href="articles/LABELS.html">LABELS</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_TEXT.html">DATASET_TEXT</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Basic Plot</li>
-    <li>
-      <a href="articles/DATASET_BINARY.html">DATASET_BINARY</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_LINECHART.html">DATASET_LINECHART</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_PIECHART.html">DATASET_PIECHART</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced Plot</li>
-    <li>
-      <a href="articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a>
-    </li>
-    <li>
-      <a href="articles/DATASET_IMAGE.html">DATASET_IMAGE</a>
-    </li>
-    <li>
-      <a href="articles/POPUP_INFO.html">POPUP_INFO</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="index.html">itol.toolkit</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.11</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/Get_Start.html">Get started</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-single-functions" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Single Functions</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-single-functions">
+<li><h6 class="dropdown-header" data-toc-skip>Tree Structure</h6></li>
+    <li><a class="dropdown-item" href="articles/COLLAPSE.html">COLLAPSE</a></li>
+    <li><a class="dropdown-item" href="articles/PRUNE.html">PRUNE</a></li>
+    <li><a class="dropdown-item" href="articles/SPACING.html">SPACING</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Theme Style</h6></li>
+    <li><a class="dropdown-item" href="articles/TREE_COLORS.html">TREE_COLORS</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_STYLE.html">DATASET_STYLE</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Text</h6></li>
+    <li><a class="dropdown-item" href="articles/LABELS.html">LABELS</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_TEXT.html">DATASET_TEXT</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Basic Plot</h6></li>
+    <li><a class="dropdown-item" href="articles/DATASET_BINARY.html">DATASET_BINARY</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_LINECHART.html">DATASET_LINECHART</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_PIECHART.html">DATASET_PIECHART</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Advanced Plot</h6></li>
+    <li><a class="dropdown-item" href="articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a></li>
+    <li><a class="dropdown-item" href="articles/DATASET_IMAGE.html">DATASET_IMAGE</a></li>
+    <li><a class="dropdown-item" href="articles/POPUP_INFO.html">POPUP_INFO</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tips
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a>
-    </li>
-    <li>
-      <a href="articles/Installation.html">Installation</a>
-    </li>
-    <li>
-      <a href="articles/Datasets.html">Datasets</a>
-    </li>
-    <li>
-      <a href="articles/Color_Palette.html">Colors</a>
-    </li>
-    <li>
-      <a href="articles/Data_Reproduction.html">Data Reproduction</a>
-    </li>
-    <li>
-      <a href="articles/Comparison_table2itol.html">vs table2itol</a>
-    </li>
-    <li>
-      <a href="articles/tree_construction.html">Tree Construction</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tips" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Tips</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-tips">
+<li><a class="dropdown-item" href="articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a></li>
+    <li><a class="dropdown-item" href="articles/Installation.html">Installation</a></li>
+    <li><a class="dropdown-item" href="articles/Datasets.html">Datasets</a></li>
+    <li><a class="dropdown-item" href="articles/Color_Palette.html">Colors</a></li>
+    <li><a class="dropdown-item" href="articles/Data_Reproduction.html">Data Reproduction</a></li>
+    <li><a class="dropdown-item" href="articles/Comparison_table2itol.html">vs table2itol</a></li>
+    <li><a class="dropdown-item" href="articles/tree_construction.html">Tree Construction</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Version history</li>
-    <li>
-      <a href="articles/v1.1.9.html">version 1.1.9</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Version history</h6></li>
+    <li><a class="dropdown-item" href="articles/v1.1.9.html">version 1.1.9</a></li>
+    <li><a class="dropdown-item" href="articles/v1.1.10.html">version 1.1.10</a></li>
+    <li><a class="dropdown-item" href="articles/v1.1.11.html">version 1.1.11</a></li>
   </ul>
 </li>
-<li>
-  <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">Gallery</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="https://tongzhou2017.github.io/itol.toolkit-gallery/">Gallery</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/TongZhou2017/itol.toolkit" class="external-link">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://discord.com/invite/n5TC7jCfGJ" class="external-link">
-    <span class="fab fa-discord fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/itol_toolkit" class="external-link">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/TongZhou2017/itol.toolkit" aria-label="GitHub repository"><span class="fa fa-github"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://discord.com/invite/n5TC7jCfGJ" aria-label="Discord community"><span class="fa fab fa-discord fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://twitter.com/itol_toolkit" aria-label="Twitter profile"><span class="fa fa-twitter"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-
-
-<p><img src="reference/figures/itol.toolkit.gif" width="160"></p>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9">
+<p><img src="reference/figures/itol.toolkit.gif" width="160" alt="itol.toolkit package logo and demonstration"></p>
 <p>The itol.toolkit is an R package that provides helper functions for the <a href="https://itol.embl.de/" class="external-link">Interactive Tree Of Life (iTOL)</a>. This package has been selected as a third-party tool in <a href="https://itol.embl.de/help.cgi#external" class="external-link">iTOL documentation</a> and is recommended as one of the <a href="https://rviews.rstudio.com/2023/02/28/january-2023-top-40-new-cran-packages/" class="external-link">Top 40 New CRAN packages in January 2023</a> by the R Views channel of RStudio.</p>
 <p>First version published in <a href="https://doi.org/10.1093/bioinformatics/btad339" class="external-link">Bioinformatics</a> journal, Please cite:</p>
 <p>Zhou, T., Xu, K., Zhao, F., Liu, W., Li, L., Hua, Z., &amp; Zhou, X. (2023). itol. toolkit accelerates working with iTOL (Interactive Tree of Life) by an automated generation of annotation files. Bioinformatics, 39(6), btad339. <a href="https://doi.org/10.1093/bioinformatics/btad339" class="external-link uri">https://doi.org/10.1093/bioinformatics/btad339</a></p>
@@ -249,7 +137,7 @@ If you prefer not to use the <code>pak</code> method, you can still use the trad
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install Biostrings</span></span>
 <span><span class="co"># install.packages("BiocManager")</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># from CRAN</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"itol.toolkit"</span><span class="op">)</span></span>
@@ -257,15 +145,15 @@ If you prefer not to use the <code>pak</code> method, you can still use the trad
 <span><span class="co"># from GitHub</span></span>
 <span><span class="co"># install.packages("devtools") # if you have not installed "devtools" package</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"TongZhou2017/itol.toolkit"</span><span class="op">)</span></span></code></pre></div>
-Please note that in order to use this software, you will need to manually install the required dependencies from Bioconductor. A complete list of the necessary packages and installation instructions can be found in the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages" class="external-link">supplementary materials</a>.
-</details><p>If you encounter any issues during the installation process, such as problems caused by other systems, R versions, or dependency packages, please refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html" class="external-link">supplementary materials</a> for a solution.</p>
+Please note that in order to use this software, you will need to manually install the required dependencies from Bioconductor. A complete list of the necessary packages and installation instructions can be found in the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html#problems-caused-by-dependency-packages">supplementary materials</a>.
+</details><p>If you encounter any issues during the installation process, such as problems caused by other systems, R versions, or dependency packages, please refer to the <a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html">supplementary materials</a> for a solution.</p>
 </div>
 <div class="section level2">
 <h2 id="quickstart">Quickstart<a class="anchor" aria-label="anchor" href="#quickstart"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">itol.toolkit</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tongzhou2017.github.io/itol.toolkit/">itol.toolkit</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># read data</span></span>
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
@@ -298,42 +186,42 @@ Please note that in order to use this software, you will need to manually instal
 <h3 id="single-functions">Single functions<a class="anchor" aria-label="anchor" href="#single-functions"></a>
 </h3>
 <ul>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html" class="external-link">COLLAPSE</a>: collapse branches by range id or node id.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/PRUNE.html" class="external-link">PRUNE</a>: drop out branches.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/SPACING.html" class="external-link">SPACING</a>: adjust branch spacing.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/TREE_COLORS.html" class="external-link">TREE_COLORS</a>: set branch style at range, clade, branch, label, and background level.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_STYLE.html" class="external-link">DATASET_STYLE</a>: set branch style at branch and label level.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/LABELS.html" class="external-link">LABELS</a>: change node name.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_TEXT.html" class="external-link">DATASET_TEXT</a>: add text by HTML.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_COLORSTRIP.html" class="external-link">DATASET_COLORSTRIP</a>: add color strip with text.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BINARY.html" class="external-link">DATASET_BINARY</a>: multi columns with one shape symbol.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_GRADIENT.html" class="external-link">DATASET_GRADIENT</a>: one column heatmap.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_HEATMAP.html" class="external-link">DATASET_HEATMAP</a>: heatmap with field tree.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SYMBOL.html" class="external-link">DATASET_SYMBOL</a>: internal tree one column with multi shape symbol.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_EXTERNALSHAPE.html" class="external-link">DATASET_EXTERNALSHAPE</a>: outside multi column with multi shape symbol.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_DOMAINS.html" class="external-link">DATASET_DOMAINS</a>: strucutre with multi shape symbol.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SIMPLEBAR.html" class="external-link">DATASET_SIMPLEBAR</a>: bar plot.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_MULTIBAR.html" class="external-link">DATASET_MULTIBAR</a>: multi bar plot.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BOXPLOT.html" class="external-link">DATASET_BOXPLOT</a>: box plot.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_LINECHART.html" class="external-link">DATASET_LINECHART</a>: line plot.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_PIECHART.html" class="external-link">DATASET_PIECHART</a>: pie plot.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_ALIGNMENT.html" class="external-link">DATASET_ALIGNMENT</a>: sequence alignment.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_CONNECTIONS.html" class="external-link">DATASET_CONNECTIONS</a>: network between braches.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_IMAGE.html" class="external-link">DATASET_IMAGE</a>: add image.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/POPUP_INFO.html" class="external-link">POPUP_INFO</a>: interactive external information.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/COLLAPSE.html">COLLAPSE</a>: collapse branches by range id or node id.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/PRUNE.html">PRUNE</a>: drop out branches.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/SPACING.html">SPACING</a>: adjust branch spacing.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/TREE_COLORS.html">TREE_COLORS</a>: set branch style at range, clade, branch, label, and background level.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_STYLE.html">DATASET_STYLE</a>: set branch style at branch and label level.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/LABELS.html">LABELS</a>: change node name.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_TEXT.html">DATASET_TEXT</a>: add text by HTML.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_COLORSTRIP.html">DATASET_COLORSTRIP</a>: add color strip with text.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BINARY.html">DATASET_BINARY</a>: multi columns with one shape symbol.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_GRADIENT.html">DATASET_GRADIENT</a>: one column heatmap.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_HEATMAP.html">DATASET_HEATMAP</a>: heatmap with field tree.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SYMBOL.html">DATASET_SYMBOL</a>: internal tree one column with multi shape symbol.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_EXTERNALSHAPE.html">DATASET_EXTERNALSHAPE</a>: outside multi column with multi shape symbol.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_DOMAINS.html">DATASET_DOMAINS</a>: strucutre with multi shape symbol.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_SIMPLEBAR.html">DATASET_SIMPLEBAR</a>: bar plot.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_MULTIBAR.html">DATASET_MULTIBAR</a>: multi bar plot.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_BOXPLOT.html">DATASET_BOXPLOT</a>: box plot.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_LINECHART.html">DATASET_LINECHART</a>: line plot.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_PIECHART.html">DATASET_PIECHART</a>: pie plot.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_ALIGNMENT.html">DATASET_ALIGNMENT</a>: sequence alignment.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_CONNECTIONS.html">DATASET_CONNECTIONS</a>: network between braches.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/DATASET_IMAGE.html">DATASET_IMAGE</a>: add image.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/POPUP_INFO.html">POPUP_INFO</a>: interactive external information.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="tips">Tips<a class="anchor" aria-label="anchor" href="#tips"></a>
 </h3>
 <ul>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/OVERVIEW_TREE_STRUCTURE.html" class="external-link">Overview</a>: overview for all functions.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html" class="external-link">Installation</a>: FAQ about installation.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html" class="external-link">Datasets</a>: overview of 5 example datasets for demo.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Color_Palette.html" class="external-link">Colors</a>: buildin color palette.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Data_Reproduction.html" class="external-link">Data reproduction</a>: learn data from template files.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Comparison_table2itol.html" class="external-link">VS table2itol</a>: compare with the other iTOL helper tool, table2itol.</p></li>
-<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html" class="external-link">Tree construction</a>: create a tree by different data and methods.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/OVERVIEW_TREE_STRUCTURE.html">Overview</a>: overview for all functions.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Installation.html">Installation</a>: FAQ about installation.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Datasets.html">Datasets</a>: overview of 5 example datasets for demo.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Color_Palette.html">Colors</a>: buildin color palette.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Data_Reproduction.html">Data reproduction</a>: learn data from template files.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/Comparison_table2itol.html">VS table2itol</a>: compare with the other iTOL helper tool, table2itol.</p></li>
+<li><p><a href="https://tongzhou2017.github.io/itol.toolkit/articles/tree_construction.html">Tree construction</a>: create a tree by different data and methods.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -345,12 +233,17 @@ Please note that in order to use this software, you will need to manually instal
 <div class="section level2">
 <h2 id="gallery">Gallery<a class="anchor" aria-label="anchor" href="#gallery"></a>
 </h2>
-<p>We collected reproducible plots into a <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/" class="external-link">gallery</a> page.</p>
+<p>We collected reproducible plots into a <a href="https://tongzhou2017.github.io/itol.toolkit-gallery/">gallery</a> page.</p>
 </div>
 <div class="section level2">
 <h2 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
 </h2>
 <p>update history:</p>
+<p>Version 1.1.11</p>
+<ul>
+<li><p><strong>Added:</strong> Dual-factor coloring support for binary dataset visualization.</p></li>
+<li><p><strong>Fixed:</strong> Legend order issues in DATASET_COLORSTRIP, DATASET_SYMBOL, and DATASET_DOMAINS functions.</p></li>
+</ul>
 <p>Version 1.1.10</p>
 <ul>
 <li><p><strong>Added:</strong> Correcting the spelling of the <code>type</code> parameter.</p></li>
@@ -366,6 +259,80 @@ Please note that in order to use this software, you will need to manually instal
 <li><p><strong>Added:</strong> Color sorting algorithm with support for custom root colors.</p></li>
 <li><p><strong>Added:</strong> Two tree construction methods (based on string vectors and data frame row/column names).</p></li>
 </ul>
+<p>Version 1.1.8</p>
+<ul>
+<li><p><strong>Added:</strong> Citation information while loading itol.toolkit package</p></li>
+<li><p><strong>Added:</strong> Color distance calculation and gradient color generation</p></li>
+<li><p><strong>Added:</strong> Color generation by two factors</p></li>
+</ul>
+<p>Version 1.1.7</p>
+<ul>
+<li><p><strong>Fixed:</strong> Remove the dependence on the Biostrings package to make the installation easier.</p></li>
+<li><p><strong>Fixed:</strong> Debug the file_get_dir and file_get_name functions while without an uplevel path.</p></li>
+</ul>
+<p>Version 1.1.6</p>
+<ul>
+<li><p><strong>Added:</strong> Add search_tree_files function to search the NEWICK format files in a directory.</p></li>
+<li><p><strong>Added:</strong> Add train_theme function to learn themes from template files in a directory.</p></li>
+<li><p><strong>Added:</strong> Update dataset5 files.</p></li>
+<li><p><strong>Fixed:</strong> Update inbuilt_theme data, which corrected the legend block in the COLOR_STRIP template file.</p></li>
+<li><p><strong>Fixed:</strong> Fix the create_uint function about the COLOR_STRIP type, which makes the legend function work in the COLOR_STRIP template.</p></li>
+</ul>
+<p>Version 1.1.5</p>
+<ul>
+<li><p><strong>Added:</strong> Support two factor for shape and color in DATASET_DOMAIN</p></li>
+<li><p><strong>Fixed:</strong> write_hub error in DATASET_LINECHART, while node data is empty</p></li>
+</ul>
+<p>Version 1.1.4</p>
+<ul>
+<li><p><strong>Fixed:</strong> write_hub error in DATASET_DOMAIN, while node data is empty</p></li>
+<li><p><strong>Fixed:</strong> write_unit error in LABLE, while the file parameter is empty</p></li>
+</ul>
+<p>Version 1.1.3</p>
+<ul>
+<li><p><strong>Added:</strong> Set getwd() as default value of file parameter in write_unit function</p></li>
+<li><p><strong>Added:</strong> Added new case of the file parameter in write_unit function: If the value is a director, then use the key value in <a href="mailto:unit@profile" class="email">unit@profile</a>$name as the output file name.</p></li>
+</ul>
+<p>Version 1.1.2</p>
+<ul>
+<li>
+<strong>Fixed:</strong> the dependence of nchar related to Rcpp package for R version lower than 4.0.0</li>
+</ul>
+<p>Version 1.1.1</p>
+<ul>
+<li><p><strong>Added:</strong> description in Get_Start doc</p></li>
+<li><p><strong>Fixed:</strong> DATASET_EXTERNALSHAPE loss field_length error</p></li>
+<li><p><strong>Fixed:</strong> DATASET_SYMBOL no legend</p></li>
+<li><p><strong>Fixed:</strong> simplify key parameter description in create_unit function</p></li>
+</ul>
+<p>Version 1.1.0</p>
+<ul>
+<li><p><strong>Added:</strong> DATASET_STYLE, DATASET_COLORSTRIP, TREE_COLORS range, DATASET_SYMBOL, DATASET_DOMAINS, DATASET_CONNECTION, DATASET_MULTIBAR, DATASET_BINARY, DATASET_TEXT, DATASET_EXTERNALSHAPE, DATASET_PIECHART support full color palette(table2itol wesanderson npg aaas nejm lancet jama jco ucscgb d3 igv locuszoom uchicago simpsons futurama rickandmorty startrek tron gsea material BrBG PiYG PRGn PuOr RdBu RdGy RdYlBu RdYlGn Spectral Accent Dark2 Paired Pastel1 Pastel2 Set1 Set2 Set3 Blues BuGn BuPu GnBu Greens Greys Oranges OrRd PuBu PuBuGn PuRd Purples RdPu Reds YlGn YlGnBu YlOrBr YlOrRd)</p></li>
+<li><p><strong>Added:</strong> user level add DATASET_MULTIBAR, DATASET_LINECHART, DATASET_PIECHART, DATASET_ALIGNMENT, DATASET_IMAGE, POPUP_INFO support</p></li>
+<li><p><strong>Added:</strong> create_hub supports direct input of phylo objects for the tree parameter, not just the tree file path</p></li>
+<li><p><strong>Fixed:</strong> wesanderson color palette random picking function changed from runif to sample, fixed the problem of repeated color matching</p></li>
+</ul>
+<p>Version 1.0.5</p>
+<ul>
+<li>
+<strong>Added:</strong> a new S4 method + for itol.unit and itol.unit. This method will merge the data from the same template method.</li>
+</ul>
+<p>Version 1.0.4</p>
+<ul>
+<li>
+<strong>Added:</strong> Add wesanderson palettes in range case of DATASET_COLORSTRIP type</li>
+</ul>
+<p>Version 1.0.3</p>
+<ul>
+<li>
+<strong>Added:</strong> interactive complex_html_text RStudio Addins for DATASET_TEXT</li>
+</ul>
+<p>Version 1.0.2</p>
+<ul>
+<li><p><strong>Fixed:</strong> while create_unit(type=“DATASET_TEXT”), unable to use one character to setup color parameter (Unable to indentify data column)</p></li>
+<li><p><strong>Fixed:</strong> while unit type is TREE_COLORS and node data is empty, unable to use hub_to_unit (attempt to use zero-length variable name)</p></li>
+<li><p><strong>Added:</strong> Add wesanderson palettes in range case of TREE_COLORS type</p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="support">Support<a class="anchor" aria-label="anchor" href="#support"></a>
@@ -378,10 +345,7 @@ Please note that in order to use this software, you will need to manually instal
 <p><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/LICENSE.md" class="external-link">MIT License</a></p>
 </div>
 
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
+  </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=itol.toolkit" class="external-link">View on CRAN</a></li>
@@ -413,7 +377,7 @@ Please note that in order to use this software, you will need to manually instal
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Tong Zhou <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Tong Zhou <br><small class="roles"> Author, maintainer </small>   </li>
 </ul>
 </div>
 
@@ -424,27 +388,24 @@ Please note that in order to use this software, you will need to manually instal
 </ul>
 </div>
 
-  </div>
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Tong Zhou.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Tong Zhou.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>

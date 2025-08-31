@@ -51,7 +51,7 @@ unit_26 <- create_unit(data = df_frequence,
                        tree = tree)
 ```
 
-![](images/DATASET_GRADIENT_1.png)
+![Gradient visualization example 1](images/DATASET_GRADIENT_1.png)
 
 We can also calculate the average usage frequency of each template in published articles by specifying the `method` parameter as `mean`, and use it in gradient coloring.
 ```{r gradient mean}
@@ -61,7 +61,7 @@ unit_27 <- create_unit(data = df_frequence,
                        method = "mean",
                        tree = tree)
 ```
-![](images/DATASET_GRADIENT_2.png)
+![Gradient visualization example 2](images/DATASET_GRADIENT_2.png)
 
 ## Style modification
 By adjusting `unit@specific_themes$heatmap$color$min`, `unit@specific_themes$heatmap$color$mid`, and `unit@specific_themes$heatmap$color$max`, users can customize the color gradient of the rectangle. Here, we set different colors for `unit_23` and `unit_24`.
