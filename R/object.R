@@ -132,7 +132,8 @@ itol.unit <- setClass(
 #' @param file template file
 #' @param tree tree file
 #' @param ... Further arguments to be passed to subsequent functions.
-#' @import dplyr
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select starts_with
 #' @importFrom purrr discard
 #' @importFrom methods new
 #' @return Returns a itol.unit object
@@ -197,7 +198,7 @@ file_to_unit <- function(file, tree, ...) {
 #' @param object itol.hub object
 #' @param theme itol.theme object
 #' @param key key id of dataset name
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @importFrom methods new
 #' @return Returns a itol.unit object
 #'

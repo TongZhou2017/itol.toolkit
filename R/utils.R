@@ -53,7 +53,7 @@ head_line <- function(function_name) {
 #' @description correct_get_color. (Version 0.0.0.9000)
 #' @param str taxa string
 #' @return a vector of colors
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @export
 correct_get_color <- function(str) {
   str <- as.factor(str)
@@ -406,7 +406,7 @@ get_color <- function(n=0,set="table2itol") {
 #' @description Paste rows group by key column
 #' @param df input data frame
 #' @return a data frame with pasted row by same id
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @export
 unite_rows <- function(df) {
   names <- names(df)
@@ -503,7 +503,14 @@ search_tree_file <- function(dir=getwd(),
   df <- file.info(results)
   df$fname <- file_get_name(rownames(df))
   if(method!='character'){
-    suppressWarnings(df <- df %>% arrange_(method))
+    suppressWarnings({
+      if (!method %in% colnames(df)) {
+        warning("method column not found; skipping sort")
+      } else {
+        ord <- order(df[[method]])
+        df <- df[ord, , drop = FALSE]
+      }
+    })
   }
   if(n == 'first'){
     df <- df %>% head(1)
@@ -601,7 +608,7 @@ longest_continuous_match <- function(input_str, target_str) {
 #'
 #' @param dt A data.table to transpose. The first column contains the new column names.
 #' @return A transposed data.table with updated column names and a 'Sample' column.
-#' @import data.table
+#' @importFrom data.table is.data.table transpose setnames setcolorder
 #' @export
 dt_transpose_header <- function(dt) {
   if (!data.table::is.data.table(dt)) {

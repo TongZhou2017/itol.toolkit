@@ -20,7 +20,8 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom utils write.table
 #' @importFrom utils file_test
-#' @import dplyr
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select starts_with summarize summarise group_by
 #' @return No return value, only output a template file
 #' @export
 #' @examples

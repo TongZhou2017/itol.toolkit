@@ -1,6 +1,6 @@
 Package: itol.toolkit
 Title: Helper Functions for 'Interactive Tree Of Life'
-Version: 1.1.11
+Version: 1.1.12
 URL: https://tongzhou2017.github.io/itol.toolkit/
 Authors@R: 
     person(
@@ -16,7 +16,7 @@ Description:
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.3.2
 Imports:
     dplyr,
     stringr,
@@ -36,7 +36,7 @@ Imports:
     ggsci,
     RColorBrewer,
     stringdist,
-    cli
+    magrittr
 Suggests: 
     knitr,
     rmarkdown,
@@ -50,6 +50,7 @@ Collate:
     'addins.R'
     'color.R'
     'data.R'
+    'globals.R'
     'learn.R'
     'object.R'
     'utils.R'

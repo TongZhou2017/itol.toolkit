@@ -1064,7 +1064,8 @@ line_split <- function(lines, param = "data") {
 #' @importFrom tidyr separate
 #' @importFrom stringr str_remove_all
 #' @importFrom stringr str_remove
-#' @import dplyr
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select starts_with summarize summarise
 #' @export
 learn_subdf <- function(lines, type, sep, dataset_name = NULL, field_labels = NULL) {
   if (is.null(dataset_name)) {
@@ -1174,7 +1175,7 @@ df_merge <- function(df1, df2, by = "id") {
 #' @importFrom ape mrca
 #' @importFrom ape drop.tip
 #' @importFrom methods is
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @export
 convert_range_to_node <- function(df, tree) {
   if (length(grep("COLLAPSE|PRUNE", names(df)[2])) > 0) {
@@ -1283,7 +1284,7 @@ learn_data <- function(df1 = NULL, file, tree = NULL, ...) {
 #' @param object itol.hub object
 #' @param unit itol.unit object
 #' @return a itol.hub object containing new data from itol.unit object
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @importFrom stringr str_extract
 #' @importFrom stringr str_remove
 #' @export

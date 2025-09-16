@@ -1,0 +1,77 @@
+---
+title: "v1.1.12"
+author: "Tong Zhou"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+This release (v1.1.12) is primarily a stability and compliance update intended for CRAN submission.
+
+Updates:
+
+1. Fix: Package startup message is now fully suppressible via `suppressPackageStartupMessages()`.
+2. Fix: Resolved R CMD check NOTES/WARNINGs by refining imports and globals.
+3. Fix: `DATASET_SIMPLEBAR` now supports both `data.frame` and `data.table` inputs.
+4. Polish: Removed leftover development `print()` checkpoints in binary dual-factor coloring.
+
+## 1. Suppressible Startup Message
+
+The package startup message was refactored to use a single `packageStartupMessage()` call. This respects `suppressPackageStartupMessages(library(itol.toolkit))` and aligns with CRAN policy.
+
+### Example
+
+```{r}
+# Shown
+library(itol.toolkit)
+
+# Suppressed
+suppressPackageStartupMessages(library(itol.toolkit))
+```
+
+## 2. R CMD check Cleanups
+
+- Added precise `@importFrom` entries for `dplyr`, `stats`, `data.table`, and `magrittr` (for `%>%`).
+- Declared globals via `utils::globalVariables()` to silence NSE NOTES.
+- Replaced deprecated `arrange_` usage in internal utilities.
+
+These changes reduce namespace collisions and eliminate visibility NOTES during checks.
+
+## 3. DATASET_SIMPLEBAR: data.frame and data.table Support
+
+`create_unit(..., type = "DATASET_SIMPLEBAR")` now accepts both `data.frame` and `data.table` inputs seamlessly.
+
+### Minimal Example
+
+```{r}
+library(itol.toolkit)
+
+tree <- system.file("extdata","tree_of_itol_templates.tree",package = "itol.toolkit")
+
+# data.frame
+df <- data.frame(id = c("A","B","C"), v1 = 1:3, v2 = 4:6)
+u_df <- create_unit(data = df, key = "SB_df", type = "DATASET_SIMPLEBAR", tree = tree)
+
+# data.table
+dt <- data.table::as.data.table(df)
+u_dt <- create_unit(data = dt, key = "SB_dt", type = "DATASET_SIMPLEBAR", tree = tree)
+```
+
+## 4. Binary Dual-Factor Coloring: Cleanup
+
+Removed temporary `print()` checkpoints left from development to keep console output clean. Functionality unchanged.
+
+
+

@@ -7,7 +7,7 @@
 #' at the cursor position.
 #'
 #' @importFrom colourpicker colourInput
-#' @import dplyr
+#' @importFrom magrittr %>%
 #' @import miniUI
 #' @import shiny
 #' @import rstudioapi
