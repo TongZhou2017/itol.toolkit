@@ -164,6 +164,21 @@ We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/
 
 update history:
 
+Version 1.2.0
+
+- **Added:** TREE_COLORS supports dual-factor coloring (main group + gradient).
+- **Added:** The 3rd element of `color` can specify a color set for base hues.
+- **Fixed:** Legend is now rebuilt from the final DATA right before output, ensuring LEGEND order matches the DATA block and paving the way for unified legend handling in future refactors.
+- **Fixed:** `write_unit()` now reports output file paths for user confirmation.
+- **Fixed:** TREE_COLORS label subtype accepts `font_type = "normal"` (and vectorization works). Previously, providing "normal" could be rejected as unsupported.
+
+Version 1.1.12
+
+- **Fixed:** Package startup message is now fully suppressible via `suppressPackageStartupMessages()`.
+- **Fixed:** Resolved R CMD check NOTES/WARNINGs by refining imports and globals.
+- **Fixed:** `DATASET_SIMPLEBAR` now supports both `data.frame` and `data.table` inputs.
+- **Fixed:** Removed leftover development `print()` checkpoints in binary dual-factor coloring.
+
 Version 1.1.11
 
 - **Added:** Dual-factor coloring support for binary dataset visualization.

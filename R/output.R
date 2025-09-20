@@ -39,8 +39,19 @@
 #' ## write unit
 #' write_unit(unit,tempfile())
 write_unit <- function(unit, file = getwd()) {
+  # Expand ~ symbols in path
+  file <- path.expand(file)
+  
   if(file_test("-d",file)){
-    file = paste0(file,"/",unique(stringr::str_remove(c(names(unit@data$node)[-1],names(unit@data$tip)[-1]),"\\$.*$")),".txt")
+    # Filter out debug column names, keep only real data columns
+    valid_names <- names(unit@data$node)[-1]
+    valid_names <- valid_names[!grepl("^\\.__", valid_names)]
+    if(length(valid_names) > 0){
+      file = paste0(file,"/",unique(stringr::str_remove(valid_names,"\\$.*$")),".txt")
+    } else {
+      # If no valid column names, use default name
+      file = paste0(file,"/unit.txt")
+    }
   }
   lines <- paste0(unit@type)
   if (!is.null(unit@sep)) {
@@ -459,7 +470,41 @@ write_unit <- function(unit, file = getwd()) {
       if (dim(unit@data$node)[2] > dim(unit@data$tip)[2] || is.null(unit@data$tip)) {
         data <- unit@data$node
       } else {
-        data <- rbind(unit@data$node, unit@data$tip)
+        # Preserve original row order: prioritize data with valid global order markers
+        if(nrow(unit@data$node) > 0 && nrow(unit@data$tip) > 0){
+          # Check which data has valid global order markers
+          node_has_order <- ".__global_order" %in% names(unit@data$node) && !all(is.na(unit@data$node$.__global_order))
+          tip_has_order <- ".__global_order" %in% names(unit@data$tip) && !all(is.na(unit@data$tip$.__global_order))
+          
+          if(tip_has_order && !node_has_order){
+            # Only tip has valid order, use tip
+            data <- unit@data$tip
+            data <- data[order(data$.__global_order), ]
+            data$.__global_order <- NULL
+          } else if(node_has_order && !tip_has_order){
+            # Only node has valid order, use node
+            data <- unit@data$node
+            data <- data[order(data$.__global_order), ]
+            data$.__global_order <- NULL
+          } else {
+            # Both have or neither has, merge then sort
+            data <- rbind(unit@data$node, unit@data$tip)
+            if(".__global_order" %in% names(data)){
+              data <- data[order(data$.__global_order), ]
+              data$.__global_order <- NULL
+            } else {
+              # Add order markers to node and tip
+              unit@data$node$.__order <- seq_len(nrow(unit@data$node))
+              unit@data$tip$.__order <- seq_len(nrow(unit@data$tip)) + nrow(unit@data$node)
+              data <- rbind(unit@data$node, unit@data$tip)
+              # Sort by original order
+              data <- data[order(data$.__order), ]
+              data$.__order <- NULL
+            }
+          }
+        } else {
+          data <- rbind(unit@data$node, unit@data$tip)
+        }
       }
     }
     if (unit@type %in% c(simple_case, field_case)) {
@@ -518,6 +563,39 @@ write_unit <- function(unit, file = getwd()) {
     }
   }
 
+  # Before writing headers, if TREE_COLORS, rebuild legend lines based on final data order
+  if (unit@type == "TREE_COLORS") {
+    # Identify color and label columns
+    label_col_idx <- which(grepl("\\$LABEL_OR_STYLE$", names(data)))
+    color_col_idx <- which(grepl("\\$COLOR$", names(data)))
+    if (length(label_col_idx) == 1 && length(color_col_idx) == 1) {
+      labels_vec <- as.character(data[[label_col_idx]])
+      colors_vec <- as.character(data[[color_col_idx]])
+      # Remove NA, deduplicate by first occurrence order
+      keep <- !is.na(labels_vec) & labels_vec != ""
+      labels_vec <- labels_vec[keep]
+      colors_vec <- colors_vec[keep]
+      unique_df <- unique(data.frame(label = labels_vec, color = colors_vec, stringsAsFactors = FALSE))
+      new_legend_labels <- unique_df$label
+      new_legend_colors <- unique_df$color
+      new_legend_shapes <- rep(1, length(new_legend_labels))
+
+      # Remove old legend three lines from lines
+      lines <- lines[!grepl("^LEGEND_LABELS\\b|^LEGEND_COLORS\\b|^LEGEND_SHAPES\\b", lines)]
+      # Append new legend three lines (preserve original LEGEND_TITLE)
+      lines <- c(
+        lines,
+        paste("LEGEND_SHAPES", paste(new_legend_shapes, collapse = unit@sep), sep = unit@sep),
+        paste("LEGEND_COLORS", paste(new_legend_colors, collapse = unit@sep), sep = unit@sep),
+        paste("LEGEND_LABELS", paste(new_legend_labels, collapse = unit@sep), sep = unit@sep)
+      )
+    }
+  }
+
+  # Ensure DATA marker is written after all headers (including legend)
+  lines <- lines[lines != "DATA"]
+  lines <- c(lines, "DATA")
+
   writeLines(lines, con = file, sep = "\n")
   if (unit@type %in% c(simple_case, field_case, "DATASET_DOMAINS", "DATASET_BOXPLOT", "DATASET_LINECHART")) {
     write.table(data, file, col.names = FALSE, row.names = FALSE, append = TRUE, sep = unit@sep, quote = FALSE)
@@ -525,6 +603,9 @@ write_unit <- function(unit, file = getwd()) {
   if (unit@type == "DATASET_ALIGNMENT") {
     fa_write(data, file, id = "id", seq = names[2], append = TRUE)
   }
+  
+  # Report output file path for user confirmation
+  message(paste(unit@type, "template file written to:", file))
 }
 
 #' Write all data object into files

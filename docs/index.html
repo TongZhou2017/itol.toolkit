@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">itol.toolkit</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,6 +88,8 @@
     <li><a class="dropdown-item" href="articles/v1.1.9.html">version 1.1.9</a></li>
     <li><a class="dropdown-item" href="articles/v1.1.10.html">version 1.1.10</a></li>
     <li><a class="dropdown-item" href="articles/v1.1.11.html">version 1.1.11</a></li>
+    <li><a class="dropdown-item" href="articles/v1.1.12.html">version 1.1.12</a></li>
+    <li><a class="dropdown-item" href="articles/v1.2.0.html">version 1.2.0</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="https://tongzhou2017.github.io/itol.toolkit-gallery/">Gallery</a></li>
@@ -239,6 +241,30 @@ Please note that in order to use this software, you will need to manually instal
 <h2 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
 </h2>
 <p>update history:</p>
+<p>Version 1.2.0</p>
+<ul>
+<li>
+<strong>Added:</strong> TREE_COLORS supports dual-factor coloring (main group + gradient).</li>
+<li>
+<strong>Added:</strong> The 3rd element of <code>color</code> can specify a color set for base hues.</li>
+<li>
+<strong>Fixed:</strong> Legend is now rebuilt from the final DATA right before output, ensuring LEGEND order matches the DATA block and paving the way for unified legend handling in future refactors.</li>
+<li>
+<strong>Fixed:</strong> <code><a href="reference/write_unit.html">write_unit()</a></code> now reports output file paths for user confirmation.</li>
+<li>
+<strong>Fixed:</strong> TREE_COLORS label subtype accepts <code>font_type = "normal"</code> (and vectorization works). Previously, providing “normal” could be rejected as unsupported.</li>
+</ul>
+<p>Version 1.1.12</p>
+<ul>
+<li>
+<strong>Fixed:</strong> Package startup message is now fully suppressible via <code><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages()</a></code>.</li>
+<li>
+<strong>Fixed:</strong> Resolved R CMD check NOTES/WARNINGs by refining imports and globals.</li>
+<li>
+<strong>Fixed:</strong> <code>DATASET_SIMPLEBAR</code> now supports both <code>data.frame</code> and <code>data.table</code> inputs.</li>
+<li>
+<strong>Fixed:</strong> Removed leftover development <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> checkpoints in binary dual-factor coloring.</li>
+</ul>
 <p>Version 1.1.11</p>
 <ul>
 <li><p><strong>Added:</strong> Dual-factor coloring support for binary dataset visualization.</p></li>
@@ -345,14 +371,7 @@ Please note that in order to use this software, you will need to manually instal
 <p><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/LICENSE.md" class="external-link">MIT License</a></p>
 </div>
 
-  </main><aside class="col-md-3"><div class="links">
-<h2 data-toc-skip>Links</h2>
-<ul class="list-unstyled">
-<li><a href="https://cloud.r-project.org/package=itol.toolkit" class="external-link">View on CRAN</a></li>
-</ul>
-</div>
-
-<div class="license">
+  </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

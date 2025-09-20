@@ -25,7 +25,7 @@ Updates:
 1. Fix: Package startup message is now fully suppressible via `suppressPackageStartupMessages()`.
 2. Fix: Resolved R CMD check NOTES/WARNINGs by refining imports and globals.
 3. Fix: `DATASET_SIMPLEBAR` now supports both `data.frame` and `data.table` inputs.
-4. Polish: Removed leftover development `print()` checkpoints in binary dual-factor coloring.
+4. Fix: Removed leftover development `print()` checkpoints in binary dual-factor coloring.
 
 ## 1. Suppressible Startup Message
 

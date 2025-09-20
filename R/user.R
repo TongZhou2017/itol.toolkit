@@ -335,7 +335,31 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       }
     }
     colname_data <- names(data)[!names(data)%in%c("id",colname_subtype,colname_color,colname_line_type,colname_size_factor)]
+    # If dual-factor coloring is enabled and data column cannot be uniquely identified, use main grouping column as label column by default
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      if(length(colname_data) != 1){
+        colname_data <- color[1]
+      }
+    }
+    # Determine which column name should be used for the last column (LABEL) in DATA block:
+    # - Dual-factor mode: use second factor (color[2]) as label
+    # - Other cases: use auto-identified colname_data
+    label_colname <- colname_data
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      label_colname <- color[2]
+    }
+
     if(subtype == "range"){
+      # For dual-factor: sort DATA and color by main factor grouping, then alphabetically by secondary factor within groups
+      if(exists("color_level_main") && exists("color_level_gradient") &&
+         (color_level_main %in% names(data)) && (color_level_gradient %in% names(data))){
+        # Ensure both main and secondary factors are sorted alphabetically
+        ord_dual <- order(as.character(data[[color_level_main]]), as.character(data[[color_level_gradient]]))
+        data  <- data[ord_dual, , drop = FALSE]
+        if(length(color) == nrow(data)){
+          color <- color[ord_dual]
+        }
+      }
       if(length(colname_data)!=1){
         stop("Unable to indentify data column")
       }
@@ -360,9 +384,80 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
         if(stringr::str_detect(color,"^#")||stringr::str_detect(color,"^rgb")){
           color = rep(color,nrow(data))
         }else{
-          stop("Unsupported color parameter")
+          # Support dual-factor coloring: when color is provided as column names in data, allow color to be length==1 but not built-in palette/color values
+          if(color %in% names(data)){
+            # If only one column name is passed, automatically map using categorical palette
+            color_levels = get_color(length(unique(data[[color]])))
+            color = as.factor(data[[color]])
+            levels(color) <- color_levels
+            colname_color = color
+          }else{
+            stop("Unsupported color parameter")
+          }
         }
       }
+    }
+
+    # When color is specified as two field names, enable dual-factor (main grouping + gradient) strategy
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      color_level_main     <- color[1]
+      color_level_gradient <- color[2]
+
+      # Optional 3rd element as color palette set
+      color_set <- NULL
+      if(length(color) >= 3){
+        candidate_set <- color[3]
+        if(stringr::str_remove(candidate_set,"_.*$") %in% get_color(set = "ls")){
+          color_set <- candidate_set
+        }
+      }
+
+      main_vec     <- as.factor(data[[color_level_main]])
+      gradient_vec <- data[[color_level_gradient]]
+
+      # Ensure main factor is sorted alphabetically
+      main_levels <- sort(levels(main_vec))
+      main_vec <- factor(main_vec, levels = main_levels)
+      n_main      <- length(main_levels)
+
+      base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+
+      color_out <- character(nrow(data))
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        for(j in seq_along(idx_main)){
+          row_idx  <- idx_main[j]
+          grad_val <- grad_vals[j]
+          color_out[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+        }
+      }
+      color <- factor(color_out)
+      # Legend: for dual-factor, labels use secondary factor name; order by main factor grouping, then alphabetically within groups
+      common_themes$legend$title <- color_level_gradient
+      legend_labels <- character(0)
+      legend_colors <- character(0)
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        legend_labels <- c(legend_labels, as.character(unique_grads))
+        legend_colors <- c(legend_colors, as.character(grad_color_map[as.character(unique_grads)]))
+      }
+      common_themes$legend$labels <- legend_labels
+      common_themes$legend$colors <- legend_colors
+      common_themes$legend$shapes <- rep(1, length(legend_labels))
     }
     if(subtype %in% c("clade","branch")){
       if(is.null(line_type)){
@@ -386,7 +481,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
         font_type = "normal"
       }
       if(length(font_type)==1){
-        if(font_type %in% c("bold", "italic", "bold-italic", "")){
+        if(font_type %in% c("bold", "italic", "bold-italic", "", "normal")){
           font_type = rep(font_type,nrow(data))
         }else{
           stop("Unsupported font type parameter")
@@ -416,11 +511,57 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       if(length(names(data)) > 4){
         stop("The input data should has 2-4 columns: id, type(optional), color(optional), label")
       }
-      df_data <- data.frame(id = data[["id"]],subtype = subtype,color = color,label=data[[colname_data]])
-      names(df_data) <- c("id",paste0(key,c("$TYPE", "$COLOR", "$LABEL_OR_STYLE")))
-      df_data <- convert_range_to_node(df_data, tree)
+      # If dual-factor exists, include hidden sorting keys to ensure final DATA is ordered by main factor + secondary factor alphabetically
+      if(exists("color_level_main") && exists("color_level_gradient") &&
+         (color_level_main %in% names(data)) && (color_level_gradient %in% names(data))){
+        df_data <- data.frame(id = data[["id"]],
+                              subtype = subtype,
+                              color = color,
+                              label = data[[label_colname]],
+                              .__main = as.character(data[[color_level_main]]),
+                              .__grad = as.character(data[[color_level_gradient]]))
+        names(df_data)[2:4] <- c(paste0(key,c("$TYPE", "$COLOR", "$LABEL_OR_STYLE")))
+        
+        df_data <- convert_range_to_node(df_data, tree)
+        
+        if(all(c(".__main",".__grad") %in% names(df_data))){
+          ord_final <- order(as.character(df_data$.__main), as.character(df_data$.__grad))
+          df_data <- df_data[ord_final, , drop = FALSE]
+          
+          df_data$.__main <- NULL
+          df_data$.__grad <- NULL
+          
+          # Rebuild legend based on actual order of DATA block
+          # Extract unique label and color combinations from sorted data
+          sorted_labels <- as.character(df_data[[paste0(key, "$LABEL_OR_STYLE")]])
+          sorted_colors <- as.character(df_data[[paste0(key, "$COLOR")]])
+          
+          # Get unique combinations, preserving order
+          unique_combinations <- unique(data.frame(
+            label = sorted_labels,
+            color = sorted_colors,
+            stringsAsFactors = FALSE
+          ))
+          
+          common_themes$legend$labels <- unique_combinations$label
+          common_themes$legend$colors <- unique_combinations$color
+          common_themes$legend$shapes <- rep(1, length(unique_combinations$label))
+        }
+      }else{
+        df_data <- data.frame(id = data[["id"]],subtype = subtype,color = color,label=data[[label_colname]])
+        names(df_data) <- c("id",paste0(key,c("$TYPE", "$COLOR", "$LABEL_OR_STYLE")))
+        df_data <- convert_range_to_node(df_data, tree)
+      }
+      
+      # Add global order marker to df_data to ensure correct order is maintained in write_unit
+      if(exists("color_level_main") && exists("color_level_gradient") &&
+         (color_level_main %in% names(data)) && (color_level_gradient %in% names(data))){
+        df_data$.__global_order <- seq_len(nrow(df_data))
+      }
+      
       data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
       data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
+      
       unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
     }
     if(subtype == "clade"){
@@ -876,8 +1017,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     profile$name <- key
     common_themes$legend$title <- colname_data
     
-    # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
-    # 获取唯一的标签和对应的颜色，保持原始顺序
+    # Fix legend order issue: follow original data frame order, not factor alphabetical order
+    # Get unique labels and corresponding colors, preserving original order
     unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
     unique_data <- unique_data[!duplicated(unique_data$label), ]
     
@@ -932,45 +1073,45 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
           color_level_gradient <- color[2]
         }
 
-        # ------------------ 开始补充配色代码 ------------------
+        # ------------------ Start dual-factor coloring code ------------------
 
-        # 1. 提取主分组列和梯度分组列
+        # 1. Extract main grouping column and gradient grouping column
         main_vec     <- as.factor(data_meta[[color_level_main]])
         gradient_vec <- data_meta[[color_level_gradient]]
 
-        # 2. 确定有多少个主分组（level）
+        # 2. Determine how many main groups (levels)
         main_levels <- levels(main_vec)
         n_main      <- length(main_levels)
 
-        # 3. 先用 get_color() 为每个主分组生成一个"基色"
-        #    get_color(n_main) 会返回长度为 n_main 的颜色向量
-        base_colors_main <- get_color(n_main)  # 例如：["#E41A1C", "#377EB8", "#4DAF4A", ...]
+        # 3. First use get_color() to generate a "base color" for each main group
+        #    get_color(n_main) returns a color vector of length n_main
+        base_colors_main <- get_color(n_main)  # e.g., ["#E41A1C", "#377EB8", "#4DAF4A", ...]
 
-        # 4. 为 field$colors 预分配空间
+        # 4. Pre-allocate space for field$colors
         field$colors <- character(field_length)
 
-        # 5. 按主分组循环
+        # 5. Loop through main groups
         for(i in seq_len(n_main)){
-          this_main   <- main_levels[i]         # 当前主分组标签（比如 "A"、"B"...）
-          base_color  <- base_colors_main[i]    # 对应的基色字符串，比如 "#377EB8"
+          this_main   <- main_levels[i]         # Current main group label (e.g., "A", "B"...)
+          base_color  <- base_colors_main[i]    # Corresponding base color string, e.g., "#377EB8"
 
-          # 取出 data_meta 中属于 this_main 的行索引
+          # Get row indices in data_meta that belong to this_main
           idx_main <- which(main_vec == this_main)
 
-          # 提取这些行对应的梯度列值，并去重
+          # Extract gradient column values for these rows and deduplicate
           grad_vals    <- gradient_vec[idx_main]
           unique_grads <- unique(grad_vals)
           n_grads      <- length(unique_grads)
 
-          # 调用 gradient_color，为这 n_grads 个梯度级别生成一段渐变色
-          # 第二个参数传入 base_color，就以 base_color 为起点往下生成
+          # Call gradient_color to generate a gradient color sequence for these n_grads gradient levels
+          # Pass base_color as second parameter to generate from base_color as starting point
           colors_grad <- gradient_color(n_grads, base_color)
-          # 例如，若 base_color="#377EB8"，n_grads=3，则 colors_grad 可能是 ["#377EB8", "#5E8EC2", "#86B4CC"]
+          # e.g., if base_color="#377EB8", n_grads=3, then colors_grad might be ["#377EB8", "#5E8EC2", "#86B4CC"]
 
-          # 建立从梯度值到"渐变色" 的映射
+          # Establish mapping from gradient values to "gradient colors"
           grad_color_map <- setNames(colors_grad, unique_grads)
 
-          # 按行给 field$colors 填值
+          # Fill field$colors row by row
           for(j in seq_along(idx_main)){
             row_idx  <- idx_main[j]
             grad_val <- grad_vals[j]
@@ -978,10 +1119,10 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
           }
         }
 
-        # 最后将字符向量转换为 factor（若下游需要 factor）
+        # Finally convert character vector to factor (if downstream needs factor)
         field$colors <- factor(field$colors)
 
-        # ------------------- 结束补充配色代码 -------------------
+        # ------------------- End dual-factor coloring code -------------------
       } else {
         field$colors <- get_color(field_length)
       }
@@ -1232,8 +1373,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     profile$name <- key
     common_themes$legend$title <- colname_data
     
-    # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
-    # 获取唯一的标签和对应的形状、颜色，保持原始顺序
+    # Fix legend order issue: follow original data frame order, not factor alphabetical order
+    # Get unique labels and corresponding shapes, colors, preserving original order
     unique_data <- data.frame(
       label = data[[colname_data]], 
       shape = shape, 
@@ -1446,8 +1587,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
     if(is.null(shape_by)){
-      # 修复图例顺序问题：按照原始数据框的顺序，而不是因子的字母顺序
-      # 获取唯一的标签和对应的形状、颜色，保持原始顺序
+      # Fix legend order issue: follow original data frame order, not factor alphabetical order
+      # Get unique labels and corresponding shapes, colors, preserving original order
       unique_data <- data.frame(
         label = data[[colname_data]], 
         shape = shape, 
@@ -1465,7 +1606,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       common_themes$legend$labels <- unique_data$label
     }else {
        common_themes$legend$shapes <- shape_by[!duplicated(data[[colname_data]])]
-       # 对于shape_by的情况，也需要修复颜色和标签的顺序
+       # For shape_by cases, also need to fix color and label order
        unique_data <- data.frame(
          label = data[[colname_data]], 
          color = color, 
@@ -1475,7 +1616,7 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
        common_themes$legend$colors <- unique_data$color
        common_themes$legend$labels <- unique_data$label
     }
-           # 标签已经在上面设置过了，这里不需要重复设置
+           # Labels have already been set above, no need to repeat here
     specific_themes$basic_plot$dataset_scale <- start %>% unique() %>% sort()
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
