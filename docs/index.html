@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">itol.toolkit</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,6 +90,7 @@
     <li><a class="dropdown-item" href="articles/v1.1.11.html">version 1.1.11</a></li>
     <li><a class="dropdown-item" href="articles/v1.1.12.html">version 1.1.12</a></li>
     <li><a class="dropdown-item" href="articles/v1.2.0.html">version 1.2.0</a></li>
+    <li><a class="dropdown-item" href="articles/v1.2.1.html">version 1.2.1</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="https://tongzhou2017.github.io/itol.toolkit-gallery/">Gallery</a></li>
@@ -241,6 +242,21 @@ Please note that in order to use this software, you will need to manually instal
 <h2 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
 </h2>
 <p>update history:</p>
+<p>Version 1.2.1</p>
+<ul>
+<li>
+<strong>Added:</strong> <code>DATASET_COLORSTRIP</code> supports dual-factor coloring (main group + gradient) with customizable color palettes.</li>
+<li>
+<strong>Added:</strong> <code>DATASET_STYLE</code> supports dual-factor coloring (main group + gradient) for both <code>branch</code> and <code>label</code> subtypes.</li>
+<li>
+<strong>Added:</strong> <code>DATASET_STYLE</code> background colors support dual-factor coloring with smart contrast adjustment when <code>background_color</code> matches <code>color</code> parameter.</li>
+<li>
+<strong>Added:</strong> Enhanced <code><a href="reference/darken_color.html">darken_color()</a></code> function with “enhanced” method for better color darkening while preserving hue and saturation.</li>
+<li>
+<strong>Added:</strong> The third element of <code>color</code> parameter can specify a color palette set for base hues in both <code>DATASET_COLORSTRIP</code> and <code>DATASET_STYLE</code>.</li>
+<li>
+<strong>Added:</strong> Support for background-only dual-factor coloring in <code>DATASET_STYLE</code> when <code>color</code> is single value and <code>background_color</code> is dual-factor.</li>
+</ul>
 <p>Version 1.2.0</p>
 <ul>
 <li>
@@ -371,7 +387,14 @@ Please note that in order to use this software, you will need to manually instal
 <p><a href="https://github.com/TongZhou2017/itol.toolkit/blob/master/LICENSE.md" class="external-link">MIT License</a></p>
 </div>
 
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=itol.toolkit" class="external-link">View on CRAN</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

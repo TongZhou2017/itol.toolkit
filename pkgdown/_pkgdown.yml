@@ -94,6 +94,8 @@ navbar:
           href: articles/v1.1.12.html
         - text: "version 1.2.0"
           href: articles/v1.2.0.html
+        - text: "version 1.2.1"
+          href: articles/v1.2.1.html
     - text: "Gallery"
       href: "https://tongzhou2017.github.io/itol.toolkit-gallery/"
   right:

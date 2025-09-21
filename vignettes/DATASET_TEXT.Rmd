@@ -39,7 +39,7 @@ tree <- system.file("extdata",
 ```
 Next we need to prepare the input data by storing it in a data frame with the first column containing the  node ID, the second column containing the corresponding text, and the third column containing the group data for automatic color configuration. 
 
-In the case of data without the third column, the program will add colors automatically. Without setting the "color" parameter, itol.tookit will use the default palette (refer to [Color_Palette](链接) for detail information). Moreover, several other styles of text can be specified by users, which are described as follows:
+In the case of data without the third column, the program will add colors automatically. Without setting the "color" parameter, itol.tookit will use the default palette (refer to [Color_Palette](https://tongzhou2017.github.io/itol.toolkit/articles/Color_Palette.html) for detail information). Moreover, several other styles of text can be specified by users, which are described as follows:
 
 - size_factor: size of text labels
 

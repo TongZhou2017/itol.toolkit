@@ -164,6 +164,15 @@ We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/
 
 update history:
 
+Version 1.2.1
+
+- **Added:** `DATASET_COLORSTRIP` supports dual-factor coloring (main group + gradient) with customizable color palettes.
+- **Added:** `DATASET_STYLE` supports dual-factor coloring (main group + gradient) for both `branch` and `label` subtypes.
+- **Added:** `DATASET_STYLE` background colors support dual-factor coloring with smart contrast adjustment when `background_color` matches `color` parameter.
+- **Added:** Enhanced `darken_color()` function with "enhanced" method for better color darkening while preserving hue and saturation.
+- **Added:** The third element of `color` parameter can specify a color palette set for base hues in both `DATASET_COLORSTRIP` and `DATASET_STYLE`.
+- **Added:** Support for background-only dual-factor coloring in `DATASET_STYLE` when `color` is single value and `background_color` is dual-factor.
+
 Version 1.2.0
 
 - **Added:** TREE_COLORS supports dual-factor coloring (main group + gradient).

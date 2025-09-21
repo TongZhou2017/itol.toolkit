@@ -32,12 +32,12 @@ itol.hub <- setClass(
 #' @description create a new object for itol.hub
 #'
 #' @param tree tree file
-#' @param field_tree todo
-#' @param seq todo
-#' @param abundance todo
-#' @param taxonomy todo
-#' @param node_data todo
-#' @param tip_data todo
+#' @param field_tree phylogenetic tree for field data
+#' @param seq sequence data object
+#' @param abundance abundance data object
+#' @param taxonomy taxonomy data object
+#' @param node_data node-level metadata object
+#' @param tip_data tip-level metadata object
 #' @importFrom ape read.tree
 #' @importFrom ape makeNodeLabel
 #' @return Returns a itol.hub object

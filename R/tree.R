@@ -39,7 +39,6 @@ vector_tree <- function(vector, branch_length=1){
     newick_str <- paste0("(", newick_str, ",", vector[i], ":",branch_length,"):",branch_length)  # Add branch length to internal nodes
   }
   newick_str <- paste0(newick_str, ";")
-  # print(newick_str)
   # Convert Newick string to phylo object
   tree <- read.tree(text = newick_str)
 

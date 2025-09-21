@@ -97,3 +97,76 @@ sort_color <- function(colors,root=NULL,rev=FALSE,plot=FALSE){
   }
   return(new_colors)
 }
+
+#' Darken color while preserving hue and saturation
+#' @description Darken a color by proportionally reducing RGB values while maintaining the color's hue and saturation characteristics.
+#' @param color input color in hex format
+#' @param factor darkening factor (0-1), where 0 is no darkening and 1 is maximum darkening
+#' @param method method for darkening: "proportional" (default) or "gradient"
+#' @importFrom grDevices col2rgb
+#' @return darkened color in hex format
+#' @export
+darken_color <- function(color, factor = 0.4, method = "proportional"){
+  if(method == "proportional"){
+    # Convert to RGB
+    rgb_vals <- col2rgb(color)
+    
+    # Calculate darkening: reduce each RGB component proportionally
+    # factor = 0 means no change, factor = 1 means complete darkening (black)
+    darken_ratio <- 1 - factor
+    new_rgb <- round(rgb_vals * darken_ratio)
+    
+    # Convert back to hex
+    hex_color <- sprintf("#%02X%02X%02X", new_rgb[1], new_rgb[2], new_rgb[3])
+    return(hex_color)
+  } else if(method == "gradient"){
+    # Use gradient_color with a dark target color
+    # Calculate a dark version of the original color
+    rgb_vals <- col2rgb(color)
+    
+    # Create a dark target by reducing all RGB components to 20% of original
+    dark_target <- round(rgb_vals * 0.2)
+    dark_hex <- sprintf("#%02X%02X%02X", dark_target[1], dark_target[2], dark_target[3])
+    
+    # Generate gradient and take the factor position
+    gradient_colors <- gradient_color(10, color, end = dark_hex)
+    gradient_position <- round(factor * 9) + 1  # factor 0.4 -> position 5
+    gradient_position <- min(gradient_position, 10)  # Ensure not exceeding bounds
+    
+    return(gradient_colors[gradient_position])
+  } else if(method == "enhanced"){
+    # Enhanced method: for neutral colors, use a saturated target instead of black
+    rgb_vals <- col2rgb(color)
+    
+    # Calculate saturation (difference between max and min RGB components)
+    max_rgb <- max(rgb_vals)
+    min_rgb <- min(rgb_vals)
+    saturation <- max_rgb - min_rgb
+    
+    # If the color is quite neutral (low saturation), use gradient to a saturated dark color
+    if(saturation < 60){
+      # Find the dominant color component
+      dominant_idx <- which.max(rgb_vals)
+      
+      # Create a saturated dark target color
+      target_rgb <- c(40, 40, 40)  # Base dark color
+      target_rgb[dominant_idx] <- 120  # Make the dominant color component brighter
+      
+      # Use gradient_color to create a smooth transition
+      target_hex <- sprintf("#%02X%02X%02X", target_rgb[1], target_rgb[2], target_rgb[3])
+      gradient_colors <- gradient_color(10, color, end = target_hex)
+      
+      # Take the appropriate position based on factor
+      gradient_position <- round(factor * 9) + 1
+      gradient_position <- min(gradient_position, 10)
+      
+      return(gradient_colors[gradient_position])
+    } else {
+      # For saturated colors, use normal proportional darkening
+      darken_ratio <- 1 - factor
+      new_rgb <- round(rgb_vals * darken_ratio)
+      hex_color <- sprintf("#%02X%02X%02X", new_rgb[1], new_rgb[2], new_rgb[3])
+      return(hex_color)
+    }
+  }
+}

@@ -185,15 +185,11 @@ use.theme <- function(type,style="default"){
 #' object <- learn_data_from_unit(object,unit)
 create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,line_type=NULL,font_type=NULL,size_factor=NULL,position=NULL,background_color=NULL,rotation=NULL,method=NULL,shape=NULL,fill=NULL,tree){
   type <- correct_type(type)
-  #print(type)
-  #data_name <- substitute(data)
-  #print(data_name)
   data_left <- learn_df(tree = tree, node = T, tip = T)
   theme <- use.theme(type,style)
   sep <- theme@sep
   profile <- theme@profile
   field <- theme@field
-  #print(field$shapes)
   common_themes <- theme@common_themes
   specific_themes <- theme@specific_themes
   if (type == "COLLAPSE") {
@@ -765,17 +761,141 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       background_color = rep(background_color,nrow(data))
     }
     colname_data <- names(data)[!names(data)%in%c("id",colname_subtype, colname_position, colname_color, colname_size_factor, colname_line_type, colname_font_type, colname_background_color)]
-    if(length(color) != nrow(data)){
-      message("Identifying data column to auto setup color parameter")
-      if(length(colname_data)!=1){
-        stop("Unable to indentify data column")
+    # If dual-factor coloring is enabled and data column cannot be uniquely identified, use main grouping column as label column by default
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      if(length(colname_data) != 1){
+        colname_data <- color[1]
+      }
+    } else {
+      if(length(color) != nrow(data)){
+        message("Identifying data column to auto setup color parameter")
+        if(length(colname_data)!=1){
+          # If background_color is dual-factor, use the gradient column as data column
+          if(!is.null(background_color) && length(background_color) >= 2 && 
+             all(background_color[1:2] %in% names(data))){
+            colname_data <- background_color[2]
+          } else {
+            stop("Unable to indentify data column")
+          }
+        }
       }
     }
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"
     }
-    if(length(color) == 1){
+    
+    # ------------------ Start dual-factor coloring code for DATASET_STYLE ------------------
+    
+    # When color is specified as two field names, enable dual-factor (main grouping + gradient) strategy
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      color_level_main     <- color[1]
+      color_level_gradient <- color[2]
+      color_param_original <- color  # Save original color parameter for background_color comparison
+      
+      # Optional 3rd element as color palette set
+      color_set <- NULL
+      if(length(color) >= 3){
+        candidate_set <- color[3]
+        if(stringr::str_remove(candidate_set,"_.*$") %in% get_color(set = "ls")){
+          color_set <- candidate_set
+        }
+      }
+      
+      main_vec     <- as.factor(data[[color_level_main]])
+      gradient_vec <- data[[color_level_gradient]]
+      
+      # Ensure main factor is sorted alphabetically
+      main_levels <- sort(levels(main_vec))
+      main_vec <- factor(main_vec, levels = main_levels)
+      n_main      <- length(main_levels)
+      
+      base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+      
+      color_out <- character(nrow(data))
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        for(j in seq_along(idx_main)){
+          row_idx  <- idx_main[j]
+          grad_val <- grad_vals[j]
+          color_out[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+        }
+      }
+      color <- factor(color_out)
+      
+      # Handle background_color dual-factor coloring if it matches color parameter
+      if(!is.null(background_color) && length(background_color) >= 2 && 
+         all(background_color[1:2] == color_param_original[1:2])){
+        # Dual-factor background coloring: same logic as color but adjusted 70% towards white
+        background_color_out <- character(nrow(data))
+        for(i in seq_len(n_main)){
+          this_main  <- main_levels[i]
+          base_color <- base_colors_main[i]
+          idx_main   <- which(main_vec == this_main)
+          grad_vals    <- gradient_vec[idx_main]
+          unique_grads <- sort(unique(grad_vals))
+          n_grads      <- length(unique_grads)
+          colors_grad  <- gradient_color(n_grads, base_color)
+          grad_color_map <- setNames(colors_grad, unique_grads)
+          for(j in seq_along(idx_main)){
+            row_idx  <- idx_main[j]
+            grad_val <- grad_vals[j]
+            original_bg_color <- grad_color_map[[ as.character(grad_val) ]]
+             # Smart background color selection based on color distance to white
+             # First try 70% towards white
+             bg_gradient_white <- gradient_color(10, original_bg_color, end = "#FFFFFF")
+             bg_color_white <- bg_gradient_white[7]  # 70% towards white
+             
+             # Calculate distances
+             dist_bg_white <- color_distance(bg_color_white, "#FFFFFF")
+             
+             # If background color is too close to white (distance < 80), use smart darkening instead
+             if(dist_bg_white < 80){
+               # Use smart darkening to preserve color hue and saturation
+               background_color_out[row_idx] <- darken_color(original_bg_color, factor = 0.4, method = "enhanced")
+             } else {
+               background_color_out[row_idx] <- bg_color_white
+             }
+          }
+        }
+        background_color <- background_color_out
+      }
+      
+      # Legend: for dual-factor, labels use secondary factor name; order by main factor grouping, then alphabetically within groups
+      common_themes$legend$title <- color_level_gradient
+      legend_labels <- character(0)
+      legend_colors <- character(0)
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        legend_labels <- c(legend_labels, as.character(unique_grads))
+        legend_colors <- c(legend_colors, as.character(grad_color_map[as.character(unique_grads)]))
+      }
+      common_themes$legend$labels <- legend_labels
+      common_themes$legend$colors <- legend_colors
+      common_themes$legend$shapes <- rep(1, length(legend_labels))
+    }
+    
+    # ------------------- End dual-factor coloring code for DATASET_STYLE -------------------
+    
+    # Save original color parameter for comparison
+    color_param_original <- color
+    
+    # Single factor coloring logic (existing code)
+    if(length(color) == 1 && !exists("color_level_main")){
       if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
         color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
@@ -786,6 +906,112 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
         }else{
           stop("Unsupported color parameter")
         }
+      }
+      
+      # Handle background_color dual-factor when color is single factor
+      if(!is.null(background_color) && length(background_color) >= 2 && 
+         all(background_color[1:2] %in% names(data))){
+        
+        background_color_level_main     <- background_color[1]
+        background_color_level_gradient <- background_color[2]
+        
+        # Optional 3rd element as color palette set
+        background_color_set <- NULL
+        if(length(background_color) >= 3){
+          candidate_set <- background_color[3]
+          if(stringr::str_remove(candidate_set,"_.*$") %in% get_color(set = "ls")){
+            background_color_set <- candidate_set
+          }
+        }
+      
+        main_vec     <- as.factor(data[[background_color_level_main]])
+        gradient_vec <- data[[background_color_level_gradient]]
+      
+        # Ensure main factor is sorted alphabetically
+        main_levels <- sort(levels(main_vec))
+        main_vec <- factor(main_vec, levels = main_levels)
+        n_main      <- length(main_levels)
+      
+        base_colors_main <- if(is.null(background_color_set)) get_color(n_main) else get_color(n_main, set = background_color_set)
+      
+        background_color_out <- character(nrow(data))
+        for(i in seq_len(n_main)){
+          this_main  <- main_levels[i]
+          base_color <- base_colors_main[i]
+          idx_main   <- which(main_vec == this_main)
+          grad_vals    <- gradient_vec[idx_main]
+          unique_grads <- sort(unique(grad_vals))
+          n_grads      <- length(unique_grads)
+          colors_grad  <- gradient_color(n_grads, base_color)
+          grad_color_map <- setNames(colors_grad, unique_grads)
+          for(j in seq_along(idx_main)){
+            row_idx  <- idx_main[j]
+            grad_val <- grad_vals[j]
+            original_bg_color <- grad_color_map[[ as.character(grad_val) ]]
+            # Only apply smart background color adjustment when color and background_color parameters are identical
+            # When they are different, use original gradient colors directly
+            # Check if the original color parameter was a single black color
+            if(exists("color_param_original") && length(color_param_original) == 1 && color_param_original == "#000000"){
+              # When color is single black and background_color is dual-factor, use original gradient colors
+              background_color_out[row_idx] <- original_bg_color
+            } else {
+              # Smart background color selection based on color distance to white
+              # First try 70% towards white
+              bg_gradient_white <- gradient_color(10, original_bg_color, end = "#FFFFFF")
+              bg_color_white <- bg_gradient_white[7]  # 70% towards white
+              
+              # Calculate distances
+              dist_bg_white <- color_distance(bg_color_white, "#FFFFFF")
+              
+              # If background color is too close to white (distance < 80), use smart darkening instead
+              if(dist_bg_white < 80){
+                # Use smart darkening to preserve color hue and saturation
+                background_color_out[row_idx] <- darken_color(original_bg_color, factor = 0.4, method = "enhanced")
+              } else {
+                background_color_out[row_idx] <- bg_color_white
+              }
+            }
+          }
+        }
+        background_color <- background_color_out
+        
+        # Update legend for background color dual-factor
+        common_themes$legend$title <- background_color_level_gradient
+        legend_labels <- character(0)
+        legend_colors <- character(0)
+        for(i in seq_len(n_main)){
+          this_main  <- main_levels[i]
+          base_color <- base_colors_main[i]
+          idx_main   <- which(main_vec == this_main)
+          grad_vals    <- gradient_vec[idx_main]
+          unique_grads <- sort(unique(grad_vals))
+          n_grads      <- length(unique_grads)
+          colors_grad  <- gradient_color(n_grads, base_color)
+          grad_color_map <- setNames(colors_grad, unique_grads)
+          legend_labels <- c(legend_labels, as.character(unique_grads))
+          # Use the same logic for legend colors as background colors
+          for(grad_val in unique_grads){
+            original_bg_color <- grad_color_map[[ as.character(grad_val) ]]
+            # Only apply smart background color adjustment when color and background_color parameters are identical
+            if(exists("color_param_original") && length(color_param_original) == 1 && color_param_original == "#000000"){
+              # When color is single black and background_color is dual-factor, use original gradient colors
+              legend_colors <- c(legend_colors, original_bg_color)
+            } else {
+              # Smart background color selection based on color distance to white
+              bg_gradient_white <- gradient_color(10, original_bg_color, end = "#FFFFFF")
+              bg_color_white <- bg_gradient_white[7]  # 70% towards white
+              dist_bg_white <- color_distance(bg_color_white, "#FFFFFF")
+              if(dist_bg_white < 80){
+                legend_colors <- c(legend_colors, darken_color(original_bg_color, factor = 0.4, method = "enhanced"))
+              } else {
+                legend_colors <- c(legend_colors, bg_color_white)
+              }
+            }
+          }
+        }
+        common_themes$legend$labels <- legend_labels
+        common_themes$legend$colors <- legend_colors
+        common_themes$legend$shapes <- rep(1, length(legend_labels))
       }
     }
     if(subtype == "branch"){
@@ -798,23 +1024,69 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
       data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
       profile$name <- key
+      
+      # Build legend for branch subtype
+      if(!exists("color_level_main")){
+        # Single factor mode - use colname_data for legend
+        if(!is.null(colname_data) && colname_data != ""){
+          common_themes$legend$title <- colname_data
+          unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
+          unique_data <- unique_data[!duplicated(unique_data$label), ]
+          common_themes$legend$colors <- unique_data$color
+          common_themes$legend$labels <- unique_data$label
+          common_themes$legend$shapes <- rep(1, length(common_themes$legend$labels))
+        }
+      }
+      
       unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
     }
     if(subtype == "label"){
       if(length(names(data)) > 6){
         stop("The input data should has 6 columns: id, type(optional), position(optional), color(optional), font size(optional), font type(optional), background color(optional), data(optional. for auto color)")
       }
+      
+      # Determine label column name
+      label_colname <- colname_data
+      if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+        label_colname <- color[2]
+      } else if(length(color) == 1 && !is.null(background_color) && length(background_color) >= 2 && 
+                all(background_color[1:2] %in% names(data))){
+        label_colname <- background_color[2]
+      }
+      
       if(is.null(background_color)){
-        df_data <- data.frame(id = data[["id"]], subtype = subtype, position = position, color = color, font_size = size_factor, font_type = font_type)
-        names(df_data) <- c("id",paste0(key,c("$TYPE", "$WHAT", "$COLOR", "$WIDTH_OR_SIZE_FACTOR", "$STYLE")))
+        df_data <- data.frame(id = data[["id"]], subtype = subtype, position = position, color = color, font_size = size_factor, font_type = font_type, label = data[[label_colname]])
+        names(df_data) <- c("id",paste0(key,c("$TYPE", "$WHAT", "$COLOR", "$WIDTH_OR_SIZE_FACTOR", "$STYLE", "$LABEL_OR_STYLE")))
       }else {
-        df_data <- data.frame(id = data[["id"]], subtype = subtype, position = position, color = color, font_size = size_factor, font_type = font_type, background_color = background_color)
-        names(df_data) <- c("id",paste0(key,c("$TYPE", "$WHAT", "$COLOR", "$WIDTH_OR_SIZE_FACTOR", "$STYLE", "$BACKGROUND_COLOR")))
+        df_data <- data.frame(id = data[["id"]], subtype = subtype, position = position, color = color, font_size = size_factor, font_type = font_type, background_color = background_color, label = data[[label_colname]])
+        names(df_data) <- c("id",paste0(key,c("$TYPE", "$WHAT", "$COLOR", "$WIDTH_OR_SIZE_FACTOR", "$STYLE", "$BACKGROUND_COLOR", "$LABEL_OR_STYLE")))
       }
       df_data <- convert_range_to_node(df_data, tree)
       data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
       data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
       profile$name <- key
+      
+      # Build legend for label subtype
+      if(!exists("color_level_main")){
+        # Single factor mode - use colname_data for legend
+        if(!is.null(colname_data) && colname_data != ""){
+          # If background_color is dual-factor, use background colors for legend
+          # Check original background_color parameter before it was processed
+          if(exists("background_color_level_main")){
+            # Legend already built in background_color dual-factor section above
+            # No need to rebuild here
+          } else {
+            # Regular single factor legend
+            common_themes$legend$title <- colname_data
+            unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
+            unique_data <- unique_data[!duplicated(unique_data$label), ]
+            common_themes$legend$colors <- unique_data$color
+            common_themes$legend$labels <- unique_data$label
+            common_themes$legend$shapes <- rep(1, length(common_themes$legend$labels))
+          }
+        }
+      }
+      
       unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
     }
   }
@@ -986,14 +1258,90 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       }
     }
     colname_data <- names(data)[!names(data)%in%c("id",colname_color)]
-    if(length(colname_data)!=1){
-      stop("Unable to indentify data column")
+    # If dual-factor coloring is enabled and data column cannot be uniquely identified, use main grouping column as label column by default
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      if(length(colname_data) != 1){
+        colname_data <- color[1]
+      }
+    } else {
+      if(length(colname_data)!=1){
+        stop("Unable to indentify data column")
+      }
     }
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"
     }
-    if(length(color) == 1){
+    
+    # ------------------ Start dual-factor coloring code for DATASET_COLORSTRIP ------------------
+    
+    # When color is specified as two field names, enable dual-factor (main grouping + gradient) strategy
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      color_level_main     <- color[1]
+      color_level_gradient <- color[2]
+      
+      # Optional 3rd element as color palette set
+      color_set <- NULL
+      if(length(color) >= 3){
+        candidate_set <- color[3]
+        if(stringr::str_remove(candidate_set,"_.*$") %in% get_color(set = "ls")){
+          color_set <- candidate_set
+        }
+      }
+      
+      main_vec     <- as.factor(data[[color_level_main]])
+      gradient_vec <- data[[color_level_gradient]]
+      
+      # Ensure main factor is sorted alphabetically
+      main_levels <- sort(levels(main_vec))
+      main_vec <- factor(main_vec, levels = main_levels)
+      n_main      <- length(main_levels)
+      
+      base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+      
+      color_out <- character(nrow(data))
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        for(j in seq_along(idx_main)){
+          row_idx  <- idx_main[j]
+          grad_val <- grad_vals[j]
+          color_out[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+        }
+      }
+      color <- factor(color_out)
+      
+      # Legend: for dual-factor, labels use secondary factor name; order by main factor grouping, then alphabetically within groups
+      common_themes$legend$title <- color_level_gradient
+      legend_labels <- character(0)
+      legend_colors <- character(0)
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        legend_labels <- c(legend_labels, as.character(unique_grads))
+        legend_colors <- c(legend_colors, as.character(grad_color_map[as.character(unique_grads)]))
+      }
+      common_themes$legend$labels <- legend_labels
+      common_themes$legend$colors <- legend_colors
+      common_themes$legend$shapes <- rep(1, length(legend_labels))
+    }
+    
+    # ------------------- End dual-factor coloring code for DATASET_COLORSTRIP -------------------
+    
+    # Single factor coloring logic (existing code)
+    if(length(color) == 1 && !exists("color_level_main")){
       if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
         color_levels = get_color(length(unique(data[[colname_data]])),set = color)
         color = as.factor(data[[colname_data]])
@@ -1009,22 +1357,35 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(length(names(data)) > 4){
       stop("The input data should has 2-4 columns: id, type(optional), color(optional), label")
     }
-    df_data <- data.frame(id = data[["id"]],color = color,label=data[[colname_data]])
+    # Determine which column name should be used for the last column (LABEL) in DATA block:
+    # - Dual-factor mode: use second factor (color[2]) as label
+    # - Other cases: use auto-identified colname_data
+    label_colname <- colname_data
+    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+      label_colname <- color[2]
+    }
+    
+    df_data <- data.frame(id = data[["id"]],color = color,label=data[[label_colname]])
     names(df_data) <- c("id",paste0(key,c("$COLOR", "$LABEL")))
     df_data <- convert_range_to_node(df_data, tree)
     data_left[["node"]] <- df_merge(data_left[["node"]], df_data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], df_data)
     profile$name <- key
-    common_themes$legend$title <- colname_data
     
-    # Fix legend order issue: follow original data frame order, not factor alphabetical order
-    # Get unique labels and corresponding colors, preserving original order
-    unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
-    unique_data <- unique_data[!duplicated(unique_data$label), ]
-    
-    common_themes$legend$colors <- unique_data$color
-    common_themes$legend$labels <- unique_data$label
-    common_themes$legend$shapes <- rep(1,length(common_themes$legend$labels))
+    # Build legend based on coloring mode
+    if(!exists("color_level_main")){
+      # Single factor mode
+      common_themes$legend$title <- colname_data
+      
+      # Fix legend order issue: follow original data frame order, not factor alphabetical order
+      # Get unique labels and corresponding colors, preserving original order
+      unique_data <- data.frame(label = data[[colname_data]], color = color, stringsAsFactors = FALSE)
+      unique_data <- unique_data[!duplicated(unique_data$label), ]
+      
+      common_themes$legend$colors <- unique_data$color
+      common_themes$legend$labels <- unique_data$label
+      common_themes$legend$shapes <- rep(1,length(common_themes$legend$labels))
+    }
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if (type == "DATASET_BINARY") {
@@ -1037,10 +1398,8 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       cols_to_keep <- c(names(data)[1], names(data)[!(col_classes == "character")])
       metacols <- c(names(data)[1], names(data)[(col_classes == "character")])
       data_meta <- data[, ..metacols]
-      #print(cols_to_keep)
       data_sub <- data[, ..cols_to_keep]
       data <- dt_transpose_header(data_sub)
-      #print(data)
     }
     if(names(data)[1] != "id"){
         message(paste0("Using the first column as id: ",names(data)[1]))
@@ -1129,27 +1488,19 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
 
     }
     if(is.null(shape)){
-      # print("c3")
       field$shapes <- rep(2,field_length)
     }else{
       shapes <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")
       if(shape %in% shapes){
-        # print("c1")
         field$shapes <- rep(shape,field_length)
       }else{
-        # print("c4")
         if(shape %in% names(data_meta)){
           field$shapes <- data_meta[[shape]]
-          # print("c2")
-          # print(field$shapes)
           old_levels <- levels(as.factor(field$shapes))
           new_levels <- 1:length(old_levels)
-          # print(old_levels)
-          # print(new_levels)
           char_vector <- as.character(field$shapes)
           char_vector <- new_levels[match(char_vector, old_levels)]
           field$shapes <- factor(char_vector)
-          # print(field$shapes)
 
         }
       }
@@ -1210,7 +1561,6 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data[is.na(data)] <- 0
     names(data) <- str_replace_all(names(data)," ","_")
     field_names <- names(data)[-1]
-    #print(field_names)
     if(length(names(data)) == 2){
       field_tree <- NULL
     }else{
