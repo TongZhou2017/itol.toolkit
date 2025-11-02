@@ -164,6 +164,15 @@ We collected reproducible plots into a [gallery](https://tongzhou2017.github.io/
 
 update history:
 
+Version 1.2.2
+
+- **Added:** `DATASET_BINARY` now supports third element color palette specification in dual-factor coloring.
+- **Added:** Flexible separator syntax for attribute-based dual-factor coloring - support any string as separator (single/multi-character, special regex characters).
+- **Added:** `DATASET_BINARY` now features flexible data conversion with a standalone `convert_to_binary()` function for precise control over binary data transformation.
+- **Added:** Interactive RStudio Addin `binary_data_conversion` provides an intuitive graphical interface for binary data conversion with real-time preview and range controls.
+- **Added:** `DATASET_EXTERNALSHAPE` now supports dual-factor coloring (main group + gradient) with customizable color palettes.
+- **Fixed:** `DATASET_PIECHART` now supports single-column data input with intelligent range detection and automatic pie segment generation.
+
 Version 1.2.1
 
 - **Added:** `DATASET_COLORSTRIP` supports dual-factor coloring (main group + gradient) with customizable color palettes.

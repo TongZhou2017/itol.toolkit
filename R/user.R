@@ -95,9 +95,9 @@ use.theme <- function(type,style="default"){
 #' color in hexadecimal, RGB or RGBA notation.
 #' @param rotation Only used while type == "DATASET_TEXT". a number or a
 #' vector of number specifying the rotation angle of the text.
-#' @param method a character specifying the numbric data summarise method. If
+#' @param method a character specifying the numeric data summarise method. If
 #' type == "DATASET_BINARY", the following choices are possible: "mean",
-#' "sum".
+#' "sum", "binary" (for automatic binary conversion).
 #' @param shape a character or a vector of character specifying the symbol
 #' shape. If type == "DATASET_BINARY", the default is 2. If type ==
 #' "DATASET_SYMBOL", the following choices are possible: 1 for rectangle, 2
@@ -1258,8 +1258,10 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       }
     }
     colname_data <- names(data)[!names(data)%in%c("id",colname_color)]
+    # Check if dual-factor coloring: only check first 2 elements
+    color_cols_to_check <- if(length(color) >= 2) color[1:2] else color
     # If dual-factor coloring is enabled and data column cannot be uniquely identified, use main grouping column as label column by default
-    if(length(color) >= 2 && all(color[1:2] %in% names(data))){
+    if(length(color) >= 2 && all(color_cols_to_check %in% names(data))){
       if(length(colname_data) != 1){
         colname_data <- color[1]
       }
@@ -1392,14 +1394,57 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(!is.data.frame(data)){
       stop("The input data class should be a data frame")
     }
+    
+    # Store original data before any conversion for metadata extraction
+    data_original <- data.table::copy(data)
+    
+    # Apply binary conversion if method is "binary"
+    if(!is.null(method) && method == "binary"){
+      data <- convert_to_binary(data, force_convert = FALSE, verbose = TRUE)
+    }
+    
+    # NOW check column classes after conversion
     col_classes <- sapply(data, class)
     char_count <- sum(col_classes == "character")
-    if(char_count > 1){
+    
+    # For metadata, use original data (before conversion)
+    col_classes_orig <- sapply(data_original, class)
+    char_count_orig <- sum(col_classes_orig == "character")
+    
+    # Check if this is dual-factor coloring scenario
+    # Only transpose data if we have character columns AND they will be used for dual-factor coloring
+    is_dual_factor <- FALSE
+    if(!is.null(color) && length(color) >= 2){
+      # Check if first 2 elements of color could be column names (for dual-factor)
+      is_dual_factor <- TRUE
+    } else if(!is.null(color) && length(color) == 1 && !is.null(shape)){
+      # Check if using shape parameter for dual-factor
+      is_dual_factor <- TRUE
+    }
+    
+    if(char_count_orig > 1){
       cols_to_keep <- c(names(data)[1], names(data)[!(col_classes == "character")])
-      metacols <- c(names(data)[1], names(data)[(col_classes == "character")])
-      data_meta <- data[, ..metacols]
+      metacols <- names(data_original)[(col_classes_orig == "character")]
+      # Ensure data_original is a data.table for ..metacols syntax
+      if(!data.table::is.data.table(data_original)){
+        data_original <- data.table::as.data.table(data_original)
+      }
+      if(!data.table::is.data.table(data)){
+        data <- data.table::as.data.table(data)
+      }
+      data_meta <- data_original[, ..metacols]
       data_sub <- data[, ..cols_to_keep]
-      data <- dt_transpose_header(data_sub)
+      
+      # Only transpose if this is a dual-factor coloring scenario
+      if(is_dual_factor && length(cols_to_keep) > 1){
+        data <- dt_transpose_header(data_sub)
+      } else {
+        # For single-factor coloring, use numeric columns only (no transpose)
+        data <- data_sub
+      }
+    } else {
+      # If no character columns (except ID), create data_meta from original data
+      data_meta <- data_original
     }
     if(names(data)[1] != "id"){
         message(paste0("Using the first column as id: ",names(data)[1]))
@@ -1408,83 +1453,238 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(length(names(data)) < 2){
       stop("The input data should has at least 2 columns")
     }
-    field_names <- names(data)[-1]
-    names(data) <- c("id",paste0(key,"$",field_names))
-    data <- convert_range_to_node(data, tree)
-    data_left[["node"]] <- df_merge(data_left[["node"]], data)
-    data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
-    field_length <- length(field_names)
-    field$labels <- field_names
+    
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"
     }
-    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+    if(length(color) == 1 && stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+      # Single-factor coloring with color palette
+      field_names <- names(data)[-1]
+      names(data) <- c("id",paste0(key,"$",field_names))
+      data <- convert_range_to_node(data, tree)
+      data_left[["node"]] <- df_merge(data_left[["node"]], data)
+      data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+      field_length <- length(field_names)
+      field$labels <- field_names
       field$colors <- get_color(field_length,set = color)
     }else{
-      if(all(color %in% names(data_meta))){
-        if(length(color)==1 & shape %in% names(data_meta)){
-          color_level_main     <- shape
-          color_level_gradient <- color
-        }
+      # Check if dual-factor coloring: first 2 elements should be column names
+      # Third element (optional) is color palette
+      color_cols_to_check <- if(length(color) >= 2) color[1:2] else color
+      
+      # Check for col_groups attribute first (DATASET_BINARY with group annotations)
+      # Determine which attribute to use based on first element of color
+      # If color[1] is "group", use default "col_groups" attribute
+      # Otherwise, if color[1] is a valid attribute name, use it
+      if(length(color) >= 2 && color[1] != "group" && color[1] %in% names(attributes(data_original))){
+        color_attr_name <- color[1]
+        col_groups <- attr(data_original, color_attr_name)
+        has_col_groups <- !is.null(col_groups) && length(col_groups) > 0
+      } else if(length(color) >= 2 && color[1] == "group"){
+        color_attr_name <- "col_groups"
+        col_groups <- attr(data_original, color_attr_name)
+        has_col_groups <- !is.null(col_groups) && length(col_groups) > 0
+      } else {
+        color_attr_name <- "col_groups"
+        col_groups <- NULL
+        has_col_groups <- FALSE
+      }
+      
+      # Check if using data_meta columns
+      has_data_meta_cols <- all(color_cols_to_check %in% names(data_meta))
+      
+      if(has_col_groups || has_data_meta_cols){
+        color_set <- NULL  # Initialize color_set
+        
+        # Handle dual-factor coloring based on color parameter length
         if(length(color)==2){
           color_level_main     <- color[1]
           color_level_gradient <- color[2]
+          color_set            <- NULL
         }
+        if(length(color)==3){
+          color_level_main     <- color[1]
+          color_level_gradient <- color[2]
+          color_set            <- color[3]
+        }
+        
+        # Handle single-factor coloring with shape parameter
+        if(length(color)==1 && !is.null(shape) && shape %in% names(data_meta)){
+          color_level_main     <- shape
+          color_level_gradient <- color
+        }
+        
+        # Check if dual-factor variables are properly set
+        if(!exists("color_level_main") || !exists("color_level_gradient")){
+          stop("Unable to set up dual-factor coloring variables")
+        }
+        
+        # For dual-factor coloring, we need to preserve the original numeric column names
+        # field_names should be the numeric columns from the original data (before transpose)
+        # We need to get the numeric columns from the original data structure
+        if(char_count > 1){
+          # Original data had character and numeric columns
+          field_names <- names(data_sub)[!(names(data_sub) %in% names(data_sub)[1])]
+          # For dual-factor coloring, use original data structure (no transpose)
+          data <- data_sub
+        } else {
+          # All columns were numeric except ID
+          field_names <- names(data)[!(names(data) %in% names(data)[1])]
+        }
+        # For DATASET_BINARY dual-factor coloring, use original data structure
+        # Rename columns to include key prefix
+        names(data) <- c("id",paste0(key,"$",names(data)[-1]))
+        # Convert range to node and merge with tree data
+        data <- convert_range_to_node(data, tree)
+        data_left[["node"]] <- df_merge(data_left[["node"]], data)
+        data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+        field_length <- length(field_names)
+        field$labels <- field_names
 
         # ------------------ Start dual-factor coloring code ------------------
 
-        # 1. Extract main grouping column and gradient grouping column
-        main_vec     <- as.factor(data_meta[[color_level_main]])
-        gradient_vec <- data_meta[[color_level_gradient]]
-
-        # 2. Determine how many main groups (levels)
-        main_levels <- levels(main_vec)
-        n_main      <- length(main_levels)
-
-        # 3. First use get_color() to generate a "base color" for each main group
-        #    get_color(n_main) returns a color vector of length n_main
-        base_colors_main <- get_color(n_main)  # e.g., ["#E41A1C", "#377EB8", "#4DAF4A", ...]
-
-        # 4. Pre-allocate space for field$colors
-        field$colors <- character(field_length)
-
-        # 5. Loop through main groups
-        for(i in seq_len(n_main)){
-          this_main   <- main_levels[i]         # Current main group label (e.g., "A", "B"...)
-          base_color  <- base_colors_main[i]    # Corresponding base color string, e.g., "#377EB8"
-
-          # Get row indices in data_meta that belong to this_main
-          idx_main <- which(main_vec == this_main)
-
-          # Extract gradient column values for these rows and deduplicate
-          grad_vals    <- gradient_vec[idx_main]
-          unique_grads <- unique(grad_vals)
-          n_grads      <- length(unique_grads)
-
-          # Call gradient_color to generate a gradient color sequence for these n_grads gradient levels
-          # Pass base_color as second parameter to generate from base_color as starting point
-          colors_grad <- gradient_color(n_grads, base_color)
-          # e.g., if base_color="#377EB8", n_grads=3, then colors_grad might be ["#377EB8", "#5E8EC2", "#86B4CC"]
-
-          # Establish mapping from gradient values to "gradient colors"
-          grad_color_map <- setNames(colors_grad, unique_grads)
-
-          # Fill field$colors row by row
-          for(j in seq_along(idx_main)){
-            row_idx  <- idx_main[j]
-            grad_val <- grad_vals[j]
-            field$colors[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+        # Check if this is a DATASET_BINARY scenario with col_groups attribute
+        # col_groups was determined above
+        # Note: col_groups might be NULL if no attribute matching color[1] was found
+        
+        # Check if using separator-based dual-factor coloring
+        # If color_level_gradient is not a column name, treat it as separator
+        is_separator_mode <- !is.null(col_groups) && length(col_groups) > 0 && 
+          (color_level_main == "group" || color_level_main == color_attr_name) &&
+          !(color_level_gradient %in% names(data_meta))
+        
+        if(is_separator_mode){
+          
+          # Special case: Using col_groups attribute with separator-based dual-factor coloring
+          # main = "group": use group names as main factor (e.g., Asia, North_America, South_America)
+          # gradient = separator_string: use separator to split column names and group by prefix
+          
+          # Get the separator string from color_level_gradient
+          separator <- color_level_gradient
+          
+          # Get the main groups (group names)
+          main_groups <- names(col_groups)
+          n_main <- length(main_groups)
+          
+          # Generate base colors for main groups
+          base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+          
+          # Generate colors for each field based on its group membership
+          field$colors <- character(field_length)
+          
+          for(i in seq_along(field$labels)){
+            field_name <- field$labels[i]
+            
+            # Find which group this field belongs to
+            for(j in seq_along(col_groups)){
+              if(field_name %in% col_groups[[j]]){
+                # This field belongs to group j
+                base_color <- base_colors_main[j]
+                
+                # Get columns in this group
+                group_cols <- col_groups[[j]]
+                field_index_in_group <- which(group_cols == field_name)
+                n_fields_in_group <- length(group_cols)
+                
+                # Using separator: extract prefix before separator from column names
+                if(n_fields_in_group == 1){
+                  field$colors[i] <- base_color
+                } else {
+                  # Extract prefix before separator using regex
+                  # Escape special regex characters in separator
+                  # Fixed approach: manually escape special chars
+                  if(separator %in% c(".", "|", "(", ")", "+", "$", "*", "?", "[", "]", "{", "}", "^", "\\\\")){
+                    sep_escaped <- paste0("\\\\", separator)
+                  } else {
+                    sep_escaped <- separator
+                  }
+                  prefix_pattern <- paste0(sep_escaped, ".*$")
+                  prefixes <- sub(prefix_pattern, "", group_cols)
+                  unique_prefixes <- unique(prefixes)
+                  n_unique_prefixes <- length(unique_prefixes)
+                  
+                  if(n_unique_prefixes == 1){
+                    # All columns have same prefix, use base color
+                    field$colors[i] <- base_color
+                  } else {
+                    # Generate gradient colors for unique prefixes
+                    gradient_colors <- gradient_color(n_unique_prefixes, base_color)
+                    field_prefix <- prefixes[field_index_in_group]
+                    prefix_index <- which(unique_prefixes == field_prefix)
+                    
+                    if(length(prefix_index) > 0 && prefix_index >= 1 && prefix_index <= length(gradient_colors)){
+                      field$colors[i] <- gradient_colors[prefix_index]
+                    } else {
+                      field$colors[i] <- base_color
+                    }
+                  }
+                }
+                break
+              }
+            }
           }
-        }
+          
+        } else {
+          # Standard dual-factor coloring (using data_meta or other factors)
+          # 1. Extract main grouping column and gradient grouping column
+          main_vec     <- as.factor(data_meta[[color_level_main]])
+          gradient_vec <- data_meta[[color_level_gradient]]
 
-        # Finally convert character vector to factor (if downstream needs factor)
-        field$colors <- factor(field$colors)
+          # 2. Determine how many main groups (levels)
+          main_levels <- levels(main_vec)
+          n_main      <- length(main_levels)
+
+          # 3. First use get_color() to generate a "base color" for each main group
+          #    get_color(n_main) returns a color vector of length n_main
+          #    Optional 3rd element as color palette set
+          base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)  # e.g., ["#E41A1C", "#377EB8", "#4DAF4A", ...]
+
+          # 4. For DATASET_BINARY dual-factor coloring, generate different colors for each field
+          #    Each field should have a distinct color based on the dual-factor scheme
+          field$colors <- if(is.null(color_set)) get_color(field_length) else get_color(field_length, set = color_set)
+        }
 
         # ------------------- End dual-factor coloring code -------------------
       } else {
-        field$colors <- get_color(field_length)
+        # Single-factor coloring fallback
+        # Define field_names for single-factor mode
+        if(char_count_orig > 1){
+          # Use numeric columns from the converted data
+          field_names <- names(data)[!(names(data) %in% names(data)[1])]
+        } else {
+          field_names <- names(data)[!(names(data) %in% names(data)[1])]
+        }
+        # Rename columns and merge data
+        names(data) <- c("id",paste0(key,"$",field_names))
+        data <- convert_range_to_node(data, tree)
+        data_left[["node"]] <- df_merge(data_left[["node"]], data)
+        data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
+        field_length <- length(field_names)
+        field$labels <- field_names
+        # Handle color assignment
+        if(length(color) == 1){
+          # Check if it's a valid hex color or color name
+          is_color <- grepl("^#[0-9A-Fa-f]{6}$", color) || color %in% grDevices::colors()
+          if(is_color){
+            # User specified a specific color, use it for all fields
+            field$colors <- rep(color, field_length)
+          } else {
+            # Not a valid color, use default palette
+            field$colors <- get_color(field_length)
+          }
+        } else {
+          # Multiple colors provided, use them
+          field$colors <- rep(color, length.out = field_length)
+        }
       }
+
+      # Generate legend for DATASET_BINARY
+      # Legend should be based on field names (columns)
+      common_themes$legend$title <- "Binary Data"
+      common_themes$legend$labels <- field$labels
+      common_themes$legend$colors <- as.character(field$colors)
+      common_themes$legend$shapes <- rep(1, length(field$labels))  # Default shape for binary data
 
     }
     if(is.null(shape)){
@@ -1493,19 +1693,55 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
       shapes <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")
       if(shape %in% shapes){
         field$shapes <- rep(shape,field_length)
+      }else if(shape == "group" || (shape %in% names(attributes(data_original)))){
+        # Check if shape is "group" (default) or a custom attribute name (e.g., "col_groups_color")
+        shape_attr_name <- if(shape == "group") "col_groups" else shape
+        col_groups <- attr(data_original, shape_attr_name)
+        
+        if(!is.null(col_groups) && length(col_groups) > 0){
+          # Assign shapes based on group membership
+          # Map each field to its group and assign shapes accordingly
+          field$shapes <- rep(2, field_length)  # Default shape
+          
+          n_groups <- length(col_groups)
+          available_shapes <- 1:min(n_groups, 6)  # iTOL supports shapes 1-6
+          
+          for(i in seq_along(col_groups)){
+            group_name <- names(col_groups)[i]
+            group_cols <- col_groups[[i]]
+            shape_idx <- available_shapes[(i - 1) %% length(available_shapes) + 1]
+            
+            # Find field indices that belong to this group
+            for(j in seq_along(field$labels)){
+              if(field$labels[j] %in% group_cols){
+                field$shapes[j] <- shape_idx
+              }
+            }
+          }
+        } else {
+          # No col_groups attribute, use default
+          field$shapes <- rep(2, field_length)
+        }
       }else{
         if(shape %in% names(data_meta)){
-          field$shapes <- data_meta[[shape]]
-          old_levels <- levels(as.factor(field$shapes))
-          new_levels <- 1:length(old_levels)
-          char_vector <- as.character(field$shapes)
-          char_vector <- new_levels[match(char_vector, old_levels)]
-          field$shapes <- factor(char_vector)
-
+          # For DATASET_BINARY, field$shapes should have length = field_length (number of fields)
+          # Each field gets a different shape based on the unique values in the shape column
+          unique_shapes <- unique(data_meta[[shape]])
+          n_shapes <- length(unique_shapes)
+          
+          # Assign shapes to fields (cycle through available shapes if needed)
+          field$shapes <- rep(1:min(n_shapes, field_length), length.out = field_length)
+        } else if(is.numeric(shape)){
+          # If shape is a numeric value (1-6 for iTOL shape types)
+          field$shapes <- rep(shape, field_length)
+        } else {
+          # Default fallback
+          field$shapes <- rep(2, field_length)
         }
       }
     }
 
+    profile$name <- key
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
   }
   if(type == "DATASET_GRADIENT"){
@@ -1750,6 +1986,10 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     if(length(names(data)) < 2){
       stop("The input data should has at least 2 columns")
     }
+    
+    # Store original data before any modifications for attribute access
+    data_original <- data.table::copy(data)
+    
     field_names <- names(data)[-1]
     data <- convert_range_to_node(data, tree)
     names(data) <- c("id",paste0(key,"$",field_names))
@@ -1757,15 +1997,267 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field$labels <- field_names
     field_length <- length(field_names)
+    
+    # Identify data column for color assignment
+    colname_data <- ""
+    if(length(field_names) == 1){
+      colname_data <- field_names[1]
+    }else{
+      remaining_cols <- field_names[!field_names %in% c("id")]
+      if(length(remaining_cols) == 1){
+        colname_data <- remaining_cols[1]
+      }else{
+        # Use the first column as default for dual-factor mode
+        colname_data <- field_names[1]
+      }
+    }
+    
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"
     }
-    if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
-      field$colors <- get_color(field_length,set = color)
-    }else{
-      field$colors <- get_color(field_length)
+    
+    # ------------------ Start dual-factor coloring code for DATASET_EXTERNALSHAPE ------------------
+    
+    # Check for attribute-based grouping (similar to DATASET_BINARY)
+    # data_original was stored above
+    
+    # Determine which attribute to use based on first element of color
+    if(length(color) >= 2 && color[1] != "group" && color[1] %in% names(attributes(data_original))){
+      color_attr_name <- color[1]
+      col_groups <- attr(data_original, color_attr_name)
+      has_col_groups <- !is.null(col_groups) && length(col_groups) > 0
+    } else if(length(color) >= 2 && color[1] == "group"){
+      color_attr_name <- "col_groups"
+      col_groups <- attr(data_original, color_attr_name)
+      has_col_groups <- !is.null(col_groups) && length(col_groups) > 0
+    } else {
+      color_attr_name <- "col_groups"
+      col_groups <- NULL
+      has_col_groups <- FALSE
     }
+    
+    # When color is specified as two field names, enable dual-factor (main grouping + gradient) strategy
+    if((length(color) >= 2 && all(color[1:2] %in% names(data_original))) || has_col_groups){
+      color_level_main     <- color[1]
+      color_level_gradient <- color[2]
+      
+      # Optional 3rd element as color palette set
+      color_set <- NULL
+      if(length(color) >= 3){
+        candidate_set <- color[3]
+        if(stringr::str_remove(candidate_set,"_.*$") %in% get_color(set = "ls")){
+          color_set <- candidate_set
+        }
+      }
+      
+      # Check if using attribute-based grouping with separator
+      # If color_level_gradient is not a column name, treat it as separator
+      is_separator_mode <- has_col_groups && 
+        (color_level_main == "group" || color_level_main == color_attr_name) &&
+        !(color_level_gradient %in% names(data_original))
+      
+      if(is_separator_mode){
+        # Special case: Using col_groups attribute with separator-based dual-factor coloring
+        # Generate colors for each field based on its group membership
+        main_groups <- names(col_groups)
+        n_main <- length(main_groups)
+        
+        # Get the separator string from color_level_gradient
+        separator <- color_level_gradient
+        
+        # Generate base colors for main groups
+        base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+        
+        # Generate colors for each field based on its group membership
+        field$colors <- character(field_length)
+        
+        for(i in seq_along(field$labels)){
+          field_name <- field$labels[i]
+          
+          # Find which group this field belongs to
+          for(j in seq_along(col_groups)){
+            if(field_name %in% col_groups[[j]]){
+              # This field belongs to group j
+              base_color <- base_colors_main[j]
+              
+              # Get columns in this group
+              group_cols <- col_groups[[j]]
+              field_index_in_group <- which(group_cols == field_name)
+              n_fields_in_group <- length(group_cols)
+              
+              # Using separator: extract prefix before separator from column names
+              if(n_fields_in_group == 1){
+                field$colors[i] <- base_color
+              } else {
+                # Extract prefix before separator using regex
+                # Escape special regex characters in separator
+                # Fixed approach: manually escape special chars
+                if(separator %in% c(".", "|", "(", ")", "+", "$", "*", "?", "[", "]", "{", "}", "^", "\\\\")){
+                  sep_escaped <- paste0("\\\\", separator)
+                } else {
+                  sep_escaped <- separator
+                }
+                prefix_pattern <- paste0(sep_escaped, ".*$")
+                prefixes <- sub(prefix_pattern, "", group_cols)
+                unique_prefixes <- unique(prefixes)
+                n_unique_prefixes <- length(unique_prefixes)
+                
+                if(n_unique_prefixes == 1){
+                  # All columns have same prefix, use base color
+                  field$colors[i] <- base_color
+                } else {
+                  # Generate gradient colors for unique prefixes
+                  gradient_colors <- gradient_color(n_unique_prefixes, base_color)
+                  field_prefix <- prefixes[field_index_in_group]
+                  prefix_index <- which(unique_prefixes == field_prefix)
+                  
+                  if(length(prefix_index) > 0 && prefix_index >= 1 && prefix_index <= length(gradient_colors)){
+                    field$colors[i] <- gradient_colors[prefix_index]
+                  } else {
+                    field$colors[i] <- base_color
+                  }
+                }
+              }
+              break
+            }
+          }
+        }
+        
+        # Legend for attribute-based grouping
+        common_themes$legend$title <- "Groups"
+        common_themes$legend$labels <- field$labels
+        common_themes$legend$colors <- as.character(field$colors)
+        common_themes$legend$shapes <- rep(1, length(field$labels))
+        
+      } else {
+        # Standard dual-factor coloring using data columns
+        main_vec     <- as.factor(data[[color_level_main]])
+        gradient_vec <- data[[color_level_gradient]]
+    
+      # Ensure main factor is sorted alphabetically
+      main_levels <- sort(levels(main_vec))
+      main_vec <- factor(main_vec, levels = main_levels)
+      n_main      <- length(main_levels)
+    
+      base_colors_main <- if(is.null(color_set)) get_color(n_main) else get_color(n_main, set = color_set)
+    
+      color_out <- character(nrow(data))
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        for(j in seq_along(idx_main)){
+          row_idx  <- idx_main[j]
+          grad_val <- grad_vals[j]
+          color_out[row_idx] <- grad_color_map[[ as.character(grad_val) ]]
+        }
+      }
+      field$colors <- factor(color_out)
+      
+      # Legend: for dual-factor, labels use secondary factor name; order by main factor grouping, then alphabetically within groups
+      common_themes$legend$title <- color_level_gradient
+      legend_labels <- character(0)
+      legend_colors <- character(0)
+      for(i in seq_len(n_main)){
+        this_main  <- main_levels[i]
+        base_color <- base_colors_main[i]
+        idx_main   <- which(main_vec == this_main)
+        grad_vals    <- gradient_vec[idx_main]
+        unique_grads <- sort(unique(grad_vals))
+        n_grads      <- length(unique_grads)
+        colors_grad  <- gradient_color(n_grads, base_color)
+        grad_color_map <- setNames(colors_grad, unique_grads)
+        legend_labels <- c(legend_labels, as.character(unique_grads))
+        legend_colors <- c(legend_colors, as.character(grad_color_map[as.character(unique_grads)]))
+      }
+      common_themes$legend$labels <- legend_labels
+      common_themes$legend$colors <- legend_colors
+      common_themes$legend$shapes <- rep(1, length(legend_labels))
+      }  # End of standard dual-factor coloring
+    } else {
+      # Single factor coloring
+      if(length(color) == 1 && stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
+        field$colors <- get_color(field_length,set = color)
+      }else{
+        field$colors <- get_color(field_length)
+      }
+      
+      # Single factor legend
+      if(!is.null(colname_data) && colname_data != "" && colname_data %in% names(data)){
+        common_themes$legend$title <- colname_data
+        unique_data <- data.frame(label = data[[colname_data]], color = field$colors, stringsAsFactors = FALSE)
+        unique_data <- unique_data[!duplicated(unique_data$label), ]
+        common_themes$legend$colors <- unique_data$color
+        common_themes$legend$labels <- unique_data$label
+        common_themes$legend$shapes <- rep(1, length(common_themes$legend$labels))
+      } else {
+        # Default legend when no valid data column
+        common_themes$legend$title <- "Fields"
+        common_themes$legend$labels <- field$labels
+        common_themes$legend$colors <- as.character(field$colors)
+        common_themes$legend$shapes <- rep(1, length(field$labels))
+      }
+    }
+    
+    # ------------------- End dual-factor coloring code for DATASET_EXTERNALSHAPE -------------------
+    
+    # ------------------ Start shape assignment code for DATASET_EXTERNALSHAPE ------------------
+    # Handle shape assignment for DATASET_EXTERNALSHAPE
+    if(is.null(shape)){
+      field$shapes <- rep(1, field_length)
+    } else {
+      valid_shapes <- c("RE","HH","HV","EL","DI","TR","TL","PL","PR","PU","PD","OC","GP")
+      if(shape %in% valid_shapes){
+        field$shapes <- rep(shape, field_length)
+      } else if(shape == "group" || (shape %in% names(attributes(data_original)))){
+        # Check if shape is "group" (default) or a custom attribute name (e.g., "col_groups_shape")
+        shape_attr_name <- if(shape == "group") "col_groups" else shape
+        col_groups <- attr(data_original, shape_attr_name)
+        
+        if(!is.null(col_groups) && length(col_groups) > 0){
+          # Assign shapes based on group membership
+          field$shapes <- rep(1, field_length)  # Default shape
+          
+          n_groups <- length(col_groups)
+          available_shapes <- c(1, 2, 3, 4, 5, 6)  # iTOL supports shapes 1-6 for EXTERNALSHAPE
+          
+          for(i in seq_along(col_groups)){
+            group_name <- names(col_groups)[i]
+            group_cols <- col_groups[[i]]
+            shape_idx <- available_shapes[(i - 1) %% length(available_shapes) + 1]
+            
+            # Find field indices that belong to this group
+            for(j in seq_along(field$labels)){
+              if(field$labels[j] %in% group_cols){
+                field$shapes[j] <- shape_idx
+              }
+            }
+          }
+        } else {
+          # No col_groups attribute, use default
+          field$shapes <- rep(1, field_length)
+        }
+      } else if(is.numeric(shape)){
+        # If shape is a numeric value (1-6 for iTOL shape types)
+        field$shapes <- rep(shape, field_length)
+      } else {
+        # Default fallback
+        field$shapes <- rep(1, field_length)
+      }
+    }
+    
+    # Update legend shapes to match field shapes
+    if(length(common_themes$legend$shapes) == length(field$shapes)){
+      common_themes$legend$shapes <- field$shapes
+    }
+    # ------------------ End shape assignment code for DATASET_EXTERNALSHAPE ------------------
+    
     profile$name <- key
     sep = "\t"
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
@@ -2118,33 +2610,76 @@ create_unit <- function(data,key,type,style="default",subtype=NULL,color=NULL,li
         message(paste0("Using the 1st column as id: ",names(data)[1]))
         names(data)[1] <- "id"
     }
-    if(is.null(position)){
-      message(paste0("Using the 2nd column as position: ",names(data)[2]))
-      names(data)[2] <- "POSITION"
-    }else{
-      data <- data.frame(data[,1],POSITION=position,data[,2:ncol(data)])
+    
+    # Handle single column case (e.g., Completeness as percentage or proportion)
+    if(ncol(data) == 2){
+      col_name <- names(data)[2]
+      values <- data[,2]
+      
+      # Auto-detect data range and calculate appropriate remainder
+      max_val <- max(values, na.rm = TRUE)
+      min_val <- min(values, na.rm = TRUE)
+      
+      if(max_val <= 1 && min_val >= 0){
+        # Data is in 0-1 range (proportion)
+        message("Single column detected. Data range 0-1, creating pie chart with value and remainder (1 - value)")
+        remainder <- 1 - values
+        remainder_label <- "Remainder"
+      } else if(max_val <= 100 && min_val >= 0){
+        # Data is in 0-100 range (percentage)
+        message("Single column detected. Data range 0-100, creating pie chart with value and remainder (100 - value)")
+        remainder <- 100 - values
+        remainder_label <- "Remainder"
+      } else {
+        # Default to percentage range if data doesn't fit standard ranges
+        message("Single column detected. Data range not standard, defaulting to percentage calculation (100 - value)")
+        remainder <- 100 - values
+        remainder_label <- "Remainder"
+      }
+      
+      # Create a data frame with value and remainder
+      data <- data.frame(
+        id = data[,1],
+        POSITION = if(is.null(position)) 0 else position,
+        RADIUS = if(is.null(size_factor)) 1 else size_factor,
+        Value = values,
+        Remainder = remainder,
+        stringsAsFactors = FALSE
+      )
+      field_names <- c("Value", remainder_label)
+    } else {
+      # Original multi-column logic
+      if(is.null(position)){
+        message(paste0("Using the 2nd column as position: ",names(data)[2]))
+        names(data)[2] <- "POSITION"
+      }else{
+        data <- data.frame(data[,1],POSITION=position,data[,2:ncol(data)])
+      }
+      if(is.null(size_factor)){
+        message(paste0("Using the 3rd column as radius: ",names(data)[3]))
+        names(data)[3] <- "RADIUS"
+      }else {
+         data <- data.frame(data[,1:2],RADIUS=size_factor,data[,3:ncol(data)])
+      }
+      field_names <- names(data)[-c(1:3)]
     }
-    if(is.null(size_factor)){
-      message(paste0("Using the 3rd column as radius: ",names(data)[3]))
-      names(data)[3] <- "RADIUS"
-    }else {
-       data <- data.frame(data[,1:2],RADIUS=size_factor,data[,3:ncol(data)])
-    }
-    field_names <- names(data)[-c(1:3)]
+    
     names(data) <- c("id",paste0(key,"$",c("POSITION", "RADIUS",field_names)))
     data <- convert_range_to_node(data, tree)
     data_left[["node"]] <- df_merge(data_left[["node"]], data)
     data_left[["tip"]] <- df_merge(data_left[["tip"]], data)
     field_length <- length(field_names)
     field$labels <- field_names
+    
+    # Handle color assignment with minimum length of 1
     if(is.null(color)){
       message("Using default color pattern: table2itol")
       color = "table2itol"
     }
     if(stringr::str_remove(color,"_.*$") %in% get_color(set="ls")){
-      field$colors <- get_color(field_length,set = color)
+      field$colors <- get_color(max(field_length, 1), set = color)
     }else{
-      field$colors <- get_color(field_length)
+      field$colors <- get_color(max(field_length, 1))
     }
     profile$name <- key
     unit <- new("itol.unit", type = type, sep = sep, profile = profile, field = field, common_themes = common_themes, specific_themes = specific_themes, data = data_left)
@@ -2476,5 +3011,6 @@ count_to_tree <- function(count,group=NULL,weight=0){
   }
   return(tree)
 }
+
 
 utils::globalVariables(c("inbuilt_themes",":=","tempalte_groups","template","result", "template_groups"))

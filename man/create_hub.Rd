@@ -17,17 +17,17 @@ create_hub(
 \arguments{
 \item{tree}{tree file}
 
-\item{field_tree}{todo}
+\item{field_tree}{phylogenetic tree for field data}
 
-\item{seq}{todo}
+\item{seq}{sequence data object}
 
-\item{abundance}{todo}
+\item{abundance}{abundance data object}
 
-\item{taxonomy}{todo}
+\item{taxonomy}{taxonomy data object}
 
-\item{node_data}{todo}
+\item{node_data}{node-level metadata object}
 
-\item{tip_data}{todo}
+\item{tip_data}{tip-level metadata object}
 }
 \value{
 Returns a itol.hub object

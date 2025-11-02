@@ -49,8 +49,12 @@ write_unit <- function(unit, file = getwd()) {
     if(length(valid_names) > 0){
       file = paste0(file,"/",unique(stringr::str_remove(valid_names,"\\$.*$")),".txt")
     } else {
-      # If no valid column names, use default name
-      file = paste0(file,"/unit.txt")
+      # If no valid column names, use profile name or default name
+      if(!is.null(unit@profile$name) && unit@profile$name != ""){
+        file = paste0(file,"/",unit@profile$name,".txt")
+      } else {
+        file = paste0(file,"/unit.txt")
+      }
     }
   }
   lines <- paste0(unit@type)

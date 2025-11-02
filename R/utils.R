@@ -622,4 +622,489 @@ dt_transpose_header <- function(dt) {
   return(transposed_dt)
 }
 
+#' Convert data to binary format for DATASET_BINARY
+#'
+#' @description Convert various data formats to binary format (-1, 0, 1) required by DATASET_BINARY.
+#' This function provides flexible data conversion options and can detect if data is already in the correct format.
+#' @param data A data frame with the first column as ID and subsequent columns as data to convert
+#' @param force_convert Logical, whether to force conversion even if data appears to be already in binary format
+#' @param verbose Logical, whether to print conversion messages
+#' @param negative_range Numeric vector of length \code{2}, range for converting to \code{-1} (e.g., c(0, 0.2))
+#' @param zero_range Numeric vector of length \code{2}, range for converting to \code{0} (e.g., c(0.2, 0.8))
+#' @param positive_range Numeric vector of length \code{2}, range for converting to \code{1} (e.g., c(0.8, 1))
+#' @param lower_inclusive Logical, whether middle range (zero_range) lower bound is inclusive (default: TRUE)
+#' @param upper_inclusive Logical, whether middle range (zero_range) upper bound is inclusive (default: TRUE)
+#' @param auto_detect Logical, whether to automatically detect data range and set ranges (default: TRUE)
+#' @return A data frame with data converted to binary format (-1, 0, 1)
+#' @details
+#' The function handles several data types with flexible range control:
+#' \itemize{
+#'   \item Boolean/logical data: TRUE->1, FALSE->0
+#'   \item 0-1 range data: Custom ranges for -1, 0, 1 conversion
+#'   \item Non-negative data: Custom ranges for -1, 0, 1 conversion
+#'   \item Already binary data: No conversion if already in -1, 0, 1 format
+#' }
+#' 
+#' Range parameters work as follows:
+#' \itemize{
+#'   \item Values in negative_range -> -1
+#'   \item Values in zero_range -> 0 (with inclusive/exclusive boundary control)
+#'   \item Values in positive_range -> 1
+#'   \item Values outside all ranges -> NA (with warning)
+#' }
+#' 
+#' The middle range (zero_range) boundary control:
+#' \itemize{
+#'   \item If lower_inclusive=TRUE: lower bound is inclusive
+#'   \item If lower_inclusive=FALSE: lower bound is exclusive
+#'   \item If upper_inclusive=TRUE: upper bound is inclusive
+#'   \item If upper_inclusive=FALSE: upper bound is exclusive
+#' }
+#' 
+#' This allows flexible scenarios like:
+#' \itemize{
+#'   \item Standard: negative->-1, middle->0, positive->1
+#'   \item Inverted: negative->0, middle->-1, positive->1
+#'   \item Custom: any range mapping to -1, 0, 1
+#' }
+#' @export
+#' @examples
+#' # Convert 0-1 range data with default ranges
+#' data <- data.frame(ID = c("A", "B", "C"), 
+#'                   Asia = c(0, 0.3, 0.8),
+#'                   Europe = c(1, 0.7, 0.2))
+#' convert_to_binary(data)
+#' 
+#' # Convert with custom ranges and boundary control
+#' convert_to_binary(data, 
+#'                  negative_range = c(0, 0.2), 
+#'                  zero_range = c(0.2, 0.8), 
+#'                  positive_range = c(0.8, 1),
+#'                  lower_inclusive = TRUE,   # [0.2, ...]
+#'                  upper_inclusive = TRUE)   # [..., 0.8]
+#' 
+#' # Convert boolean data
+#' data_bool <- data.frame(ID = c("A", "B", "C"), 
+#'                        Present = c(TRUE, FALSE, TRUE),
+#'                        Absent = c(FALSE, TRUE, FALSE))
+#' convert_to_binary(data_bool)
+convert_to_binary <- function(data, force_convert = FALSE, verbose = TRUE, 
+                             negative_range = NULL, zero_range = NULL, 
+                             positive_range = NULL, lower_inclusive = TRUE,
+                             upper_inclusive = TRUE, auto_detect = TRUE) {
+  if (!is.data.frame(data)) {
+    stop("The input data class should be a data frame")
+  }
+  
+  if (ncol(data) < 2) {
+    stop("Data must have at least 2 columns (ID + data columns)")
+  }
+  
+  # Create a copy to avoid modifying original data
+  data_converted <- data.table::copy(data)
+  
+  if (verbose) {
+    message("Converting data to binary format (-1, 0, 1)...")
+  }
+  
+  # Initialize conversion table for summary
+  conversion_table <- NULL
+  range_info <- NULL
+  
+  for (col_name in names(data_converted)[-1]) {  # Skip the id column
+    col_data <- data_converted[[col_name]]
+    col_class <- class(col_data)[1]
+    
+    # Check if data is already in binary format
+    if (!force_convert) {
+      if (is.numeric(col_data)) {
+        unique_vals <- unique(col_data[!is.na(col_data)])
+        if (all(unique_vals %in% c(-1, 0, 1))) {
+          if (verbose) {
+            message(paste0("  Column '", col_name, "': Already in binary format (-1, 0, 1)"))
+          }
+          next
+        }
+      }
+    }
+    
+    # Case 1: Boolean/logical data (TRUE/FALSE, T/F, true/false, 1/0 as character)
+    if (col_class %in% c("logical", "character")) {
+      # Try to convert character to logical
+      if (col_class == "character") {
+        # Handle various boolean representations
+        col_data_lower <- tolower(trimws(col_data))
+        is_bool <- col_data_lower %in% c("true", "false", "t", "f", "1", "0", "yes", "no")
+        
+        if (all(is_bool | is.na(col_data))) {
+          # Convert to logical
+          col_data <- ifelse(col_data_lower %in% c("true", "t", "1", "yes"), TRUE,
+                           ifelse(col_data_lower %in% c("false", "f", "0", "no"), FALSE, NA))
+          if (verbose) {
+            message(paste0("  Column '", col_name, "': Detected boolean data, converting TRUE->1, FALSE->0"))
+          }
+        }
+      }
+      
+      if (is.logical(col_data)) {
+        # Convert logical: TRUE->1, FALSE->0
+        col_data <- as.integer(col_data)  # TRUE->1, FALSE->0
+        data_converted[[col_name]] <- col_data
+        next
+      }
+    }
+    
+    # Case 2: Numeric data with flexible range control
+    if (is.numeric(col_data)) {
+      non_na_data <- col_data[!is.na(col_data)]
+      if (length(non_na_data) > 0) {
+        min_val <- min(non_na_data)
+        max_val <- max(non_na_data)
+        
+        # Auto-detect ranges if not provided
+        if (auto_detect && is.null(negative_range) && is.null(zero_range) && is.null(positive_range)) {
+          if (min_val >= 0) {
+            if (max_val <= 1) {
+              # 0-1 range (proportions)
+              neg_range <- c(0, 0.5)
+              zero_range <- c(0.5, 0.5)
+              pos_range <- c(0.5, 1)
+            } else {
+              # Other non-negative numbers
+              neg_range <- c(0, 1)
+              zero_range <- c(1, 1)
+              pos_range <- c(1, max_val)
+            }
+          } else {
+            # Data has negative values, check if already in -1, 0, 1 format
+            unique_vals <- unique(non_na_data)
+            if (all(unique_vals %in% c(-1, 0, 1))) {
+              if (verbose) {
+                message(paste0("  Column '", col_name, "': Already in binary format (-1, 0, 1)"))
+              }
+              next
+            } else {
+              if (verbose) {
+                warning(paste0("  Column '", col_name, "': Contains negative values not in binary format. Skipping conversion."))
+              }
+              next
+            }
+          }
+        } else {
+          # Use provided ranges or defaults
+          neg_range <- if (!is.null(negative_range)) negative_range else c(0, 0.5)
+          zero_range <- if (!is.null(zero_range)) zero_range else c(0.5, 0.5)
+          pos_range <- if (!is.null(positive_range)) positive_range else c(0.5, 1)
+        }
+        
+        # Validate ranges
+        if (length(neg_range) != 2 || length(zero_range) != 2 || length(pos_range) != 2) {
+          stop("All range parameters must be vectors of length 2: c(min, max)")
+        }
+        
+        # Apply conversion with boundary control
+        if (verbose) {
+          # Create clear boundary notation for middle range
+          lower_bracket <- if (lower_inclusive) "[" else "("
+          upper_bracket <- if (upper_inclusive) "]" else ")"
+        }
+        
+        # Convert based on ranges with boundary control
+        col_data_converted <- rep(NA_integer_, length(col_data))
+        
+        # Apply ranges in order of priority (first match wins)
+        # Check for negative range: boundary control based on middle range lower_inclusive
+        # The lower boundary of middle range determines the upper boundary of negative range
+        if (lower_inclusive) {
+          # Middle range lower boundary is inclusive: negative range upper boundary is exclusive
+          neg_mask <- col_data >= neg_range[1] & col_data < neg_range[2]
+        } else {
+          # Middle range lower boundary is exclusive: negative range upper boundary is inclusive
+          neg_mask <- col_data >= neg_range[1] & col_data <= neg_range[2]
+        }
+        col_data_converted[neg_mask] <- -1L
+        neg_count <- sum(neg_mask, na.rm = TRUE)
+        
+        # Check for middle range (zero_range) with separate boundary control
+        # lower_inclusive and upper_inclusive are independent
+        if (lower_inclusive && upper_inclusive) {
+          # [min, max] - both inclusive
+          middle_mask <- is.na(col_data_converted) & col_data >= zero_range[1] & col_data <= zero_range[2]
+        } else if (lower_inclusive && !upper_inclusive) {
+          # [min, max) - lower inclusive, upper exclusive
+          middle_mask <- is.na(col_data_converted) & col_data >= zero_range[1] & col_data < zero_range[2]
+        } else if (!lower_inclusive && upper_inclusive) {
+          # (min, max] - lower exclusive, upper inclusive
+          middle_mask <- is.na(col_data_converted) & col_data > zero_range[1] & col_data <= zero_range[2]
+        } else {
+          # (min, max) - both exclusive
+          middle_mask <- is.na(col_data_converted) & col_data > zero_range[1] & col_data < zero_range[2]
+        }
+        col_data_converted[middle_mask] <- 0L
+        middle_count <- sum(middle_mask, na.rm = TRUE)
+        
+        # Check for positive range: boundary control based on middle range upper_inclusive
+        # The upper boundary of middle range determines the lower boundary of positive range
+        if (pos_range[1] == pos_range[2]) {
+          # Single value range - only match exact value
+          pos_mask <- is.na(col_data_converted) & col_data == pos_range[1]
+        } else {
+          # Lower boundary of positive range depends on upper_inclusive of middle range
+          if (upper_inclusive) {
+            # Middle range upper boundary is inclusive: positive range lower boundary is exclusive
+            pos_mask <- is.na(col_data_converted) & col_data > pos_range[1] & col_data <= pos_range[2]
+          } else {
+            # Middle range upper boundary is exclusive: positive range lower boundary is inclusive
+            pos_mask <- is.na(col_data_converted) & col_data >= pos_range[1] & col_data <= pos_range[2]
+          }
+        }
+        col_data_converted[pos_mask] <- 1L
+        pos_count <- sum(pos_mask, na.rm = TRUE)
+        
+        # Check for values outside all ranges
+        outside_range <- is.na(col_data_converted) & !is.na(col_data)
+        outside_count <- sum(outside_range, na.rm = TRUE)
+        
+        # Store conversion counts for table display
+        if (verbose) {
+          # Store range info for first column
+          if (is.null(range_info)) {
+            range_info <- list(
+              neg_range = neg_range,
+              zero_range = zero_range,
+              pos_range = pos_range,
+              lower_inclusive = lower_inclusive,
+              upper_inclusive = upper_inclusive
+            )
+          }
+          
+          # Initialize conversion table if first column
+          if (is.null(conversion_table)) {
+            conversion_table <- list()
+          }
+          
+          # Add current column counts
+          col_counts <- c(neg_count, middle_count, pos_count)
+          if (outside_count > 0) {
+            col_counts <- c(col_counts, outside_count)
+          }
+          conversion_table[[col_name]] <- col_counts
+        }
+        
+        data_converted[[col_name]] <- col_data_converted
+      }
+    }
+  }
+  
+  # Display conversion table if verbose
+  if (verbose && !is.null(conversion_table) && length(conversion_table) > 0) {
+    # Use stored range info
+    if (!is.null(range_info)) {
+      neg_range <- range_info$neg_range
+      zero_range <- range_info$zero_range
+      pos_range <- range_info$pos_range
+      lower_inclusive <- range_info$lower_inclusive
+      upper_inclusive <- range_info$upper_inclusive
+    }
+    
+    # Create boundary notation for middle range
+    lower_bracket <- if (lower_inclusive) "[" else "("
+    upper_bracket <- if (upper_inclusive) "]" else ")"
+    
+    # Create boundary notation for negative range
+    # Negative range upper boundary depends on lower_inclusive
+    neg_lower_bracket <- "["  # Always inclusive at lower boundary
+    neg_upper_bracket <- if (lower_inclusive) ")" else "]"  # Exclusive if lower_inclusive=TRUE
+    
+    # Create boundary notation for positive range
+    # Positive range lower boundary depends on upper_inclusive
+    pos_lower_bracket <- if (upper_inclusive) "(" else "["  # Exclusive if upper_inclusive=TRUE
+    pos_upper_bracket <- "]"  # Always inclusive at upper boundary
+    
+    # Set row names for the table
+    neg_range_str <- paste0(neg_lower_bracket, neg_range[1], ", ", neg_range[2], neg_upper_bracket, " -> -1")
+    middle_range_str <- paste0(lower_bracket, zero_range[1], ", ", zero_range[2], upper_bracket, " -> 0")
+    pos_range_str <- paste0(pos_lower_bracket, pos_range[1], ", ", pos_range[2], pos_upper_bracket, " -> 1")
+    
+    # Convert list to data frame
+    # Standard rows: neg, middle, pos (always 3 rows)
+    standard_rows <- 3
+    has_na <- any(sapply(conversion_table, function(x) length(x) > 3))
+    total_rows <- if (has_na) 4 else 3
+    
+    # Initialize data.table with correct number of rows
+    table_df <- data.table::data.table(
+      matrix(0, nrow = total_rows, ncol = length(conversion_table))
+    )
+    names(table_df) <- names(conversion_table)
+    
+    for (col_name in names(conversion_table)) {
+      col_counts <- conversion_table[[col_name]]
+      # Ensure we have exactly total_rows elements
+      if (length(col_counts) < total_rows) {
+        col_counts <- c(col_counts, rep(0, total_rows - length(col_counts)))
+      } else if (length(col_counts) > total_rows) {
+        col_counts <- col_counts[1:total_rows]
+      }
+      # Convert to integer to ensure proper display
+      table_df[[col_name]] <- as.integer(col_counts)
+    }
+    
+    # Add range information as first column
+    range_names <- c(neg_range_str, middle_range_str, pos_range_str)
+    if (has_na) {
+      range_names <- c(range_names, "-> NA (outside ranges)")
+    }
+    
+    # Create final table with range names as first column
+    final_table <- data.table::data.table(
+      Range = range_names,
+      table_df
+    )
+
+    print(final_table)
+    
+    # Store the summary table as an attribute for external access
+    attr(data_converted, "conversion_summary") <- final_table
+  }
+  
+  return(data_converted)
+}
+
+#' Annotate Column Groups
+#'
+#' Adds column grouping information as a hidden attribute to a data frame.
+#' This allows you to specify which columns belong to the same group without
+#' modifying the data structure itself.
+#'
+#' @param data A data frame or data.table to annotate.
+#' @param groups A named list or vector where names are group names and values
+#'   are column names (or indices) that belong to that group. Supports both
+#'   explicit column names and regular expressions.
+#' @param attr_name The name of the attribute to store the grouping information.
+#'   Default is "col_groups". This allows you to have separate grouping attributes
+#'   for different purposes (e.g., "col_groups_color" for color grouping,
+#'   "col_groups_shape" for shape grouping).
+#' @return The input data frame with an additional attribute containing the
+#'   grouping information.
+#'
+#' @details
+#' The grouping information is stored as a hidden attribute, which does not
+#' affect normal data frame operations. This allows you to annotate data with
+#' grouping information without changing its structure.
+#'
+#' By default, the grouping information is stored in an attribute named
+#' "col_groups". However, you can specify a different attribute name to allow
+#' for separate grouping configurations for color and shape (or other purposes).
+#'
+#' @examples
+#' \dontrun{
+#' # Create a data frame with multiple columns
+#' data <- data.frame(
+#'   ID = c("A", "B", "C"),
+#'   Asia_1 = c(0.5, 0.6, 0.7),
+#'   Asia_2 = c(0.4, 0.5, 0.6),
+#'   North_1 = c(0.3, 0.4, 0.5),
+#'   North_2 = c(0.2, 0.3, 0.4)
+#' )
+#'
+#' # Method 1: Explicit column names
+#' data <- anno_col_group(data, list(
+#'   Asia = c("Asia_1", "Asia_2"),
+#'   North = c("North_1", "North_2")
+#' ))
+#'
+#' # Method 2: Regular expression
+#' data <- anno_col_group(data, list(
+#'   Asia = "^Asia",
+#'   North = "^North"
+#' ))
+#'
+#' # Method 3: Separate grouping for color and shape
+#' data <- anno_col_group(data, list(
+#'   Group1 = c("Asia_1", "Asia_2")
+#' ), attr_name = "col_groups_color")
+#'
+#' data <- anno_col_group(data, list(
+#'   Group1 = c("North_1")
+#' ), attr_name = "col_groups_shape")
+#'
+#' # Access grouping information
+#' attr(data, "col_groups_color")
+#' attr(data, "col_groups_shape")
+#' }
+#'
+#' @export
+anno_col_group <- function(data, groups, attr_name = "col_groups") {
+  if (!is.data.frame(data)) {
+    stop("Input data must be a data frame or data.table")
+  }
+  
+  # Convert named vector to list if needed
+  if (is.vector(groups) && !is.list(groups)) {
+    groups <- as.list(groups)
+  }
+  
+  if (!is.list(groups)) {
+    stop("Groups must be a named list or vector")
+  }
+  
+  # Validate that all groups are named
+  if (is.null(names(groups)) || any(names(groups) == "")) {
+    stop("All groups must be named")
+  }
+  
+  data_cols <- names(data)
+  expanded_groups <- list()
+  
+  for (group_name in names(groups)) {
+    group_cols <- groups[[group_name]]
+    
+    # Expand the group definition
+    expanded_cols <- character()
+    
+    for (col in group_cols) {
+      if (is.character(col)) {
+        # Check if it's a regular expression (length 1 and looks like regex)
+        if (length(group_cols) == 1 && nchar(col) > 0) {
+          # Try regex matching
+          matched_cols <- grep(col, data_cols, value = TRUE)
+          if (length(matched_cols) > 0) {
+            expanded_cols <- c(expanded_cols, matched_cols)
+          } else {
+            # If no match, check if it's a literal column name
+            if (col %in% data_cols) {
+              expanded_cols <- c(expanded_cols, col)
+            } else {
+              warning(paste0("Column pattern '", col, "' matched no columns. Skipping."))
+            }
+          }
+        } else {
+          # Explicit column name
+          if (col %in% data_cols) {
+            expanded_cols <- c(expanded_cols, col)
+          } else {
+            warning(paste0("Column '", col, "' not found in data. Skipping."))
+          }
+        }
+      } else if (is.numeric(col)) {
+        # Column index
+        if (col >= 1 && col <= ncol(data)) {
+          expanded_cols <- c(expanded_cols, data_cols[col])
+        } else {
+          warning(paste0("Column index ", col, " out of range. Skipping."))
+        }
+      }
+    }
+    
+    # Remove duplicates and store
+    expanded_groups[[group_name]] <- unique(expanded_cols)
+  }
+  
+  # Store the expanded grouping information as an attribute
+  attr(data, attr_name) <- expanded_groups
+  
+  return(data)
+}
+
 

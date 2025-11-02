@@ -71,9 +71,9 @@ color in hexadecimal, RGB or RGBA notation.}
 \item{rotation}{Only used while type == "DATASET_TEXT". a number or a
 vector of number specifying the rotation angle of the text.}
 
-\item{method}{a character specifying the numbric data summarise method. If
+\item{method}{a character specifying the numeric data summarise method. If
 type == "DATASET_BINARY", the following choices are possible: "mean",
-"sum".}
+"sum", "binary" (for automatic binary conversion).}
 
 \item{shape}{a character or a vector of character specifying the symbol
 shape. If type == "DATASET_BINARY", the default is 2. If type ==

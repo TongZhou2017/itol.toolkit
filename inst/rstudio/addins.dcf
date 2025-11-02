@@ -2,3 +2,8 @@ Name: Complex HTML Text
 Description: Mutate new column with html style characters
 Binding: complex_html_text
 Interactive: true
+
+Name: Binary Data Conversion
+Description: Convert data to binary format (-1, 0, 1) with interactive range controls
+Binding: binary_data_conversion
+Interactive: true
